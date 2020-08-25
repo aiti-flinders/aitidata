@@ -1,4 +1,4 @@
-# aitidata
+# dAITIr
 Data sets used commonly in AITI research. Current data included:
 - JobKeeper Applications by SA2 (Treasury - https://treasury.gov.au/coronavirus/jobkeeper/data)
 - JobSeeker Applications by SA2 (DSS - https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile)

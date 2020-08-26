@@ -8,3 +8,5 @@ Data sets used commonly in AITI research. Current data included:
 - Employment (full-time, part-time, total) and Underemployment (total, ratio) by industry (ABS Cat. no. 6291.0.55.003 - Tables 5 and 19)
 - Labour force indicators (ABS Cat. no. 6202.0 - Tables 12, 19, 22, 23)
 - Economic Complexity indicators for Australian states 
+- Internet vacancies index (https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport)
+- Various helper datasets (ANZSIC Heirarchy)

@@ -7,9 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "hamish.gamble@flinders.edu.au")
 Description: A collection of datasets commonly used in research at
-the Australian Industrial Transformation Institute at Flinders University. 
-Data has been tidyed and simplified for ease of use, and for easy integration
-into the reportabs package. 
+  the Australian Industrial Transformation Institute at Flinders University. 
+  Data has been tidyed and simplified for ease of use, and for easy integration
+  into the reportabs package.
 License: CC0
 Encoding: UTF-8
 LazyData: true

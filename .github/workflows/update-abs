@@ -1,0 +1,36 @@
+# Check every day at 11:40am Adelaide/Australia for updated ABS data
+
+name: update-abs
+
+# Controls when the action will run. Run this job every weekday at 1:30am UTC
+on:
+  schedule:
+    - cron: '40 1 * * MON-FRI'
+  push:
+    branches: 
+      - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  refresh-data:
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install packages
+        run: Rscript -e 'install.packages(c("readabs", "here", "rvest", "xml2", "lubridate"), type = "binary")'
+      - name: Get data
+        run: Rscript -e 'source(here::here("R", "update_lfs.R"), echo = TRUE)`
+      - name: Commit
+        run: 
+          git config --global user.name 'Hamish Gamble'
+          git config --global user.email 'hamish.gamble@gmail.com'
+          git add .
+          git commit -m 'updating data' || echo "No changes to commit"
+          git push || echo "No changes to commit"
+         
+

@@ -8,7 +8,16 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 
-states <- strayr::strayr(seq(1,8), to = "state_name")
+states <- c(
+  "New South Wales",
+  "Victoria",
+  "Queensland",
+  "South Australia",
+  "Western Australia",
+  "Tasmania",
+  "Northern Territory",
+  "Australian Capital Territory"
+)
 
 if(!abs_data_up_to_date("6202.0")) {
   

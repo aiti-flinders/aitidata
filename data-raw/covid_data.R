@@ -28,7 +28,10 @@ covid_data <- left_join(jobkeeper_sa2, jobseeker_sa2)  %>%
          covid_impact, 
          state_name_2016) %>% 
   pivot_longer(cols = c(-sa2_main_2016, -state_name_2016, -date), names_to = 'indicator', values_to = 'value') %>%
-  bind_rows(payroll_sa4)
+  bind_rows(payroll_sa4) %>% 
+  pivot_longer(cols = c(sa2_main_2016, sa4_code_2016), names_to = "statistical_area", values_to = "statistical_area_code") %>%
+  filter(!is.na(statistical_area_code)) %>%
+  mutate(statistical_area = str_sub(statistical_area, 0L, 3L))
 
 
 

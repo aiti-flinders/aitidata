@@ -19,7 +19,7 @@ states <- c(
   "Australian Capital Territory"
 )
 
-if(!daitir::abs_data_up_to_date("6202.0")) {
+if(!abs_data_up_to_date("6202.0")) {
   
   message("Updating `data/labour_force.rda`")
   

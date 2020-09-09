@@ -10,43 +10,45 @@ if (!file.exists("data-raw/internet_vacancies_basic.xlsx") | force) {
   download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790177&.xlsx",
                 destfile = "data-raw/internet_vacancies_basic.xlsx",
                 mode = "wb")
+  
+  
+  raw <- read_excel("data-raw/internet_vacancies_basic.xlsx",
+                    sheet = 1,
+                    .name_repair = "universal")
+  
+  internet_vacancies_basic <- raw %>%
+    gather(key = "date", value = "vacancies", c(5:length(.))) %>%
+    mutate(date = as.Date(paste0(date,"01"), format = "%b%y%d"),
+           state = strayr::strayr(State, to = "state_name", fuzzy_match = FALSE),
+           state = ifelse(is.na(state), "Australia", state)) %>%
+    group_by(state, date, ANZSCO_CODE, Title) %>%
+    summarise(value=mean(vacancies), .groups  = "keep") %>%
+    rename(occupation = Title,
+           anzsco_2 = ANZSCO_CODE) %>%
+    ungroup()
+  
+  anzsco_tibble <- tribble(
+    ~anzsco_1, ~occupation_group,
+    "0", "Total",
+    "1", "Managers",
+    "2", "Professionals",
+    "3", "Technicians and Trades Workers",
+    "4", "Community and Personal Service Workers",
+    "5", "Clerical and Administrative Workers",
+    "6", "Sales Workers",
+    "7", "Machinery Operators and Drivers",
+    "8", "Labourers"
+  )
+  
+  internet_vacancies_index <- internet_vacancies_basic %>%
+    mutate(anzsco_1 = str_sub(anzsco_2, 0, 1)) %>%
+    left_join(anzsco_tibble) %>%
+    mutate(occupation = ifelse(str_detect(occupation, "TOTAL"), "TOTAL", occupation),
+           occupation = ifelse((str_length(anzsco_2) == 1 & anzsco_2 != "0"), str_to_title(str_c(occupation, " (Total)")), occupation))
+  
 }
 
-raw <- read_excel("data-raw/internet_vacancies_basic.xlsx",
-                  sheet = 1,
-                  .name_repair = "universal")
-
-internet_vacancies_basic <- raw %>%
-  gather(key = "date", value = "vacancies", c(5:length(.))) %>%
-  mutate(date = as.Date(paste0(date,"01"), format = "%b%y%d"),
-         state = strayr::strayr(State, to = "state_name", fuzzy_match = FALSE),
-         state = ifelse(is.na(state), "Australia", state)) %>%
-  group_by(state, date, ANZSCO_CODE, Title) %>%
-  summarise(vacancies=mean(vacancies), .groups  = "keep") %>%
-  rename(region = state,
-         occupation = Title,
-         anzsco_2 = ANZSCO_CODE) %>%
-  ungroup()
-
-anzsco_tibble <- tribble(
-  ~anzsco_1, ~occupation_group,
-  "0", "Total",
-  "1", "Managers",
-  "2", "Professionals",
-  "3", "Technicians and Trades Workers",
-  "4", "Community and Personal Service Workers",
-  "5", "Clerical and Administrative Workers",
-  "6", "Sales Workers",
-  "7", "Machinery Operators and Drivers",
-  "8", "Labourers"
-)
-
-internet_vacancies_index <- internet_vacancies_basic %>%
-  mutate(anzsco_1 = str_sub(anzsco_2, 0, 1)) %>%
-  left_join(anzsco_tibble) %>%
-  mutate(occupation = ifelse(str_detect(occupation, "TOTAL"), "TOTAL", occupation),
-         occupation = ifelse((str_length(anzsco_2) == 1 & anzsco_2 != "0"), str_to_title(str_c(occupation, " (Total)")), occupation))
-
+file.remove("data-raw/internet_vacancies_basic.xlsx")
 
 usethis::use_data(internet_vacancies_index, overwrite = TRUE, compress = "xz")
 

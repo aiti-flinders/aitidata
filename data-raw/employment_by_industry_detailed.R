@@ -1,9 +1,13 @@
-## code to prepare `employment_industry_detailed` dataset goes here
+## code to prepare `employment_by_industry_detailed` dataset goes here
 
 library(tidyverse)
 library(readxl)
+library(readabs)
 
-df <- read_excel(path = "data-raw/employment by industry detailed.xlsx",
+download_abs_data_cube("6291.0.55.003", cube = "EQ06", path = "data-raw")
+
+
+df <- read_excel(path = unzip("data-raw/EQ06.zip"),
                  sheet = "Data 1",
                  skip = 3) %>%
   pivot_longer(cols = 5:8, names_to = "indicator", values_to = "value") %>%
@@ -25,18 +29,20 @@ df <- read_excel(path = "data-raw/employment by industry detailed.xlsx",
               values_from = value) %>%
   mutate(Australia = pmap_dbl(select(., 5:12), sum, na.rm = T)) %>%
   pivot_longer(5:13,
-               names_to = "region",
+               names_to = "state",
                values_to = "value") %>%
   replace_na(list(value = 0))
 
 anzsic_c <- daitir::anzsic %>%
   select(-class)
 
-employment_industry_detailed <- left_join(df, anzsic_c) %>%
+employment_by_industry_detailed <- left_join(df, anzsic_c) %>%
   distinct() %>%
-  group_by(date, indicator, gender, region, subdivision, division) %>%
-  summarise(value = sum(value), .groups = NULL) %>%
-  ungroup()
+  group_by(date, indicator, gender, state, subdivision, division) %>%
+  summarise(value = sum(value)) %>%
+  ungroup() %>%
+  mutate(value = value*1000,
+         indicator = str_replace_all(indicator, "\\('000.+", ""))
 
-
+file.remove("data-raw/eq06.zip")
 usethis::use_data(employment_industry_detailed, overwrite = TRUE, compress = 'xz')

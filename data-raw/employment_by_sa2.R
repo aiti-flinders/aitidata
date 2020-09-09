@@ -1,7 +1,10 @@
-## code to prepare `employment_by_sa2` dataset goes here
+## code to prepare `employment_by_industry_sa2` dataset goes here
 #Data from 2016 census - table builder
 
-employment_industry_sa2 <- read_csv("data-raw/employment_by_industry_by_sa2.zip", 
+library(tidyverse)
+
+
+employment_by_industry_sa2 <- read_csv("data-raw/employment_by_industry_by_sa2.zip", 
                                     skip = 10, 
                                     col_names = c("counting", 
                                                   "sa2_name_2016",
@@ -26,33 +29,7 @@ employment_industry_sa2 <- read_csv("data-raw/employment_by_industry_by_sa2.zip"
 
 
 
-usethis::use_data(employment_industry_sa2, overwrite = TRUE)
+usethis::use_data(employment_by_industry_sa2, compress = "xz", overwrite = TRUE)
 
-map_data <- left_join(employment_industry_sa2, payroll_industry) %>% 
-  group_by(sa2_name_2016) %>% 
-  mutate(value = (value-100)/100) %>% 
-  summarise(employment_impact = round(sum(rca_employment*value, na.rm = T)), 2) %>% 
-  left_join(max_ind) %>%
-  left_join(sa22016) %>%
-  st_as_sf()
 
-pal <- colorBin("Reds", map_data$employment_impact, 8, pretty = TRUE, reverse = TRUE)
-
-leaflet(map_data) %>% 
-  addTiles() %>%
-  addPolygons(
-    color = 'white',
-    weight = 1,
-    fillColor = ~pal(employment_impact),
-    fillOpacity = 0.7,
-    highlight = highlightOptions(
-      weight = 2,
-      color = 'blue',
-      fillOpacity = 0.7,
-      bringToFront = TRUE),
-    label = ~str_c(sa2_name_2016, ": ", (employment_impact), " (",industry, ")")) %>%
-  addLegend(
-    position = "bottomright",
-    pal = pal,
-    values = map_data$employment_impact)
   

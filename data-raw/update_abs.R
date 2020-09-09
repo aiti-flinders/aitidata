@@ -94,4 +94,3 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 source(here::here("data-raw", "labour_force.R"))
 source(here::here("data-raw", "labour_account.R"))
 
-usethis::use_data(update_abs, overwrite = TRUE)

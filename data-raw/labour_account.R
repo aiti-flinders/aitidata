@@ -5,7 +5,7 @@ library(dplyr)
 library(lubridate)
 
 
-if (!abs_data_up_to_date("6150.0.55.003") | !file.exists(here::here("data","labour_account.rda"))) {
+if (!abs_data_up_to_date("6150.0.55.003")) {
   message("updating `data/labour_account.rda`")
   download_abs_data_cube('6150.0.55.003', cube = '6150055003do001_2019202006', path = here::here("data-raw"))
   

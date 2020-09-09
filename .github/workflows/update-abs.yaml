@@ -21,9 +21,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
-        run: Rscript -e 'install.packages(c("readabs", "here", "readr", "rmarkdown", "lubridate"), type = "binary")'
+        run: Rscript -e "install.packages(c('readabs', 'here', 'readr', 'rmarkdown', 'lubridate'), type = 'binary')"
       - name: Get data
-        run: Rscript -e 'source(here::here("data-raw", "labour_force.R"), echo = TRUE)'
+        run: Rscript -e "source(here::here('data-raw', 'labour_force.R'), echo = TRUE)"
       - name: Commit
         run: 
           git config --global user.name 'Hamish Gamble'

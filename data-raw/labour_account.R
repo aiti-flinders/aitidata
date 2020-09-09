@@ -5,13 +5,13 @@ library(dplyr)
 library(lubridate)
 
 
-if (!abs_data_up_to_date("6150.0.55.003") | !file.exists("data/labour_account.rda")) {
+if (!abs_data_up_to_date("6150.0.55.003") | !file.exists(here::here("data","labour_account.rda"))) {
   message("updating `data/labour_account.rda`")
-  download_abs_data_cube('6150.0.55.003', cube = '6150055003do001_2019202006', path = "data-raw")
+  download_abs_data_cube('6150.0.55.003', cube = '6150055003do001_2019202006', path = here::here("data-raw"))
   
-  file.rename("data-raw/6150055003do001_2019202006.xls", "data-raw/labour_account.xls")
+  file.rename(here::here("data-raw","6150055003do001_2019202006.xls"), here::here("data-raw","labour_account.xls"))
 
-  raw <- read_abs_local(path = "data-raw", filenames = "labour_account.xls")
+  raw <- read_abs_local(path = here::here("data-raw"), filenames = "labour_account.xls")
 
   labour_account <- raw %>%
     separate(series,
@@ -24,9 +24,10 @@ if (!abs_data_up_to_date("6150.0.55.003") | !file.exists("data/labour_account.rd
            month = month(date, abbr = FALSE, label = TRUE)) %>%
     select(date, month, year, prefix, indicator, state, industry, series_type, value, unit)
   
-  file.remove("data-raw/labour_account.xls")
+  file.remove(here::here("data-raw", "labour_account.xls"))
   
-  usethis::use_data(labour_account, overwrite = TRUE, compress = 'xz')
+  save(labour_account, file = here::here("data", "labour_account.rda"), compress = "xz")
+  
 } else {
   message("`data/labour_account.rda` is already up to date")
 }

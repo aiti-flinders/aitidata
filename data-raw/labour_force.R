@@ -82,8 +82,8 @@ if(!abs_data_up_to_date("6202.0")) {
     pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
   
   
-  usethis::use_data(labour_force, overwrite = TRUE, compress = 'xz')
-
+  save(labour_force, file = here::here("data", "labour_force.rda"), compress = 'xz')
+  
 } else {
   message("`data/labour_force.rda` is already up-to-date")
 }

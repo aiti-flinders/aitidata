@@ -1,8 +1,8 @@
 ## code to prepare `labour_account` dataset goes here
-library(tidyverse)
 library(readabs)
-
-
+library(tidyr)
+library(dplyr)
+library(lubridate)
 
 
 if (!abs_data_up_to_date("6150.0.55.003") | !file.exists("data/labour_account.rda")) {
@@ -20,8 +20,8 @@ if (!abs_data_up_to_date("6150.0.55.003") | !file.exists("data/labour_account.rd
              extra = "drop") %>%
     mutate_if(is.character, trimws)  %>%
     filter(!is.na(value)) %>%
-    mutate(year = lubridate::year(date),
-           month = lubridate::month(date, abbr = FALSE, label = TRUE)) %>%
+    mutate(year = year(date),
+           month = month(date, abbr = FALSE, label = TRUE)) %>%
     select(date, month, year, prefix, indicator, state, industry, series_type, value, unit)
   
   file.remove("data-raw/labour_account.xls")

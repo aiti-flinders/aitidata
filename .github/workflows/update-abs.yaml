@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
-        run: Rscript -e "install.packages(c('readabs', 'here', 'readr', 'rmarkdown', 'lubridate'), type = 'binary')"
+        run: Rscript -e "install.packages(c('devtools','readabs', 'here', 'readr', 'rmarkdown', 'lubridate'), type = 'binary')"
       - name: Install github
         run: Rscript -e "devtools::install_github('hamgamb/daitir')"
       - name: Get data

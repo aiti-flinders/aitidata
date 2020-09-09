@@ -4,9 +4,7 @@
 ## Table 22. Underutilised persons by Age and Sex - Trend, Seasonally adjusted and Original
 ## Table 23. Underutilised persons by State and Territory and Sex - Trend, Seasonally adjusted and Original
 library(readabs)
-library(dplyr)
-library(tidyr)
-library(lubridate)
+library(tidyverse)
 
 states <- c(
   "New South Wales",

@@ -21,7 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: 
-          Rscript -e "install.packages(c('devtools','readabs', 'here', 'tidyr', 'tibble', 'readr', 'rmarkdown', 'lubridate'), type = 'binary')"
+          Rscript -e "install.packages(c('tidyverse'), type = 'binary')"
       - name: Get data
         run: 
           Rscript -e "source(here::here('data-raw', 'update_abs.R'), echo = TRUE)"

@@ -10,7 +10,7 @@ abs_current_release(cat_no)
 \item{cat_no}{}
 }
 \value{
-
+date
 }
 \description{
 Find the release date of the most recent ABS Catalogue

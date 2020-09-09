@@ -4,7 +4,7 @@
 #' @param data_name optional 
 #'
 #' @return logical
-#' @export
+#' @export abs_data_up_to_date
 #'
 
 abs_data_up_to_date <- function(cat_no, data_name = NULL) {
@@ -34,8 +34,8 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #'
 #' @param cat_no 
 #'
-#' @return
-#' @export
+#' @return date
+#' @export abs_current_release
 #'
 #' @examples
 abs_current_release <- function(cat_no) {
@@ -73,8 +73,8 @@ abs_current_release <- function(cat_no) {
 #'
 #' @param cat_no 
 #'
-#' @return
-#' @export
+#' @return date
+#' @export abs_next_release
 #'
 #' @examples
 abs_next_release <- function(cat_no) {

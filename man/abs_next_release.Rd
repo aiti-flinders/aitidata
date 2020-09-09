@@ -10,7 +10,7 @@ abs_next_release(cat_no)
 \item{cat_no}{}
 }
 \value{
-
+date
 }
 \description{
 Find the date of the next release of an ABS dataset

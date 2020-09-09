@@ -21,6 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: Rscript -e "install.packages(c('readabs', 'here', 'readr', 'rmarkdown', 'lubridate'), type = 'binary')"
+        run: Rscript -e "devtools::install_github('hamgamb/daitir')"
       - name: Get data
         run: Rscript -e "source(here::here('data-raw', 'labour_force.R'), echo = TRUE)"
       - name: Commit

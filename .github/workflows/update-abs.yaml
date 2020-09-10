@@ -24,9 +24,10 @@ jobs:
           Rscript -e "install.packages(c('tidyr', 'dplyr', 'lubridate', 'usethis', 'here', 'readabs'), type = 'binary')"
       - name: Get data
         run: 
-          Rscript -e "source(here::here('data-raw', 'update_abs.R'), echo = TRUE)"
+          Rscript -e "source(here::here('data-raw', 'labour_account.R'), echo = TRUE)"
+          Rscript -e "source(here::here('data-raw', 'labour_force.R'), echo = TRUE)"
       - name: Commit
-        run: 
+        run: |
           git config --global user.name 'Hamish Gamble'
           git config --global user.email 'hamish.gamble@gmail.com'
           git add .

@@ -21,7 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: |
-          Rscript -e "install.packages(c('tidyr', 'dplyr', 'devtools', 'lubridate', 'here', 'readabs'), type = 'binary')"
+          Rscript -e "install.packages(c('tidyr', 'dplyr', 'devtools', 'lubridate', 'here', 'readabs'))"
           Rscript -e "devtools::install_github('hamgamb/daitir')"
       - name: Get data
         run: |

@@ -4,6 +4,8 @@ name: update-abs
 
 # Controls when the action will run. Run this job every weekday at 1:30am UTC
 on:
+  schedule:
+    - cron: '40 1 * * MON-FRI'
 
   push:
     branches: 
@@ -22,7 +24,7 @@ jobs:
       - name: Install packages
         run: |
           Rscript -e "install.packages(c('tidyr', 'dplyr', 'devtools', 'lubridate', 'here', 'readabs', 'stringr'), type = 'binary')"
-          Rscript -e "devtools::install_github('hamgamb/daitir')"
+          Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
       - name: Get data
         run: |
           Rscript -e "source(here::here('data-raw', 'update_abs.R'), echo = TRUE)"

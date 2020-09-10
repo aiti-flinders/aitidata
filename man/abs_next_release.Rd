@@ -15,3 +15,6 @@ date
 \description{
 Find the date of the next release of an ABS dataset
 }
+\examples{
+
+}

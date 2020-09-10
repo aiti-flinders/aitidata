@@ -5,6 +5,8 @@
 #'
 #' @return logical
 #' @export abs_data_up_to_date
+#' 
+#' 
 #'
 
 abs_data_up_to_date <- function(cat_no, data_name = NULL) {
@@ -23,9 +25,12 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
     stop(paste0("ABS catalogue number ", cat_no, " returned multiple datasets - specify data"))
   }
   
-  file_created <- file.info(paste0("data/", cat_to_file, ".rda"))$ctime
-  
-  latest <- (current_release <= file_created) & (now < next_release)
+  if (!file.exists(paste0("data/", cat_to_file, ".rda"))) {
+    latest <- FALSE
+  } else {
+    file_created <- file.info(paste0("data/", cat_to_file, ".rda"))$ctime
+    latest <- (current_release <= file_created) & (now < next_release)
+  }
   
   return(latest)
 }
@@ -38,6 +43,8 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #' @export abs_current_release
 #'
 #' @examples
+#' 
+#' @importFrom dplyr "%>%"
 abs_current_release <- function(cat_no) {
   
   release_url <- glue::glue("https://www.abs.gov.au/AUSSTATS/abs@.nsf/second+level+view?ReadForm&prodno={cat_no}&&tabname=Past%20Future%20Issues")
@@ -77,6 +84,8 @@ abs_current_release <- function(cat_no) {
 #' @export abs_next_release
 #'
 #' @examples
+#' 
+#' @importFrom dplyr "%>%"
 abs_next_release <- function(cat_no) {
   
   release_url <- glue::glue("https://www.abs.gov.au/AUSSTATS/abs@.nsf/second+level+view?ReadForm&prodno={cat_no}&&tabname=Past%20Future%20Issues")

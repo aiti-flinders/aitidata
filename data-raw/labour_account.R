@@ -13,7 +13,7 @@ file.rename(here::here("data-raw","6150055003do001_2019202006.xls"), here::here(
 raw <- read_abs_local(path = here::here("data-raw"), filenames = "labour_account.xls")
 
 labour_account <- raw %>%
-  mutate(series = ifelse((grepl("Public sector", series) | grepl("Private sector", series)), str_replace(series, "; P", "- P"), series)) %>%
+  mutate(series = ifelse((grepl("Public sector", series) | grepl("Private sector", series)), gsub(x = series, pattern = "; P", replacement = "- P"), series)) %>%
   separate(series,
            into = c("prefix", "indicator", "state", "industry"),
            sep = ";",

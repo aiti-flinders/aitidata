@@ -13,15 +13,20 @@ file.rename(here::here("data-raw","6150055003do001_2019202006.xls"), here::here(
 raw <- read_abs_local(path = here::here("data-raw"), filenames = "labour_account.xls")
 
 labour_account <- raw %>%
+  mutate(series = ifelse((grepl("Public sector", series) | grepl("Private sector", series)), str_replace(series, "; P", "- P"), series)) %>%
   separate(series,
            into = c("prefix", "indicator", "state", "industry"),
            sep = ";",
            extra = "drop") %>%
-  mutate_if(is.character, trimws)  %>%
-  filter(!is.na(value)) %>%
-  mutate(year = year(date),
+  mutate(across(where(is.character), trimws),
+         year = year(date),
          month = month(date, abbr = FALSE, label = TRUE)) %>%
+  filter(!grepl(" - Percentage changes", indicator),
+         !is.na(value)) %>%
   select(date, month, year, prefix, indicator, state, industry, series_type, value, unit)
+
+
+
 
 file.remove(here::here("data-raw", "labour_account.xls"))
 

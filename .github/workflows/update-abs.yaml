@@ -29,7 +29,7 @@ jobs:
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'
-          git config --global user.email 'hamish.gamble@gmail.com'
+          git config --global user.email 'gamb0043@flinders.edu.au'
           git add .
           git commit -m 'updating data' || echo "No changes to commit"
           git push || echo "No changes to commit"

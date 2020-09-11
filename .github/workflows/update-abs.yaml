@@ -23,7 +23,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: |
-          Rscript -e "install.packages(c('tidyr', 'dplyr', 'devtools', 'lubridate', 'here', 'readabs', 'stringr', 'readxl', 'sf', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('tidyverse', 'devtools', 'here', 'readabs',  'sf', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
           Rscript -e "devtools::install_github('wfmackey/absmapsdata', dependencies = FALSE)"
       - name: Get data

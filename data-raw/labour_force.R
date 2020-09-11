@@ -25,7 +25,7 @@ if(!daitir::abs_data_up_to_date("6202.0")) {
   
   message("Updating `data/labour_force.rda`")
   
-  raw <- read_abs(cat_no = "6202.0", tables = c(12,19,22,23), retain_files = FALSE)
+  raw <- read_abs(cat_no = "6202.0", tables = c(12), retain_files = FALSE)
   
   labour_force_12 <- raw %>%
     filter(table_no == 6202012) %>%
@@ -82,7 +82,6 @@ if(!daitir::abs_data_up_to_date("6202.0")) {
     pivot_wider(names_from = indicator, values_from = value) %>%
     mutate("Underutilised total" = `Unemployed total` + `Underemployed total`) %>%
     pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
-  
   
   save(labour_force, file = here::here("data", "labour_force.rda"), compress = 'xz')
   

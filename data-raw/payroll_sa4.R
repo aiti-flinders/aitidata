@@ -35,28 +35,28 @@ if(!daitir::abs_data_up_to_date("6160.0.55.001", "payroll_sa4")) {
     filter(!is.na(sa4_code_2016),
            !is.na(value))
   
-  payroll_industry <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet = "Payroll jobs index-Subdivision", skip = 5, na = "NA", n_max = 1041) %>%
-    janitor::clean_names() %>%
-    pivot_longer(cols = c(5:length(.)),
-                 names_to = 'date',
-                 values_to = "value") %>%
-    mutate(across(1:4, ~str_remove_all(., "^[0-9]. ")),
-           across(date, ~str_remove_all(., "x") %>% as.numeric() %>% as.Date(., origin = "1899-12-30")),
-           across(value, ~as.numeric(.)),
-           across(age_group, ~as_factor(.)),
-           across(industry, ~str_sub(., 7, str_length(.)))) %>%
-    filter(sex == "Persons", 
-           age_group == "All ages",
-           sub_division == "All sub-divisions",
-           industry != "dustries", 
-           !is.na(value)) %>%
-    filter(date == max(.$date)) %>%
-    select(industry, value) %>%
-    mutate(across(industry, ~str_to_title(.) %>% str_replace_all(., "&", "and"))) 
+  # payroll_industry <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet = "Payroll jobs index-Subdivision", skip = 5, na = "NA", n_max = 1041) %>%
+  #   janitor::clean_names() %>%
+  #   pivot_longer(cols = c(5:length(.)),
+  #                names_to = 'date',
+  #                values_to = "value") %>%
+  #   mutate(across(1:4, ~str_remove_all(., "^[0-9]. ")),
+  #          across(date, ~str_remove_all(., "x") %>% as.numeric() %>% as.Date(., origin = "1899-12-30")),
+  #          across(value, ~as.numeric(.)),
+  #          across(age_group, ~as_factor(.)),
+  #          across(industry, ~str_sub(., 7, str_length(.)))) %>%
+  #   filter(sex == "Persons", 
+  #          age_group == "All ages",
+  #          sub_division == "All sub-divisions",
+  #          industry != "dustries", 
+  #          !is.na(value)) %>%
+  #   filter(date == max(.$date)) %>%
+  #   select(industry, value) %>%
+  #   mutate(across(industry, ~str_to_title(.) %>% str_replace_all(., "&", "and"))) 
   
   file.remove(here::here("data-raw", "payroll_sa4.xlsx"))
   
-  save(payroll_industry, file = here::here("data", "payroll_industry.rda"), compress = "xz")
+  # save(payroll_industry, file = here::here("data", "payroll_industry.rda"), compress = "xz")
   
   save(payroll_sa4, file = here::here("data", "payroll_sa4.rda"), compress = "xz")
 }

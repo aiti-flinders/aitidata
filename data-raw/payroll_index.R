@@ -19,7 +19,7 @@ if(!daitir::abs_data_up_to_date('6160.0.55.001', 'payroll_index')) {
                  values_to = "value") %>%
     mutate(across(1:5, ~str_remove_all(., "^[0-9]\\. ")),
            across(industry_division, ~str_remove_all(., "(0[0-9]|1[0-9])\\. ([A-S]-)")),
-           across(date, ~str_remove_all(., "x") %>% as.numeric() %>% as.Date(., origin = "1899-12-30")),
+           across(date, ~str_remove_all(.," x") %>% as.numeric() %>% as.Date(., origin = "1899-12-30")),
            across(value, ~as.numeric(.)),
            across(age_group, ~as_factor(.)),
            across(state_or_territory, ~strayr::strayr(., to = "state_name")),

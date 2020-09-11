@@ -1,14 +1,12 @@
 #Payroll SA4 data comes from 6160.0.55.001, table 5 - called "6160055001_do005"
 
-if(!daitir::abs_data_up_to_date("6160.0.55.001", "payroll_sa4")) {
   ## code to prepare `payroll_sa4` dataset goes here
   library(dplyr)
   library(tidyr)
   library(janitor)
   library(readxl)
-  library(sf)
-  library(absmapsdata)
-  
+  library(forcats)
+
   readabs::download_abs_data_cube("6160.0.55.001", cube = "6160055001_do005", path = here::here("data-raw"))
   file.rename(here::here("data-raw", "6160055001_do005.xlsx"), here::here("data-raw", "payroll_sa4.xlsx"))
   
@@ -18,20 +16,20 @@ if(!daitir::abs_data_up_to_date("6160.0.55.001", "payroll_sa4")) {
     pivot_longer(cols = c(5:length(.)),
                  names_to = "date",
                  values_to = "value") %>%
-    mutate(across(1:4, ~str_remove_all(., "^[0-9]. ")),
-           across(date, ~str_remove_all(., "x") %>% as.numeric() %>% as.Date(., origin = "1899-12-30")),
-           across(value, ~as.numeric(.)),
-           across(age_group, ~as_factor(.)),
-           sa4_code_2016 = ifelse(statistical_area_4 != "All SA4", str_sub(statistical_area_4, start = 1L, end = 3L), NA)) %>%
+    mutate(across(1:4, ~gsub("^[0-9]. ", "", .)),
+           date = gsub("x", "", date),
+           date = as.numeric(date),
+           date = as.Date(date, origin = "1899-12-30"),
+           value = as.numeric(value),
+           age_group = as_factor(age_group),
+           sa4_code_2016 = ifelse(statistical_area_4 != "All SA4", str_sub(statistical_area_4, start = 1L, end = 3L), NA),
+           state_or_territory = strayr::strayr(state_or_territory, to = "state_name"),
+           indicator = "payroll_index") %>%
     select(state_name_2016 = state_or_territory,
-           gender = sex,
-           age = age_group,
            date,
            value,
-           sa4_code_2016) %>% 
-    mutate(across(state_name_2016, ~strayr::strayr(., to = "state_name")),
-           indicator = "payroll_index") %>%
-    select(-gender, -age) %>%
+           sa4_code_2016,
+           indicator) %>% 
     filter(!is.na(sa4_code_2016),
            !is.na(value))
   
@@ -59,6 +57,6 @@ if(!daitir::abs_data_up_to_date("6160.0.55.001", "payroll_sa4")) {
   # save(payroll_industry, file = here::here("data", "payroll_industry.rda"), compress = "xz")
   
   save(payroll_sa4, file = here::here("data", "payroll_sa4.rda"), compress = "xz")
-}
+
 
 

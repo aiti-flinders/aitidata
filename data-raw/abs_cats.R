@@ -15,5 +15,19 @@ abs_cats <- tibble::tribble(
   "6150.0.55.003", "Labour Account Australia", list("1" = "Total All Industries"), "labour_account",
   "8165.0", "Counts of Australian Businesses, including Entries and Exits", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2")
 
-abs_cats <- tidyr::unnest_longer(abs_cats, col = tables)
+abs_cats <- tidyr::unnest_longer(abs_cats, col = tables) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(next_release = abs_next_release(cat_no))
+
+non_abs_cats <- tibble::tribble(
+  ~url, ~xpath,  ~title, ~data_name, 
+  "https://data.gov.au/data/dataset/728daa75-06e8-442d-931c-93ecc6a57880", "//*[@id='content']/div[3]/div/article/div/section[3]/table/tbody/tr[9]/td", "JobSeeker Payment and Youth Allowance recipients - monthly profile", "jobseeker_sa2",
+  "https://treasury.gov.au/coronavirus/jobkeeper/data", '//*[@id="block-mainpagecontent-2"]/div/article/div/div/table/tbody/tr/td[2]/p/font', "JobKeeper postcode data", "jobkeeper_sa2",
+  "https://www.employment.gov.au/small-area-labour-markets-publication-0", '//*[@id="node-10604"]/div/div/div/div/h2[1]', "Small Area Labour Markets publication", "small_area_labour_market"
+  ) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(next_release = xml2::read_html(url) %>% rvest::html_nodes(xpath = xpath) %>% rvest::html_text()) 
+                
+                
+                
 usethis::use_data(abs_cats, internal = TRUE,  overwrite = TRUE)

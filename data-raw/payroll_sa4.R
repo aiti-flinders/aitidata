@@ -53,8 +53,10 @@ payroll_industry <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet 
   select(industry, value) %>%
   mutate(across(industry, ~str_to_title(.) %>% str_replace_all(., "&", "and"))) 
 
+file.remove(here::here("data-raw", "payroll_sa4.xlsx"))
+
 save(payroll_industry, file = here::here("data", "payroll_industry.rda"), compress = "xz")
 
-save(paryoll_sa4, file = here::here("data", "payroll_sa4.rda"), compress = "xz")
+save(payroll_sa4, file = here::here("data", "payroll_sa4.rda"), compress = "xz")
 
 

@@ -1,15 +1,17 @@
 ## code to prepare `payroll_sa4` dataset goes here
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(janitor)
 library(readxl)
 library(sf)
 library(absmapsdata)
 
 #Payroll SA4 data comes from 6160.0.55.001, table 5 - called "6160055001_do005"
 
-readabs::download_abs_data_cube("6160.0.55.001", cube = "6160055001_do005", path = "data-raw")
-file.rename("data-raw/6160055001_do005.xlsx", "data-raw/payroll_sa4.xlsx")
+readabs::download_abs_data_cube("6160.0.55.001", cube = "6160055001_do005", path = here::here("data-raw"))
+file.rename(here::here("data-raw", "6160055001_do005.xlsx"), here::here("data-raw", "pyroll_sa4.xlsx"))
 
-payroll_sa4 <- read_xlsx("data-raw/payroll_sa4.xlsx", sheet = "Payroll jobs index-SA4", skip = 5, na = "NA") %>%
+payroll_sa4 <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet = "Payroll jobs index-SA4", skip = 5, na = "NA") %>%
   janitor::clean_names() %>%
   mutate(across(starts_with("x"), as.numeric)) %>%
   pivot_longer(cols = c(5:length(.)),
@@ -32,7 +34,7 @@ payroll_sa4 <- read_xlsx("data-raw/payroll_sa4.xlsx", sheet = "Payroll jobs inde
   filter(!is.na(sa4_code_2016),
          !is.na(value))
 
-payroll_industry <- read_xlsx("data-raw/payroll_sa4.xlsx", sheet = "Payroll jobs index-Subdivision", skip = 5, na = "NA", n_max = 1041) %>%
+payroll_industry <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet = "Payroll jobs index-Subdivision", skip = 5, na = "NA", n_max = 1041) %>%
   janitor::clean_names() %>%
   pivot_longer(cols = c(5:length(.)),
                names_to = 'date',
@@ -51,7 +53,8 @@ payroll_industry <- read_xlsx("data-raw/payroll_sa4.xlsx", sheet = "Payroll jobs
   select(industry, value) %>%
   mutate(across(industry, ~str_to_title(.) %>% str_replace_all(., "&", "and"))) 
 
-usethis::use_data(payroll_industry, compress = "xz", overwrite = TRUE)
-  
+save(payroll_industry, file = here::here("data", "payroll_industry.rda"), compress = "xz")
 
-usethis::use_data(payroll_sa4, compress = "xz", overwrite = TRUE)
+save(paryoll_sa4, file = here::here("data", "payroll_sa4.rda"), compress = "xz")
+
+

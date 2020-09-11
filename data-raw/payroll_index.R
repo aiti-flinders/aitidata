@@ -1,13 +1,12 @@
 ## code to prepare `payroll_index` dataset goes here
 library(readabs)
 library(dplyr)
+library(readxl)
 
-if (!file.exists("data-raw/payroll_index.xlsx")) {
-  download_abs_data_cube("6160.0.55.001", cube = "6160055001_do004.xlsx", path = "data-raw")
-  file.rename("data-raw/6160055001_do004.xlsx", "data-raw/payroll_index.xlsx")
-}
+download_abs_data_cube("6160.0.55.001", cube = "6160055001_do004.xlsx", path = here::here("data-raw"))
+file.rename(here::here("data-raw", "6160055001_do004.xlsx"), here::here("data-raw", "payroll_index.xlsx"))
 
-payroll_index <- read_xlsx("data-raw/payroll_index.xlsx", sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
+payroll_index <- read_xlsx(here::here("data-raw", "payroll_index.xlsx"), sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
   janitor::clean_names() %>%
   mutate(across(starts_with("x"), as.numeric)) %>%
   pivot_longer(cols = c(5:length(.)),
@@ -21,5 +20,8 @@ payroll_index <- read_xlsx("data-raw/payroll_index.xlsx", sheet = "Payroll jobs 
          across(state_or_territory, ~strayr::strayr(., to = "state_name")),
          across(industry_division, ~str_to_title(.) %>% str_replace_all(., "&", "and"))) %>%
   select(date, gender = sex, age = age_group, state = state_or_territory, industry = industry_division, value)
+
+file.remove(here::here("data-raw", "payroll_index.xlsx"))
+
+save(payroll_index, file = here::here("data", "payroll_index.rda"), compress = "xz")
          
-usethis::use_data(payroll_index, overwrite = TRUE, compress = "xz")

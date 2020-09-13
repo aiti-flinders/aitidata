@@ -22,7 +22,7 @@ jobs:
         run: |
           Rscript -e "install.packages(c('stringdist','devtools', 'readabs', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
-          Rscript -e "devtools::install_github("hamgamb/daitir", dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
 
       - name: Get data
         run: |

@@ -20,7 +20,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: |
-          Rscript -e "install.packages(c('devtools', 'readabs', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('stringdist','devtools', 'readabs', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
 
       - name: Get data

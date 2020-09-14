@@ -1,7 +1,7 @@
 ## code to prepare `jobkeeper_sa2` dataset goes here
 
 library(sf)
-library(absmaps)
+library(absmapsdata)
 library(tidyverse)
 library(xml2)
 library(rvest)

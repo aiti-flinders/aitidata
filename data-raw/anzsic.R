@@ -1,5 +1,7 @@
 ## code to prepare `anzsic` dataset goes here
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library()
 library(readxl)
 
 download.file("https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1292.0.55.002_anzsic%202006%20-%20codes%20and%20titles.xls&1292.0.55.002&Data%20Cubes&A8CF900440465BDBCA257122001ABA2D&0&2006&28.02.2006&Latest",

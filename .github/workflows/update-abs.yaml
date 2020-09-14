@@ -6,6 +6,7 @@ name: update-abs
 on:
   schedule:
     - cron: '10 2 * * MON-FRI'
+  push:
     branches:
       - master
 

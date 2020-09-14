@@ -4,7 +4,8 @@ name: update-abs
 
 # Controls when the action will run. Run this job every weekday at 1:30am UTC
 on:
-  push:
+  schedule:
+    - cron: '10 2 * * MON-FRI'
     branches:
       - master
 
@@ -20,7 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: |
-          Rscript -e "install.packages(c('usethis','stringdist','devtools', 'readabs', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('zoo', usethis','stringdist','devtools', 'readabs', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
 

@@ -3,12 +3,14 @@ library(absmapsdata)
 library(dplyr)
 library(sf)
 
+devtools::load_all(".")
+
 source("data-raw/jobkeeper_sa2.R")
 source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
 source("data-raw/payroll_sa4.R")
 
-bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
+covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
   left_join(small_area_labour_market %>% 
               filter(indicator == "Smoothed labour force (persons)",
                      date == max(.$date)) %>%
@@ -34,7 +36,8 @@ bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
   pivot_longer(cols = c(sa2_main_2016, sa4_code_2016), names_to = "statistical_area", values_to = "statistical_area_code") %>%
   filter(!is.na(statistical_area_code)) %>%
   mutate(statistical_area = str_sub(statistical_area, 0L, 3L)) %>% 
-  rename(state = state_name_2016)
+  rename(state = state_name_2016) %>%
+  arrange(date)
 
 
 

@@ -1,3 +1,4 @@
+library(dplyr)
 abs_cats <- tibble::tribble(
   ~cat_no, ~title, ~tables,  ~data_name, 
   "6202.0", "Labour Force, Australia", list("12" = "Labour force status by Sex, State and Territory", 

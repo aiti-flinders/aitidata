@@ -1,6 +1,9 @@
 ## code to prepare `national_accounts` dataset goes here
 library(readabs)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(stringr)
+
 ana <- read_abs(cat_no = "5206.0", tables = 6)
 
 industry_value_add <- ana %>%

@@ -1,7 +1,9 @@
 ## code to prepare `underutilisation` dataset goes here
 
 library(readabs)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(stringr)
 
 raw <- read_abs(cat_no = "6291.0.55.003", tables = c('23a', '23b'), retain_files = FALSE)
 

@@ -22,7 +22,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
         run: |
-          Rscript -e "install.packages(c('zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('rvest', 'xml2', 'zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
           Rscript -e "devtools::install_github('MattCowgill/readabs', dependencies = FALSE)"

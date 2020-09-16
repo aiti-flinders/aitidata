@@ -22,11 +22,15 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install packages
+        env: 
+          GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           Rscript -e "install.packages(c('devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr'), type = 'binary')"
+          Rscript -e "devtools::install_github('mattcowgill/strayr')"
+          Rscript -e "devtools::install_github('hamgamb/aititheme')"
           Rscript -e "devtools::install_github('hamgamb/reportabs')"
           Rscript -e "devtools::install_github('hamgamb/daitir')"
-          Rscript -e "devtools::install_github('mattcowgill/strayr')"
+          
       - name: Render files
         run: |
           Rscript -e "purrr::map(.x = strayr::strayr(1:8, to = 'state_name'), .f = ~daitir::render_monthly_briefing(state = .x))"

@@ -28,7 +28,7 @@ jobs:
         run: |
           Rscript -e "install.packages(c('devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr', 'stringdist', 'backports'), type = 'binary')"
           Rscript -e "devtools::install_github('mattcowgill/strayr')"
-          Rscript -e "devtools::install_github('hamgamb/aititheme')"
+          Rscript -e "devtools::install_github('hamgamb/aititheme', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/reportabs')"
           Rscript -e "devtools::install_github('hamgamb/daitir')"
           

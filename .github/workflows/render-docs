@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Render monthly labour force pdfs
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    paths:
+      - 'data/labour_force.rda'
+    branches: 
+      - master
+      
+
+jobs:
+  render-documents:
+    # The type of runner that the job will run on
+    runs-on: macOS-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - name: Install packages
+        run: |
+          Rscript -e "install.packages(c('devtools','rmarkdown', dplyr', 'stringr', 'ggplot2', 'lubridate', scales', 'purrr'), type = 'binary')
+          Rscript -e "devtools::install_github('hamgamb/reportabs')"
+          Rscript -e "devtools::install_github('hamgamb/daitir')"
+          Rscript -e "devtools::install_github('mattcowgill/strayr')"
+      - name: Render files
+        run: |
+          Rscript -e "purrr::map(.x = strayr::strayr(1:8, to = 'state_name'), .f = ~daitir::render_monthly_briefing(state = .x))"
+      - name: Commit changes
+        run: |
+          git config --global user.name 'Hamish Gamble'
+          git config --global user.email 'gamb0043@flinders.edu.au'
+          git add .
+          git commit -m 'updating data' || echo "No changes to commit"
+          git push || echo "No changes to commit"
+

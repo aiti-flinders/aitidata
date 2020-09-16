@@ -8,8 +8,7 @@ on:
   push:
     branches: 
       - master
-    paths:
-      - 'data/labour_force.rda'
+
       
 
 jobs:

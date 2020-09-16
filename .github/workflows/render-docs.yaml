@@ -33,7 +33,7 @@ jobs:
           
       - name: Render files
         run: |
-          Rscript -e "purrr::map(.x = strayr::strayr(1:8, to = 'state_name'), .f = ~daitir::render_monthly_briefing(state = .x))"
+          Rscript -e "purrr::map(.x = strayr::strayr(1:8, to = 'state_name'), .f = ~reportabs::render_monthly_briefing(state = .x))"
       - name: Commit changes
         run: |
           git config --global user.name 'Hamish Gamble'

@@ -1,5 +1,5 @@
 ## code to prepare `update_abs` dataset goes here
-to_update <- unique(abs_cats[abs_cats$next_release == lubridate::today(tzone = "Australia/Adelaide"), ]$data_name)
+to_update <- unique(daitir:::abs_cats[daitir:::abs_cats$next_release == lubridate::today(tzone = "Australia/Adelaide"), ]$data_name)
 
 if (length(to_update) == 0) {
   message("everything is up to date!")

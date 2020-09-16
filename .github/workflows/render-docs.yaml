@@ -14,7 +14,7 @@ on:
 jobs:
   render-documents:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: macOS-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -26,11 +26,13 @@ jobs:
         env: 
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr', 'stringdist', 'backports'), type = 'binary')"
-          Rscript -e "devtools::install_github('mattcowgill/strayr')"
+          Rscript -e "install.packages(c('httr', 'xml2', 'zoo', 'devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr', 'stringdist', 'backports'), type = 'binary')"
+          Rscript -e "devtools::install_github('mattcowgill/strayr', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/aititheme', dependencies = FALSE)"
-          Rscript -e "devtools::install_github('hamgamb/reportabs')"
-          Rscript -e "devtools::install_github('hamgamb/daitir')"
+          Rscript -e "devtools::install_github('hamgamb/reportabs', dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
+      - name: Install tinytex
+        run: Rscript -e "tinytex::install_tinytex()"
           
       - name: Render files
         run: |

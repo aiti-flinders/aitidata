@@ -14,7 +14,7 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
   next_release <- lubridate::as_datetime(paste(abs_next_release(cat_no), "11:00:00"), tz = "Australia/Adelaide")
   
   if (is.null(data_name)) {
-    cat_to_file <- unique(daitir:::abs_cats[daitir:::abs_cats$cat_no == cat_no, ]$data_name)
+    cat_to_file <- unique(abs_cats[abs_cats$cat_no == cat_no, ]$data_name)
   } else {
     cat_to_file <- data_name
   }
@@ -37,12 +37,12 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 
 #' Find the release date of the most recent ABS Catalogue
 #'
-#' @param cat_no 
+#' @param cat_no string. Include the ".0"
 #'
 #' @return date
 #' @export abs_current_release
 #'
-#' @examples
+#' @examples abs_current_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
 abs_current_release <- function(cat_no) {
@@ -78,12 +78,12 @@ abs_current_release <- function(cat_no) {
 
 #' Find the date of the next release of an ABS dataset
 #'
-#' @param cat_no 
+#' @param cat_no string. Include the ".0" 
 #'
 #' @return date
 #' @export abs_next_release
 #'
-#' @examples
+#' @examples abs_next_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
 abs_next_release <- function(cat_no) {

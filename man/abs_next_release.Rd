@@ -7,7 +7,7 @@
 abs_next_release(cat_no)
 }
 \arguments{
-\item{cat_no}{}
+\item{cat_no}{string. Include the ".0"}
 }
 \value{
 date
@@ -16,5 +16,6 @@ date
 Find the date of the next release of an ABS dataset
 }
 \examples{
+abs_next_release("6202.0")
 
 }

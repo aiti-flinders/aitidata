@@ -118,6 +118,59 @@
 #' @source \url{https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport}
 "internet_vacancies_index"
 
+#' JobKeeper data by SA2
+#' 
+#' This dataset uses treasury estimates of JobKeeper applications by
+#' postcode, and reconciles that to a statistical area measure instead.
+#' Conversion is done through apportioning businesses via meshblocks.
+#' 
+#' @format A dataframe with 4 variables
+#' \describe{
+#' \item{sa2_main_2016}{Statistical Area 2 Code}
+#' \item{date}{Date}
+#' \item{indicator}{Jobkeeper applications, Total businesses, Jobkeeper proportion}
+#' \item{value}{Value}
+#' }
+#' 
+#' @source \url{https://treasury.gov.au/coronavirus/jobkeeper/data}
+#' 
+"jobkeeper_sa2"
+
+#' JobSeeker data by SA2
+#' 
+#' Department of Social Services estimates of monthly jobseeker and
+#' youth allowance payments since March 2020. 
+#' 
+#' @format A dataframe with 4 variables
+#' \describe{
+#' \item{sa2_main_2016}{Statistical Area 2 Code}
+#' \item{date}{Date}
+#' \item{indicator}{Jobseeker payment, Youth allowance other, Jobseeker growth, Youth allowance growth}
+#' \item{value}{Value}
+#' }
+#'
+#' @source \url{https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile} 
+"jobseeker_sa2"
+
+#' Labour Account 
+#' 
+#' Experimental ABS labour force data 
+#' 
+#' @format A dataframe with 10 variables
+#' \describe{
+#' \item{date}{Date}
+#' \item{month}{Month}
+#' \item{year}{Year}
+#' \item{prefix}{Prefix on the indicator - safe to ignore}
+#' \item{indicator}{Labour account indicator}
+#' \item{industry}{Industry}
+#' \item{series_type}{Series type}
+#' \item{value}{Value}
+#' \item{unit}{Unit of value}
+#' }
+#' 
+#' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6150.0.55.003}
+"labour_account"
 
 #' ABS Labour Force Survey
 #' 
@@ -141,5 +194,54 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0}
 "labour_force"
 
+#' Payroll Index
+#' 
+#' ABS Weekly Payroll data since 4th January 2020. 
+#' 
+#' @format A dataframe with 6 variables:
+#' \describe{
+#' \item{date}{Date}
+#' \item{gender}{Gender}
+#' \item{age}{Age group}
+#' \item{state}{State}
+#' \item{industry}{Industry}
+#' \item{value}{Value}
+#' }
+#' 
+#' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
+"payroll_index"
 
+#' Payroll SA4
+#' 
+#' ABS Weekly Payroll data for Statistical Area 4 Regions
+#' 
+#' @format A dataframe with 5 variables:
+#' \describe{
+#' \item{state_name_2016}{State}
+#' \item{date}{Date}
+#' \item{value}{Number of payroll jobs - indexed to March 14th 2020}
+#' \item{indicator}{This dataset contains only the payroll index data}
+#' }
+#' 
+#' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
+"payroll_sa4"
+
+#' Small Area Labour Market
+#' 
+#' The Department of Education, Skills and Employment quarterly regional 
+#' estimates of unemployment and the unemployment rate at the Statistical
+#' Area Level 2 (SA2)
+#' 
+#' @format A dataframe with 6 variables:
+#' \describe{
+#' \item{indicator}{One of Labour force total, Unemployment rate, Unemployed total}
+#' \item{sa2_name_2016}{Name of the SA2 region}
+#' \item{sa2_main_2016}{9 digit code representing the SA2 region}
+#' \item{date}{Quarterly since December 2010}
+#' \item{value}{Value of the indicator}
+#' \item{state_name_2016}{State name}
+#' }
+#' 
+#' @source \url{https://www.employment.gov.au/small-area-labour-markets-publication-0}
+"small_area_labour_market"
 

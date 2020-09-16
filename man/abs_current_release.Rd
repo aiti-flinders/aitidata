@@ -7,7 +7,7 @@
 abs_current_release(cat_no)
 }
 \arguments{
-\item{cat_no}{}
+\item{cat_no}{string. Include the ".0"}
 }
 \value{
 date
@@ -16,5 +16,6 @@ date
 Find the release date of the most recent ABS Catalogue
 }
 \examples{
+abs_current_release("6202.0")
 
 }

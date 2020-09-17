@@ -26,11 +26,15 @@ jobs:
         env: 
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr'), type = 'binary')"
-          Rscript -e "devtools::install_github('mattcowgill/strayr')"
-          Rscript -e "devtools::install_github('hamgamb/aititheme')"
-          Rscript -e "devtools::install_github('hamgamb/reportabs')"
-          Rscript -e "devtools::install_github('hamgamb/daitir')"
+          Rscript -e "install.packages(c('plotly', 'tidyr', 'rvest', 'xml2', 'zoo', 'devtools','rmarkdown', 'dplyr', 'stringr', 'ggplot2', 'lubridate', 'scales', 'purrr', 'stringdist', 'backports'), type = 'binary')"
+          Rscript -e "devtools::install_github('mattcowgill/strayr', dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/aititheme', dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/reportabs', dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
+      - name: Install tinytex
+        run: Rscript -e "tinytex::install_tinytex()"
+      - name: Install Roboto
+        run: Rscript -e "tinytex::tlmgr_install('roboto')"
           
       - name: Render files
         run: |

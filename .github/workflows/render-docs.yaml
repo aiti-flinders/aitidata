@@ -33,6 +33,8 @@ jobs:
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = FALSE)"
       - name: Install tinytex
         run: Rscript -e "tinytex::install_tinytex()"
+      - name: Install Roboto
+        run: Rscript -e "tinytex::tlmgr_install('roboto')"
           
       - name: Render files
         run: |

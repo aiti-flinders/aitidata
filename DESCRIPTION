@@ -24,6 +24,7 @@ Imports:
     stringr,
     tibble,
     xml2,
-    dplyr
+    dplyr,
+    reportabs
 Suggests: 
     testthat

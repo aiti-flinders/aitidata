@@ -25,3 +25,5 @@ Imports:
     tibble,
     xml2,
     dplyr
+Suggests: 
+    testthat

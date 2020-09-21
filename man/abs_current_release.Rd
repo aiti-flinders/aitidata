@@ -4,10 +4,10 @@
 \alias{abs_current_release}
 \title{Find the release date of the most recent ABS Catalogue}
 \usage{
-abs_current_release(cat_no)
+abs_current_release(topic)
 }
 \arguments{
-\item{cat_no}{string. Include the ".0"}
+\item{topic}{}
 }
 \value{
 date

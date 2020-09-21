@@ -4,10 +4,10 @@
 \alias{abs_next_release}
 \title{Find the date of the next release of an ABS dataset}
 \usage{
-abs_next_release(cat_no)
+abs_next_release(topic, theme = NULL, parent_topic = NULL)
 }
 \arguments{
-\item{cat_no}{string. Include the ".0"}
+\item{topic}{}
 }
 \value{
 date

@@ -37,7 +37,8 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 
 #' Find the release date of the most recent ABS Catalogue
 #'
-#' @param cat_no string. Include the ".0"
+#'
+#' @param topic 
 #'
 #' @return date
 #' @export abs_current_release
@@ -45,28 +46,25 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #' @examples abs_current_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
-abs_current_release <- function(cat_no) {
+abs_current_release <- function(topic) {
   
-  release_url <- glue::glue("https://www.abs.gov.au/AUSSTATS/abs@.nsf/second+level+view?ReadForm&prodno={cat_no}&&tabname=Past%20Future%20Issues")
+  if(grepl(".", topic)) {
+    topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
+    }
+  
+  theme <- unique(abs_cats[abs_cats$topic == topic,]$theme)
+  parent_topic <- unique(abs_cats[abs_cats$topic == topic,]$parent_topic)
+  
+  
+  
+  release_url <- glue::glue("https://www.abs.gov.au/statistics/{theme}/{parent_topic}/{topic}/latest-release")
   
   release_page <- xml2::read_html(release_url)
   
-  release_table <- tibble::tibble(release = release_page %>%  rvest::html_nodes("#mainpane a") %>% rvest::html_text(),
-                                  url_suffix = release_page %>%  rvest::html_nodes("#mainpane a") %>% rvest::html_attr("href"))
-  
-  release_date <- release_table %>%
-    dplyr::filter(grepl("(Latest)", .data$release)) %>%
-    dplyr::pull(.data$release) %>%
-    stringr::str_remove(" \\(Latest\\)") %>%
-    stringr::str_extract("Week ending \\d+\\s{1}\\w+ \\d+$|(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?).*") %>%
-    stringr::str_replace_all(" ", "%20")
-  
-  download_url <- glue::glue("https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/{cat_no}{release_date}?OpenDocument")
-  
-  cur_release <- xml2::read_html(download_url) %>%
-    rvest::html_nodes(xpath = '//*[@id="Release"]') %>%
+  cur_release <- release_page %>% 
+    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[1]/div[2]') %>%
     rvest::html_text() %>%
-    stringr::str_extract("[0-9/]{8,}")
+    trimws()
   
   cur_release <- as.Date(cur_release, format = "%d/%m/%y")
   
@@ -78,7 +76,8 @@ abs_current_release <- function(cat_no) {
 
 #' Find the date of the next release of an ABS dataset
 #'
-#' @param cat_no string. Include the ".0" 
+#'
+#' @param topic 
 #'
 #' @return date
 #' @export abs_next_release
@@ -86,17 +85,26 @@ abs_current_release <- function(cat_no) {
 #' @examples abs_next_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
-abs_next_release <- function(cat_no) {
+abs_next_release <- function(topic) {
   
-  release_url <- glue::glue("https://www.abs.gov.au/AUSSTATS/abs@.nsf/second+level+view?ReadForm&prodno={cat_no}&&tabname=Past%20Future%20Issues")
+  if(grepl(".", topic)) {
+    topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
+  }
+  
+  theme <- unique(abs_cats[abs_cats$topic == topic,]$theme)
+  parent_topic <- unique(abs_cats[abs_cats$topic == topic,]$parent_topic)
+  
+  
+  
+  release_url <- glue::glue("https://www.abs.gov.au/statistics/{theme}/{parent_topic}/{topic}")
   
   release_page <- xml2::read_html(release_url)
   
-  release_date <- release_page %>%
-    rvest::html_nodes(xpath = '//*[@id="mainpane"]/div/ul[1]/li') %>%
-    rvest::html_text()
+  next_date <- release_page %>% 
+    rvest::html_nodes(xpath = '//*[@id="content"]/div/div[4]/div/div/div/div[1]/time') %>%
+    rvest::html_text() %>%
+    trimws()
   
-  next_date <- stringr::str_sub(release_date, start = -10)
   
   next_date <- as.Date(next_date, format = "%d/%m/%Y")
   

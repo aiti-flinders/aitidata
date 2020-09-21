@@ -17,11 +17,9 @@ abs_cats <- tibble::tribble(
   "6150.0.55.003", "labour", "employment-and-unemployment", "labour-account-australia", list("1" = "Total All Industries"), "labour_account",
   "8165.0","economy", "business-indicators", "counts-australian-businesses-including-entries-and-exits", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2")
 
-abs_cats <- tidyr::unnest_longer(abs_cats, col = tables) %>%
-  dplyr::rowwise() 
-
-# %>%
-#   dplyr::mutate(next_release = abs_next_release(cat_no))
+abs_cats <- tidyr::unnest_longer(abs_cats, col = tables) %>% 
+  dplyr::rowwise() %>%   
+  dplyr::mutate(next_release = abs_next_release(topic = topic, theme = theme, parent_topic = parent_topic))
 
 non_abs_cats <- tibble::tribble(
   ~url, ~xpath,  ~title, ~data_name, 

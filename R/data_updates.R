@@ -28,7 +28,7 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
   if (!file.exists(paste0("data/", cat_to_file, ".rda"))) {
     latest <- FALSE
   } else {
-    file_created <- file.info(paste0("data/", cat_to_file, ".rda"))$ctime
+    file_created <- file.info(paste0("data/", cat_to_file, ".rda"))$mtime
     latest <- (current_release <= file_created) & (now < next_release)
   }
   
@@ -85,14 +85,18 @@ abs_current_release <- function(topic) {
 #' @examples abs_next_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
-abs_next_release <- function(topic) {
+abs_next_release <- function(topic, theme = NULL, parent_topic = NULL) {
   
-  if(grepl(".", topic)) {
-    topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
-  }
+  if(is.null(theme) & is.null(parent_topic)) {
+  
+    if(grepl(".", topic)) {
+      topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
+    }
   
   theme <- unique(abs_cats[abs_cats$topic == topic,]$theme)
   parent_topic <- unique(abs_cats[abs_cats$topic == topic,]$parent_topic)
+  
+  } 
   
   
   

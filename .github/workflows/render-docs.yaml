@@ -6,7 +6,8 @@ name: Render monthly labour force pdfs
 # events but only for the master branch
 on:
   push:
-    branches: master
+    paths:  
+      - 'data/labour_force.rda'
 
       
 

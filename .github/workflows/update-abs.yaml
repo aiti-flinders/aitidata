@@ -6,6 +6,8 @@ name: update-abs
 on:
   schedule:
     - cron: '40 1 * * MON-FRI'
+  push:
+    master
 
 
 
@@ -23,6 +25,7 @@ jobs:
         run: |
           Rscript -e "install.packages(c('hutils', 'fst', 'XML', 'rsdmx', 'rvest', 'xml2', 'zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
+          Rscript -e "devtools::install_github('hamgamb/reportabs', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = TRUE)"
           Rscript -e "devtools::install_github('MattCowgill/readabs', dependencies = FALSE)"
       - name: Get data

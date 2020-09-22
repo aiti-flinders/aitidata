@@ -7,8 +7,9 @@ library(dplyr)
 library(readxl)
 library(forcats)
 
-download_abs_data_cube("6160.0.55.001", cube = "6160055001_do004.xlsx", path = here::here("data-raw"))
-file.rename(here::here("data-raw", "6160055001_do004.xlsx"), here::here("data-raw", "payroll_index.xlsx"))
+download.file(url = "https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release/6160055001_do004.xlsx",
+              destfile = "data-raw/payroll_index.xlsx",
+              mode = 'wb')
 
 payroll_index <- read_xlsx(here::here("data-raw", "payroll_index.xlsx"), sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
   janitor::clean_names() %>%

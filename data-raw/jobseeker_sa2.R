@@ -11,7 +11,7 @@ jobseeker_latest <- read_html("https://data.gov.au/data/dataset/728daa75-06e8-44
   html_text() %>%
   as.Date()
 
-if (as.Date(file.info("data/jobseeker_sa2.rda")$ctime) < jobseeker_latest | !file.exists("data/jobseeker_sa2.rda")) {
+if (as.Date(file.info("data/jobseeker_sa2.rda")$mtime) < jobseeker_latest | !file.exists("data/jobseeker_sa2.rda")) {
 
   message("Updating `data/jobseeker_sa2.rda`")
   

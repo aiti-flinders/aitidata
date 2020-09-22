@@ -7,9 +7,10 @@
   library(readxl)
   library(forcats)
 
-  readabs::download_abs_data_cube("6160.0.55.001", cube = "6160055001_do005", path = here::here("data-raw"))
-  file.rename(here::here("data-raw", "6160055001_do005.xlsx"), here::here("data-raw", "payroll_sa4.xlsx"))
-  
+  download.file(url = "https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release/6160055001_do005.xlsx",
+                destfile = "data-raw/payroll_sa4.xlsx",
+                mode = 'wb')
+
   payroll_sa4 <- read_xlsx(here::here("data-raw", "payroll_sa4.xlsx"), sheet = "Payroll jobs index-SA4", skip = 5, na = "NA") %>%
     janitor::clean_names() %>%
     mutate(across(starts_with("x"), as.numeric)) %>%

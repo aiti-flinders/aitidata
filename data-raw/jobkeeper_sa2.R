@@ -75,23 +75,27 @@ jobkeeper_date <- release_page %>%
   str_extract("(?<=\\: ).*") %>%
   as.Date(format = "%d %B %Y")
 
-if (!as.Date(file.info("data/jobkeeper_sa2.rda")$ctime) >= jobkeeper_date | !file.exists("data/jobkeeper_sa2.rda")) {
+if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !file.exists("data/jobkeeper_sa2.rda")) {
   
   message("Updating jobkeeper_sa2 dataset...")
   
   download.file(paste0("https://treasury.gov.au/", jobkeeper_data_url), dest = "data-raw/jobkeeper_postal.xlsx", mode = "wb")
   
+  (nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = "Data", skip = 1, n_max = 0)))
+  
+  (ct <- ifelse(grepl("Postcode", nms), "text", "numeric"))
+  
   job_keeper_postal <- read_xlsx(path = "data-raw/jobkeeper_postal.xlsx", 
                                  sheet = "Data",
                                  skip = 1,
-                                 col_types = c("text", "numeric", "numeric")) %>%
+                                 col_types = ct) %>%
     janitor::clean_names() %>%
     mutate(postcode = str_pad(postcode, 4, "left", "0"))
   
   file.remove("data-raw/jobkeeper_postal.xlsx")
   
   
-  business_sa2 <- cabee_sa2 %>%
+  business_sa2 <- daitir::cabee_sa2 %>%
     group_by(sa2_main_2016, date) %>%
     summarise(total_businesses = sum(value, na.rm = T), .groups = "drop") %>%
     mutate(sa2_main_2016 = as.character(sa2_main_2016)) %>%
@@ -104,17 +108,20 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$ctime) >= jobkeeper_date | !fil
     group_by(POA_CODE_2016) %>% 
     mutate(share = total_businesses/sum(total_businesses, na.rm = T)) %>% 
     ungroup() %>% 
-    mutate(weighted_may_application_count = may_application_count * share,
+    mutate(weighted_june_application_count = june_application_count * share,
+           weighted_may_application_count = may_application_count * share,
            weighted_april_application_count = april_application_count * share) %>% 
     group_by(sa2_main_2016) %>%
     summarise(apps_april = sum(weighted_april_application_count, na.rm = T),
-              apps_may = sum(weighted_may_application_count, na.rm = T)) %>%
-    pivot_longer(cols = c(2:3), 
+              apps_may = sum(weighted_may_application_count, na.rm = T),
+              apps_june = sum(weighted_june_application_count, na.rm = T)) %>%
+    pivot_longer(cols = c(2:length(.)), 
                  names_to = "date",
                  values_to = "jobkeeper_applications") %>%
     mutate(date = case_when(
       date == "apps_april" ~ as.Date("2020-04-01"),
-      date == "apps_may" ~ as.Date("2020-05-01")
+      date == "apps_may" ~ as.Date("2020-05-01"),
+      date == "apps_june" ~ as.Date("2020-06-01")
     ),
     jobkeeper_applications = ceiling(jobkeeper_applications)) %>%
     left_join(business_sa2) %>%

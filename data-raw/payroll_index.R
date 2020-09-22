@@ -7,7 +7,7 @@ library(dplyr)
 library(readxl)
 library(forcats)
 
-download.file(url = "https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release/6160055001_do004.xlsx",
+download.file(url = "https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release/6160055001_DO004.xlsx",
               destfile = "data-raw/payroll_index.xlsx",
               mode = 'wb')
  

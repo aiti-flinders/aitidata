@@ -89,6 +89,9 @@ if (new_date > old_date) {
     distinct() %>%
     pivot_wider(names_from = indicator, values_from = value) %>%
     mutate("Underutilised total" = `Unemployed total` + `Underemployed total`) %>%
+    janitor::clean_names()
+  
+  
     pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
 
   save(labour_force, file = here::here("data", "labour_force.rda"), compress = 'xz')

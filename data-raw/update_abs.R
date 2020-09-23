@@ -1,5 +1,8 @@
 ## code to prepare `update_abs` dataset goes here
-#' @importFrom dplyr %>%
+library(dplyr)
+library(purrr)
+library(lubridate)
+
 to_update <- abs_lookup_table %>%
   dplyr::filter(next_release == lubridate::today(tzone = "Australia/Adelaide")) %>%
   dplyr::pull(catalogue)

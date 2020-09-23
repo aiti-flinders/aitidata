@@ -8,7 +8,7 @@ devtools::load_all(".")
 source("data-raw/jobkeeper_sa2.R")
 source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
-source("data-raw/payroll_sa4.R")
+source("data-raw/weekly-payroll-jobs-and-wages-australia.R")
 
 covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
   left_join(small_area_labour_market %>% 
@@ -23,7 +23,8 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
          jobseeker_decile = ntile(jobseeker_proportion, 10), 
          covid_impact = jobkeeper_decile + jobseeker_decile) %>%  
   left_join(sa22016) %>%
-  select(sa2_main_2016, 
+  select(sa2_main_2016,
+         sa3_code_2016,
          date,
          jobkeeper_applications, 
          jobkeeper_proportion, 
@@ -31,18 +32,23 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2)  %>%
          jobseeker_proportion,
          covid_impact, 
          state_name_2016) %>% 
-  pivot_longer(cols = c(-sa2_main_2016, -state_name_2016, -date), names_to = 'indicator', values_to = 'value') %>%
-  bind_rows(payroll_sa4) %>% 
-  pivot_longer(cols = c(sa2_main_2016, sa4_code_2016), names_to = "statistical_area", values_to = "statistical_area_code") %>%
-  filter(!is.na(statistical_area_code)) %>%
-  mutate(statistical_area = str_sub(statistical_area, 0L, 3L)) %>% 
-  rename(state = state_name_2016) %>%
+  bind_rows(payroll_region) %>%
   arrange(date) %>% 
-  pivot_wider(id_cols = c(date, state, value, statistical_area, statistical_area_code), 
-              names_from = indicator, 
-              values_from = value) %>% 
-  group_by(state, statistical_area, statistical_area_code) %>%
-  mutate(jobkeeper_growth = jobkeeper_applications-lag(jobkeeper_applications)) %>% 
-  pivot_longer(cols = c(6:11), names_to = 'indicator', values_to = 'value')
+  group_by(state_name_2016, sa2_main_2016) %>%
+  mutate(jobkeeper_growth = jobkeeper_applications-lag(jobkeeper_applications)) %>%
+  ungroup() %>%
+  select(state = state_name_2016, 
+         sa2_main_2016, 
+         sa3_code_2016, 
+         date, 
+         jobkeeper_applications, 
+         jobkeeper_proportion, 
+         jobkeeper_growth,
+         jobseeker_payment,
+         jobseeker_proportion,
+         payroll_index,
+         covid_impact) %>%
+  pivot_longer(cols = c(5:length(.)), names_to = 'indicator', values_to = 'value')
+
 
 usethis::use_data(covid_data, overwrite = TRUE, compress = 'xz')

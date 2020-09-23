@@ -1,5 +1,8 @@
 ## code to prepare `update_abs` dataset goes here
-to_update <- unique(daitir:::abs_cats[daitir:::abs_cats$next_release == lubridate::today(tzone = "Australia/Adelaide"), ]$data_name)
+#' @importFrom dplyr %>%
+to_update <- abs_lookup_table %>%
+  dplyr::filter(next_release == lubridate::today(tzone = "Australia/Adelaide")) %>%
+  dplyr::pull(catalogue)
 
 if (length(to_update) == 0) {
   message("everything is up to date!")

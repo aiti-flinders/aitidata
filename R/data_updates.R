@@ -38,7 +38,7 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #' Find the release date of the most recent ABS Catalogue
 #'
 #'
-#' @param topic 
+#' @param catalogue string 
 #'
 #' @return date
 #' @export abs_current_release
@@ -46,18 +46,11 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #' @examples abs_current_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
-abs_current_release <- function(topic) {
+abs_current_release <- function(catalogue_string) {
   
-  if(grepl(".", topic)) {
-    topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
-    }
-  
-  theme <- unique(abs_cats[abs_cats$topic == topic,]$theme)
-  parent_topic <- unique(abs_cats[abs_cats$topic == topic,]$parent_topic)
-  
-  
-  
-  release_url <- glue::glue("https://www.abs.gov.au/statistics/{theme}/{parent_topic}/{topic}/latest-release")
+  release_url <- abs_lookup_table %>%
+    dplyr::filter(catalogue == catalogue_string) %>%
+    pull(url)
   
   release_page <- xml2::read_html(release_url)
   
@@ -77,7 +70,7 @@ abs_current_release <- function(topic) {
 #' Find the date of the next release of an ABS dataset
 #'
 #'
-#' @param topic 
+#' @param catalogue_string 
 #'
 #' @return date
 #' @export abs_next_release
@@ -85,32 +78,36 @@ abs_current_release <- function(topic) {
 #' @examples abs_next_release("6202.0")
 #' 
 #' @importFrom dplyr "%>%"
-abs_next_release <- function(topic, theme = NULL, parent_topic = NULL) {
+abs_next_release <- function(catalogue_string) {
   
-  if(is.null(theme) & is.null(parent_topic)) {
-  
-    if(grepl(".", topic)) {
-      topic <- unique(abs_cats[abs_cats$cat_no == topic, ]$topic)
-    }
-  
-  theme <- unique(abs_cats[abs_cats$topic == topic,]$theme)
-  parent_topic <- unique(abs_cats[abs_cats$topic == topic,]$parent_topic)
-  
-  } 
-  
-  
-  
-  release_url <- glue::glue("https://www.abs.gov.au/statistics/{theme}/{parent_topic}/{topic}")
+  release_url <- abs_lookup_table %>%
+    dplyr::filter(catalogue == catalogue_string) %>%
+    pull(url)
   
   release_page <- xml2::read_html(release_url)
   
   next_date <- release_page %>% 
-    rvest::html_nodes(xpath = '//*[@id="content"]/div/div[4]/div/div/div/div[1]/time') %>%
+    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/span') %>%
     rvest::html_text() %>%
-    trimws()
+    stringr::str_replace_all("[^\\d\\/]","")
   
   
   next_date <- as.Date(next_date, format = "%d/%m/%Y")
+  
+  if (length(next_date) == 0) {
+    next_date <- release_page %>%
+      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
+      rvest::html_text() %>%
+      trimws() %>%
+      .[2]
+    
+    next_date <- as.Date(next_date, format = "%d/%m/%Y")
+    
+  } 
+  
+  if (length(next_date) == 0) {
+    next_date <- NA
+  }
   
   return(next_date)
   

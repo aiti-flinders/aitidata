@@ -50,9 +50,15 @@ for (i in cabee_sheets) {
   
 }
 
-cabee_sa2 <- cabee_sa2 %>%
-  select(-industry_code,
-         division = industry_label)
+cabee_sa2 <- cabee_sa2 %>% 
+  pivot_longer(cols = c(-industry_code, -industry_label, -sa2_main_2016, -sa2_name_2016, -date),
+               names_to = "indicator",
+               values_to = "value") %>%
+  select(date,
+         division = industry_label,
+         sa2_main_2016,
+         sa2_name_2016,
+         indicator, value)
 
 file.remove("data-raw/cabee_sa2.xls")
 usethis::use_data(cabee_sa2, compress = "xz", overwrite = TRUE)

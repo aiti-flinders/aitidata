@@ -3,7 +3,7 @@ library(dplyr)
 library(purrr)
 library(lubridate)
 
-to_update <- daitir::abs_lookup_table %>%
+to_update <- daitir:::abs_lookup_table %>%
   dplyr::filter(next_release == lubridate::today(tzone = "Australia/Adelaide")) %>%
   dplyr::pull(catalogue)
 

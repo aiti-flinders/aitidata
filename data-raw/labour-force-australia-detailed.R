@@ -8,7 +8,7 @@ library(purrr)
 
 message("updating `employment_by_industry`")
 
-raw <- read_abs("6291.0.55.003", tables = c(5, 19), retain_files = FALSE)
+raw <- read_abs("6291.0.55.001", tables = c(5, 19), retain_files = FALSE)
 
 employment_industry_5 <- raw %>%
   filter(table_no == "6291005") %>% 

@@ -4,10 +4,10 @@
 \alias{abs_next_release}
 \title{Find the date of the next release of an ABS dataset}
 \usage{
-abs_next_release(topic, theme = NULL, parent_topic = NULL)
+abs_next_release(catalogue_string)
 }
 \arguments{
-\item{topic}{}
+\item{catalogue_string}{}
 }
 \value{
 date

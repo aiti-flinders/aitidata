@@ -7,6 +7,8 @@ to_update <- daitir:::abs_lookup_table %>%
   dplyr::filter(next_release == lubridate::today(tzone = "Australia/Adelaide")) %>%
   dplyr::pull(catalogue)
 
+to_update <- to_update[file.exists(here::here("data-raw", paste0(to_update, ".R")))]
+
 if (length(to_update) == 0) {
   message("everything is up to date!")
 } else {

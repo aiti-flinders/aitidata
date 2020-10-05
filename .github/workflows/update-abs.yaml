@@ -6,9 +6,7 @@ name: update-abs
 on:
   schedule:
     - cron: '40 1 * * MON-FRI'
-  push:
-    branches: 
-      master
+
 
 
 
@@ -26,7 +24,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('ggplot2', 'plotly', 'scales', 'hutils', 'fst', 'XML', 'rsdmx', 'rvest', 'xml2', 'zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('parsedate','ggplot2', 'plotly', 'scales', 'hutils', 'fst', 'XML', 'rsdmx', 'rvest', 'xml2', 'zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
           Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/aititheme', dependencies = FALSE)"
           Rscript -e "devtools::install_github('hamgamb/reportabs', dependencies = FALSE)"

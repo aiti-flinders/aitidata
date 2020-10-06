@@ -23,31 +23,31 @@ states <- c(
 
 message("Updating `data/labour_force.rda`")
 
-raw <- read_abs(cat_no = "6202.0", tables = c("12","19","22","23"), retain_files = FALSE)
+raw <- read_abs(cat_no = "6202.0", tables = c("12", "19", "22", "23"), retain_files = FALSE)
 
 labour_force_12 <- raw %>%
   filter(table_no == 6202012) %>%
   separate_series(column_names = c("indicator", "gender", "state")) %>%
   mutate(
-    value = ifelse(unit == "000", (1000*value), (value)),
+    value = ifelse(unit == "000", (1000 * value), (value)),
     year = year(date),
     month = month(date, label = TRUE, abbr = FALSE),
     age = "Total (age)"
   ) %>%
-  select(date, year, month, indicator,  gender, age, state, series_type, value, unit)
+  select(date, year, month, indicator, gender, age, state, series_type, value, unit)
 
 
 labour_force_19 <- raw %>%
   filter(table_no == 6202019) %>%
   separate(series, into = c("indicator", "gender", "state"), sep = ";") %>%
-  mutate(across(c(indicator, gender), ~trimws(gsub(">", "", .))),
-         state = ifelse(gender %in% states, gender, "Australia"),
-         gender = ifelse(gender %in% states, "Persons", gender),
-         unit = "000",
-         value = ifelse(unit == "000", 1000*value, value),
-         year = year(date),
-         month = month(date, label = TRUE, abbr = FALSE),
-         age = "Total (age)"
+  mutate(across(c(indicator, gender), ~ trimws(gsub(">", "", .))),
+    state = ifelse(gender %in% states, gender, "Australia"),
+    gender = ifelse(gender %in% states, "Persons", gender),
+    unit = "000",
+    value = ifelse(unit == "000", 1000 * value, value),
+    year = year(date),
+    month = month(date, label = TRUE, abbr = FALSE),
+    age = "Total (age)"
   ) %>%
   select(date, year, month, indicator, gender, age, state, series_type, value, unit)
 
@@ -55,24 +55,26 @@ labour_force_19 <- raw %>%
 labour_force_22 <- raw %>%
   filter(table_no == 6202022) %>%
   separate(series, into = c("indicator", "gender", "age"), sep = ";") %>%
-  mutate(across(c(indicator, gender, age), ~trimws(gsub(">", "", .))),
-         age = ifelse(age == "", "Total (age)", age),
-         value = ifelse(unit == "000", (1000*value), value),
-         year = year(date),
-         month = month(date, label = T, abbr = F),
-         state = "Australia") %>%
+  mutate(across(c(indicator, gender, age), ~ trimws(gsub(">", "", .))),
+    age = ifelse(age == "", "Total (age)", age),
+    value = ifelse(unit == "000", (1000 * value), value),
+    year = year(date),
+    month = month(date, label = T, abbr = F),
+    state = "Australia"
+  ) %>%
   select(date, year, month, indicator, gender, age, state, series_type, value, unit)
 
 
 labour_force_23 <- raw %>%
   filter(table_no == 6202023) %>%
   separate(series, into = c("indicator", "gender", "state"), sep = ";") %>%
-  mutate(across(c(indicator, gender, state), ~trimws(gsub(">", "", .))),
-         state = ifelse(state == "", "Australia", state),
-         value = ifelse(unit == "000", (1000*value), value),
-         year = lubridate::year(date),
-         month = lubridate::month(date, label = T, abbr = F),
-         age = "Total (age)") %>%
+  mutate(across(c(indicator, gender, state), ~ trimws(gsub(">", "", .))),
+    state = ifelse(state == "", "Australia", state),
+    value = ifelse(unit == "000", (1000 * value), value),
+    year = lubridate::year(date),
+    month = lubridate::month(date, label = T, abbr = F),
+    age = "Total (age)"
+  ) %>%
   select(date, year, month, indicator, gender, age, state, series_type, value, unit)
 
 labour_force <- bind_rows(list(labour_force_12, labour_force_19, labour_force_22, labour_force_23)) %>%
@@ -81,11 +83,4 @@ labour_force <- bind_rows(list(labour_force_12, labour_force_19, labour_force_22
   mutate("Underutilised total" = `Unemployed total` + `Underemployed total`) %>%
   pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
 
-save(labour_force, file = here::here("data", "labour_force.rda"), compress = 'xz')
-
-
-
-
-
-
-
+save(labour_force, file = here::here("data", "labour_force.rda"), compress = "xz")

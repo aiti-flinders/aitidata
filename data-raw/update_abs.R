@@ -12,7 +12,7 @@ to_update <- to_update[file.exists(here::here("data-raw", paste0(to_update, ".R"
 if (length(to_update) == 0) {
   message("everything is up to date!")
 } else {
-  file_paths <- purrr::map(to_update, ~here::here("data-raw", paste0(., ".R")))
+  file_paths <- purrr::map(to_update, ~ here::here("data-raw", paste0(., ".R")))
   message(paste("updating", paste(sep = ",", collapse = " ", to_update)))
   purrr::map(file_paths, source)
 }

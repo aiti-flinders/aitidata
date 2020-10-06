@@ -17,5 +17,4 @@ Find the release date of the most recent ABS Catalogue
 }
 \examples{
 abs_current_release("6202.0")
-
 }

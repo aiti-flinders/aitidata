@@ -8,7 +8,7 @@ library(readxl)
 library(forcats)
 
 message("updating `payroll_index.rda`")
-daitir::download_abs_data_cube("weekly-payroll-jobs-and-wages-australia",
+download_abs_data_cube("weekly-payroll-jobs-and-wages-australia",
   cube = "6160055001_DO004.xlsx",
   path = "data-raw"
 )
@@ -43,7 +43,7 @@ download.file(
 
 message("updating `payroll_region.rda`")
 
-daitir::download_abs_data_cube("weekly-payroll-jobs-and-wages-australia",
+download_abs_data_cube("weekly-payroll-jobs-and-wages-australia",
   cube = "6160055001_DO005.xlsx",
   path = "data-raw"
 )

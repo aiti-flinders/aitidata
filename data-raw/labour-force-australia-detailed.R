@@ -51,7 +51,7 @@ save(employment_by_industry, file = here::here("data", "employment_by_industry.r
 
 message("updating `employment_by_industry_detailed`")
 
-daitir::download_abs_data_cube("labour-force-australia-detailed", cube = "EQ06", path = "data-raw")
+readabs::download_abs_data_cube("labour-force-australia-detailed", cube = "EQ06", path = "data-raw")
 
 df <- read_excel(
   path = "data-raw/EQ06.xlsx",

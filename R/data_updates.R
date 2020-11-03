@@ -77,33 +77,12 @@ abs_current_release <- function(catalogue_string) {
 #' abs_next_release("6202.0")
 #' @importFrom dplyr "%>%"
 abs_next_release <- function(catalogue_string) {
-  release_url <- abs_lookup_table %>%
+  next_date <- abs_lookup_table %>%
     dplyr::filter(catalogue == catalogue_string) %>%
-    pull(url)
-
-  release_page <- xml2::read_html(release_url)
-
-  next_date <- release_page %>%
-    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/span') %>%
-    rvest::html_text() %>%
-    stringr::str_replace_all("[^\\d\\/]", "")
+    dplyr::pull(next_release)
 
 
   next_date <- as.Date(next_date, format = "%d/%m/%Y")
-
-  if (length(next_date) == 0) {
-    next_date <- release_page %>%
-      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
-      rvest::html_text() %>%
-      trimws() %>%
-      .[2]
-
-    next_date <- as.Date(next_date, format = "%d/%m/%Y")
-  }
-
-  if (length(next_date) == 0) {
-    next_date <- NA
-  }
 
   return(next_date)
 }

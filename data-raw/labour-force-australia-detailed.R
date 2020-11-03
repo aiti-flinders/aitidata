@@ -5,6 +5,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(purrr)
+library(readxl)
 
 message("updating `employment_by_industry`")
 

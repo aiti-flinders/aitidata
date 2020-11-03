@@ -99,7 +99,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
   business_sa2 <- daitir::cabee_sa2 %>%
     group_by(sa2_main_2016, date) %>%
-    summarise(total_businesses = sum(value, na.rm = T), .groups = "drop") %>%
+    summarise(total_businesses = sum(total, na.rm = T), .groups = "drop") %>%
     mutate(sa2_main_2016 = as.character(sa2_main_2016)) %>%
     filter(date == max(.$date)) %>%
     select(-date)
@@ -111,6 +111,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     mutate(share = total_businesses / sum(total_businesses, na.rm = T)) %>%
     ungroup() %>%
     mutate(
+      weighted_july_application_count = july_application_count * share,
       weighted_june_application_count = june_application_count * share,
       weighted_may_application_count = may_application_count * share,
       weighted_april_application_count = april_application_count * share
@@ -119,7 +120,8 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     summarise(
       apps_april = sum(weighted_april_application_count, na.rm = T),
       apps_may = sum(weighted_may_application_count, na.rm = T),
-      apps_june = sum(weighted_june_application_count, na.rm = T)
+      apps_june = sum(weighted_june_application_count, na.rm = T),
+      apps_july = sum(weighted_july_application_count, na.rm = T)
     ) %>%
     pivot_longer(
       cols = c(2:length(.)),
@@ -128,6 +130,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     ) %>%
     mutate(
       date = case_when(
+        date == "apps_july" ~ as.Date("2020-07-01"),
         date == "apps_april" ~ as.Date("2020-04-01"),
         date == "apps_may" ~ as.Date("2020-05-01"),
         date == "apps_june" ~ as.Date("2020-06-01")

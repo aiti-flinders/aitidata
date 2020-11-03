@@ -2,7 +2,7 @@
 library(tidyverse)
 library(sf)
 
-download.file("https://docs.employment.gov.au/system/files/doc/other/salm_smoothed_sa2_datafiles_asgs_2016_-_march_quarter_2020.csv",
+download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193958&.csv",
   destfile = "data-raw/salm_sa2.csv",
   mode = "wb"
 )
@@ -15,7 +15,7 @@ all_sa2 <- absmapsdata::sa22016 %>%
 
 small_area_labour_market <- raw %>%
   janitor::clean_names() %>%
-  mutate(mar_20 = as.character(mar_20)) %>%
+  mutate(across(where(is.numeric), as.character)) %>%
   pivot_longer(
     cols = c(4:length(.)),
     names_to = "date",

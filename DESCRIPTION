@@ -26,5 +26,4 @@ Imports:
     xml2,
     dplyr,
     reportabs
-Suggests: 
-    testthat
+

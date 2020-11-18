@@ -7,7 +7,7 @@ library(lubridate)
 
 
 message("updating `data/labour_account.rda`")
-download_abs_data_cube("6150.0.55.003", cube = "6150055003do001_2019202006", path = here::here("data-raw"))
+download_abs_data_cube("labour-account-australia", cube = "6150055003do001_2019202006", path = here::here("data-raw"))
 
 file.rename(here::here("data-raw", "6150055003do001_2019202006.xls"), here::here("data-raw", "labour_account.xls"))
 

@@ -158,9 +158,32 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
       values_to = "value"
     ) %>%
     mutate(across(indicator, ~ str_to_sentence(str_replace_all(., "_", " "))))
+  
+  jobkeeper_state <- jobkeeper_sa2 %>% 
+    pivot_wider(names_from = indicator, values_from = value) %>% 
+    left_join(absmapsdata::sa22016) %>% 
+    group_by(state_name_2016, date) %>% 
+    summarise(across(c(`Jobkeeper applications`, `Total businesses`), sum)) %>%
+    ungroup() %>%
+    pivot_longer(cols = c(`Jobkeeper applications`, `Total businesses`), names_to = "indicator", values_to = "value") %>%
+    pivot_wider(names_from = state_name_2016, values_from = value) %>%
+    rowwise() %>% 
+    mutate(Australia = `Australian Capital Territory` + `New South Wales` + `Northern Territory` + Queensland + `South Australia` + Tasmania + Victoria + `Western Australia`) %>%
+    ungroup() %>% 
+    pivot_longer(cols = c(3:11), names_to = "state", values_to = "value") %>%
+    pivot_wider(names_from = indicator, values_from = value) %>%
+    mutate("Jobkeeper proportion" = 100*`Jobkeeper applications`/`Total businesses`) %>%
+    pivot_longer(cols = c(3:5), names_to = "indicator", values_to = "value") %>%
+    mutate(unit = case_when(indicator == "Jobkeeper proportion" ~ "Percent",
+                            TRUE ~ "000"),
+           series_type = "Original",
+           month = lubridate::month(date, abbr = FALSE, label = TRUE),
+           year = lubridate::year(date)) 
 
 
+  usethis::use_data(jobkeeper_state, overwrite = TRUE, compress = "xz")
   usethis::use_data(jobkeeper_sa2, overwrite = TRUE, compress = "xz")
+  
 } else {
   message("jobkeeper_sa2 data is already up to date")
 }

@@ -27,20 +27,7 @@ update_abs_lookup_table <- function() {
       url = glue::glue("https://www.abs.gov.au{sub_page_url_suffix}/{catalogue}/latest-release"),
     )
   }
-  
-  scrape_next_release <- function(url) {
-    next_release <- xml2::read_html(url) %>% rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>% rvest::html_text() 
-    if (length(next_release) == 0) {
-      next_release <- as.Date("01-01-1900") 
-    } else { next_release <- next_release %>% 
-      stringi::stri_replace_all_fixed("Next Release ", "")
-    }
-  }
-  
-  
-  new_abs_lookup_table <- purrr::map_dfr(main_page_data$url_suffix, scrape_sub_page) %>%
-    rowwise() %>%
-    mutate(next_release = scrape_next_release(url))
+
   
   return(new_abs_lookup_table)
 }

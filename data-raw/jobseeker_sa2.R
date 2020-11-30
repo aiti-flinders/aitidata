@@ -55,7 +55,23 @@ if (as.Date(file.info("data/jobseeker_sa2.rda")$mtime) < jobseeker_latest | !fil
     ungroup() %>%
     pivot_longer(cols = c(-sa2_main_2016, -date), names_to = "indicator", values_to = "value") %>%
     mutate(indicator = str_to_sentence(str_replace_all(indicator, "_", " ")))
-
+  
+  jobseeker_state <- jobseeker_all %>%
+    left_join(sa22016, by = c("sa2_name" = "sa2_name_2016")) %>%
+    select(state_name_2016, jobseeker_payment, youth_allowance_other, date) %>%
+    arrange(date) %>%
+    group_by(state_name_2016, date) %>%
+    summarise(across(c(jobseeker_payment, youth_allowance_other), ~sum(.,na.rm = T))) %>%
+    ungroup() %>%
+    pivot_longer(cols = c(-state_name_2016, -date), names_to = "indicator", values_to = "value") %>%
+    mutate(indicator = str_to_sentence(str_replace_all(indicator, "_", " ")),
+           series_type = "Original",
+           unit = "000", 
+           year = lubridate::year(date),
+           month = lubridate::month(date, abbr = FALSE, label = TRUE)) %>%
+    rename(state = state_name_2016)
+  
+  usethis::use_data(jobseeker_state, compress = "xz", overwrite = TRUE)
   usethis::use_data(jobseeker_sa2, compress = "xz", overwrite = TRUE)
 } else {
   message("`data/jobseeker_sa2.rda` is already up to date")

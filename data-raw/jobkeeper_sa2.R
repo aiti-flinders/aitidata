@@ -81,13 +81,13 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
   download.file(paste0("https://treasury.gov.au/", jobkeeper_data_url), dest = "data-raw/jobkeeper_postal.xlsx", mode = "wb")
 
-  (nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = "Data", skip = 1, n_max = 0)))
+  (nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = 2, skip = 1, n_max = 0)))
 
   (ct <- ifelse(grepl("Postcode", nms), "text", "numeric"))
 
   job_keeper_postal <- read_xlsx(
     path = "data-raw/jobkeeper_postal.xlsx",
-    sheet = "Data",
+    sheet = 2,
     skip = 1,
     col_types = ct
   ) %>%
@@ -98,11 +98,12 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
 
   business_sa2 <- daitir::cabee_sa2 %>%
-    group_by(sa2_main_2016, date) %>%
-    summarise(total_businesses = sum(total, na.rm = T), .groups = "drop") %>%
+    filter(indicator == "total") %>%
     mutate(sa2_main_2016 = as.character(sa2_main_2016)) %>%
     filter(date == max(.$date)) %>%
-    select(-date)
+    select(-date,
+           -indicator,
+           total_businesses = value)
 
   jobkeeper_sa2 <- left_join(postal_areas, mesh_aus, by = c("MB_CODE_2016" = "mb_code_2016")) %>%
     left_join(job_keeper_postal, by = c("POA_CODE_2016" = "postcode")) %>%
@@ -111,17 +112,18 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     mutate(share = total_businesses / sum(total_businesses, na.rm = T)) %>%
     ungroup() %>%
     mutate(
-      weighted_july_application_count = july_application_count * share,
-      weighted_june_application_count = june_application_count * share,
+      weighted_april_application_count = april_application_count * share,
       weighted_may_application_count = may_application_count * share,
-      weighted_april_application_count = april_application_count * share
-    ) %>%
+      weighted_june_application_count = june_application_count * share,
+      weighted_july_application_count = july_application_count * share,
+      weighted_august_application_count = august_application_count * share) %>%
     group_by(sa2_main_2016) %>%
     summarise(
       apps_april = sum(weighted_april_application_count, na.rm = T),
       apps_may = sum(weighted_may_application_count, na.rm = T),
       apps_june = sum(weighted_june_application_count, na.rm = T),
-      apps_july = sum(weighted_july_application_count, na.rm = T)
+      apps_july = sum(weighted_july_application_count, na.rm = T),
+      apps_august = sum(weighted_august_application_count, na.rm = T)
     ) %>%
     pivot_longer(
       cols = c(2:length(.)),
@@ -130,10 +132,11 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     ) %>%
     mutate(
       date = case_when(
-        date == "apps_july" ~ as.Date("2020-07-01"),
         date == "apps_april" ~ as.Date("2020-04-01"),
         date == "apps_may" ~ as.Date("2020-05-01"),
-        date == "apps_june" ~ as.Date("2020-06-01")
+        date == "apps_june" ~ as.Date("2020-06-01"),
+        date == "apps_july" ~ as.Date("2020-07-01"),
+        date == "apps_august" ~ as.Date("2020-08-01")
       ),
       jobkeeper_applications = ceiling(jobkeeper_applications)
     ) %>%

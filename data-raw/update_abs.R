@@ -3,18 +3,16 @@ library(dplyr)
 library(purrr)
 library(lubridate)
 
-to_update <- daitir:::abs_lookup_table %>% 
-  rowwise() %>%
-  mutate(next_release = daitir:::scrape_next_release(url)) %>%
-  dplyr::filter(next_release == lubridate::today(tzone = "Australia/Adelaide")) %>%
-  dplyr::pull(catalogue)
+to_update <- build_daitir() %>% 
+  dplyr::filter(mtime < current_release) %>%
+  dplyr::pull(data_name) %>%
+  unique()
 
-to_update <- to_update[file.exists(here::here("data-raw", paste0(to_update, ".R")))]
 
 if (length(to_update) == 0) {
   message("everything is up to date!")
 } else {
-  file_paths <- purrr::map(to_update, ~ here::here("data-raw", paste0(., ".R")))
-  message(paste("updating", paste(sep = ",", collapse = " ", to_update)))
+  file_paths <- purrr::map(to_update, ~here::here("data-raw", paste0(., ".R")))
+  message(paste("Found out of date datasets: ", paste(collapse = ", ", to_update)))
   purrr::map(file_paths, source)
 }

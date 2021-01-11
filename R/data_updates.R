@@ -49,7 +49,7 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 abs_current_release <- function(catalogue_string = NULL, url = NULL) {
   
   if(!is.null(catalogue_string) & is.null(url)) {
-  release_url <- abs_lookup_table %>%
+  release_url <- abs_cats %>%
     dplyr::filter(catalogue == catalogue_string) %>%
     dplyr::pull(url)
   
@@ -102,6 +102,20 @@ abs_next_release <- function(catalogue_string = NULL, url = NULL) {
     trimws()
   
   next_release <- as.Date(next_release, format = "%d/%m/%y")
+  
+  if(length(next_release) == 0) {
+    next_release <- release_page %>%
+      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
+      rvest::html_text() %>%
+      .[2] %>%
+      trimws()
+    
+    next_release <- as.Date(next_release, format = "%d/%m/%y")
+  } 
+  
+  if(length(next_release) == 0) {
+    next_release <- NA
+  } 
 
   return(next_release)
 }

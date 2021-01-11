@@ -2,10 +2,10 @@
 
 name: update-abs
 
-# Controls when the action will run. Run this job every weekday at 1:30am UTC
+# Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
   schedule:
-    - cron: '40 0 * * MON-FRI'
+    - cron: '40 0 * * 1-5'
 
 
 

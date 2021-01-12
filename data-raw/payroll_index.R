@@ -4,12 +4,12 @@ library(tidyr)
 library(forcats)
 library(strayr)
 library(stringr)
+library(readxl)
 
 message("updating `payroll_index.rda`")
-download_data_cube("weekly-payroll-jobs-and-wages-australia",
-                       cube = "6160055001_DO004.xlsx",
-                       path = "data-raw"
-)
+download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
+                   cube = "Table 4: Payroll jobs and wages indexes",
+                   path = "data-raw")
 
 payroll_index <- read_xlsx(here::here("data-raw", "6160055001_DO004.xlsx"), sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
   clean_names() %>%

@@ -34,8 +34,7 @@ jobs:
           Rscript -e "devtools::install_github('MattCowgill/readabs', dependencies = FALSE)"
       - name: Get data
         run: |
-          Rscript -e "library(daitir)"
-          Rscript -e "source(here::here('data-raw', 'update_abs.R'), echo = TRUE)"
+          Rscript -e "daitir:::update_abs()"
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'

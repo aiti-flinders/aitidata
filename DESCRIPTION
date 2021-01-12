@@ -26,4 +26,6 @@ Imports:
     xml2,
     dplyr,
     reportabs
-
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

@@ -10,3 +10,7 @@ Data sets used commonly in AITI research. Current data included:
 - Economic Complexity indicators for Australian states 
 - Internet vacancies index (https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport)
 - Various helper datasets (ANZSIC Heirarchy)
+
+  <!-- badges: start -->
+  [![R-CMD-check](https://github.com/hamgamb/daitir/workflows/R-CMD-check/badge.svg)](https://github.com/hamgamb/daitir/actions)
+  <!-- badges: end -->

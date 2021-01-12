@@ -55,4 +55,4 @@ national_accounts <- bind_rows(industry_aggregates, industry_value_add) %>%
   mutate(across(c(industry, subdivision), ~ ifelse(is.na(.), "Total (industry)", .)))
 
 
-save(national_accounts, file = here::here("data", "national_accounts"), compress = "xz")
+save(national_accounts, file = here::here("data", "national_accounts.rda"), compress = "xz")

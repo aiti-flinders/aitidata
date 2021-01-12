@@ -6,7 +6,6 @@ name: update-abs
 on:
   schedule:
     - cron: '40 0 * * 1-5'
-  push:
 
 
 

@@ -1,5 +1,3 @@
-#' @importFrom magrittr %>%
-
 update_abs <- function() {
   
   to_update <- build_daitir() %>% 

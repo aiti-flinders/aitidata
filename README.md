@@ -13,4 +13,5 @@ Data sets used commonly in AITI research. Current data included:
 
   <!-- badges: start -->
   [![R-CMD-check](https://github.com/hamgamb/daitir/workflows/R-CMD-check/badge.svg)](https://github.com/hamgamb/daitir/actions)
+  [![update-abs](https://github.com/hamgamb/daitir/workflows/update-abs/badge.svg)](https://github.com/hamgamb/daitir/actions)
   <!-- badges: end -->

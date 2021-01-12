@@ -6,6 +6,7 @@ name: update-abs
 on:
   schedule:
     - cron: '40 0 * * 1-5'
+  push:
 
 
 
@@ -33,6 +34,7 @@ jobs:
           Rscript -e "devtools::install_github('MattCowgill/readabs', dependencies = FALSE)"
       - name: Get data
         run: |
+          Rscript -e "library(daitir)"
           Rscript -e "source(here::here('data-raw', 'update_abs.R'), echo = TRUE)"
       - name: Commit
         run: |

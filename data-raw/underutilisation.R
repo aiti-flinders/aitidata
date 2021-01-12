@@ -5,7 +5,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-raw <- read_abs(cat_no = "6291.0.55.003", tables = c("23a", "23b"), retain_files = FALSE)
+raw <- read_abs(cat_no = "6291.0.55.001", tables = c("23a", "23b"), retain_files = FALSE)
 
 underutilisation_23a <- raw %>%
   filter(table_no == "6291023a") %>%

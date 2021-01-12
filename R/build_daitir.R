@@ -1,6 +1,10 @@
+#' 
+#'
+#' @importFrom magrittr %>%
+#' 
 build_daitir <- function() {
   abs_cats <- tibble::tribble(
-  ~cat_no, ~url, ~tables,  ~data_name, catalogue_name, 
+  ~cat_no, ~url, ~tables,  ~data_name,  
   "6202.0", "https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release", list("12" = "Labour force status by Sex, State and Territory", 
                                             "19" = "Monthly hours worked in all jobs (Extrapolated): by Employed full-time, part-time and Sex and by State and Territory",
                                             "22" = "Underutilised persons by Age and Sex",
@@ -16,8 +20,8 @@ build_daitir <- function() {
   "6150.0.55.003", "https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-account-australia/latest-release", list("1" = "Total All Industries"), "labour_account",
   "8165.0", "https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2") %>%
   tidyr::unnest_longer(col = tables) %>%
-  rowwise() %>%
-  mutate(mtime = as.Date(file.info(paste0("data/", data_name, ".rda"))$mtime),
+  dplyr::rowwise() %>%
+  dplyr::mutate(mtime = as.Date(file.info(paste0("data/", data_name, ".rda"))$mtime),
          current_release = abs_current_release(url = url),
          next_release = abs_next_release(url = url))
   

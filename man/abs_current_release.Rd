@@ -4,7 +4,7 @@
 \alias{abs_current_release}
 \title{Find the release date of the most recent ABS Catalogue}
 \usage{
-abs_current_release(catalogue_string)
+abs_current_release(catalogue_string = NULL, url = NULL)
 }
 \arguments{
 \item{catalogue}{string}

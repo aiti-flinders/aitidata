@@ -211,7 +211,7 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
 "payroll_index"
 
-#' Payroll SA4
+#' Payroll Substate
 #'
 #' ABS Weekly Payroll data for Statistical Area 4 Regions
 #'
@@ -224,7 +224,7 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
-"payroll_sa4"
+"payroll_substate"
 
 #' Small Area Labour Market
 #'

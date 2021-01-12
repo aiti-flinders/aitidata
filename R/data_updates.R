@@ -46,28 +46,26 @@ abs_data_up_to_date <- function(cat_no, data_name = NULL) {
 #' @examples
 #' abs_current_release("6202.0")
 #' @importFrom dplyr "%>%"
-abs_current_release <- function(catalogue_string = NULL, url = NULL) {
+abs_current_release <- function(cat_string = NULL, url = NULL) {
   
-  if(!is.null(catalogue_string) & is.null(url)) {
-  release_url <- abs_cats %>%
-    dplyr::filter(catalogue == catalogue_string) %>%
-    dplyr::pull(url)
+  if(!is.null(cat_string) & is.null(url)) {
+  current_release <- build_daitir() %>%
+    dplyr::filter(catalogue_string == cat_string) %>%
+    dplyr::pull(current_release) %>%
+    unique()
   
-  } else if (is.null(catalogue_string) & !is.null(url)) {
+  } else if (is.null(cat_string) & !is.null(url)) {
     release_url <- url
+    release_page <- xml2::read_html(release_url)
+    
+    current_release <- release_page %>%
+      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[1]/div[2]') %>%
+      rvest::html_text() %>%
+      trimws()
+    
+    current_release <- as.Date(current_release, format = "%d/%m/%y")
   }
-
-  release_page <- xml2::read_html(release_url)
-
-  cur_release <- release_page %>%
-    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[1]/div[2]') %>%
-    rvest::html_text() %>%
-    trimws()
-
-  cur_release <- as.Date(cur_release, format = "%d/%m/%y")
-
-
-  return(cur_release)
+  return(current_release)
 }
 
 
@@ -82,26 +80,28 @@ abs_current_release <- function(catalogue_string = NULL, url = NULL) {
 #' @examples
 #' abs_next_release("6202.0")
 #' @importFrom dplyr "%>%"
-abs_next_release <- function(catalogue_string = NULL, url = NULL) {
+abs_next_release <- function(cat_string = NULL, url = NULL) {
   
-  if(!is.null(catalogue_string) & is.null(url)) {
-    release_url <- abs_lookup_table %>%
-      dplyr::filter(catalogue == catalogue_string) %>%
-      dplyr::pull(url)
+  if(!is.null(cat_string) & is.null(url)) {
+    next_release <- build_daitir() %>%
+      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::pull(next_release) %>%
+      unique()
     
-  } else if (is.null(catalogue_string) & !is.null(url)) {
+  } else if (is.null(cat_string) & !is.null(url)) {
     release_url <- url
+    release_page <- xml2::read_html(release_url)
+    
+    next_release <- release_page %>%
+      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
+      rvest::html_text() %>%
+      gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
+      trimws()
+    
+    next_release <- as.Date(next_release, format = "%d/%m/%y")
   }
   
-  release_page <- xml2::read_html(release_url)
-  
-  next_release <- release_page %>%
-    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
-    rvest::html_text() %>%
-    gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
-    trimws()
-  
-  next_release <- as.Date(next_release, format = "%d/%m/%y")
+ 
   
   if(length(next_release) == 0) {
     next_release <- release_page %>%

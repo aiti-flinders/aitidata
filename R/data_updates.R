@@ -1,38 +1,18 @@
-#' Check if an ABS data source is up to date
+#' Checks that installed version of daitir has
+#' up to date data
 #'
-#' @param cat_no string. include the ".0"
-#' @param data_name optional
+#' @return A message describing the up-to-date-ness of the installed package.
+#' @export check_data_up_to_date
 #'
-#' @return logical
-#' @export abs_data_up_to_date
-#'
-#'
-#'
-
-abs_data_up_to_date <- function(cat_no, data_name = NULL) {
-  current_release <- abs_current_release(cat_no)
-  next_release <- lubridate::as_datetime(paste(abs_next_release(cat_no), "11:00:00"), tz = "Australia/Adelaide")
-
-  if (is.null(data_name)) {
-    cat_to_file <- unique(abs_cats[abs_cats$cat_no == cat_no, ]$data_name)
+check_data_up_to_date <- function() {
+  up_to_dateness <- build_daitir() %>%
+    dplyr::filter(mtime < current_release)
+  
+  if (nrow(up_to_dateness) == 0) {
+    message("All data appears to be up to date! Get to work!")
   } else {
-    cat_to_file <- data_name
+    message("The following data appears to be out of date. Please download the latest version of daitir using:\n\ndevtools::install_github('hamgamb/daitir')")
   }
-
-  now <- lubridate::now()
-
-  if (length(cat_to_file) > 1) {
-    stop(paste0("ABS catalogue number ", cat_no, " returned multiple datasets - specify data"))
-  }
-
-  if (!file.exists(paste0("data/", cat_to_file, ".rda"))) {
-    latest <- FALSE
-  } else {
-    file_created <- file.info(paste0("data/", cat_to_file, ".rda"))$mtime
-    latest <- (current_release <= file_created) & (now < next_release)
-  }
-
-  return(latest)
 }
 
 #' Find the release date of the most recent ABS Catalogue
@@ -63,7 +43,7 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
       rvest::html_text() %>%
       trimws()
     
-    current_release <- as.Date(current_release, format = "%d/%m/%y")
+    current_release <- as.Date(current_release, format = "%d/%m/%Y")
   }
   return(current_release)
 }
@@ -98,7 +78,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
       gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
       trimws()
     
-    next_release <- as.Date(next_release, format = "%d/%m/%y")
+    next_release <- as.Date(next_release, format = "%d/%m/%Y")
   } else if (!is.null(cat_string) & !is.null(url)) {
     warning("Both URL and catalogue_string were specified. Using URL")
     next_release <- build_daitir() %>%
@@ -116,7 +96,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
       .[2] %>%
       trimws()
     
-    next_release <- as.Date(next_release, format = "%d/%m/%y")
+    next_release <- as.Date(next_release, format = "%d/%m/%Y")
   } 
   
   if(length(next_release) == 0) {

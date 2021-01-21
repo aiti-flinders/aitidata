@@ -99,9 +99,15 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%y")
+  } else if (!is.null(cat_string) & !is.null(url)) {
+    warning("Both URL and catalogue_string were specified. Using URL")
+    next_release <- build_daitir() %>%
+      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::pull(next_release) %>%
+      unique()
+  } else if (is.null(cat_string) & is.null(url)) {
+    stop("One of URL and catalogue_string must be specified")
   }
-  
- 
   
   if(length(next_release) == 0) {
     next_release <- release_page %>%

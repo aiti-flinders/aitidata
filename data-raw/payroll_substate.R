@@ -5,16 +5,11 @@ library(tidyr)
 library(strayr)
 library(stringr)
 
-download.file(
-  url = "https://www.abs.gov.au/statistics/labour/earnings-and-work-hours/weekly-payroll-jobs-and-wages-australia/latest-release/6160055001_do005.xlsx",
-  destfile = "data-raw/payroll_substate.xlsx",
-  mode = "wb"
-)
 
 message("updating `payroll_substate.rda`")
 
 download_data_cube("weekly-payroll-jobs-and-wages-australia",
-                       cube = "6160055001_DO005.xlsx",
+                       cube = "Table 5: Sub-state - Payroll jobs indexes",
                        path = "data-raw"
 )
 

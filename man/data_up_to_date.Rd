@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_up_to_date.R
 \name{data_up_to_date}
 \alias{data_up_to_date}
-\title{Checks that installed version of daitir has
+\title{Checks that installed version of aitidata has
 up to date data}
 \usage{
 data_up_to_date()
@@ -11,6 +11,6 @@ data_up_to_date()
 A message describing the up-to-date-ness of the installed package.
 }
 \description{
-Checks that installed version of daitir has
+Checks that installed version of aitidata has
 up to date data
 }

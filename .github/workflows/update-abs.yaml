@@ -5,10 +5,8 @@ name: update-abs
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
   schedule:
-    - cron: '40 0 * * 1-5'
-
-
-
+    - cron: '10 0 * * 1-5'
+  push:
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -25,12 +23,8 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('parsedate','ggplot2', 'httr', 'magrittr', 'plotly', 'scales', 'hutils', 'fst', 'XML', 'rsdmx', 'rvest', 'xml2', 'zoo', 'usethis','stringdist','devtools', 'dplyr', 'tidyr', 'stringr', 'here', 'readxl', 'forcats', 'janitor'), type = 'binary')"
-          Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = FALSE)"
-          Rscript -e "devtools::install_github('hamgamb/aititheme', dependencies = FALSE)"
-          Rscript -e "devtools::install_github('hamgamb/reportabs', dependencies = FALSE)"
+          Rscript -e "install.packages(c('httr', 'magrittr', 'glue', 'lubridate', 'rvest', 'stringr', 'tibble', 'xml2', 'dplyr', 'here', 'purrr', 'readabs'), type = 'binary')"
           Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = TRUE)"
-          Rscript -e "devtools::install_github('MattCowgill/readabs', dependencies = FALSE)"
       - name: Get data
         run: |
           Rscript -e "daitir:::update_abs()"

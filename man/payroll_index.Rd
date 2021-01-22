@@ -3,22 +3,8 @@
 \docType{data}
 \name{payroll_index}
 \alias{payroll_index}
-\title{ABS Labour Force Survey}
+\title{Payroll Index}
 \format{
-A dataframe with 10 variables:
-\describe{
-\item{date}{date of survey}
-\item{year}{year of survey}
-\item{month}{month of survey}
-\item{gender}{gender of individual surveyed: persons, male, or female}
-\item{age}{age of individual surveyed}
-\item{state}{state or territory (including Australia)}
-\item{series_type}{level of adjustment of original data: original (no adjustment), seasonally adjusted, or trend}
-\item{unit}{unit of measurement for indicator}
-\item{indicator}{labour force indicator}
-\item{value}{value of labour force indicator}
-}
-
 A dataframe with 6 variables:
 \describe{
 \item{date}{Date}
@@ -30,18 +16,12 @@ A dataframe with 6 variables:
 }
 }
 \source{
-\url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0}
-Payroll Index
-
-ABS Weekly Payroll data since 4th January 2020.
-
 \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
 }
 \usage{
 payroll_index
 }
 \description{
-A dataset containing monthly national and sub-national labour force
-indicators since February 1978.
+ABS Weekly Payroll data since 4th January 2020.
 }
 \keyword{datasets}

@@ -264,8 +264,7 @@
 #' National Accounts
 "national_accounts"
 
-#' Seek data
-"seek_data"
+
 
 
 

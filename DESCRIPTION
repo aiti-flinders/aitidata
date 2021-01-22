@@ -26,7 +26,11 @@ Imports:
     stringr,
     tibble,
     xml2,
-    dplyr
+    tidyr,
+    dplyr,
+    here,
+    purrr,
+    readabs
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

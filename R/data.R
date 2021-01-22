@@ -98,6 +98,10 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/PrimaryMainFeatures/6291.0.55.001?OpenDocument}
 "employment_by_industry"
 
+#' ABS Detailed employment by industry
+"employment_by_industry_detailed"
+
+
 #' Internet Vacancies Index
 #'
 #' A dataset containing monthly nation and sub-national internet vacancies by
@@ -192,7 +196,7 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0}
-"labour_force"
+# "labour_force"
 
 #' Payroll Index
 #'
@@ -244,3 +248,24 @@
 #'
 #' @source \url{https://www.employment.gov.au/small-area-labour-markets-publication-0}
 "small_area_labour_market"
+
+#' Jobkeeper 
+"jobkeeper_state"
+
+#' Jobseeker
+"jobseeker_state"
+
+#' Underutilisation
+"underutilisation"
+
+#' SA Net Debt
+"south_australia_net_debt"
+
+#' National Accounts
+"national_accounts"
+
+#' Seek data
+"seek_data"
+
+
+

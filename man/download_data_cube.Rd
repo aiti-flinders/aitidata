@@ -6,6 +6,13 @@
 \usage{
 download_data_cube(catalogue_string, cube, path = here::here("data-raw"))
 }
+\arguments{
+\item{catalogue_string}{string}
+
+\item{cube}{string}
+
+\item{path}{string}
+}
 \description{
 The filepath is returned invisibly which enables piping to \code{unzip()} or \code{readxl::read_excel}.
 }

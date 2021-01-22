@@ -196,7 +196,7 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0}
-# "labour_force"
+"labour_force"
 
 #' Payroll Index
 #'

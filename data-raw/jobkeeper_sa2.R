@@ -97,7 +97,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
   file.remove("data-raw/jobkeeper_postal.xlsx")
 
 
-  business_sa2 <- daitir::cabee_sa2 %>%
+  business_sa2 <- aitidata::cabee_sa2 %>%
     filter(indicator == "total") %>%
     group_by(date, sa2_main_2016, sa2_name_2016) %>%
     summarise(total_businesses = sum(value, na.rm = T)) %>%

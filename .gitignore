@@ -28,5 +28,3 @@ vignettes/*.pdf
 .Renviron
 .Rproj.user
 aitidata.Rproj
-daitir.Rproj
-out/*.pdf

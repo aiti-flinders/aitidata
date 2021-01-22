@@ -24,10 +24,10 @@ jobs:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           Rscript -e "install.packages(c('devtools' ,'httr', 'magrittr', 'glue', 'lubridate', 'rvest', 'stringr', 'tibble', 'xml2', 'dplyr', 'here', 'purrr', 'readabs'), type = 'binary')"
-          Rscript -e "devtools::install_github('hamgamb/daitir', dependencies = TRUE)"
+          Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
       - name: Get data
         run: |
-          Rscript -e "daitir:::update_abs()"
+          Rscript -e "aitidata:::update_abs()"
           Rscript -e "devtools::document()"
       - name: Commit
         run: |

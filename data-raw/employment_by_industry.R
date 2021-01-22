@@ -94,7 +94,7 @@ df <- read_excel(
   ) %>%
   replace_na(list(value = 0))
 
-anzsic_c <- daitir::anzsic %>%
+anzsic_c <- aitidata::anzsic %>%
   select(-class)
 
 employment_by_industry_detailed <- left_join(df, anzsic_c) %>%

@@ -12,6 +12,6 @@ Data sets used commonly in AITI research. Current data included:
 - Various helper datasets (ANZSIC Heirarchy)
 
   <!-- badges: start -->
-  [![R-CMD-check](https://github.com/hamgamb/daitir/workflows/R-CMD-check/badge.svg)](https://github.com/hamgamb/daitir/actions)
-  [![update-abs](https://github.com/hamgamb/daitir/workflows/update-abs/badge.svg)](https://github.com/hamgamb/daitir/actions)
+  [![R-CMD-check](https://github.com/hamgamb/aitidata/workflows/R-CMD-check/badge.svg)](https://github.com/hamgamb/aitidata/actions)
+  [![update-abs](https://github.com/hamgamb/aitidata/workflows/update-abs/badge.svg)](https://github.com/hamgamb/aitidata/actions)
   <!-- badges: end -->

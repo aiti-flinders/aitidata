@@ -14,7 +14,7 @@ industry_value_add <- raw %>%
     industry = str_replace_all(str_to_title(industry), "And", "and")
   ) %>%
   filter(
-    industry %in% daitir::anzsic$division,
+    industry %in% aitidata::anzsic$division,
     !is.na(value)
   ) %>%
   mutate(subdivision = ifelse(subdivision == "", paste(industry, "(Total)"), subdivision)) %>%

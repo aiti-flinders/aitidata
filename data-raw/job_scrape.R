@@ -60,6 +60,6 @@ seek_data <- scraped_page %>%
          job_title = trimws(job_title),
          date_scraped = Sys.time())
 
-seek_data <- bind_rows(seek_data, daitir::seek_data)
+seek_data <- bind_rows(seek_data, aitidata::seek_data)
 
 usethis::use_data(seek_data, overwrite = TRUE, compress = 'xz')

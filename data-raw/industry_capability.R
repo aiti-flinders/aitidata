@@ -1,6 +1,6 @@
 ## code to prepare `industry_capability` dataset goes here
 library(tidyverse)
-library(daitir)
+library(aitidata)
 library(reticulate)
 
 sa2_zero_businesses <- cabee_sa2 %>%

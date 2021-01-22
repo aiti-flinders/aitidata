@@ -1,3 +1,4 @@
+#' @importFrom purrr map map_chr
 update_abs <- function() {
   
   to_update <- build_daitir() %>% 
@@ -9,7 +10,7 @@ update_abs <- function() {
   if (length(to_update) == 0) {
     message("everything is up to date!")
   } else {
-    file_paths <- purrr::map(to_update, ~here::here("data-raw", paste0(., ".R")))
+    file_paths <- purrr::map_chr(to_update, ~here::here("data-raw", paste0(., ".R")))
     message(paste("Found out of date datasets: ", paste(collapse = ", ", to_update)))
     purrr::map(file_paths, source)
   }

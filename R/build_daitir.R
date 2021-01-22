@@ -1,6 +1,5 @@
-#' 
-#'
 #' @importFrom magrittr %>%
+#' @importFrom tidyr unnest_longer
 #' 
 build_daitir <- function() {
   abs_cats <- tibble::tribble(

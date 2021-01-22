@@ -1,17 +1,21 @@
 #' The filepath is returned invisibly which enables piping to \code{unzip()} or \code{readxl::read_excel}.
 #'
-#' @importFrom dplyr %>%
+#' @importFrom magrittr %>%
 #' @importFrom glue glue
 #' @importFrom dplyr filter pull slice
 #' @importFrom rvest html_nodes html_attr html_text
 #' @importFrom httr GET
+#' @importFrom here here
+#' @importFrom readabs get_available_files
+#' 
+#' @param catalogue_string string
+#' @param cube string
+#' @param path string
 #'
-#' @export
+#' @export 
 #'
 #'
-download_data_cube <- function(catalogue_string,
-                                   cube,
-                                   path = here::here("data-raw")) {
+download_data_cube <- function(catalogue_string, cube, path = here::here("data-raw")) {
   
   # check if path is valid
   if (!dir.exists(path)) {

@@ -1,31 +1,12 @@
-#' Checks that installed version of daitir has
-#' up to date data
-#'
-#' @return A message describing the up-to-date-ness of the installed package.
-#' @export check_data_up_to_date
-#'
-check_data_up_to_date <- function() {
-  up_to_dateness <- build_daitir() %>%
-    dplyr::filter(mtime < current_release)
-  
-  if (nrow(up_to_dateness) == 0) {
-    message("All data appears to be up to date! Get to work!")
-  } else {
-    message("The following data appears to be out of date. Please download the latest version of daitir using:\n\ndevtools::install_github('hamgamb/daitir')")
-  }
-}
-
 #' Find the release date of the most recent ABS Catalogue
-#'
-#'
-#' @param catalogue string
+#' @param cat_string string
+#' @param url string
 #'
 #' @return date
 #' @export abs_current_release
 #'
-#' @examples
-#' abs_current_release("6202.0")
-#' @importFrom dplyr "%>%"
+#' @examples \dontrun{abs_current_release("6202.0")}
+#' @importFrom magrittr "%>%"
 abs_current_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {
@@ -52,14 +33,14 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
 #' Find the date of the next release of an ABS dataset
 #'
 #'
-#' @param catalogue_string
+#' @param cat_string string
+#' @param url string
 #'
 #' @return date
 #' @export abs_next_release
 #'
-#' @examples
-#' abs_next_release("6202.0")
-#' @importFrom dplyr "%>%"
+#' @examples \dontrun{abs_next_release("6202.0")}
+#' @importFrom magrittr "%>%"
 abs_next_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {

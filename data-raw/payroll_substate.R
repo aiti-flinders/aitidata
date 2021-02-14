@@ -6,15 +6,32 @@ library(strayr)
 library(stringr)
 library(aitidata)
 
+abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
+                               cube = "Table 7: Employment size - Payroll jobs index",
+                               path = "data-raw")
+
+current_date <- read_xlsx(here::here(abs_test),
+                          sheet = 2,
+                          skip = 5) %>%
+  select(last_col()) %>%
+  colnames() %>%
+  as.numeric() %>%
+  as.Date(origin = "1899-12-30")
+
+if (current_date <= max(payroll_index$date)) {
+  message("Skipping `payroll_substate.rda`: appears to be up-to-date")
+  file.remove(abs_test)
+} else {
+
 message("updating `payroll_substate.rda`")
 
-download_data_cube("weekly-payroll-jobs-and-wages-australia",
+abs_file <- download_data_cube("weekly-payroll-jobs-and-wages-australia",
                        cube = "Table 5: Sub-state - Payroll jobs indexes",
                        path = "data-raw"
 )
 
-payroll_substate <- read_xlsx(here::here("data-raw", "6160055001_DO005.xlsx"), sheet = "Payroll jobs index-SA3", skip = 5, na = "NA") %>%
-  janitor::clean_names() %>%
+payroll_substate <- read_xlsx(here::here(abs_file), sheet = "Payroll jobs index-SA3", skip = 5, na = "NA") %>%
+  clean_names() %>%
   mutate(across(starts_with("x"), as.numeric)) %>%
   pivot_longer(
     cols = c(4:length(.)),
@@ -28,19 +45,10 @@ payroll_substate <- read_xlsx(here::here("data-raw", "6160055001_DO005.xlsx"), s
          value = as.numeric(value),
          sa3_code_2016 = ifelse(statistical_area_3 != "All SA4", str_sub(statistical_area_3, start = 1L, end = 5L), NA),
          state_or_territory = strayr(state_or_territory, to = "state_name"),
-         indicator = "payroll_index"
-  ) %>%
-  select(
-    state_name_2016 = state_or_territory,
-    date,
-    value,
-    sa3_code_2016,
-    indicator
-  ) %>%
-  filter(
-    !is.na(sa3_code_2016),
-    !is.na(value)
-  ) %>%
-  pivot_wider(id_cols = c(-indicator, -value), names_from = indicator, values_from = value)
+         indicator = "payroll_index") %>%
+  select(state_name_2016 = state_or_territory, date, value, sa3_code_2016, indicator) %>%
+  filter(!is.na(sa3_code_2016), !is.na(value))
 
 save(payroll_substate, file = here::here("data", "payroll_substate.rda"), compress = "xz")
+file.remove(abs_file)
+}

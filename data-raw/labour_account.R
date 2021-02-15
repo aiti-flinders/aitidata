@@ -1,5 +1,4 @@
 ## code to prepare `labour_account` dataset goes here
-
 library(tidyr)
 library(dplyr)
 library(lubridate)
@@ -18,6 +17,7 @@ current_date <- read_xls(here::here(abs_test),
 
 if (current_date <= max(aitidata::labour_account$date)) {
   message("Skipping `labour_account.rda`: appears to be up-to-date")
+  file.remove(abs_test)
 } else {
   message("Updating `data/labour_account.rda`")
   
@@ -40,7 +40,7 @@ if (current_date <= max(aitidata::labour_account$date)) {
            !is.na(value)) %>%
     select(date, month, year, prefix, indicator, state, industry, series_type, value, unit)
   
-  
+  file.remove(abs_test)
   file.remove(abs_file)
   
   save(labour_account, file = here::here("data", "labour_account.rda"), compress = "xz")

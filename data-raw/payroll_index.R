@@ -2,10 +2,10 @@ library(janitor)
 library(dplyr)
 library(tidyr)
 library(forcats)
-library(strayr)
 library(stringr)
 library(readxl)
 library(aitidata)
+library(strayr)
 
 
 abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",

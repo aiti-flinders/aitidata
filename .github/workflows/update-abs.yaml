@@ -27,7 +27,8 @@ jobs:
           Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
       - name: Get data
         run: |
-          Rscript -e "aitidata:::update_abs()"
+          Rscript -e "library(aitidata)"
+          Rscript -e "aitidata::update_abs()"
           Rscript -e "devtools::document()"
       - name: Commit
         run: |

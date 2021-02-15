@@ -23,7 +23,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('devtools' ,'httr', 'magrittr', 'glue', 'lubridate', 'rvest', 'stringr', 'tibble', 'xml2', 'dplyr', 'here', 'purrr', 'readabs', 'janitor'), type = 'binary')"
+          Rscript -e "install.packages(c('devtools' ,'httr', 'magrittr', 'glue', 'lubridate', 'rvest', 'stringr', 'tibble', 'xml2', 'dplyr', 'here', 'purrr', 'readabs', 'janitor', 'readxl', 'forcats', 'zoo', 'purrr'), type = 'binary')"
           Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
       - name: Get data
         run: |

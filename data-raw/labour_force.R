@@ -90,6 +90,5 @@ if (max(abs_test$date) <= max(aitidata::labour_force$date)) {
     pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
   
   
-  
-  save(labour_force, file = here::here("data", "labour_force.rda"), compress = "xz")
+  usethis::use_data(labour_force, overwrite = TRUE, compress = "xz")
 }

@@ -9,7 +9,7 @@ library(readxl)
 
 abs_test <- read_abs("6291.0.55.001", tables = "23a", retain_files = FALSE)
 
-if (max(abs_test$date) <= max(employment_by_industry$date)) {
+if (max(abs_test$date) <= max(aitidata::employment_by_industry$date)) {
   message("Skipping `employment_by_industry.rda`: appears to be up-to-date")
 } else {
   message("updating `employment_by_industry`")

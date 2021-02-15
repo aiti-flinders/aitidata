@@ -7,7 +7,7 @@ library(stringr)
 
 abs_test <- read_abs(cat_no = "6291.0.55.001", tables = c("23a"), retain_files = FALSE) 
 
-if (max(abs_test$date) <= max(underutilisation$date)) {
+if (max(abs_test$date) <= max(aitidata::underutilisation$date)) {
   message("Skipping `underutilisation.rda`: appears to be up-to-date")
 } else {
   message("Updating `underutilisation.rda`")

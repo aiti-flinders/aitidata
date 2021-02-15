@@ -11,7 +11,7 @@ library(lubridate)
 
 abs_test <- read_abs(cat_no = "6202.0", tables = "19a", retain_files = FALSE)
 
-if (max(abs_test$date) <= max(labour_force$date)) {
+if (max(abs_test$date) <= max(aitidata::labour_force$date)) {
   message("Skipping `labour_force.rda`: appears to be up-to-date")
 } else {
   

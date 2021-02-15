@@ -18,7 +18,7 @@ current_date <- read_xlsx(here::here(abs_test),
   as.numeric() %>%
   as.Date(origin = "1899-12-30")
 
-if (current_date <= max(payroll_index$date)) {
+if (current_date <= max(aitidata::payroll_substate$date)) {
   message("Skipping `payroll_substate.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {

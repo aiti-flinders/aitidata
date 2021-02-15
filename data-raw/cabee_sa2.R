@@ -17,7 +17,7 @@ current_date <- read_excel(abs_test,
          release = as.Date(paste0(release, "-01"), format = "%B %Y-%d")) %>%
   pull(release)
 
-if (current_date <= max(cabee_sa2$date)) {
+if (current_date <= max(aitidata::cabee_sa2$date)) {
   message("Skipping `cabee_sa2.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {

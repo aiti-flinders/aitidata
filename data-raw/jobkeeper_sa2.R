@@ -46,10 +46,18 @@ if (!file.exists("data-raw/mesh_aus2016.rds")) {
 }
 
 if (!file.exists("data-raw/postal_areas.zip")) {
-  postal_areas <- download.file("https://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055003_poa_2016_aust_csv.zip&1270.0.55.003&Data%20Cubes&BCC18002983CD965CA25802C00142BA4&0&July%202016&13.09.2016&Previous",
-    destfile = "data-raw/postal_areas.zip",
-    mode = "wb"
+  postal_areas <- download_file("https://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055003_poa_2016_aust_csv.zip&1270.0.55.003&Data%20Cubes&BCC18002983CD965CA25802C00142BA4&0&July%202016&13.09.2016&Previous",
+                                path = "data-raw"
   )
+  
+  postal_areas <- read_csv(postal_areas, 
+                           col_types = cols(
+                             MB_CODE_2016 = col_character(),
+                             POA_CODE_2016 = col_character(),
+                             POA_NAME_2016 = col_character(),
+                             AREA_ALBERS_SQKM = col_double()
+                           ))
+  
 } else {
   postal_areas <- read_csv("data-raw/postal_areas.zip",
     col_types = cols(
@@ -85,66 +93,44 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
   (ct <- ifelse(grepl("Postcode", nms), "text", "numeric"))
 
-  job_keeper_postal <- read_xlsx(
+  jobkeeper_postal <- read_xlsx(
     path = "data-raw/jobkeeper_postal.xlsx",
     sheet = 2,
     skip = 1,
     col_types = ct
   ) %>%
     janitor::clean_names() %>%
-    mutate(postcode = str_pad(postcode, 4, "left", "0"))
-
-  file.remove("data-raw/jobkeeper_postal.xlsx")
+    mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%
+    rename_with(.cols = -postcode, ~paste0("apps_",str_extract(., ".+?(?=_)")))
+    
 
 
   business_sa2 <- aitidata::cabee_sa2 %>%
     filter(indicator == "total") %>%
     group_by(date, sa2_main_2016, sa2_name_2016) %>%
-    summarise(total_businesses = sum(value, na.rm = T)) %>%
+    summarise(total_businesses = sum(value, na.rm = T), .groups = "drop") %>%
     ungroup() %>%
     mutate(sa2_main_2016 = as.character(sa2_main_2016)) %>%
     filter(date == max(.$date)) %>%
-    select(-date,
-           -sa2_name_2016)
+    select(-date, -sa2_name_2016)
 
   jobkeeper_sa2 <- left_join(postal_areas, mesh_aus, by = c("MB_CODE_2016" = "mb_code_2016")) %>%
-    left_join(job_keeper_postal, by = c("POA_CODE_2016" = "postcode")) %>%
+    left_join(jobkeeper_postal, by = c("POA_CODE_2016" = "postcode")) %>%
     left_join(business_sa2) %>%
     group_by(POA_CODE_2016) %>%
     mutate(share = total_businesses / sum(total_businesses, na.rm = T)) %>%
     ungroup() %>%
-    mutate(
-      weighted_april_application_count = april_application_count * share,
-      weighted_may_application_count = may_application_count * share,
-      weighted_june_application_count = june_application_count * share,
-      weighted_july_application_count = july_application_count * share,
-      weighted_august_application_count = august_application_count * share,
-      weighted_september_application_count = september_application_count * share) %>%
+    mutate(across(contains("apps_"), .fns = ~. * share, .names = "{.col}")) %>%
     group_by(sa2_main_2016) %>%
-    summarise(
-      apps_april = sum(weighted_april_application_count, na.rm = T),
-      apps_may = sum(weighted_may_application_count, na.rm = T),
-      apps_june = sum(weighted_june_application_count, na.rm = T),
-      apps_july = sum(weighted_july_application_count, na.rm = T),
-      apps_august = sum(weighted_august_application_count, na.rm = T),
-      apps_september = sum(weighted_september_application_count, na.rm = T)
-    ) %>%
+    summarise(across(contains("apps_"), .fns = ~sum(., na.rm = TRUE), .names = "{.col}")) %>%
     pivot_longer(
       cols = c(2:length(.)),
       names_to = "date",
       values_to = "jobkeeper_applications"
     ) %>%
-    mutate(
-      date = case_when(
-        date == "apps_april" ~ as.Date("2020-04-01"),
-        date == "apps_may" ~ as.Date("2020-05-01"),
-        date == "apps_june" ~ as.Date("2020-06-01"),
-        date == "apps_july" ~ as.Date("2020-07-01"),
-        date == "apps_august" ~ as.Date("2020-08-01"),
-        date == "apps_september" ~ as.Date("2020-09-01")
-      ),
-      jobkeeper_applications = ceiling(jobkeeper_applications)
-    ) %>%
+    mutate(date = str_remove(date, "apps_"),
+           date = as.Date(paste0("2020-", match(date, tolower(month.name)), "-01")),
+           jobkeeper_applications = ceiling(jobkeeper_applications)) %>%
     left_join(business_sa2) %>%
     mutate(jobkeeper_proportion = ifelse(total_businesses != 0, 100 * jobkeeper_applications / total_businesses, 0)) %>%
     filter(

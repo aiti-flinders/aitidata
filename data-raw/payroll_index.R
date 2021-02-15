@@ -25,11 +25,11 @@ if (current_date <= max(payroll_index$date)) {
   file.remove(abs_test)
 } else {
   message("Updating `payroll_index.rda`")
-  download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
+  abs_file <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
                      cube = "Table 4: Payroll jobs and wages indexes",
                      path = "data-raw")
   
-  payroll_jobs <- read_xlsx(here::here("data-raw", "6160055001_DO004.xlsx"), sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
+  payroll_jobs <- read_xlsx(abs_file, sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
     clean_names() %>%
     mutate(across(starts_with("x"), as.numeric)) %>%
     pivot_longer(

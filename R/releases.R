@@ -10,22 +10,23 @@
 abs_current_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {
-  current_release <- build_daitir() %>%
-    dplyr::filter(catalogue_string == cat_string) %>%
-    dplyr::pull(current_release) %>%
-    unique()
-  
+    release_url <-aitidata_catalogues %>%
+      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::pull(url) %>%
+      unique()
+    
   } else if (is.null(cat_string) & !is.null(url)) {
     release_url <- url
-    release_page <- xml2::read_html(release_url)
-    
-    current_release <- release_page %>%
-      rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[1]/div[2]') %>%
-      rvest::html_text() %>%
-      trimws()
-    
-    current_release <- as.Date(current_release, format = "%d/%m/%Y")
   }
+  release_page <- xml2::read_html(release_url)
+  
+  current_release <- release_page %>%
+    rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[1]/div[2]') %>%
+    rvest::html_text() %>%
+    trimws()
+  
+  current_release <- as.Date(current_release, format = "%d/%m/%Y")
+  
   return(current_release)
 }
 
@@ -44,14 +45,24 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
 abs_next_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {
-    next_release <- build_daitir() %>%
+    release_url <- aitidata_catalogues %>%
       dplyr::filter(catalogue_string == cat_string) %>%
-      dplyr::pull(next_release) %>%
+      dplyr::pull(url) %>%
       unique()
     
   } else if (is.null(cat_string) & !is.null(url)) {
     release_url <- url
-    release_page <- xml2::read_html(release_url)
+  } else if (!is.null(cat_string) & !is.null(url)) {
+    warning("Both URL and catalogue_string were specified. Using URL")
+    release_url <- aitidata_catalogues() %>%
+      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::pull(url) %>%
+      unique()
+  }  else if (is.null(cat_string) & is.null(url)) {
+    stop("One of URL and catalogue_string must be specified")
+  }
+    
+  release_page <- xml2::read_html(release_url)
     
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
@@ -60,15 +71,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")
-  } else if (!is.null(cat_string) & !is.null(url)) {
-    warning("Both URL and catalogue_string were specified. Using URL")
-    next_release <- build_daitir() %>%
-      dplyr::filter(catalogue_string == cat_string) %>%
-      dplyr::pull(next_release) %>%
-      unique()
-  } else if (is.null(cat_string) & is.null(url)) {
-    stop("One of URL and catalogue_string must be specified")
-  }
+ 
   
   if(length(next_release) == 0) {
     next_release <- release_page %>%
@@ -83,6 +86,6 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
   if(length(next_release) == 0) {
     next_release <- NA
   } 
-
+  
   return(next_release)
 }

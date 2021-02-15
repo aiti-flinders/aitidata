@@ -4,10 +4,10 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-raw <- read_abs(cat_no = "5206.0", tables = c(1, 6))
+raw <- read_abs(cat_no = "5206.0", tables = c(1, 6), retain_files = FALSE)
 
-industry_value_add <- raw %>%
-  filter(table_no == "5206001_industry_gva") %>%
+national_accounts <- raw %>%
+  filter(table_no == "5206006_industry_gva") %>%
   mutate(series = str_replace_all(series, regex("(\\s\\([A-S]\\)\\s)|(\\s;)$", multiline = TRUE), "")) %>%
   separate(series, into = c("industry", "subdivision"), sep = ";", fill = "right") %>%
   mutate(across(where(is.character), ~ trimws(.)),
@@ -41,18 +41,18 @@ industry_value_add <- raw %>%
   )
 
 
-industry_aggregates <- raw %>%
-  filter(table_no == "5206006_industry_gva") %>%
-  separate(series, into = c("indicator", "type"), sep = ": ") %>%
-  mutate(across(where(is.character), ~ str_to_sentence(.)),
-    indicator = ifelse(str_detect(type, "percentage changes"), paste(indicator, "(growth)"), indicator),
-    type = str_remove_all(type, "( - percentage changes ;)|( ;)")
-  ) %>%
-  filter(!is.na(value)) %>%
-  select(date, indicator, type, value, series_type, unit)
+# industry_aggregates <- raw %>%
+#   filter(table_no == "5206006_industry_gva") %>%
+#   separate(series, into = c("indicator", "type"), sep = ": ") %>%
+#   mutate(across(where(is.character), ~ str_to_sentence(.)),
+#     indicator = ifelse(str_detect(type, "percentage changes"), paste(indicator, "(growth)"), indicator),
+#     type = str_remove_all(type, "( - percentage changes ;)|( ;)")
+#   ) %>%
+#   filter(!is.na(value)) %>%
+#   select(date, indicator, type, value, series_type, unit)
 
-national_accounts <- bind_rows(industry_aggregates, industry_value_add) %>%
-  mutate(across(c(industry, subdivision), ~ ifelse(is.na(.), "Total (industry)", .)))
+# national_accounts <- bind_rows(industry_aggregates, industry_value_add) %>%
+#   mutate(across(c(industry, subdivision), ~ ifelse(is.na(.), "Total (industry)", .)))
 
 
-save(national_accounts, file = here::here("data", "national_accounts.rda"), compress = "xz")
+usethis::use_data(national_accounts, overwrite = TRUE, compress = "xz")

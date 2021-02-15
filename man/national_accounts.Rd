@@ -5,7 +5,7 @@
 \alias{national_accounts}
 \title{National Accounts}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 57309 rows and 8 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 51051 rows and 7 columns.
 }
 \usage{
 national_accounts

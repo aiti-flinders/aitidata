@@ -4,9 +4,10 @@ library(tidyr)
 library(dplyr)
 library(lubridate)
 library(zoo)
+library(aitidata)
 
 abs_test <- download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
-                               cube = "Data cube 1: Tables 1 - 20 of counts of Australian businesses, including entries and exits",
+                               cube = "Data cube 1: Tables 1-20 of counts of Australian businesses, including entries and exits",
                                path = "data-raw")
 
 current_date <- read_excel(abs_test,

@@ -1,11 +1,14 @@
 ## code to prepare `jobkeeper_sa2` dataset goes here
 
 library(sf)
+library(absmaps)
 library(absmapsdata)
-library(tidyverse)
+library(readr)
+library(dplyr)
 library(xml2)
 library(rvest)
 library(readxl)
+library(aitidata)
 
 if (!file.exists("data-raw/mesh_aus2016.rds")) {
   download_absmaps("mesh_sa", saveDirectory = "data-raw")

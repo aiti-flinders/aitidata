@@ -1,5 +1,6 @@
 ## code to prepare `cabee_sa2` dataset goes here
 library(readxl)
+library(stringr)
 library(tidyr)
 library(dplyr)
 library(lubridate)
@@ -29,6 +30,8 @@ if (current_date <= max(aitidata::cabee_sa2$date)) {
   
   cabee_dates <- na.omit(as_date(zoo::as.yearmon(excel_sheets(abs_file))))
   cabee_sheets <- paste(month(cabee_dates, label = T, abbr = F), year(cabee_dates))
+  cabee_sheets <-  c(paste(cabee_sheets[1:4], c("a", "b")), cabee_sheets[5])
+  cabee_sheets <- cabee_sheets[str_detect(cabee_sheets, "b", negate = TRUE)]
   
   cabee_sa2 <- tribble(
     ~"date",
@@ -62,7 +65,7 @@ if (current_date <= max(aitidata::cabee_sa2$date)) {
                            )) %>%
       filter(!is.na(sa2_main_2016)) %>%
       mutate(sa2_main_2016 = as.character(sa2_main_2016),
-             date = as.Date(paste(i, "01"), "%B %Y %d"))
+             date = as.Date(paste(str_remove_all(i, "a"), "01"), format = "%B %Y %d"))
     
     cabee_sa2 <- bind_rows(cabee_year, cabee_sa2)
   }

@@ -264,6 +264,15 @@
 #' National Accounts
 "national_accounts"
 
+#' Australian Manufacturing
+"aus_manufacturing"
+
+#' Industry value add
+"industry_value_add"
+
+#' Seek Advertisments
+"seek_data"
+
 
 
 

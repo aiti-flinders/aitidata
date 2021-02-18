@@ -7,9 +7,11 @@ library(stringr)
 library(purrr)
 library(readxl)
 
-abs_test <- download_data_cube("labour-force-australia-detailed", "6291023a.xls")
+abs_test <- download_data_cube("labour-force-australia-detailed", "6291023a.xls") 
 
-if (max(abs_test$date) <= max(aitidata::employment_by_industry$date)) {
+abs_file <- read_abs_local(filenames = "6291023a.xls", path = "data-raw")
+
+if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
   message("Skipping `employment_by_industry.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {

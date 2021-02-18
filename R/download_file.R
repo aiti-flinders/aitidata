@@ -1,9 +1,9 @@
 #' Download a file from the internet
 #' @importFrom httr GET content
-#' @param download_url 
-#' @param path 
+#' @param file_download_url url of file to download
+#' @param path path to download the file to
 #'
-#' @return Returns the path where the file has been downloaded
+#' @return Returns (silently) the path where the file has been downloaded
 #' @export download_file
 #'
 download_file <- function(file_download_url,  path = here::here("data-raw")) {

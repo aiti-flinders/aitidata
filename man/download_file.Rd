@@ -7,12 +7,12 @@
 download_file(file_download_url, path = here::here("data-raw"))
 }
 \arguments{
-\item{path}{}
+\item{file_download_url}{url of file to download}
 
-\item{download_url}{}
+\item{path}{path to download the file to}
 }
 \value{
-Returns the path where the file has been downloaded
+Returns (silently) the path where the file has been downloaded
 }
 \description{
 Download a file from the internet

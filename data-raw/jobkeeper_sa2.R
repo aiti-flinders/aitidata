@@ -4,6 +4,8 @@ library(sf)
 library(absmaps)
 library(absmapsdata)
 library(readr)
+library(stringr)
+library(tidyr)
 library(dplyr)
 library(xml2)
 library(rvest)
@@ -86,6 +88,11 @@ jobkeeper_date <- release_page %>%
   html_text() %>%
   str_extract("(?<=\\: ).*") %>%
   as.Date(format = "%d %B %Y")
+
+#Many conditions for updating this dataset:
+#1. New meshblock files
+#2. New jobkeeper data
+#3. New business count data
 
 if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !file.exists("data/jobkeeper_sa2.rda")) {
   message("Updating jobkeeper_sa2 dataset...")

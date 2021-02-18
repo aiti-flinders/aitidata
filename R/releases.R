@@ -6,12 +6,13 @@
 #' @export abs_current_release
 #'
 #' @examples \dontrun{abs_current_release("6202.0")}
-#' @importFrom magrittr "%>%"
+#' @importFrom dplyr "%>%"
+#' @importFrom rlang .data
 abs_current_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {
     release_url <-aitidata_catalogues %>%
-      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(url) %>%
       unique()
     
@@ -41,12 +42,13 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
 #' @export abs_next_release
 #'
 #' @examples \dontrun{abs_next_release("6202.0")}
-#' @importFrom magrittr "%>%"
+#' @importFrom dplyr "%>%"
+#' @importFrom rlang .data
 abs_next_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {
     release_url <- aitidata_catalogues %>%
-      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(url) %>%
       unique()
     
@@ -55,7 +57,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
   } else if (!is.null(cat_string) & !is.null(url)) {
     warning("Both URL and catalogue_string were specified. Using URL")
     release_url <- aitidata_catalogues %>%
-      dplyr::filter(catalogue_string == cat_string) %>%
+      dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(url) %>%
       unique()
   }  else if (is.null(cat_string) & is.null(url)) {
@@ -67,7 +69,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
       rvest::html_text() %>%
-      gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
+      gsub(x = .data, pattern = "([A-Z])\\w+", replacement = "") %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")
@@ -77,7 +79,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
       rvest::html_text() %>%
-      .[2] %>%
+      .data[2] %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")

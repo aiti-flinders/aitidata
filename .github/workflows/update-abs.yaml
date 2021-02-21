@@ -5,7 +5,7 @@ name: update-abs
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
   schedule:
-    - cron: '50 23 * * 1-5'
+    - cron: '35 0 * * 1-5'
   push:
 
 
@@ -28,13 +28,13 @@ jobs:
           Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
       - name: Get data
         run: |
-          Rscript -e "library(aitidata)"
-          Rscript -e "aitidata::update_abs()"
+          Rscript -e "devtools::load_all()"
+          Rscript -e "update_abs()"
           Rscript -e "devtools::document()"
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'
           git config --global user.email 'gamb0043@flinders.edu.au'
           git add .
-          git commit -m 'updating data' || echo "No changes to commit"
+          git commit -m 'Scheduled data updates' || echo "No changes to commit"
           git push || echo "No changes to commit"

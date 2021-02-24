@@ -35,7 +35,8 @@ if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
     ) %>%
     select(date, year, month, indicator, industry, gender, age, state, series_type, value, unit)  %>% 
     group_by(date,  indicator, gender, age, state) %>% 
-    mutate(value_share = 200 * value/sum(value))
+    mutate(value_share = 200 * value/sum(value)) %>%
+    ungroup()
   
   
   employment_industry_19 <- raw %>%

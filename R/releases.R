@@ -69,7 +69,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
       rvest::html_text() %>%
-      gsub(x = .data, pattern = "([A-Z])\\w+", replacement = "") %>%
+      gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")
@@ -79,7 +79,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
       rvest::html_text() %>%
-      .data[2] %>%
+      .[2] %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")

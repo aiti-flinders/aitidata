@@ -1,5 +1,6 @@
 ## code to prepare `employment_by_industry` dataset goes here.
 library(readabs)
+library(aitidata)
 library(lubridate)
 library(dplyr)
 library(tidyr)
@@ -54,7 +55,10 @@ if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
            industry = ifelse(industry %in% indicator, "Total (industry)", industry)
     ) %>%
     filter(!industry %in% c("Managers", "Professionals", "Technicians and Trades Workers", "Community and Personal Service Workers", "Clerical and Administrative Workers", "Sales Workers", "Machinery Operators and Drivers", "Labourers")) %>%
-    select(date, year, month, indicator, industry, gender, age, state, series_type, value, unit)
+    select(date, year, month, indicator, industry, gender, age, state, series_type, value, unit) %>% 
+    group_by(date,  indicator, gender, age, state) %>% 
+    mutate(value_share = 200 * value/sum(value)) %>%
+    ungroup()
   
   
   employment_by_industry <- bind_rows(employment_industry_5, employment_industry_19) %>%

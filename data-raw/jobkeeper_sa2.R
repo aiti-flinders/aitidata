@@ -99,19 +99,35 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
   download.file(paste0("https://treasury.gov.au/", jobkeeper_data_url), dest = "data-raw/jobkeeper_postal.xlsx", mode = "wb")
 
-  (nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = 2, skip = 1, n_max = 0)))
+  nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = 2, skip = 1, n_max = 0))
 
-  (ct <- ifelse(grepl("Postcode", nms), "text", "numeric"))
+  ct <- ifelse(grepl("Postcode", nms), "text", "numeric")
 
   jobkeeper_postal <- read_xlsx(
     path = "data-raw/jobkeeper_postal.xlsx",
-    sheet = 2,
+    sheet = "First phase",
     skip = 1,
     col_types = ct
   ) %>%
     janitor::clean_names() %>%
     mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%
     rename_with(.cols = -postcode, ~paste0("apps_",str_extract(., ".+?(?=_)")))
+  
+  nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = 3, skip = 1, n_max = 0))
+  
+  ct <- ifelse(grepl("Postcode", nms), "text", "numeric")
+  
+  jobkeeper_extension <- read_xlsx(
+    path = "data-raw/jobkeeper_postal.xlsx",
+    sheet = "Extension phase",
+    skip = 1,
+    col_types = ct
+  ) %>%
+    janitor::clean_names() %>%
+    mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%
+    rename_with(.cols = -postcode, ~paste0("apps_", str_extract(., ".+?(?=_)")))
+  
+  jobkeeper_all <- left_join(jobkeeper_postal, jobkeeper_extension)
     
 
 
@@ -125,7 +141,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     select(-date, -sa2_name_2016)
 
   jobkeeper_sa2 <- left_join(postal_areas, mesh_aus, by = c("MB_CODE_2016" = "mb_code_2016")) %>%
-    left_join(jobkeeper_postal, by = c("POA_CODE_2016" = "postcode")) %>%
+    left_join(jobkeeper_all, by = c("POA_CODE_2016" = "postcode")) %>%
     left_join(business_sa2) %>%
     group_by(POA_CODE_2016) %>%
     mutate(share = total_businesses / sum(total_businesses, na.rm = T)) %>%

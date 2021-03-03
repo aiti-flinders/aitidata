@@ -9,7 +9,7 @@ library(strayr)
 
 
 abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                               cube = "Table 7: Employment size - Payroll jobs index",
+                               cube = "Table 4: Payroll jobs and wages indexes",
                                path = "data-raw")
 
 current_date <- read_xlsx(here::here(abs_test),
@@ -25,9 +25,7 @@ if (current_date <= max(aitidata::payroll_index$date)) {
   file.remove(abs_test)
 } else {
   message("Updating `payroll_index.rda`")
-  abs_file <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                     cube = "Table 4: Payroll jobs and wages indexes",
-                     path = "data-raw")
+  abs_file <- abs_test
   
   payroll_jobs <- read_xlsx(abs_file, sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
     clean_names() %>%
@@ -51,7 +49,7 @@ if (current_date <= max(aitidata::payroll_index$date)) {
     ) %>%
     select(date, gender = sex, age = age_group, state = state_or_territory, industry = industry_division, indicator, value)
   
-  payroll_wages <- read_xlsx(here::here("data-raw", "6160055001_DO004.xlsx"), sheet = "Total wages index", skip = 5, na = "NA", n_max = 4321) %>%
+  payroll_wages <- read_xlsx(abs_file, sheet = "Total wages index", skip = 5, na = "NA", n_max = 4321) %>%
     clean_names() %>%
     mutate(across(starts_with("x"), as.numeric)) %>%
     pivot_longer(

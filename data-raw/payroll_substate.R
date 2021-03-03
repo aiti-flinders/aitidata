@@ -7,7 +7,7 @@ library(stringr)
 library(aitidata)
 
 abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                               cube = "Table 7: Employment size - Payroll jobs index",
+                               cube = "Table 5: Sub-state - Payroll jobs indexes",
                                path = "data-raw")
 
 current_date <- read_xlsx(here::here(abs_test),
@@ -24,10 +24,8 @@ if (current_date <= max(aitidata::payroll_substate$date)) {
 } else {
   message("updating `payroll_substate.rda`")
   
-  abs_file <- download_data_cube("weekly-payroll-jobs-and-wages-australia",
-                         cube = "Table 5: Sub-state - Payroll jobs indexes",
-                         path = "data-raw"
-  )
+  abs_file <- abs_test
+  
   
   payroll_substate <- read_xlsx(here::here(abs_file), sheet = "Payroll jobs index-SA3", skip = 5, na = "NA") %>%
     clean_names() %>%

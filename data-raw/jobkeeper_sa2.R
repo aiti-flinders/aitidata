@@ -205,6 +205,8 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
   usethis::use_data(jobkeeper_state, overwrite = TRUE, compress = "xz")
   usethis::use_data(jobkeeper_sa2, overwrite = TRUE, compress = "xz")
   
+  file.remove("data-raw/jobkeeper_postal.xlsx")
+  
 } else {
   message("jobkeeper_sa2 data is already up to date")
 }

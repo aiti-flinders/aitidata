@@ -3,8 +3,10 @@
 library(dplyr)
 library(purrr)
 library(readxl)
+library(tidyr)
 library(xml2)
 library(rvest)
+library(stringr)
 library(absmapsdata)
 
 jobseeker_latest <- read_html("https://data.gov.au/data/dataset/728daa75-06e8-442d-931c-93ecc6a57880") %>%

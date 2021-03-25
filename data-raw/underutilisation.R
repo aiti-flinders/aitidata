@@ -15,7 +15,7 @@ if (max(abs_file$date) <= max(aitidata::underutilisation$date)) {
 } else {
   message("Updating `underutilisation.rda`")
   
-  raw <- download_data_cube("labour-force-australia-detailed", cube = "6291023b.xls", path = "data-raw")
+  abs_cube <- download_data_cube("labour-force-australia-detailed", cube = "6291023b.xls", path = "data-raw")
   
   raw <- read_abs_local(filenames = c("6291023a.xls", "6291023b.xls"), path = "data-raw")
   
@@ -50,7 +50,7 @@ if (max(abs_file$date) <= max(aitidata::underutilisation$date)) {
     distinct()
   
   file.remove(abs_test)
-  file.remove(raw)
+  file.remove(abs_cube)
 
   usethis::use_data(underutilisation, overwrite = TRUE, compress = "xz")
 }

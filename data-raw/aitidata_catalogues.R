@@ -14,7 +14,8 @@ aitidata_catalogues <- tibble::tribble(
   "6291.0.55.003", "labour-force-australia-detailed","https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia-detailed/latest-release", list("23a" = "Volume measures of underutilisation by State, Territory and Sex",
                                                                                                                                                                                  "23b" = "Volume measures of underutilisation by Age and Sex"), "underutilisation", 
   "6150.0.55.003", "labour-account-australia",  "https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-account-australia/latest-release", list("1" = "Total All Industries"), "labour_account", 
-  "8165.0", "counts-australian-businesses-including-entries-and-exits", "https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2") %>%
+  "8165.0", "counts-australian-businesses-including-entries-and-exits", "https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2",
+  NA, ) %>%
   tidyr::unnest_longer(col = tables) 
 
 

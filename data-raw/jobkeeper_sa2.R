@@ -105,7 +105,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
 
   jobkeeper_postal <- read_xlsx(
     path = "data-raw/jobkeeper_postal.xlsx",
-    sheet = "First phase",
+    sheet = "First Phase",
     skip = 1,
     col_types = ct
   ) %>%
@@ -117,9 +117,9 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
   
   ct <- ifelse(grepl("Postcode", nms), "text", "numeric")
   
-  jobkeeper_extension <- read_xlsx(
+  jobkeeper_extension_first <- read_xlsx(
     path = "data-raw/jobkeeper_postal.xlsx",
-    sheet = "Extension phase",
+    sheet = "Extension - First Quarter",
     skip = 1,
     col_types = ct
   ) %>%
@@ -127,7 +127,22 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%
     rename_with(.cols = -postcode, ~paste0("apps_", str_extract(., ".+?(?=_)")))
   
-  jobkeeper_all <- left_join(jobkeeper_postal, jobkeeper_extension)
+  nms <- names(read_excel("data-raw/jobkeeper_postal.xlsx", sheet = 4, skip = 1, n_max = 0))
+  
+  ct <- ifelse(grepl("Postcode", nms), "text", "numeric")
+  
+  jobkeeper_extension_second <- read_xlsx(
+    path = "data-raw/jobkeeper_postal.xlsx",
+    sheet = "Extension - Second Quarter",
+    skip = 1,
+    col_types = ct
+  ) %>%
+    janitor::clean_names() %>%
+    mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%
+    rename_with(.cols = -postcode, ~paste0("apps_", str_extract(., ".+?(?=_)")))
+  
+  jobkeeper_all <- left_join(jobkeeper_postal, jobkeeper_extension_first) %>%
+    left_join(jobkeeper_extension_second)
     
 
 

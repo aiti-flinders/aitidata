@@ -6,9 +6,11 @@ library(strayr)
 library(stringr)
 library(aitidata)
 
-abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
+abs_test <- try(download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
                                cube = "Table 5: Sub-state - Payroll jobs indexes",
-                               path = "data-raw")
+                               path = "data-raw"), expr = "Error")
+
+if (abs_test != "Error") {
 
 current_date <- read_xlsx(here::here(abs_test),
                           sheet = 2,
@@ -18,7 +20,7 @@ current_date <- read_xlsx(here::here(abs_test),
   as.numeric() %>%
   as.Date(origin = "1899-12-30")
 
-if (current_date <= max(aitidata::payroll_substate$date)) {
+if (current_date <= max(aitidata::payroll_substate$date) | abs_test == "Error") {
   message("Skipping `payroll_substate.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {
@@ -49,4 +51,5 @@ if (current_date <= max(aitidata::payroll_substate$date)) {
   save(payroll_substate, file = here::here("data", "payroll_substate.rda"), compress = "xz")
   file.remove(abs_test)
   file.remove(abs_file)
+}
 }

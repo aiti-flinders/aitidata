@@ -9,7 +9,7 @@ library(strayr)
 
 
 abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                               cube = "Table 4: Payroll jobs and wages indexes",
+                               cube = "6160055001_DO004.xlsx",
                                path = "data-raw")
 
 current_date <- read_xlsx(here::here(abs_test),

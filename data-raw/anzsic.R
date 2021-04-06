@@ -1,4 +1,5 @@
-## code to prepare `anzsic` dataset goes here
+## code to prepare `anzsic` dataset goes here.
+#This likely does not need updating automatically. The last change to the ANZSIC was in 2006. 
 library(dplyr)
 library(tidyr)
 library(readxl)

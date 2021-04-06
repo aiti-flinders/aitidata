@@ -8,7 +8,7 @@ devtools::load_all(".")
 source("data-raw/jobkeeper_sa2.R")
 source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
-source("data-raw/weekly-payroll-jobs-and-wages-australia.R")
+source("data-raw/payroll_substate.R")
 
 covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
   left_join(small_area_labour_market %>%
@@ -40,7 +40,7 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
     covid_impact,
     state_name_2016
   ) %>%
-  bind_rows(payroll_region) %>%
+  left_join(payroll_substate %>% filter(indicator == "payroll_index")  %>% select(-indicator, payroll_index = value)) %>%
   arrange(date) %>%
   group_by(state_name_2016, sa2_main_2016) %>%
   mutate(jobkeeper_growth = jobkeeper_applications - lag(jobkeeper_applications)) %>%

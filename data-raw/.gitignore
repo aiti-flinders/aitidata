@@ -11,10 +11,8 @@ internet_vacancies_skill.xlsx
 labour_account.xls
 labour_force.csv
 labour_force_raw.csv
-mesh_aus2016.rds
 payroll_index.xlsx
 payroll_sa4.xlsx
-postal_areas.zip
 salm_sa2.csv
 underemployment_by_industry_and_occupation.csv
 5220002_Annual_NSW.xls
@@ -29,5 +27,6 @@ sa2_pow_sa3_ur_travel_mode.csv
 sa2_pow_ur.csv
 6160055001_DO005.xlsx
 payroll_substate.xlsx
-1270055003_poa_2016_aust_csv.zip
 sa3_indp2_occp2.csv
+small_area_labour_market.R
+jobkeeper_sa2.R

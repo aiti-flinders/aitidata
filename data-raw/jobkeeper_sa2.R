@@ -12,7 +12,7 @@ library(rvest)
 library(readxl)
 library(aitidata)
 
-if (!file.exists("data-raw/mesh_aus2016.rds")) {
+if (!file.exists(here::here("data-raw/mesh_aus2016.rds"))) {
   download_absmaps("mesh_sa", saveDirectory = "data-raw")
   download_absmaps("mesh_act", saveDirectory = "data-raw")
   download_absmaps("mesh_vic", saveDirectory = "data-raw")
@@ -50,7 +50,7 @@ if (!file.exists("data-raw/mesh_aus2016.rds")) {
   mesh_aus <- readRDS("data-raw/mesh_aus2016.rds")
 }
 
-if (!file.exists("data-raw/postal_areas.zip")) {
+if (!file.exists("data-raw/1270055003_poa_2016_aust_csv.zip")) {
   postal_areas <- download_file("https://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055003_poa_2016_aust_csv.zip&1270.0.55.003&Data%20Cubes&BCC18002983CD965CA25802C00142BA4&0&July%202016&13.09.2016&Previous",
                                 path = "data-raw"
   )
@@ -64,7 +64,7 @@ if (!file.exists("data-raw/postal_areas.zip")) {
                            ))
   
 } else {
-  postal_areas <- read_csv("data-raw/postal_areas.zip",
+  postal_areas <- read_csv("data-raw/1270055003_poa_2016_aust_csv.zip",
     col_types = cols(
       MB_CODE_2016 = col_character(),
       POA_CODE_2016 = col_character(),

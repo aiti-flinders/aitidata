@@ -1,5 +1,7 @@
 ## code to prepare `small_area_labour_market` dataset goes here
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readr)
 library(sf)
 
 download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193962&.csv",

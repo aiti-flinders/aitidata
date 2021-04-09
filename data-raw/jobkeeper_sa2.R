@@ -170,7 +170,12 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
       values_to = "jobkeeper_applications"
     ) %>%
     mutate(date = str_remove(date, "apps_"),
-           date = as.Date(paste0("2020-", match(date, tolower(month.name)), "-01")),
+           month = match(date, tolower(month.name)),
+           year = case_when(
+             month %in% c(1,2,3) ~ 2021,
+             TRUE ~ 2020
+           ),
+           date = as.Date(paste(year, month,  "01", sep = "-")),
            jobkeeper_applications = ceiling(jobkeeper_applications)) %>%
     left_join(business_sa2) %>%
     mutate(jobkeeper_proportion = ifelse(total_businesses != 0, 100 * jobkeeper_applications / total_businesses, 0)) %>%

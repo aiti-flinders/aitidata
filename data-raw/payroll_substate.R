@@ -3,24 +3,16 @@ library(janitor)
 library(dplyr)
 library(tidyr)
 library(strayr)
+library(readabs)
 library(stringr)
 library(aitidata)
+library(absmapsdata)
+library(sf)
 
-abs_test <- try(download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                               cube = "Table 5: Sub-state - Payroll jobs indexes",
-                               path = "data-raw"), expr = "Error")
+abs_test <- read_payrolls(series = "sa3_jobs", path = here::here("data-raw"))
 
-if (abs_test != "Error") {
 
-current_date <- read_xlsx(here::here(abs_test),
-                          sheet = 2,
-                          skip = 5) %>%
-  select(last_col()) %>%
-  colnames() %>%
-  as.numeric() %>%
-  as.Date(origin = "1899-12-30")
-
-if (current_date <= max(aitidata::payroll_substate$date) | abs_test == "Error") {
+if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
   message("Skipping `payroll_substate.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {
@@ -29,27 +21,16 @@ if (current_date <= max(aitidata::payroll_substate$date) | abs_test == "Error") 
   abs_file <- abs_test
   
   
-  payroll_substate <- read_xlsx(here::here(abs_file), sheet = "Payroll jobs index-SA3", skip = 5, na = "NA") %>%
-    clean_names() %>%
-    mutate(across(starts_with("x"), as.numeric)) %>%
-    pivot_longer(
-      cols = c(4:length(.)),
-      names_to = "date",
-      values_to = "value"
-    ) %>%
-    mutate(across(1:4, ~ gsub("^[0-9]. ", "", .)),
-           date = gsub("x", "", date),
-           date = as.numeric(date),
-           date = as.Date(date, origin = "1899-12-30"),
-           value = as.numeric(value),
-           sa3_code_2016 = ifelse(statistical_area_3 != "All SA4", str_sub(statistical_area_3, start = 1L, end = 5L), NA),
-           state_or_territory = strayr(state_or_territory, to = "state_name"),
-           indicator = "payroll_index") %>%
-    select(state_name_2016 = state_or_territory, date, value, sa3_code_2016, indicator) %>%
+  payroll_substate <- abs_file %>%
+    mutate(state_name_2016 = strayr(state, to = "state_name"),
+           sa3_name_2016 = sa3,
+           indicator = "Payroll Index") %>%
+    left_join(sa32016) %>%
+    select(state_name_2016, date, value, sa3_code_2016, indicator) %>%
     filter(!is.na(sa3_code_2016), !is.na(value))
   
   save(payroll_substate, file = here::here("data", "payroll_substate.rda"), compress = "xz")
-  file.remove(abs_test)
-  file.remove(abs_file)
-}
+  
+  file.remove(here::here("data-raw/6160055001_DO005.xlsx"))
+  
 }

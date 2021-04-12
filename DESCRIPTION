@@ -30,8 +30,14 @@ Imports:
     dplyr,
     here,
     purrr,
-    readabs,
-    rlang
+    readabs (>= 0.4.8.900),
+    rlang,
+    strayr (>= 0.0.1),
+    absmapsdata (>= 1.2.1),
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes: 
+    MattCowgill/readabs,
+    MattCowgill/strayr,
+    wfmackey/absmapsdata

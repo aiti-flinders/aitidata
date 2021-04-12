@@ -23,11 +23,8 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('devtools' ,'httr', 'magrittr', 'glue', 'lubridate', 'rvest', 'stringr', 'tibble', 'xml2', 'dplyr', 'here', 'readabs', 'janitor', 'readxl', 'forcats', 'zoo', 'purrr'), type = 'binary')"
-          Rscript -e "devtools::install_github('MattCowgill/strayr', dependencies = TRUE)"
-          Rscript -e "devtools::install_github('wfmackey/absmapsdata', dependencies = TRUE)"
-          Rscript -e "devtools::install_github('wfmackey/absmaps', dependencies = TRUE)"
-          Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
+          Rscript -e "install.packages(c('remotes'))
+          Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
       - name: Get data
         run: |
           Rscript -e "devtools::load_all()"

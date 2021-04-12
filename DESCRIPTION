@@ -34,10 +34,12 @@ Imports:
     rlang,
     strayr (>= 0.0.1),
     absmapsdata (>= 1.2.1),
+    absmaps (>= 0.2.1)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Remotes: 
     MattCowgill/readabs,
     MattCowgill/strayr,
-    wfmackey/absmapsdata
+    wfmackey/absmapsdata,
+    wfmackey/absmaps

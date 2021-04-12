@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          Rscript -e "install.packages(c('remotes'))"
+          Rscript -e "install.packages(c('remotes', 'devtools'))"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
       - name: Get data
         run: |

@@ -4,6 +4,8 @@ name: update-abs
 
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
+   schedule:
+      - cron: '35 0 * * 1-5'
    push:
 
 

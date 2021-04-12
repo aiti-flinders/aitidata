@@ -14,7 +14,7 @@ abs_test <- read_payrolls(series = "sa3_jobs", path = here::here("data-raw"))
 
 if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
   message("Skipping `payroll_substate.rda`: appears to be up-to-date")
-  file.remove(abs_test)
+  file.remove("data-raw/6160055001_DO005.xlsx")
 } else {
   message("updating `payroll_substate.rda`")
   

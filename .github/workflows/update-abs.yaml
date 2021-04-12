@@ -24,7 +24,7 @@ jobs:
           Rscript -e "install.packages(c('remotes', 'devtools'))"
           Rscript -e "devtools::install_github('hamgamb/aitidata', dependencies = TRUE)"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
-          Rscript -e "install.packages('janitor', 'forcats')"
+          Rscript -e "install.packages(c('janitor', 'forcats'))"
 
       - name: Get data
         run: |

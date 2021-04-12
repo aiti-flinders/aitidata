@@ -8,6 +8,7 @@ library(xml2)
 library(rvest)
 library(stringr)
 library(absmapsdata)
+library(sf)
 
 jobseeker_latest <- read_html("https://data.gov.au/data/dataset/728daa75-06e8-442d-931c-93ecc6a57880") %>%
   html_nodes(xpath = '//*[@id="content"]/div[3]/div/article/div/section[3]/table/tbody/tr[9]/td') %>%
@@ -15,19 +16,19 @@ jobseeker_latest <- read_html("https://data.gov.au/data/dataset/728daa75-06e8-44
   as.Date()
 
 
-files <- data.frame(
+files <- tibble(
   url = read_html("https://data.gov.au/data/dataset/728daa75-06e8-442d-931c-93ecc6a57880") %>% html_nodes("#dataset-resources a") %>% html_attr("href")
 ) %>%
   filter(grepl(".xlsx", url)) %>%
   mutate(date = str_extract(url, "(january|february|march|april|may|june|july|august|september|october|november|december)-\\d{4}"),
          date = as.Date(paste0(date, "-01"), "%B-%Y-%d"))
 
-if (max(files$date) <= max(jobseeker_sa2$date)) {
+if (max(files$date) <= max(aitidata::jobseeker_sa2$date)) {
   message("Skipping: `jobseeker_state.rda`, `jobseeker_sa2.rda`: appears to be up-to-date") 
 } else {
   
   message("Updating `jobseeker_state.rda`, `jobseeker_sa2.rda`")
-  file_paths <- purrr::map(files$url, ~download_file(.x))
+  file_paths <- purrr::map(files$url, ~aitidata::download_file(.x))
 
   jobseeker_all <- data.frame(
     "sa2" = numeric(),
@@ -81,6 +82,6 @@ if (max(files$date) <= max(jobseeker_sa2$date)) {
   usethis::use_data(jobseeker_state, compress = "xz", overwrite = TRUE)
   usethis::use_data(jobseeker_sa2, compress = "xz", overwrite = TRUE)
   
-  map(file_paths, file.remove)
+  quietly(map_lgl(file_paths, file.remove))
 }
 

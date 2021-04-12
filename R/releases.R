@@ -49,7 +49,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
   if(!is.null(cat_string) & is.null(url)) {
     release_url <- aitidata_catalogues %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
-      dplyr::pull(url) %>%
+      dplyr::pull(.data$url) %>%
       unique()
     
   } else if (is.null(cat_string) & !is.null(url)) {
@@ -58,7 +58,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     warning("Both URL and catalogue_string were specified. Using URL")
     release_url <- aitidata_catalogues %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
-      dplyr::pull(url) %>%
+      dplyr::pull(.data$url) %>%
       unique()
   }  else if (is.null(cat_string) & is.null(url)) {
     stop("One of URL and catalogue_string must be specified")
@@ -68,8 +68,10 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/div/ul/li[1]/span/text()') %>%
-      rvest::html_text() %>%
-      gsub(x = ., pattern = "([A-Z])\\w+", replacement = "") %>%
+      rvest::html_text() 
+      
+    next_release <- next_release %>%
+      gsub(x = next_release, pattern = "([A-Z])\\w+", replacement = "") %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")
@@ -79,7 +81,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     next_release <- release_page %>%
       rvest::html_nodes(xpath = '//*[@id="release-date-section"]/div[2]/div/text()') %>%
       rvest::html_text() %>%
-      .[2] %>%
+      .data[2] %>%
       trimws()
     
     next_release <- as.Date(next_release, format = "%d/%m/%Y")

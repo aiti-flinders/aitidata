@@ -82,6 +82,6 @@ if (max(files$date) <= max(aitidata::jobseeker_sa2$date)) {
   usethis::use_data(jobseeker_state, compress = "xz", overwrite = TRUE)
   usethis::use_data(jobseeker_sa2, compress = "xz", overwrite = TRUE)
   
-  quietly(map_lgl(file_paths, file.remove))
+  map_lgl(file_paths, file.remove)
 }
 

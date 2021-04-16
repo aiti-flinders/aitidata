@@ -177,6 +177,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
            ),
            date = as.Date(paste(year, month,  "01", sep = "-")),
            jobkeeper_applications = ceiling(jobkeeper_applications)) %>%
+    select(-year, - month) %>%
     left_join(business_sa2) %>%
     mutate(jobkeeper_proportion = ifelse(total_businesses != 0, 100 * jobkeeper_applications / total_businesses, 0)) %>%
     filter(
@@ -197,7 +198,13 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
       names_to = "indicator",
       values_to = "value"
     ) %>%
-    mutate(across(indicator, ~ str_to_sentence(str_replace_all(., "_", " "))))
+    mutate(across(indicator, ~ str_to_sentence(str_replace_all(., "_", " "))), 
+           unit = case_when(indicator == "Jobkeeper proportion" ~ "Percent", TRUE ~ "000"),
+           series_type = "Original",
+           month = lubridate::month(date, abbr = FALSE, label = TRUE),
+           year = lubridate::year(date),
+           gender = "Persons",
+           age = "Total (age)")
   
   jobkeeper_state <- jobkeeper_sa2 %>% 
     ungroup() %>% 
@@ -219,7 +226,9 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
                             TRUE ~ "000"),
            series_type = "Original",
            month = lubridate::month(date, abbr = FALSE, label = TRUE),
-           year = lubridate::year(date)) 
+           year = lubridate::year(date),
+           gender = "Persons",
+           age = "Total (age)") 
 
 
   usethis::use_data(jobkeeper_state, overwrite = TRUE, compress = "xz")

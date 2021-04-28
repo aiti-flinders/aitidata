@@ -1,17 +1,49 @@
-# AITI Data 
-Data sets used commonly in AITI research. Current data included:
-- JobKeeper Applications by SA2 (Treasury - https://treasury.gov.au/coronavirus/jobkeeper/data)
-- JobSeeker Applications by SA2 (DSS - https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile)
-- Weekly Payroll Jobs industry impacts (ABS Cat. no. 6160.0.55.001 - Table 5)
-- Weekly Payroll Jobs by SA4 (ABS Cat. no. 6160.0.55.001 - Table 5)
-- Unemployment rate, Labour force, Number unemployed by SA2 (Small Area Labour Market Publication - https://www.employment.gov.au/small-area-labour-markets-publication-0)
-- Employment (full-time, part-time, total) and Underemployment (total, ratio) by industry (ABS Cat. no. 6291.0.55.003 - Tables 5 and 19)
-- Labour force indicators (ABS Cat. no. 6202.0 - Tables 12, 19, 22, 23)
-- Economic Complexity indicators for Australian states 
-- Internet vacancies index (https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport)
-- Various helper datasets (ANZSIC Heirarchy)
 
-  <!-- badges: start -->
-  [![R-CMD-check](https://github.com/hamgamb/aitidata/workflows/R-CMD-check/badge.svg)](https://github.com/hamgamb/aitidata/actions)
-  [![update-abs](https://github.com/hamgamb/aitidata/workflows/update-abs/badge.svg)](https://github.com/hamgamb/aitidata/actions)
-  <!-- badges: end -->
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# aitidata
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+aitidata is a collection of data sets commonly used by researchers at
+the Australian Industrial Transformation Institute. Data is updated at
+about 11:30am each day.
+
+## Installation
+
+You can install the latest version from [GitHub](https://github.com/)
+with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("aiti-flinders/aitidata")
+```
+
+## Included data
+
+| Item                               | Title                                                                                 |
+| :--------------------------------- | :------------------------------------------------------------------------------------ |
+| anzsic                             | Australian and New Zealand Standard Industrial Classification (ANZSIC)                |
+| aus\_manufacturing                 | Australian Manufacturing                                                              |
+| cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 |
+| covid\_data                        | COVID-19 Geographic data                                                              |
+| economic\_complexity               | Australian Subnational Economic Complexity                                            |
+| employment\_by\_industry           | ABS Employment by Industry                                                            |
+| employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   |
+| industry\_value\_add               | Industry value add                                                                    |
+| internet\_vacancies\_index         | Internet Vacancies Index                                                              |
+| jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 |
+| jobkeeper\_state                   | Jobkeeper                                                                             |
+| jobseeker\_sa2                     | JobSeeker data by SA2                                                                 |
+| jobseeker\_state                   | Jobseeker                                                                             |
+| labour\_account                    | Labour Account                                                                        |
+| labour\_force                      | ABS Labour Force Survey                                                               |
+| national\_accounts                 | National Accounts                                                                     |
+| payroll\_index                     | Payroll Index                                                                         |
+| payroll\_substate                  | Payroll Substate                                                                      |
+| seek\_data                         | Seek Advertisments                                                                    |
+| small\_area\_labour\_market        | Small Area Labour Market                                                              |
+| south\_australia\_net\_debt        | SA Net Debt                                                                           |
+| underutilisation                   | Underutilisation                                                                      |

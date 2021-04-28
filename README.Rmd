@@ -1,0 +1,40 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# aitidata
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+aitidata is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 
+
+## Installation
+
+You can install the latest version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("aiti-flinders/aitidata")
+```
+
+
+
+## Included data
+
+``` {r, echo = FALSE}
+
+knitr::kable(data.frame(data(package = "aitidata")$results)[-c(1, 2)])
+
+```

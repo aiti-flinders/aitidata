@@ -3,7 +3,7 @@
 \docType{data}
 \name{labour_account}
 \alias{labour_account}
-\title{Labour Account}
+\title{ABS Labour Account}
 \format{
 A dataframe with 10 variables
 \describe{

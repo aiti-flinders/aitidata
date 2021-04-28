@@ -3,7 +3,7 @@
 \docType{data}
 \name{south_australia_net_debt}
 \alias{south_australia_net_debt}
-\title{SA Net Debt}
+\title{South Australia Historic Net Debt}
 \format{
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 34 rows and 5 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, 
 south_australia_net_debt
 }
 \description{
-SA Net Debt
+South Australia Historic Net Debt
 }
 \keyword{datasets}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{national_accounts}
 \alias{national_accounts}
-\title{National Accounts}
+\title{ABS National Accounts}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 51051 rows and 7 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 national_accounts
 }
 \description{
-National Accounts
+ABS National Accounts
 }
 \keyword{datasets}

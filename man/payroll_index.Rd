@@ -3,7 +3,7 @@
 \docType{data}
 \name{payroll_index}
 \alias{payroll_index}
-\title{Payroll Index}
+\title{ABS Weekly Payroll Index}
 \format{
 A dataframe with 6 variables:
 \describe{

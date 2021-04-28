@@ -156,7 +156,7 @@
 #' @source \url{https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile}
 "jobseeker_sa2"
 
-#' Labour Account
+#' ABS Labour Account
 #'
 #' Experimental ABS labour force data
 #'
@@ -198,7 +198,7 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0}
 "labour_force"
 
-#' Payroll Index
+#' ABS Weekly Payroll Index
 #'
 #' ABS Weekly Payroll data since 4th January 2020.
 #'
@@ -215,7 +215,7 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
 "payroll_index"
 
-#' Payroll Substate
+#' ABS Weekly Payroll Index for SA3 
 #'
 #' ABS Weekly Payroll data for Statistical Area 4 Regions
 #'
@@ -230,7 +230,7 @@
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
 "payroll_substate"
 
-#' Small Area Labour Market
+#' DESE Small (SA2) Area Labour Market 
 #'
 #' The Department of Education, Skills and Employment quarterly regional
 #' estimates of unemployment and the unemployment rate at the Statistical
@@ -249,19 +249,19 @@
 #' @source \url{https://www.employment.gov.au/small-area-labour-markets-publication-0}
 "small_area_labour_market"
 
-#' Jobkeeper 
+#' Jobkeeper applications by state
 "jobkeeper_state"
 
-#' Jobseeker
+#' Jobseeker applications by state
 "jobseeker_state"
 
-#' Underutilisation
+#' ABS Measures of Underutilisation
 "underutilisation"
 
-#' SA Net Debt
+#' South Australia Historic Net Debt
 "south_australia_net_debt"
 
-#' National Accounts
+#' ABS National Accounts 
 "national_accounts"
 
 #' Australian Manufacturing
@@ -270,7 +270,7 @@
 #' Industry value add
 "industry_value_add"
 
-#' Seek Advertisments
+#' Seek Job Ads
 "seek_data"
 
 

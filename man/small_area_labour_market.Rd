@@ -3,7 +3,7 @@
 \docType{data}
 \name{small_area_labour_market}
 \alias{small_area_labour_market}
-\title{Small Area Labour Market}
+\title{DESE Small (SA2) Area Labour Market}
 \format{
 A dataframe with 6 variables:
 \describe{

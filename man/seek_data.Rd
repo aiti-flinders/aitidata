@@ -3,7 +3,7 @@
 \docType{data}
 \name{seek_data}
 \alias{seek_data}
-\title{Seek Advertisments}
+\title{Seek Job Ads}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 8500 rows and 8 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 seek_data
 }
 \description{
-Seek Advertisments
+Seek Job Ads
 }
 \keyword{datasets}

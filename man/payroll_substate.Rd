@@ -3,7 +3,7 @@
 \docType{data}
 \name{payroll_substate}
 \alias{payroll_substate}
-\title{Payroll Substate}
+\title{ABS Weekly Payroll Index for SA3}
 \format{
 A dataframe with 5 variables:
 \describe{

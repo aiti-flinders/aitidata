@@ -10,7 +10,6 @@ library(dplyr)
 library(xml2)
 library(rvest)
 library(readxl)
-library(aitidata)
 
 if (!file.exists(here::here("data-raw/mesh_aus2016.rds"))) {
   download_absmaps("mesh_sa", saveDirectory = "data-raw")
@@ -135,7 +134,8 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     path = "data-raw/jobkeeper_postal.xlsx",
     sheet = "Extension - Second Quarter",
     skip = 1,
-    col_types = ct
+    range = cell_limits(c(2, 1), c(NA, 3)),
+    col_types = ct, #Temporary until I can fix the spreadsheet
   ) %>%
     janitor::clean_names() %>%
     mutate(postcode = str_pad(postcode, 4, "left", "0")) %>%

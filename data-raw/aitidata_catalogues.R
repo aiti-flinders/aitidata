@@ -17,7 +17,8 @@ aitidata_catalogues <- tibble::tribble(
   "8165.0", "counts-australian-businesses-including-entries-and-exits", "https://www.abs.gov.au/statistics/economy/business-indicators/counts-australian-businesses-including-entries-and-exits/latest-release", list("8" = "Businesses by Industry Division by Statistical Area Level 2 by Employment Size Ranges"), "cabee_sa2",
   "8155.0", "australian-industry", "https://www.abs.gov.au/statistics/industry/industry-overview/australian-industry/latest-release", list("Manufacturing industry"), "aus_manufacturing",
   NA, NA, NA, list(NA),  "covid_data",
-  NA, "jobseeker-payment-and-youth-allowance-recipients-monthly-profile", "https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile", NA,  "jobseeker_sa2" ) %>%
+  NA, "jobseeker-payment-and-youth-allowance-recipients-monthly-profile", "https://data.gov.au/data/dataset/jobseeker-payment-and-youth-allowance-recipients-monthly-profile", NA,  "jobseeker_sa2",
+  NA, NA, "https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx", list("IVI Regional Data - May 2020 onwards (Excel)"), "internet_vacancies_regional") %>%
   tidyr::unnest_longer(col = tables) 
 
 

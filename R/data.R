@@ -273,6 +273,9 @@
 #' Seek Job Ads
 "seek_data"
 
+#' Internet Vacancies Regional
+"internet_vacancies_regional"
+
 
 
 

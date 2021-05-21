@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/aiti-flinders/aitidata/workflows/R-CMD-check/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
 aitidata is a collection of data sets commonly used by researchers at
@@ -34,16 +35,17 @@ devtools::install_github("aiti-flinders/aitidata")
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   |
 | industry\_value\_add               | Industry value add                                                                    |
 | internet\_vacancies\_index         | Internet Vacancies Index                                                              |
+| internet\_vacancies\_regional      |                                                                                       |
 | jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 |
-| jobkeeper\_state                   | Jobkeeper                                                                             |
+| jobkeeper\_state                   | Jobkeeper applications by state                                                       |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 |
-| jobseeker\_state                   | Jobseeker                                                                             |
-| labour\_account                    | Labour Account                                                                        |
+| jobseeker\_state                   | Jobseeker applications by state                                                       |
+| labour\_account                    | ABS Labour Account                                                                    |
 | labour\_force                      | ABS Labour Force Survey                                                               |
-| national\_accounts                 | National Accounts                                                                     |
-| payroll\_index                     | Payroll Index                                                                         |
-| payroll\_substate                  | Payroll Substate                                                                      |
-| seek\_data                         | Seek Advertisments                                                                    |
-| small\_area\_labour\_market        | Small Area Labour Market                                                              |
-| south\_australia\_net\_debt        | SA Net Debt                                                                           |
-| underutilisation                   | Underutilisation                                                                      |
+| national\_accounts                 | ABS National Accounts                                                                 |
+| payroll\_index                     | ABS Weekly Payroll Index                                                              |
+| payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      |
+| seek\_data                         | Seek Job Ads                                                                          |
+| small\_area\_labour\_market        | DESE Small (SA2) Area Labour Market                                                   |
+| south\_australia\_net\_debt        | South Australia Historic Net Debt                                                     |
+| underutilisation                   | ABS Measures of Underutilisation                                                      |

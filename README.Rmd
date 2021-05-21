@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # aitidata
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/aiti-flinders/aitidata/workflows/R-CMD-check/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
 aitidata is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 

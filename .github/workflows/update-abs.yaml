@@ -28,7 +28,7 @@ jobs:
           Rscript -e "devtools::install_github('mattcowgill/strayr', dependencies = TRUE)"
           Rscript -e "devtools::install_github('wfmackey/absmapsdata', dependencies = TRUE)"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
-          Rscript -e "install.packages(c('readabs', 'janitor', 'forcats', 'sf', 'zoo'))"
+          Rscript -e "install.packages(c('readabs', 'janitor', 'forcats', 'sf', 'zoo', 'vroom'))"
 
       - name: Get data
         run: |

@@ -6,12 +6,14 @@
 #' @export abs_current_release
 #'
 #' @examples \dontrun{abs_current_release("6202.0")}
-#' @importFrom dplyr "%>%"
+#' @importFrom dplyr "%>%" filter pull
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_nodes html_text
 #' @importFrom rlang .data
 abs_current_release <- function(cat_string = NULL, url = NULL) {
   
-  if(!is.null(cat_string) & is.null(url)) {
-    release_url <-aitidata_catalogues %>%
+  if (!is.null(cat_string) & is.null(url)) {
+    release_url <- aitidata_catalogues %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(url) %>%
       unique()

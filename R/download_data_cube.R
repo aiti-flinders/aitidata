@@ -14,7 +14,7 @@
 #' @export 
 #'
 #'
-download_data_cube <- function(catalogue_string, cube, path = here::here("data-raw")) {
+download_data_cube <- function(catalogue_string, cube, path = "data-raw") {
   
   # check if path is valid
   if (!dir.exists(path)) {
@@ -39,7 +39,7 @@ download_data_cube <- function(catalogue_string, cube, path = here::here("data-r
   # Check that there is a match
   
   if (length(file_download_url) == 0) {
-    stop(glue("No matching cube. Please check against ABS website."))
+    stop("No matching cube. Please check against ABS website.")
   }
   
   

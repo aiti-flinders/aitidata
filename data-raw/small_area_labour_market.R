@@ -14,7 +14,7 @@ current_date <- read_csv("data-raw/salm_test.csv",
   paste0(., "-01") %>%
   as.Date(format = "%b-%y-%d")
 
-if (current_date <= max(small_area_labour_market$date)) {
+if (current_date <= max(aitidata::small_area_labour_market$date)) {
   message("Skipping `small_area_labour_market.rda`: appears to be up-to-date")
 } else {
   download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193958&.csv",

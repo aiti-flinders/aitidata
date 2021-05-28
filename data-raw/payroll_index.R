@@ -1,11 +1,7 @@
-library(janitor)
 library(dplyr)
 library(tidyr)
-library(forcats)
-library(stringr)
 library(readxl)
-library(aitidata)
-library(strayr)
+library(readabs)
 
 
 abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
@@ -25,53 +21,19 @@ if (current_date <= max(aitidata::payroll_index$date)) {
   file.remove(abs_test)
 } else {
   message("Updating `payroll_index.rda`")
-  abs_file <- abs_test
   
-  payroll_jobs <- read_xlsx(abs_file, sheet = "Payroll jobs index", skip = 5, na = "NA", n_max = 4321) %>%
-    clean_names() %>%
-    mutate(across(starts_with("x"), as.numeric)) %>%
-    pivot_longer(
-      cols = c(5:length(.)),
-      names_to = "date",
-      values_to = "value"
-    ) %>%
-    mutate(across(1:5, ~ gsub("^[0-9]\\. ", "", .)),
-           industry_division = gsub("(0[0-9]|1[0-9])\\. ([A-S]-)", "", industry_division),
-           date = gsub("x", "", date),
-           date = as.numeric(date),
-           date = as.Date(date, origin = "1899-12-30"),
-           value = as.numeric(value),
-           age_group = as_factor(age_group),
-           state_or_territory = strayr(state_or_territory, to = "state_name"),
-           industry_division = str_to_title(industry_division),
-           industry_division = gsub("&", "and", industry_division),
-           indicator = "payroll_jobs"
-    ) %>%
-    select(date, gender = sex, age = age_group, state = state_or_territory, industry = industry_division, indicator, value)
+  payroll_jobs <- readabs::read_payrolls("industry_jobs", path = "data-raw") %>%
+    rename(gender = sex,
+           payroll_jobs = series)
   
-  payroll_wages <- read_xlsx(abs_file, sheet = "Total wages index", skip = 5, na = "NA", n_max = 4321) %>%
-    clean_names() %>%
-    mutate(across(starts_with("x"), as.numeric)) %>%
-    pivot_longer(
-      cols = c(5:length(.)),
-      names_to = "date",
-      values_to = "value"
-    ) %>%
-    mutate(across(1:5, ~ gsub("^[0-9]\\. ", "", .)),
-           industry_division = gsub("(0[0-9]|1[0-9])\\. ([A-S]-)", "", industry_division),
-           date = gsub("x", "", date),
-           date = as.numeric(date),
-           date = as.Date(date, origin = "1899-12-30"),
-           value = as.numeric(value),
-           age_group = as_factor(age_group),
-           state_or_territory = strayr(state_or_territory, to = "state_name"),
-           industry_division = str_to_title(industry_division),
-           industry_division = gsub("&", "and", industry_division),
-           indicator = "payroll_wages"
-    ) %>%
-    select(date, gender = sex, age = age_group, state = state_or_territory, industry = industry_division, indicator, value)
+  payroll_wages <- readabs::read_payrolls("industry_wages", path = "data-raw") %>%
+    rename(gender = sex,
+           payroll_wages = series)
   
-  payroll_index <- bind_rows(payroll_jobs, payroll_wages)
+ 
+  payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages)
   
-  save(payroll_index, file = here::here("data", "payroll_index.rda"), compress = "xz")
+  file.remove("data-raw/6160055001_DO004.xlsx")
+  
+  usethis::use_data(payroll_index, overwrite = TRUE, compress = "xz")
 }

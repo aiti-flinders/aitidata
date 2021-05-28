@@ -31,7 +31,10 @@ Imports:
     here,
     purrr,
     rlang,
-    readabs
+    readabs,
+    strayr (>= 0.0.1)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes:  
+    github::mattcowgill/strayr

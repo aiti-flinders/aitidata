@@ -25,8 +25,9 @@ jobs:
         run: | 
           Rscript -e "install.packages(c('remotes', 'devtools'))"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata', dependencies = TRUE)"
+          Rscript -e "devtools::install_github('mattcowgill/strayr', dependencies = TRUE)"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
-          Rscript -e "install.packages(c('janitor', 'forcats', 'sf', 'zoo'))"
+          Rscript -e "install.packages(c('readabs', 'janitor', 'forcats', 'sf', 'zoo'))"
 
       - name: Get data
         run: |

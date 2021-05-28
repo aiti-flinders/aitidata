@@ -1,10 +1,5 @@
 ## code to prepare `covid_data` dataset goes here
-library(absmapsdata)
-library(dplyr)
-library(sf)
-
-devtools::load_all(".")
-
+devtools::load_all()
 source("data-raw/jobkeeper_sa2.R")
 source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")

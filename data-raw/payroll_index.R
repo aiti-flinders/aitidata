@@ -4,19 +4,10 @@ library(readxl)
 library(readabs)
 
 
-abs_test <- download_data_cube(catalogue_string = "weekly-payroll-jobs-and-wages-australia",
-                               cube = "6160055001_DO004.xlsx",
-                               path = "data-raw")
+abs_test <- readabs::read_payrolls("industry_jobs", path = "data-raw")
 
-current_date <- read_xlsx(here::here(abs_test),
-                          sheet = 2,
-                          skip = 5) %>%
-  select(last_col()) %>%
-  colnames() %>%
-  as.numeric() %>%
-  as.Date(origin = "1899-12-30")
 
-if (current_date <= max(aitidata::payroll_index$date)) {
+if (max(abs_test$date) <= max(aitidata::payroll_index$date)) {
   message("Skipping `payroll_index.rda`: appears to be up-to-date")
   file.remove(abs_test)
 } else {

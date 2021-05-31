@@ -1,15 +1,10 @@
-library(readxl)
-library(janitor)
-library(dplyr)
-library(tidyr)
-library(strayr)
 library(readabs)
-library(stringr)
-library(aitidata)
+library(dplyr)
+library(strayr)
 library(absmapsdata)
 library(sf)
 
-abs_test <- read_payrolls(series = "sa3_jobs", path = here::here("data-raw"))
+abs_test <- readabs::read_payrolls(series = "sa3_jobs", path = "data-raw")
 
 
 if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
@@ -22,15 +17,15 @@ if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
   
   
   payroll_substate <- abs_file %>%
-    mutate(state_name_2016 = strayr(state, to = "state_name"),
+    dplyr::mutate(state_name_2016 = strayr(state, to = "state_name"),
            sa3_name_2016 = sa3,
            indicator = "Payroll Index") %>%
-    left_join(sa32016) %>%
-    select(state_name_2016, date, value, sa3_code_2016, indicator) %>%
-    filter(!is.na(sa3_code_2016), !is.na(value))
+    dplyr::left_join(absmapsdata::sa32016) %>%
+    dplyr::select(state_name_2016, date, value, sa3_code_2016, indicator) %>%
+    dplyr::filter(!is.na(sa3_code_2016), !is.na(value))
   
-  save(payroll_substate, file = here::here("data", "payroll_substate.rda"), compress = "xz")
+  usethis::use_data(payroll_substate, overwrite = TRUE, compress = "xz")
   
-  file.remove(here::here("data-raw/6160055001_DO005.xlsx"))
+  file.remove("data-raw/6160055001_DO005.xlsx")
   
 }

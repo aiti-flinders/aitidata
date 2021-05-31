@@ -8,6 +8,7 @@ library(readabs)
 library(dplyr)
 library(tidyr)
 library(lubridate)
+library(usethis)
 
 abs_test <- read_abs(cat_no = "6202.0", tables = "19a", retain_files = FALSE)
 
@@ -32,12 +33,12 @@ if (max(abs_test$date) <= max(aitidata::labour_force$date)) {
   raw <- readabs::read_abs(cat_no = "6202.0", tables = c("12", "12a", "19", "19a", "22", "23", "23a"), retain_files = FALSE)
   
   labour_force_12 <- raw %>%
-    dplyr::filter(table_no == "6202012" |table_no == "6202012a") %>%
+    dplyr::filter(table_no == "6202012" | table_no == "6202012a") %>%
     readabs::separate_series(column_names = c("indicator", "gender", "state")) %>%
     dplyr::mutate(
       value = ifelse(unit == "000", (1000 * value), (value)),
       year = lubridate::year(date),
-      month = lubridate:: month(date, label = TRUE, abbr = FALSE),
+      month = lubridate::month(date, label = TRUE, abbr = FALSE),
       age = "Total (age)"
     ) %>%
     dplyr::select(date, year, month, indicator, gender, age, state, series_type, value, unit)

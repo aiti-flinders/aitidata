@@ -23,7 +23,7 @@ if (current_date <= max(aitidata::cabee_sa2$date)) {
   file.remove(abs_test)
 } else {
   
-  abs_file <- download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
+  abs_file <- aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
                                  cube = "Data cube 8: Businesses by industry division by Statistical Area Level 2 by employment size ranges",
                                  path = "data-raw")
   

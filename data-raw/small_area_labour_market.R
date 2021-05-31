@@ -13,6 +13,7 @@ current_date <- readr::read_csv("data-raw/salm_test.csv",
 
 if (current_date <= max(aitidata::small_area_labour_market$date)) {
   message("Skipping `small_area_labour_market.rda`: appears to be up-to-date")
+  file.remove("data-raw/salm_test.csv")
 } else {
   download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193958&.csv",
                 destfile = "data-raw/salm_sa2.csv",

@@ -9,7 +9,7 @@ abs_test <- readabs::read_payrolls("industry_jobs", path = "data-raw")
 
 if (max(abs_test$date) <= max(aitidata::payroll_index$date)) {
   message("Skipping `payroll_index.rda`: appears to be up-to-date")
-  file.remove(abs_test)
+  file.remove("data-raw/6160055001_DO004.xlsx")
 } else {
   message("Updating `payroll_index.rda`")
   

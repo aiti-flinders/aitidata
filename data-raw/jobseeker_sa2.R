@@ -64,6 +64,8 @@ if (max(files$date) <= max(jobseeker_sa2$date)) {
     tidyr::pivot_longer(cols = c(-state_name_2016, -date), names_to = "indicator", values_to = "value") %>%
     dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(indicator, "_", " ")),
            series_type = "Original",
+           gender = "Persons",
+           age = "Total (age)",
            unit = "000", 
            year = lubridate::year(date),
            month = lubridate::month(date, abbr = FALSE, label = TRUE)) %>%

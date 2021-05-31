@@ -7,14 +7,14 @@ if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
   file_struct <- data.frame(stringsAsFactors = FALSE,
                             state = c("nsw","vic","qld","sa","wa","tas","nt","act","ot"),
                             url = c("https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_nsw_csv.zip&1270.0.55.001&Data%20Cubes&1FC672E70A77D52FCA257FED0013A0F7&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_vic_csv.zip&1270.0.55.001&Data%20Cubes&F1EA82ECA7A762BCCA257FED0013A253&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_qld_csv.zip&1270.0.55.001&Data%20Cubes&A6A81C7C2CE74FAACA257FED0013A344&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_sa_csv.zip&1270.0.55.001&Data%20Cubes&5763C01CA9A3E566CA257FED0013A38D&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_wa_csv.zip&1270.0.55.001&Data%20Cubes&6C293909851DCBFFCA257FED0013A3BF&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_tas_csv.zip&1270.0.55.001&Data%20Cubes&A9B01B4DACD0BFEFCA257FED0013A3FC&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_nt_csv.zip&1270.0.55.001&Data%20Cubes&CA6464FAA0777F80CA257FED0013A429&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_act_csv.zip&1270.0.55.001&Data%20Cubes&10AFEFD3A73B902ECA257FED0013A455&0&July%202016&12.07.2016&Latest",
-                                        "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_ot_csv.zip&1270.0.55.001&Data%20Cubes&DE3FEF9908F4CF9BCA257FED0013A48F&0&July%202016&12.07.2016&Latest"))
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_vic_csv.zip&1270.0.55.001&Data%20Cubes&F1EA82ECA7A762BCCA257FED0013A253&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_qld_csv.zip&1270.0.55.001&Data%20Cubes&A6A81C7C2CE74FAACA257FED0013A344&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_sa_csv.zip&1270.0.55.001&Data%20Cubes&5763C01CA9A3E566CA257FED0013A38D&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_wa_csv.zip&1270.0.55.001&Data%20Cubes&6C293909851DCBFFCA257FED0013A3BF&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_tas_csv.zip&1270.0.55.001&Data%20Cubes&A9B01B4DACD0BFEFCA257FED0013A3FC&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_nt_csv.zip&1270.0.55.001&Data%20Cubes&CA6464FAA0777F80CA257FED0013A429&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_act_csv.zip&1270.0.55.001&Data%20Cubes&10AFEFD3A73B902ECA257FED0013A455&0&July%202016&12.07.2016&Latest",
+                                    "https://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_mb_2016_ot_csv.zip&1270.0.55.001&Data%20Cubes&DE3FEF9908F4CF9BCA257FED0013A48F&0&July%202016&12.07.2016&Latest"))
   dir.create("data-raw/maps")
   
   purrr::map2(.x = file_struct$state, 
@@ -42,7 +42,7 @@ if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
                            ))
   
   save(mesh_aus, file = "data-raw/mesh_aus2016.rda", compress = "xz")
-
+  
   unlink("data-raw/maps", recursive = TRUE)
 } else {
   mesh_aus <- get(load("data-raw/mesh_aus2016.rda"))
@@ -54,23 +54,34 @@ if (!file.exists("data-raw/abs_poa_2016.zip")) {
                 mode = "wb")
   
   postal_areas <- readr::read_csv("data-raw/abs_poa_2016.zip",
-                           col_types = readr::cols(
-                             MB_CODE_2016 = readr::col_character(),
-                             POA_CODE_2016 = readr::col_character(),
-                             POA_NAME_2016 = readr::col_character(),
-                             AREA_ALBERS_SQKM = readr::col_double()
-                           ))
+                                  col_types = readr::cols(
+                                    MB_CODE_2016 = readr::col_character(),
+                                    POA_CODE_2016 = readr::col_character(),
+                                    POA_NAME_2016 = readr::col_character(),
+                                    AREA_ALBERS_SQKM = readr::col_double()
+                                  ))
   
 } else {
   postal_areas <- readr::read_csv("data-raw/abs_poa_2016.zip",
-    col_types = readr::cols(
-      MB_CODE_2016 = readr::col_character(),
-      POA_CODE_2016 = readr::col_character(),
-      POA_NAME_2016 = readr::col_character(),
-      AREA_ALBERS_SQKM = readr::col_double()
-    )
+                                  col_types = readr::cols(
+                                    MB_CODE_2016 = readr::col_character(),
+                                    POA_CODE_2016 = readr::col_character(),
+                                    POA_NAME_2016 = readr::col_character(),
+                                    AREA_ALBERS_SQKM = readr::col_double()
+                                  )
   )
 }
+
+jobkeeper_url <- "https://treasury.gov.au/coronavirus/jobkeeper/data"
+
+release_page <- rvest::read_html(jobkeeper_url)
+
+jobkeeper_data_url <- release_page %>%
+  rvest::html_nodes(xpath = '//*[@id="block-mainpagecontent-2"]/div/article/div/div/table/tbody/tr/td[2]/p') %>%
+  rvest::html_children() %>%
+  rvest::html_attr("href") %>%
+  .[1]
+
 
 get_file_types <- function(file, sheet, skip, n_max) {
   nms <- names(readxl::read_excel(path = file, sheet = sheet, skip = skip, n_max = 0))
@@ -80,7 +91,7 @@ get_file_types <- function(file, sheet, skip, n_max) {
   ct <- ifelse(grepl("postcode", nms), "text", "numeric")
   
   ft <- list(nms = nms, ct = ct)
-
+  
   return(ft)
   
 }
@@ -99,7 +110,8 @@ read_jobkeeper <- function(file, sheet, ...) {
   return(jobkeeper_postal)
 }
 
-message("Updating jobkeeper_sa2 dataset...")
+
+
 
 download.file(paste0("https://treasury.gov.au/", jobkeeper_data_url), dest = "data-raw/jobkeeper_postal.xlsx", mode = "wb")
 
@@ -205,5 +217,4 @@ usethis::use_data(jobkeeper_state, overwrite = TRUE, compress = "xz")
 usethis::use_data(jobkeeper_sa2, overwrite = TRUE, compress = "xz")
 
 file.remove("data-raw/jobkeeper_postal.xlsx")
-  
 

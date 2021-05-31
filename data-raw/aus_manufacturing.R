@@ -34,7 +34,8 @@ if (max(years) == max(aitidata::aus_manufacturing$year)) {
       indicator = stringr::str_remove_all(indicator, "_[1-3]"))
   
   file.remove(abs_file)
+  usethis::use_data(aus_manufacturing, overwrite = TRUE, compress = "xz")
+  
 }
 
-usethis::use_data(aus_manufacturing, overwrite = TRUE)
 

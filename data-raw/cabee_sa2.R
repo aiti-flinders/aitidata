@@ -5,17 +5,16 @@ library(tidyr)
 library(dplyr)
 library(lubridate)
 library(zoo)
-library(aitidata)
 
-abs_test <- download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
+abs_test <- aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
                                cube = "Data cube 1: Tables 1-20 of counts of Australian businesses, including entries and exits",
                                path = "data-raw")
 
-current_date <- read_excel(abs_test,
-                           sheet = 1,
-                           range = "A2",
-                           col_names = "release") %>%
-  mutate(release = str_sub(release, start = -9L, end = -1L),
+current_date <- readxl::read_excel(abs_test,
+                                   sheet = 1,
+                                   range = "A2",
+                                   col_names = "release") %>%
+  dplyr::mutate(release = str_sub(release, start = -9L, end = -1L),
          release = as.Date(paste0(release, "-01"), format = "%B %Y-%d")) %>%
   pull(release)
 

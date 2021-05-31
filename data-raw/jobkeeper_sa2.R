@@ -1,4 +1,5 @@
 ## code to prepare `jobkeeper_sa2` dataset goes here
+devtools::load_all(".")
 
 
 if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
@@ -20,7 +21,25 @@ if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
               .y = file_struct$url,
               .f = ~download.file(mode = "wb", url = .y, destfile = paste0("data-raw/maps/mesh_", .x, ".zip")))
   
-  mesh_aus <- vroom::vroom(fs::dir_ls(path = "data-raw/maps"))
+  mesh_aus <- vroom::vroom(fs::dir_ls(path = "data-raw/maps"), 
+                           col_types = readr::cols(
+                             MB_CODE_2016 = readr::col_character(),
+                             MB_CATEGORY_NAME_2016 = readr::col_character(),
+                             SA1_MAINCODE_2016 = readr::col_character(),
+                             SA1_7DIGITCODE_2016 = readr::col_character(),
+                             SA2_MAINCODE_2016 = readr::col_character(),
+                             SA2_5DIGITCODE_2016 = readr::col_character(),
+                             SA2_NAME_2016 = readr::col_character(),
+                             SA3_CODE_2016 = readr::col_character(),
+                             SA3_NAME_2016 = readr::col_character(),
+                             SA4_CODE_2016 = readr::col_character(),
+                             SA4_NAME_2016 = readr::col_character(),
+                             GCCSA_CODE_2016 = readr::col_character(),
+                             GCCSA_NAME_2016 = readr::col_character(),
+                             STATE_CODE_2016 = readr::col_character(),
+                             STATE_NAME_2016 = readr::col_character(),
+                             AREA_ALBERS_SQKM = readr::col_double()
+                           ))
   
   save(mesh_aus, file = "data-raw/mesh_aus2016.rda", compress = "xz")
 
@@ -29,14 +48,14 @@ if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
   mesh_aus <- get(load("data-raw/mesh_aus2016.rda"))
 }
 
-if (!file.exists("data-raw/1270055003_poa_2016_aust_csv.zip")) {
+if (!file.exists("data-raw/abs_poa_2016.zip")) {
   download.file(url = "https://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055003_poa_2016_aust_csv.zip&1270.0.55.003&Data%20Cubes&BCC18002983CD965CA25802C00142BA4&0&July%202016&13.09.2016&Previous",
                 destfile = "data-raw/abs_poa_2016.zip",
                 mode = "wb")
   
   postal_areas <- readr::read_csv("data-raw/abs_poa_2016.zip",
                            col_types = readr::cols(
-                             MB_CODE_2016 = readr::col_double(),
+                             MB_CODE_2016 = readr::col_character(),
                              POA_CODE_2016 = readr::col_character(),
                              POA_NAME_2016 = readr::col_character(),
                              AREA_ALBERS_SQKM = readr::col_double()
@@ -126,7 +145,6 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     dplyr::group_by(date, sa2_main_2016, sa2_name_2016) %>%
     dplyr::summarise(total_businesses = sum(value, na.rm = T), .groups = "drop") %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(sa2_main_2016 = as.double(sa2_main_2016)) %>%
     dplyr::filter(date == max(.$date)) %>%
     dplyr::select(-date, -sa2_name_2016)
 
@@ -163,6 +181,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
     tidyr::pivot_longer(cols = c(-SA2_MAINCODE_2016, -date),
                         names_to = "indicator",
                         values_to = "value") %>%
+    dplyr::rename(sa2_main_2016 = SA2_MAINCODE_2016) %>%
     dplyr::mutate(dplyr::across(indicator, ~ stringr::str_to_sentence(stringr::str_replace_all(., "_", " "))),
                   unit = dplyr::case_when(indicator == "Jobkeeper proportion" ~ "Percent", TRUE ~ "000"),
                   series_type = "Original",
@@ -172,11 +191,10 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
                   age = "Total (age)")
   
   jobkeeper_state <- jobkeeper_sa2 %>% 
-    dplyr::ungroup() %>% 
-    tidyr::pivot_wider(id_cols = c(SA2_MAINCODE_2016, date), 
+    tidyr::pivot_wider(id_cols = c(sa2_main_2016, date), 
                        names_from = indicator, 
                        values_from = value) %>% 
-    dplyr::left_join(mesh_aus[c("SA2_MAINCODE_2016", "STATE_NAME_2016")], by = "SA2_MAINCODE_2016") %>% 
+    dplyr::left_join(mesh_aus[c("SA2_MAINCODE_2016", "STATE_NAME_2016")], by = c("sa2_main_2016" = "SA2_MAINCODE_2016")) %>% 
     dplyr::group_by(STATE_NAME_2016, date) %>% 
     dplyr::summarise(dplyr::across(c(`Jobkeeper applications`, `Total businesses`), sum), .groups = "drop") %>%
     dplyr::ungroup() %>%
@@ -203,8 +221,7 @@ if (!as.Date(file.info("data/jobkeeper_sa2.rda")$mtime) >= jobkeeper_date | !fil
                   month = lubridate::month(date, abbr = FALSE, label = TRUE),
                   year = lubridate::year(date),
                   gender = "Persons",
-                  age = "Total (age)") 
-
+                  age = "Total (age)")
 
   usethis::use_data(jobkeeper_state, overwrite = TRUE, compress = "xz")
   usethis::use_data(jobkeeper_sa2, overwrite = TRUE, compress = "xz")

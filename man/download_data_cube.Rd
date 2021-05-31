@@ -4,7 +4,7 @@
 \alias{download_data_cube}
 \title{The filepath is returned invisibly which enables piping to \code{unzip()} or \code{readxl::read_excel}.}
 \usage{
-download_data_cube(catalogue_string, cube, path = here::here("data-raw"))
+download_data_cube(catalogue_string, cube, path = "data-raw")
 }
 \arguments{
 \item{catalogue_string}{string}

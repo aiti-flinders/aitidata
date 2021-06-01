@@ -35,7 +35,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   |
 | industry\_value\_add               | Industry value add                                                                    |
 | internet\_vacancies\_index         | Internet Vacancies Index                                                              |
-| internet\_vacancies\_regional      |                                                                                       |
+| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           |
 | jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 |
 | jobkeeper\_state                   | Jobkeeper applications by state                                                       |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 |

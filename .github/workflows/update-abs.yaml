@@ -29,6 +29,9 @@ jobs:
           Rscript -e "devtools::install_github('wfmackey/absmapsdata', dependencies = TRUE)"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
           Rscript -e "install.packages(c('readabs','readr', 'janitor', 'forcats', 'sf', 'zoo', 'vroom', 'here', 'rmarkdown'), type = 'binary')"
+      - name: Install aitidata
+        run: |
+          Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
       - name: Get data
         run: |
           Rscript -e "devtools::load_all()"

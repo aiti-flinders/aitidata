@@ -4,7 +4,7 @@ library(dplyr)
 library(lubridate)
 
 abs_test <- aitidata::download_data_cube(catalogue_string = "labour-account-australia",
-                               cube = "Table 21. Unbalanced: total all industries - original",
+                               cube = "6150055003DO021_2020202103.xls",
                                path = "data-raw")
 
 current_date <- readxl::read_xls(abs_test, sheet = 2, skip = 9) %>%
@@ -20,7 +20,7 @@ if (current_date <= max(aitidata::labour_account$date)) {
   message("Updating `data/labour_account.rda`")
   
   abs_file <- aitidata::download_data_cube(catalogue_string = "labour-account-australia", 
-                                 cube = "Table 1. Total all industries - trend, seasonally adjusted and original", 
+                                 cube = "6150055003DO001_2020202103.xls", 
                                  path = "data-raw")
   
   labour_account <- readabs::read_abs_local(filenames = abs_file, path = "data-raw") %>%

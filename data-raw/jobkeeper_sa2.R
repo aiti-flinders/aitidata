@@ -207,6 +207,7 @@ jobkeeper_state <- jobkeeper_sa2 %>%
                       names_to = "indicator", 
                       values_to = "value") %>%
   dplyr::mutate(unit = dplyr::case_when(indicator == "Jobkeeper proportion" ~ "Percent", TRUE ~ "000"),
+                value = dplyr::case_when(indicator == "Jobkeeper proportion" ~ value, TRUE ~ value/1000),
                 series_type = "Original",
                 month = lubridate::month(date, abbr = FALSE, label = TRUE),
                 year = lubridate::year(date),

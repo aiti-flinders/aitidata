@@ -1,5 +1,4 @@
 ## code to prepare `jobkeeper_sa2` dataset goes here
-devtools::load_all(".")
 
 
 if (!file.exists(("data-raw/mesh_aus2016.rda"))) {
@@ -122,8 +121,7 @@ jobkeeper_phase_2 <- read_jobkeeper("data-raw/jobkeeper_postal.xlsx",
                                     sheet = 3)
 
 jobkeeper_phase_3 <- read_jobkeeper("data-raw/jobkeeper_postal.xlsx",
-                                    sheet = 4,
-                                    range = readxl::cell_limits(c(3, 1), c(NA, 3)))
+                                    sheet = 4)
 
 jobkeeper_all <- dplyr::left_join(jobkeeper_phase_1, jobkeeper_phase_2, by = "postcode") %>%
   dplyr::left_join(jobkeeper_phase_3, by = "postcode")

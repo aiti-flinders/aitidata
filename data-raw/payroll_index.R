@@ -14,19 +14,24 @@ if (max(abs_test$date) <= max(aitidata::payroll_index$date)) {
   message("Updating `payroll_index.rda`")
   
   payroll_jobs <- readabs::read_payrolls("industry_jobs", path = "data-raw") %>%
-    rename(gender = sex,
-           indicator = series) %>%
-    mutate(indicator = "payroll_jobs")
+    dplyr::rename(.data = .data,
+                  gender = sex,
+                  indicator = series) %>%
+    dplyr::mutate(.data = .data, 
+                  indicator = "payroll_jobs")
   
   payroll_wages <- readabs::read_payrolls("industry_wages", path = "data-raw") %>%
-    rename(gender = sex,
-           indicator = series) %>%
-    mutate(indicator = "payroll_wages")
+    dplyr::rename(.data = .data,
+                  gender = sex,
+                  indicator = series) %>%
+    dplyr::mutate(.data = .data,
+                  indicator = "payroll_wages")
   
- 
+  
   payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages)
   
   file.remove("data-raw/6160055001_DO004.xlsx")
   
   usethis::use_data(payroll_index, overwrite = TRUE, compress = "xz")
+  
 }

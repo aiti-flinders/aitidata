@@ -5,7 +5,7 @@
 \alias{jobkeeper_state}
 \title{Jobkeeper applications by state}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 297 rows and 10 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 324 rows and 10 columns.
 }
 \usage{
 jobkeeper_state

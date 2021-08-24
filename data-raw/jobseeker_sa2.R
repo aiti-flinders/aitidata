@@ -16,6 +16,10 @@ files <- data.frame(
   dplyr::mutate(date = stringr::str_extract(url, "(january|february|march|april|may|june|july|august|september|october|november|december)-\\d{4}"),
          date = as.Date(paste0(date, "-01"), "%B-%Y-%d"))
 
+#data.gov.au currently has 2 versions of the 2021 file uploaded
+
+files <- dplyr::distinct(files, date, .keep_all = TRUE)
+
 if (max(files$date) <= max(jobseeker_sa2$date)) {
   message("Skipping: `jobseeker_state.rda`, `jobseeker_sa2.rda`: appears to be up-to-date") 
 } else {

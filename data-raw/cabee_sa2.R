@@ -5,23 +5,30 @@ library(tidyr)
 library(dplyr)
 library(lubridate)
 library(zoo)
+library(readabs)
 
-abs_test <- aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
-                               cube = "Data cube 1: Tables 1-20 of counts of Australian businesses, including entries and exits",
-                               path = "data-raw")
+# The ABS is currently updating the CABEE release schedule. Add the check back after december 16th
 
-current_date <- readxl::read_excel(abs_test,
-                                   sheet = 1,
-                                   range = "A2",
-                                   col_names = "release") %>%
-  dplyr::mutate(release = str_sub(release, start = -9L, end = -1L),
-         release = as.Date(paste0(release, "-01"), format = "%B %Y-%d")) %>%
-  pull(release)
+# abs_test <- download_abs_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits",
+#                                cube = 1,
+#                                path = "data-raw")
+# 
+# current_date <- readxl::read_excel(abs_test,
+#                                    sheet = 1,
+#                                    range = "A2",
+#                                    col_names = "release") %>%
+#   dplyr::mutate(release = str_sub(release, start = -9L, end = -1L),
+#          release = as.Date(paste0(release, "-01"), format = "%B %Y-%d")) %>%
+#   pull(release)
+
+current_date <- TRUE
 
 if (current_date <= max(aitidata::cabee_sa2$date)) {
   message("Skipping `cabee_sa2.rda`: appears to be up-to-date")
-  file.remove(abs_test)
+  #file.remove(abs_test)
 } else {
+
+
   
   abs_file <- aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
                                  cube = "Data cube 8: Businesses by industry division by Statistical Area Level 2 by employment size ranges",

@@ -17,10 +17,10 @@ if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
   
   
   payroll_substate <- abs_file %>%
-    dplyr::mutate(state_name_2016 = strayr(state, to = "state_name"),
-           sa3_name_2016 = sa3,
-           indicator = "Payroll Index") %>%
-    dplyr::left_join(absmapsdata::sa32016) %>%
+    dplyr::mutate(state_name_2016 = clean_state(state, to = "state_name"),
+                  sa3_name_2016 = statistical_area_level_3,
+                  indicator = "Payroll Index") %>%
+    dplyr::left_join(absmapsdata::sa32016, by = c("state_name_2016", "sa3_name_2016")) %>%
     dplyr::select(state_name_2016, date, value, sa3_code_2016, indicator) %>%
     dplyr::filter(!is.na(sa3_code_2016), !is.na(value))
   

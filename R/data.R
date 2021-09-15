@@ -213,7 +213,7 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/mf/6160.0.55.001}
-"payroll_index"
+"payroll_jobs"
 
 #' ABS Weekly Payroll Index for SA3 
 #'

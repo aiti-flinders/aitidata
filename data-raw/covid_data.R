@@ -17,7 +17,7 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
                 jobkeeper_decile = dplyr::ntile(jobkeeper_proportion, 10),
                 jobseeker_decile = dplyr::ntile(jobseeker_proportion, 10),
                 covid_impact = jobkeeper_decile + jobseeker_decile) %>%
-  dplyr::left_join(absmapsdata::sa22016, by = "sa2_main_2016") %>%
+  dplyr::left_join(absmapsdata::sa22016, by = c("sa2_main_2016" = "sa2_name_2016")) %>%
   dplyr::select(sa2_main_2016,
                 sa3_code_2016,
                 date,

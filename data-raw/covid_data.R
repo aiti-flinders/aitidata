@@ -5,7 +5,7 @@ source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
 source("data-raw/payroll_substate.R")
 
-covid_data <- dplyr::bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
+covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
   dplyr::left_join(by = "sa2_main_2016", small_area_labour_market %>% 
                      dplyr::filter( indicator == "Smoothed labour force (persons)", date == max(.$date)) %>%
                      dplyr::select(labour_force = value, sa2_main_2016)) %>%

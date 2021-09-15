@@ -1,12 +1,14 @@
 ## code to prepare `small_area_labour_market` dataset goes here
 library(sf)
+library(dplyr)
+library(readr)
 
 download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193962&.csv",
                            destfile = "data-raw/salm_test.csv",
                            mode = "wb")
-current_date <- readr::read_csv("data-raw/salm_test.csv",
+current_date <- read_csv("data-raw/salm_test.csv",
                       skip = 1) %>%
-  dplyr::select(dplyr::last_col()) %>%
+  select(last_col()) %>%
   colnames() %>%
   paste0(., "-01") %>%
   as.Date(format = "%b-%y-%d")

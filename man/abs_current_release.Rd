@@ -2,7 +2,7 @@
 % Please edit documentation in R/releases.R
 \name{abs_current_release}
 \alias{abs_current_release}
-\title{Find the release date of the most recent ABS Catalogue}
+\title{Find the release date of a dataset from the ABS.}
 \usage{
 abs_current_release(cat_string = NULL, url = NULL)
 }
@@ -15,8 +15,8 @@ abs_current_release(cat_string = NULL, url = NULL)
 date
 }
 \description{
-Find the release date of the most recent ABS Catalogue
+Find the release date of a dataset from the ABS.
 }
 \examples{
-\dontrun{abs_current_release("6202.0")}
+\dontrun{current_release(cat_string = "labour-force-australia")}
 }

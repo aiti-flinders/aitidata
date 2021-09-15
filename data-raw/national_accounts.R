@@ -4,7 +4,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-abs_test <- read_abs(cat_no = "5206.0", tables = 43, retain_files = FALSE)
+abs_test <- read_abs(cat_no = "5206.0", tables = 42, retain_files = FALSE)
 
 if (max(abs_test$date) <= max(aitidata::national_accounts$date)) {
   message("Skipping `national_accounts.rda`: appears to be up-to-date")

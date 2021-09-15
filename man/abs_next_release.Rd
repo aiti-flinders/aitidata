@@ -17,6 +17,3 @@ date
 \description{
 Find the date of the next release of an ABS dataset
 }
-\examples{
-\dontrun{abs_next_release("6202.0")}
-}

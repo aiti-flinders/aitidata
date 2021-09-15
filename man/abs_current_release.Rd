@@ -11,9 +11,6 @@ abs_current_release(cat_string = NULL, url = NULL)
 
 \item{url}{string}
 }
-\value{
-date
-}
 \description{
 Find the release date of a dataset from the ABS.
 }

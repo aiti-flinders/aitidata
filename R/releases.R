@@ -32,6 +32,8 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
 }
 
 
+#' Current release date from data.gov
+#' 
 #' @param url string
 #'
 #' @return Date

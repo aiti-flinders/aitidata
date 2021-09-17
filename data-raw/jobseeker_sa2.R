@@ -51,13 +51,13 @@ if (max(files$date) <= max(jobseeker_sa2$date)) {
 
   jobseeker_sa2 <- jobseeker_all %>%
     left_join(absmapsdata::sa22016, by = c("sa2_name" = "sa2_name_2016")) %>%
-    select(sa2_main_2016, jobseeker_payment, youth_allowance_other, date) %>%
+    select(sa2_name, jobseeker_payment, youth_allowance_other, date) %>%
     arrange(date) %>%
-    group_by(sa2_main_2016) %>%
+    group_by(sa2_name) %>%
     mutate(jobseeker_growth = jobseeker_payment - lag(jobseeker_payment),
            youth_allowance_growth = youth_allowance_other - lag(youth_allowance_other)) %>%
     ungroup() %>%
-    pivot_longer(cols = c(-sa2_main_2016, -date), names_to = "indicator", values_to = "value") %>%
+    pivot_longer(cols = c(-sa2_name, -date), names_to = "indicator", values_to = "value") %>%
     mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(indicator, "_", " ")))
   
   jobseeker_state <- jobseeker_all %>%

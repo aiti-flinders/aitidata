@@ -169,7 +169,7 @@ jobkeeper_sa2 <- dplyr::left_join(postal_areas, mesh_aus, by = "MB_CODE_2016") %
   tidyr::pivot_longer(cols = c(-SA2_MAINCODE_2016, -date),
                       names_to = "indicator",
                       values_to = "value") %>%
-  dplyr::rename(sa2_main_2016 = SA2_MAINCODE_2016) %>%
+  dplyr::rename(sa2_code_2016 = SA2_MAINCODE_2016) %>%
   dplyr::mutate(dplyr::across(indicator, ~ stringr::str_to_sentence(stringr::str_replace_all(., "_", " "))),
                 unit = dplyr::case_when(indicator == "Jobkeeper proportion" ~ "Percent", TRUE ~ "000"),
                 series_type = "Original",
@@ -179,10 +179,10 @@ jobkeeper_sa2 <- dplyr::left_join(postal_areas, mesh_aus, by = "MB_CODE_2016") %
                 age = "Total (age)")
 
 jobkeeper_state <- jobkeeper_sa2 %>% 
-  tidyr::pivot_wider(id_cols = c(sa2_main_2016, date), 
+  tidyr::pivot_wider(id_cols = c(sa2_code_2016, date), 
                      names_from = indicator, 
                      values_from = value) %>% 
-  dplyr::left_join(mesh_aus[c("SA2_MAINCODE_2016", "STATE_NAME_2016")], by = c("sa2_main_2016" = "SA2_MAINCODE_2016")) %>% 
+  dplyr::left_join(mesh_aus[c("SA2_MAINCODE_2016", "STATE_NAME_2016")], by = c("sa2_code_2016" = "SA2_MAINCODE_2016")) %>% 
   dplyr::group_by(STATE_NAME_2016, date) %>% 
   dplyr::summarise(dplyr::across(c(`Jobkeeper applications`, `Total businesses`), sum), .groups = "drop") %>%
   dplyr::ungroup() %>%

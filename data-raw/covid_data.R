@@ -6,10 +6,10 @@ source("data-raw/small_area_labour_market.R")
 source("data-raw/payroll_substate.R")
 
 covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
-  dplyr::left_join(by = "sa2_main_2016", small_area_labour_market %>% 
+  dplyr::left_join(by = "sa2_code_2016", small_area_labour_market %>% 
                      dplyr::filter( indicator == "Smoothed labour force (persons)", date == max(.$date)) %>%
-                     dplyr::select(labour_force = value, sa2_main_2016)) %>%
-  tidyr::pivot_wider(id_cols = c(sa2_main_2016, date, labour_force), names_from = indicator, values_from = value) %>%
+                     dplyr::select(labour_force = value, sa2_code_2016)) %>%
+  tidyr::pivot_wider(id_cols = c(sa2_code_2016, date, labour_force), names_from = indicator, values_from = value) %>%
   dplyr::rename(jobkeeper_applications = 4,
                 jobkeeper_proportion = 6,
                 jobseeker_payment = 7) %>%
@@ -17,8 +17,8 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
                 jobkeeper_decile = dplyr::ntile(jobkeeper_proportion, 10),
                 jobseeker_decile = dplyr::ntile(jobseeker_proportion, 10),
                 covid_impact = jobkeeper_decile + jobseeker_decile) %>%
-  dplyr::left_join(absmapsdata::sa22016, by = c("sa2_main_2016" = "sa2_name_2016")) %>%
-  dplyr::select(sa2_main_2016,
+  dplyr::left_join(absmapsdata::sa22016, by = "sa2_code_2016") %>%
+  dplyr::select(sa2_code_2016,
                 sa3_code_2016,
                 date,
                 jobkeeper_applications,
@@ -30,11 +30,11 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
   dplyr::left_join(by = c("sa3_code_2016", "date", "state_name_2016"),
                    payroll_substate %>% dplyr::filter(indicator == "payroll_index")  %>% dplyr::select(-indicator, payroll_index = value)) %>%
   dplyr::arrange(date) %>%
-  dplyr::group_by(state_name_2016, sa2_main_2016) %>%
+  dplyr::group_by(state_name_2016, sa2_code_2016) %>%
   dplyr::mutate(jobkeeper_growth = jobkeeper_applications - lag(jobkeeper_applications)) %>%
   dplyr::ungroup() %>%
   dplyr::select(state = state_name_2016,
-                sa2_main_2016,
+                sa2_code_2016,
                 sa3_code_2016,
                 date,
                 jobkeeper_applications,

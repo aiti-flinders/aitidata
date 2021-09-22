@@ -60,6 +60,8 @@ gov_current_release <- function(url = url) {
 #' @param url string
 #'
 #' @return date
+#' 
+#' @export
 
 #' @importFrom dplyr "%>%"
 #' @importFrom rlang .data

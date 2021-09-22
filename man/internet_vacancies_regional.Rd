@@ -5,7 +5,7 @@
 \alias{internet_vacancies_regional}
 \title{Internet Vacancies Regional}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 284715 rows and 7 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 286824 rows and 7 columns.
 }
 \usage{
 internet_vacancies_regional

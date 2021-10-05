@@ -13,7 +13,7 @@ if (max(abs_test$date) <= max(employment_by_industry$date)) {
 } else {
   message("Updating `employment_by_industry_detailed.rda`")
   
-  abs_file <- download_data_cube("labour-force-australia-detailed", 
+  abs_file <- aitidata::download_data_cube("labour-force-australia-detailed", 
                                  cube = "EQ06", 
                                  path = "data-raw")
   

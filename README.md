@@ -27,26 +27,26 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Item                               | Title                                                                                 | Last Updated        |
 | :--------------------------------- | :------------------------------------------------------------------------------------ | :------------------ |
-| anzsic                             | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | 2021-10-08 01:46:30 |
-| aus\_manufacturing                 | Australian Manufacturing                                                              | 2021-10-08 01:46:30 |
-| cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-10-08 01:46:30 |
-| covid\_data                        | COVID-19 Geographic data                                                              | 2021-10-08 01:57:18 |
-| economic\_complexity               | Australian Subnational Economic Complexity                                            | 2021-10-08 01:46:30 |
-| employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-10-08 01:46:30 |
-| employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-10-08 01:46:30 |
-| industry\_value\_add               | Industry value add                                                                    | 2021-10-08 01:46:30 |
-| internet\_vacancies\_index         | Internet Vacancies Index                                                              | 2021-10-08 01:46:30 |
-| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-10-08 01:46:30 |
-| jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 | 2021-10-08 01:57:05 |
-| jobkeeper\_state                   | Jobkeeper applications by state                                                       | 2021-10-08 01:57:04 |
-| jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-10-08 01:46:30 |
-| jobseeker\_state                   | Jobseeker applications by state                                                       | 2021-10-08 01:46:30 |
-| labour\_account                    | ABS Labour Account                                                                    | 2021-10-08 01:46:30 |
-| labour\_force                      | ABS Labour Force Survey                                                               | 2021-10-08 01:46:30 |
-| national\_accounts                 | ABS National Accounts                                                                 | 2021-10-08 01:46:30 |
-| payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-10-08 01:56:29 |
-| payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2021-10-08 01:56:35 |
-| seek\_data                         | Seek Job Ads                                                                          | 2021-10-08 01:46:30 |
-| small\_area\_labour\_market        | DESE Small (SA2) Area Labour Market                                                   | 2021-10-08 01:46:30 |
-| south\_australia\_net\_debt        | South Australia Historic Net Debt                                                     | 2021-10-08 01:46:30 |
-| underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-10-08 01:46:30 |
+| anzsic                             | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | 2021-10-11 01:46:03 |
+| aus\_manufacturing                 | Australian Manufacturing                                                              | 2021-10-11 01:46:03 |
+| cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-10-11 01:46:03 |
+| covid\_data                        | COVID-19 Geographic data                                                              | 2021-10-11 01:56:47 |
+| economic\_complexity               | Australian Subnational Economic Complexity                                            | 2021-10-11 01:46:03 |
+| employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-10-11 01:46:03 |
+| employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-10-11 01:46:03 |
+| industry\_value\_add               | Industry value add                                                                    | 2021-10-11 01:46:03 |
+| internet\_vacancies\_index         | Internet Vacancies Index                                                              | 2021-10-11 01:46:03 |
+| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-10-11 01:46:03 |
+| jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 | 2021-10-11 01:56:34 |
+| jobkeeper\_state                   | Jobkeeper applications by state                                                       | 2021-10-11 01:56:34 |
+| jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-10-11 01:46:03 |
+| jobseeker\_state                   | Jobseeker applications by state                                                       | 2021-10-11 01:46:03 |
+| labour\_account                    | ABS Labour Account                                                                    | 2021-10-11 01:46:03 |
+| labour\_force                      | ABS Labour Force Survey                                                               | 2021-10-11 01:46:03 |
+| national\_accounts                 | ABS National Accounts                                                                 | 2021-10-11 01:46:03 |
+| payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-10-11 01:46:03 |
+| payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2021-10-11 01:46:03 |
+| seek\_data                         | Seek Job Ads                                                                          | 2021-10-11 01:46:03 |
+| small\_area\_labour\_market        | DESE Small (SA2) Area Labour Market                                                   | 2021-10-11 01:46:03 |
+| south\_australia\_net\_debt        | South Australia Historic Net Debt                                                     | 2021-10-11 01:46:03 |
+| underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-10-11 01:46:03 |

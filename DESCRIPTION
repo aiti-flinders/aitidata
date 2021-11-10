@@ -32,6 +32,8 @@ Imports:
     here,
     purrr,
     rlang,
-    readabs
+    readabs (>= 0.4.10.901)
 Suggests: 
     testthat (>= 3.0.0)
+Remotes:  
+    mattcowgill/readabs

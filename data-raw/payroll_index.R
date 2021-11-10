@@ -44,11 +44,7 @@ if (max(abs_test$date) <= max(aitidata::payroll_index$date)) {
                   indicator = "payroll_jobs",
                   state = strayr::clean_state(state, to = "state_name"))
   
-  
-    dplyr::rename(gender = sex,
-                  indicator = series) %>%
-    dplyr::mutate(indicator = "payroll_jobs",
-                  state = strayr::clean_state(state, to = "state_name"))
+
   
   payroll_wages <- payroll_index <- readxl::read_excel("data-raw/6160055001_DO004.xlsx", sheet = "Total wages index", col_types = "text", skip = 5) %>%
     dplyr::rename_with(.fn = ~ dplyr::case_when(

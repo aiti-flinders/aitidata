@@ -276,6 +276,9 @@
 #' Internet Vacancies Regional
 "internet_vacancies_regional"
 
+#' aitidata Catalogues
+"aitidata_catalogues"
+
 
 
 

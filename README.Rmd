@@ -5,12 +5,43 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+
+library(magrittr)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+write_metadata <- function() {
+ included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] %>%
+   dplyr::mutate(Item = paste0("aitidata::", Item))
+ 
+ dates <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
+ 
+ dplyr::bind_cols(included_data, dates)
+ 
+}
+
+safe_max <- function(df) {
+  
+  df <- lazyeval::lazy_eval(df)
+  
+  if ("date" %in% colnames(df)) {
+    
+    r <- max(df$date)
+    
+  }
+  
+  else {
+    r <- NA
+  }
+  
+  names(r) <- "date"
+  r
+}
 ```
 
 # aitidata
@@ -36,8 +67,7 @@ devtools::install_github("aiti-flinders/aitidata")
 ## Included data
 
 ``` {r, echo = FALSE}
-inc_data <- data.frame(data(package = "aitidata")$results)[-c(1, 2)]
-inc_data$`Last Updated` <- file.info(paste0("data/", inc_data$Item, ".rda"))$mtime
-knitr::kable(inc_data)
+
+knitr::kable(write_metadata())
 
 ```

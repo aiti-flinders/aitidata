@@ -95,4 +95,4 @@ aitidata_catalogues <- dplyr::bind_rows(
   tidyr::unnest_longer(col = data_name)
 
 
-usethis::use_data(aitidata_catalogues, internal = TRUE, overwrite = TRUE)
+usethis::use_data(aitidata_catalogues, compress = 'xz', overwrite = TRUE)

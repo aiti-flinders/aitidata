@@ -7,6 +7,8 @@ output: github_document
 ```{r, include = FALSE}
 
 library(magrittr)
+library(dplyr)
+library(stringr)
 
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -21,7 +23,11 @@ write_metadata <- function() {
  
  dates <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
  
- dplyr::bind_cols(included_data, dates)
+ dplyr::bind_cols(included_data, dates) %>%
+   dplyr::mutate(Item = str_remove_all(Item, "aitidata::")) %>% 
+   dplyr::rename("Data Name" = Item,
+          "Description" = Title,
+          "Last Updated" = date) 
  
 }
 

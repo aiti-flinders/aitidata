@@ -83,6 +83,12 @@ aitidata_catalogues <- dplyr::bind_rows(
                 "https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx", 
                 list("IVI Regional Data - May 2020 onwards (Excel)"), 
                 list("internet_vacancies_regional"),
+                NA),
+  build_tribble(NA, 
+                NA,
+                "https://data.humdata.org/dataset/movement-range-maps?fbclid=IwAR15g05Cfsmq6azkgxpJqmnRU0eW5PqHTsIWfictGKBlvZYs77dZWFobFNg",
+                list("Movement Range Maps"),
+                list("mobility_facebook"),
                 NA)
   ) %>%
   tidyr::unnest_longer(col = tables) %>%

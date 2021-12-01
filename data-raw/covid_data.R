@@ -5,7 +5,7 @@ source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
 source("data-raw/payroll_substate.R")
 
-maps_data <- strayr::read_maps("sa22016")
+maps_data <- strayr::read_absmap("sa22016")
 
 covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
   dplyr::left_join(by = "sa2_code_2016", small_area_labour_market %>% 

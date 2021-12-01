@@ -3,25 +3,22 @@ library(readr)
 library(dplyr)
 library(lubridate)
 library(tidyr)
+library(rhdx)
+library(purrr)
 
-facebook_mobility <- function(year = c("2020", "2021")) {
-  
-  if (is.numeric(year)) {
-    year <- as.character(year)
-  }
-  
-  url <- switch(year,
-                "2020" = "https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e/resource/3d77ce5c-ab6d-4864-b8a2-c8bafffac4f3/download/movement-range-data-2020-03-01-2020-12-31.zip",
-                "2021" = "https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e/resource/55a51014-0d27-49ae-bf92-c82a570c2c6c/download/movement-range-data-2021-11-25.zip")
- 
+set_rhdx_config(hdx_site = "prod")
 
-  download.file(url, destfile = "data-raw/fb_mobility.zip")
+
+
+facebook_mobility <- function() {
   
-  fname <- switch(year,
-                  "2020" = unzip("data-raw/fb_mobility.zip", list = TRUE)$Name[1],
-                  "2021" = unzip("data-raw/fb_mobility.zip", list = TRUE)$Name[2])
   
-  fb_mobility <- read_tsv(unz("data-raw/fb_mobility.zip", fname)) %>%
+  
+  
+  fb_mobility <- search_datasets("Movement Range Maps") %>%
+    pluck(1) %>%
+    get_resource(2) %>%
+    read_resource() %>%
     filter(country == "AUS") %>%
     select(state = polygon_name,
            date = ds,
@@ -32,8 +29,7 @@ facebook_mobility <- function(year = c("2020", "2021")) {
     mutate(date = date(date),
            weekday = wday(date))
   
-  file.remove("data-raw/fb_mobility.zip")
-  
+
   return(fb_mobility)
 }
 

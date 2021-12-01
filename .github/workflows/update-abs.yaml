@@ -25,9 +25,7 @@ jobs:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
           Rscript -e "install.packages(c('remotes', 'devtools'), tpe = 'binary')"
-          Rscript -e "devtools::install_github('mattcowgill/strayr', dependencies = TRUE, type = 'binary')"
-          Rscript -e "options(timeout=1000)"
-          Rscript -e "devtools::install_github('wfmackey/absmapsdata', dependencies = TRUE, type = 'binary')"
+          Rscript -e "devtools::install_github('runapp-aus/strayr', dependencies = TRUE, type = 'binary')"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
           Rscript -e "install.packages(c('readabs','readr', 'janitor', 'forcats', 'sf', 'zoo', 'vroom', 'here', 'rmarkdown'), type = 'binary')"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"

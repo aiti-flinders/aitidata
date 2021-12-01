@@ -32,8 +32,10 @@ Imports:
     here,
     purrr,
     rlang,
-    readabs (>= 0.4.10.901)
+    readabs (>= 0.4.10.901),
+    strayr (>= 0.1.5.1)
 Suggests: 
     testthat (>= 3.0.0)
 Remotes:  
-    mattcowgill/readabs
+    mattcowgill/readabs,
+    runapp-aus/strayr

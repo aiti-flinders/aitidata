@@ -6,6 +6,7 @@ library(sf)
 library(purrr)
 library(readxl)
 library(tidyr)
+library(strayr)
 
 jobseeker_latest <- current_release(url = 'https://data.gov.au/data/dataset/728daa75-06e8-442d-931c-93ecc6a57880', source = "data.gov")
 
@@ -50,7 +51,7 @@ if (max(files$date) <= max(jobseeker_sa2$date)) {
   }
 
   jobseeker_sa2 <- jobseeker_all %>%
-    left_join(absmapsdata::sa22016, by = c("sa2_name" = "sa2_name_2016")) %>%
+    left_join(read_absmap("sa22016"), by = c("sa2_name" = "sa2_name_2016")) %>%
     select(sa2_code_2016, jobseeker_payment, youth_allowance_other, date) %>%
     arrange(date) %>%
     group_by(sa2_code_2016) %>%
@@ -61,7 +62,7 @@ if (max(files$date) <= max(jobseeker_sa2$date)) {
     mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(indicator, "_", " ")))
   
   jobseeker_state <- jobseeker_all %>%
-    dplyr::left_join(absmapsdata::sa22016, by = c("sa2_name" = "sa2_name_2016")) %>%
+    dplyr::left_join(read_absmap("sa22016"), by = c("sa2_name" = "sa2_name_2016")) %>%
     dplyr::select(state_name_2016, jobseeker_payment, youth_allowance_other, date) %>%
     dplyr::arrange(date) %>%
     dplyr::group_by(state_name_2016, date) %>%

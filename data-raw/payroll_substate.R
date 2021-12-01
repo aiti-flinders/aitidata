@@ -1,7 +1,6 @@
 library(readabs)
 library(dplyr)
 library(strayr)
-library(absmapsdata)
 library(sf)
 
 abs_test <- readabs::read_payrolls(series = "sa3_jobs", path = "data-raw")
@@ -20,7 +19,7 @@ if (max(abs_test$date) <= max(aitidata::payroll_substate$date)) {
     dplyr::mutate(state_name_2016 = clean_state(state, to = "state_name"),
                   sa3_name_2016 = statistical_area_level_3,
                   indicator = "Payroll Index") %>%
-    dplyr::left_join(absmapsdata::sa32016, by = c("state_name_2016", "sa3_name_2016")) %>%
+    dplyr::left_join(read_absmap("sa32016"), by = c("state_name_2016", "sa3_name_2016")) %>%
     dplyr::select(state_name_2016, date, value, sa3_code_2016, indicator) %>%
     dplyr::filter(!is.na(sa3_code_2016), !is.na(value))
   

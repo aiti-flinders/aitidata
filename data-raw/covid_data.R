@@ -5,6 +5,8 @@ source("data-raw/jobseeker_sa2.R")
 source("data-raw/small_area_labour_market.R")
 source("data-raw/payroll_substate.R")
 
+maps_data <- strayr::read_maps("sa22016")
+
 covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
   dplyr::left_join(by = "sa2_code_2016", small_area_labour_market %>% 
                      dplyr::filter( indicator == "Smoothed labour force (persons)", date == max(.$date)) %>%
@@ -17,7 +19,7 @@ covid_data <- bind_rows(jobkeeper_sa2, jobseeker_sa2) %>%
                 jobkeeper_decile = dplyr::ntile(jobkeeper_proportion, 10),
                 jobseeker_decile = dplyr::ntile(jobseeker_proportion, 10),
                 covid_impact = jobkeeper_decile + jobseeker_decile) %>%
-  dplyr::left_join(absmapsdata::sa22016, by = "sa2_code_2016") %>%
+  dplyr::left_join(maps_data, by = "sa2_code_2016") %>%
   dplyr::select(sa2_code_2016,
                 sa3_code_2016,
                 date,

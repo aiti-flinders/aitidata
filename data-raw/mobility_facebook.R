@@ -34,6 +34,6 @@ facebook_mobility <- function() {
 }
 
 mobility_facebook <- bind_rows(aitidata:::mobility_facebook_2020,
-                               facebook_mobility("2021"))
+                               facebook_mobility())
   
 usethis::use_data(mobility_facebook, compress = "xz", overwrite = TRUE)

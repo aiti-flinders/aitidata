@@ -26,7 +26,8 @@ devtools::install_github("aiti-flinders/aitidata")
 ## Included data
 
 | Data Name                          | Description                                                                           | Last Updated |
-|:-----------------------------------|:--------------------------------------------------------------------------------------|:-------------|
+| :--------------------------------- | :------------------------------------------------------------------------------------ | :----------- |
+| aitidata\_catalogues               | aitidata Catalogues                                                                   | NA           |
 | anzsic                             | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA           |
 | aus\_manufacturing                 | Australian Manufacturing                                                              | NA           |
 | cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2020-06-01   |

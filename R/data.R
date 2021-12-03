@@ -250,10 +250,44 @@
 "small_area_labour_market"
 
 #' Jobkeeper applications by state
+#' 
+#' The Australian Treasury collected and reported on the number of
+#' businesses within a postcode who were receiving the temporary jobkeeper
+#' supplement between April 2020 and March 2021. Data are provided by postcode and
+#' postcodes with less than 5 businesses receiving jobkeeper are suppressed. 
+#' Data are converted from postcode to Statistical Area 2, then grouped by state. 
+#' 
+#' @format A dataframe with 10 variables:
+#' \describe{
+#' \item{state}{Name of the state}
+#' \item{date}{Monthly between April 2020 and March 2021}
+#' \item{month}{Name of the month}
+#' \item{year}{Year}
+#' \item{indicator}{One of Jobkeeper applications, Total businesses, Jobkeeper proportion}
+#' \item{value}{Value of the indicator}
+#' \item{unit}{Units of the data}
+#' }
 "jobkeeper_state"
 
-#' Jobseeker applications by state
-"jobseeker_state"
+#' Jobkeeper applications by sa2
+#' 
+#' The Australian Treasury collected and reported on the number of
+#' businesses within a postcode who were receiving the temporary jobkeeper
+#' supplement between April 2020 and March 2021. Data are provided by postcode and
+#' postcodes with less than 5 businesses receiving jobkeeper are suppressed. 
+#' Data are converted from postcode to Statistical Area 2. 
+#' 
+#' @format A dataframe with 10 variables:
+#' \describe{
+#' \item{sa2_code_2016}{9 digit code representing the Statistical Area Level 2 the business is located in}
+#' \item{date}{Monthly between April 2020 and March 2021}
+#' \item{month}{Name of the month}
+#' \item{year}{Year}
+#' \item{indicator}{One of Jobkeeper applications, Total businesses, Jobkeeper proportion}
+#' \item{value}{Value of the indicator}
+#' \item{unit}{Units of the data}
+#' }
+"jobseeker_sa2"
 
 #' ABS Measures of Underutilisation
 "underutilisation"
@@ -275,6 +309,9 @@
 
 #' Internet Vacancies Regional
 "internet_vacancies_regional"
+
+#' Facebook Mobility
+"mobility_facebook"
 
 #' aitidata Catalogues
 "aitidata_catalogues"

@@ -15,7 +15,7 @@ download_facebook <- function() {
  search_datasets("Movement Range Maps") %>%
     pluck(1) %>%
     get_resource(2) %>%
-    download_resource(folder = "data-raw", filename = "facebook.zip")
+    download_resource(folder = "data-raw", filename = "facebook.zip", force = TRUE)
 }
 
 read_facebook <- function() {

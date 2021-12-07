@@ -4,6 +4,7 @@ library(dplyr)
 library(lubridate)
 library(tidyr)
 library(rhdx)
+library(strayr)
 library(purrr)
 
 set_rhdx_config(hdx_site = "prod")
@@ -39,9 +40,15 @@ fb_mobility <-   read_facebook() %>%
            weekday = wday(date))
   
 
-
+lga_to_state <- read_absmap(name = "lga2016") %>%
+  mutate(lga_name_2016 = gsub(pattern = " \\(.+\\)",
+                              x = lga_name_2016,
+                              replacement = "")) %>%
+  as_tibble() %>%
+  select(lga_name_2016, state_name_2016)
 
 mobility_facebook <- bind_rows(aitidata:::mobility_facebook_2020,
-                               fb_mobility)
+                               fb_mobility) %>%
+  left_join(lga_to_state, by = c("state" = "lga_name_2016"))
   
 usethis::use_data(mobility_facebook, compress = "xz", overwrite = TRUE)

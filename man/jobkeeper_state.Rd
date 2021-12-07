@@ -5,12 +5,25 @@
 \alias{jobkeeper_state}
 \title{Jobkeeper applications by state}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 324 rows and 10 columns.
+A dataframe with 10 variables:
+\describe{
+\item{state}{Name of the state}
+\item{date}{Monthly between April 2020 and March 2021}
+\item{month}{Name of the month}
+\item{year}{Year}
+\item{indicator}{One of Jobkeeper applications, Total businesses, Jobkeeper proportion}
+\item{value}{Value of the indicator}
+\item{unit}{Units of the data}
+}
 }
 \usage{
 jobkeeper_state
 }
 \description{
-Jobkeeper applications by state
+The Australian Treasury collected and reported on the number of
+businesses within a postcode who were receiving the temporary jobkeeper
+supplement between April 2020 and March 2021. Data are provided by postcode and
+postcodes with less than 5 businesses receiving jobkeeper are suppressed.
+Data are converted from postcode to Statistical Area 2, then grouped by state.
 }
 \keyword{datasets}

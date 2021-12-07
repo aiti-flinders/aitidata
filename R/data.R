@@ -287,7 +287,7 @@
 #' \item{value}{Value of the indicator}
 #' \item{unit}{Units of the data}
 #' }
-"jobseeker_sa2"
+"jobkeeper_sa2"
 
 #' ABS Measures of Underutilisation
 "underutilisation"
@@ -302,7 +302,7 @@
 "aus_manufacturing"
 
 #' Industry value add
-"industry_value_add"
+"national_accounts"
 
 #' Seek Job Ads
 "seek_data"
@@ -316,6 +316,14 @@
 #' aitidata Catalogues
 "aitidata_catalogues"
 
+#'jobseeker state
+"jobseeker_state"
+
+#'Facebook mobility
+"mobility_facebook"
+
+#' Google mobility
+"mobility_google"
 
 
 

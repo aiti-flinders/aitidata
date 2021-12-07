@@ -3,7 +3,7 @@
 \docType{data}
 \name{jobseeker_state}
 \alias{jobseeker_state}
-\title{Jobseeker applications by state}
+\title{jobseeker state}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 360 rows and 10 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 jobseeker_state
 }
 \description{
-Jobseeker applications by state
+jobseeker state
 }
 \keyword{datasets}

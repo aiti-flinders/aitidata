@@ -43,7 +43,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_state                   | jobseeker state                                                                       | 2021-10-01   |
 | labour\_account                    | ABS Labour Account                                                                    | 2021-06-01   |
 | labour\_force                      | ABS Labour Force Survey                                                               | 2021-10-01   |
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2021-11-30   |
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2021-12-05   |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03   |
 | national\_accounts                 | ABS National Accounts                                                                 | 2021-09-01   |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-10-16   |

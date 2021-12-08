@@ -4,7 +4,7 @@ library(dplyr)
 library(lubridate)
 
 abs_test <- aitidata::download_data_cube(catalogue_string = "labour-account-australia",
-                               cube = "6150055003DO001_2020202106.xls",
+                               cube = "6150055003DO001.xls",
                                path = "data-raw")
 
 current_date <- readxl::read_xls(abs_test, sheet = 2, skip = 9) %>%

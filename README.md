@@ -41,7 +41,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobkeeper\_state                   | Jobkeeper applications by state                                                       | 2021-03-01   |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-10-01   |
 | jobseeker\_state                   | jobseeker state                                                                       | 2021-10-01   |
-| labour\_account                    | ABS Labour Account                                                                    | 2021-06-01   |
+| labour\_account                    | ABS Labour Account                                                                    | 2021-09-01   |
 | labour\_force                      | ABS Labour Force Survey                                                               | 2021-10-01   |
 | mobility\_facebook                 | Facebook Mobility                                                                     | 2021-12-05   |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03   |

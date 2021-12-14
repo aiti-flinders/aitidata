@@ -50,5 +50,7 @@ lga_to_state <- read_absmap(name = "lga2016") %>%
 mobility_facebook <- bind_rows(aitidata:::mobility_facebook_2020,
                                fb_mobility) %>%
   left_join(lga_to_state, by = c("state" = "lga_name_2016"))
+
+file.remove("data-raw/facebook.zip")
   
 usethis::use_data(mobility_facebook, compress = "xz", overwrite = TRUE)

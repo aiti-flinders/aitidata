@@ -8,7 +8,6 @@ library(readabs)
 library(dplyr)
 library(tidyr)
 library(lubridate)
-library(usethis)
 
 abs_test <- read_abs(cat_no = "6202.0", tables = "19a", retain_files = FALSE)
 

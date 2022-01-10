@@ -6,9 +6,9 @@ library(lubridate)
 
 
 
-abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", "6291023a.xls") 
+abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", "6291023a.xlsx") 
 
-abs_file <- readabs::read_abs_local(filenames = "6291023a.xls", path = "data-raw")
+abs_file <- readabs::read_abs_local(filenames = "6291023a.xlsx", path = "data-raw")
 
 if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
   message("Skipping `employment_by_industry.rda`: appears to be up-to-date")
@@ -16,7 +16,7 @@ if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
 } else {
   message("updating `employment_by_industry`")
   
-  raw <- aitidata::download_data_cube("labour-force-australia-detailed", "6291005.xls")
+  raw <- aitidata::download_data_cube("labour-force-australia-detailed", "6291005.xlsx")
   
   employment_by_industry <- readabs::read_abs_local(filenames = raw, path = "data-raw") %>%
     tidyr::separate(series, into = c("state", "industry", "indicator"), sep = ";", extra = "drop") %>%

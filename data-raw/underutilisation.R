@@ -4,9 +4,9 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 
-abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", cube = "6291023a.xls", path = "data-raw") 
+abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", cube = "6291023a.xlsx", path = "data-raw") 
 
-abs_file <- readabs::read_abs_local(filenames = "6291023a.xls", path = "data-raw")
+abs_file <- readabs::read_abs_local(filenames = "6291023a.xlsx", path = "data-raw")
 
 if (max(abs_file$date) <= max(aitidata::underutilisation$date)) {
   message("Skipping `underutilisation.rda`: appears to be up-to-date")
@@ -14,9 +14,9 @@ if (max(abs_file$date) <= max(aitidata::underutilisation$date)) {
 } else {
   message("Updating `underutilisation.rda`")
   
-  abs_cube <- aitidata::download_data_cube("labour-force-australia-detailed", cube = "6291023b.xls", path = "data-raw")
+  abs_cube <- aitidata::download_data_cube("labour-force-australia-detailed", cube = "6291023b.xlsx", path = "data-raw")
   
-  raw <- read_abs_local(filenames = c("6291023a.xls", "6291023b.xls"), path = "data-raw")
+  raw <- read_abs_local(filenames = c("6291023a.xlsx", "6291023b.xlsx"), path = "data-raw")
   
   underutilisation_23a <- raw %>%
     dplyr::filter(table_no == "6291023a") %>%

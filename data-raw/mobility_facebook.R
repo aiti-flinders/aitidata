@@ -21,7 +21,9 @@ download_facebook <- function() {
 
 read_facebook <- function() {
   
-  fname <- unzip("data-raw/facebook.zip", list = TRUE)$Name[2]
+  fname <- unzip("data-raw/facebook.zip", list = TRUE) %>%
+    filter(Length == max(.$Length)) %>%
+    pull(Name)
   
   read_tsv(unz("data-raw/facebook.zip", fname)) 
 }

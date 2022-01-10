@@ -36,7 +36,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-08-01   |
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-08-01   |
 | internet\_vacancies\_index         | Internet Vacancies Index                                                              | NA           |
-| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-10-01   |
+| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-11-01   |
 | jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 | 2021-03-01   |
 | jobkeeper\_state                   | Jobkeeper applications by state                                                       | 2021-03-01   |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-11-01   |

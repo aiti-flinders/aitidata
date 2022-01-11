@@ -33,7 +33,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2020-06-01   |
 | covid\_data                        | COVID-19 Geographic data                                                              | 2021-11-01   |
 | economic\_complexity               | Australian Subnational Economic Complexity                                            | NA           |
-| employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-08-01   |
+| employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-11-01   |
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-08-01   |
 | internet\_vacancies\_index         | Internet Vacancies Index                                                              | NA           |
 | internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-11-01   |
@@ -43,12 +43,12 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_state                   | jobseeker state                                                                       | 2021-11-01   |
 | labour\_account                    | ABS Labour Account                                                                    | 2021-09-01   |
 | labour\_force                      | ABS Labour Force Survey                                                               | 2021-11-01   |
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2021-12-18   |
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-01-08   |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03   |
 | national\_accounts                 | ABS National Accounts                                                                 | 2021-09-01   |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-11-13   |
 | payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2021-11-13   |
 | seek\_data                         | Seek Job Ads                                                                          | NA           |
-| small\_area\_labour\_market        | DESE Small (SA2) Area Labour Market                                                   | 2021-06-01   |
+| small\_area\_labour\_market        | DESE Small (SA2) Area Labour Market                                                   | 2021-09-01   |
 | south\_australia\_net\_debt        | South Australia Historic Net Debt                                                     | NA           |
-| underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-08-01   |
+| underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-11-01   |

@@ -89,7 +89,13 @@ aitidata_catalogues <- dplyr::bind_rows(
                 "https://data.humdata.org/dataset/movement-range-maps?fbclid=IwAR15g05Cfsmq6azkgxpJqmnRU0eW5PqHTsIWfictGKBlvZYs77dZWFobFNg",
                 list("Movement Range Maps"),
                 list("mobility_facebook"),
-                NA)
+                NA),
+  build_tribble("8615.0",
+                "retail-trade-australia",
+                "https://www.abs.gov.au/statistics/industry/retail-and-wholesale-trade/retail-trade-australia",
+                list("Retail turnover, state by industry subgroup, seasonally adjusted"),
+                list("retail_trade"),
+                "abs")
   ) %>%
   tidyr::unnest_longer(col = tables) %>%
   tidyr::unnest_longer(col = data_name)

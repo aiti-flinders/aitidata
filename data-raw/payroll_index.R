@@ -74,7 +74,9 @@ if (max(abs_test$date) <= max(aitidata::payroll_index$date)) {
 
 
   
-  payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages)
+  payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages) %>%
+    dplyr::mutate(industry = strayr::clean_anzsic(industry),
+                  industry = ifelse(is.na(industry), "Total (Industry)", industry))
   
   file.remove("data-raw/6160055001_DO004.xlsx")
   

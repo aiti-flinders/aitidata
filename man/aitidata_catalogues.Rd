@@ -5,7 +5,7 @@
 \alias{aitidata_catalogues}
 \title{aitidata Catalogues}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 21 rows and 7 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 22 rows and 7 columns.
 }
 \usage{
 aitidata_catalogues

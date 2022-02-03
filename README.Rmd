@@ -27,7 +27,8 @@ write_metadata <- function() {
    dplyr::mutate(Item = str_remove_all(Item, "aitidata::")) %>% 
    dplyr::rename("Data Name" = Item,
           "Description" = Title,
-          "Last Updated" = date) 
+          "Last Updated" = date) %>% 
+   dplyr::arrange(desc(`Last Updated`))
  
 }
 

@@ -1,9 +1,3 @@
-#' Title
-#'
-#' @return
-#' @export
-#'
-#' @examples
 update_employment_by_industry <- function() {
   
   abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", "6291023a.xlsx", path = "data-raw") 

@@ -58,7 +58,11 @@ safe_max <- function(df) {
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
-aitidata is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 
+`aitidata` is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 
+
+The current version of `aitidata` is `r packageVersion("aitidata")`. 
+
+Data was last updated `r Sys.time()` 
 
 ## Installation
 

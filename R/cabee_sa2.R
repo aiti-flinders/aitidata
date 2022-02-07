@@ -30,7 +30,7 @@ update_cabee_sa2 <- function() {
     cabee_sheets <- cabee_sheets[!is.na(cabee_sheets)]
     cabee_sheets <- cabee_sheets[stringr::str_detect(cabee_sheets, "b", negate = TRUE)]
 
-    cabee_sa2 <- tribble(
+    cabee_sa2 <- tibble::tribble(
       ~"date",
       ~"industry_code",
       ~"industry_label",

@@ -1,19 +1,11 @@
-#' Prepare labour_force dataset. 
-#'
-#' @description 
-#'  It contains data from 4 relevant releases of the 6202.0 series released on the 3rd Thursday of each month.
-#'   Table 12. Labour force status by Sex, State and Territory - Trend, Seasonally adjusted and Original
-#'   Table 19. Monthly hours worked in all jobs by Employed full-time, part-time and Sex and by State and Territory - Trend and Seasonally adjusted
-#' Table 22. Underutilised persons by Age and Sex - Trend, Seasonally adjusted and Original
-#' Table 23. Underutilised persons by State and Territory and Sex - Trend, Seasonally adjusted and Original
 update_labour_force <- function() {
 
-abs_test <- readabs::read_abs(cat_no = "6202.0", tables = "19a")
+abs_test <- readabs::read_abs(cat_no = "6202.0", tables = "19a", retain_files = FALSE)
 
 if (max(abs_test$date) <= max(aitidata::labour_force$date)) {
   message("Skipping `labour_force.rda`: appears to be up-to-date")
-  file.remove(abs_test)
-} else {
+  return(TRUE)
+  } else {
   
   message("Updating `labour-force-australia`")
   
@@ -90,6 +82,6 @@ if (max(abs_test$date) <= max(aitidata::labour_force$date)) {
     tidyr::pivot_longer(cols = c(9:length(.)), names_to = "indicator", values_to = "value", values_drop_na = TRUE)
   
     usethis::use_data(labour_force, overwrite = TRUE, compress = "xz")
-    file.remove(raw)
-}
+    return(TRUE)
+    }
 }

@@ -33,7 +33,7 @@ update_mobility_facebook <- function() {
                  names_to = "metric",
                  values_to = "trend") %>%
     dplyr::mutate(date = lubridate::date(date),
-           weekday = lubdirate::wday(date))
+           weekday = lubridate::wday(date))
   
   
   lga_to_state <- strayr::read_absmap(name = "lga2016", remove_year_suffix = TRUE) %>%
@@ -41,11 +41,11 @@ update_mobility_facebook <- function() {
                                 x = lga_name,
                                 replacement = "")) %>%
     dplyr::as_tibble() %>%
-    dplyr::select(lga_name_2016, state_name_2016)
+    dplyr::select(lga_name, state_name)
   
   mobility_facebook <- dplyr::bind_rows(aitidata:::mobility_facebook_2020,
                                  fb_mobility) %>%
-    dplyr::left_join(lga_to_state, by = c("state" = "lga_name_2016"))
+    dplyr::left_join(lga_to_state, by = c("state" = "lga_name"))
   
   file.remove("data-raw/facebook.zip")
   

@@ -3,7 +3,7 @@ update_covid_data <- function() {
   
   maps_data <- strayr::read_absmap("sa22016")
   
-  covid_data <- bind_rows(aitidata::jobkeeper_sa2, aitidata::jobseeker_sa2) %>%
+  covid_data <- dplyr::bind_rows(aitidata::jobkeeper_sa2, aitidata::jobseeker_sa2) %>%
     dplyr::left_join(by = "sa2_code_2016", small_area_labour_market %>% 
                        dplyr::filter( indicator == "Smoothed labour force (persons)", date == max(.$date)) %>%
                        dplyr::select(labour_force = value, sa2_code_2016)) %>%

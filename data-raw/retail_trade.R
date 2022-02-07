@@ -31,8 +31,6 @@ if (is.data.frame(abs_test)) {
     
     usethis::use_data(retail_trade, overwrite = TRUE, compress = "xz")
   } 
-} else {
-  message("`retail_trade.rda` has not been updated yet")
-}
+} 
 
 

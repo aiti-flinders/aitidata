@@ -3,12 +3,7 @@
 on:
   push:
     branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+      - data_prep
 
 name: R-CMD-check
 

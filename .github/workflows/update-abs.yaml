@@ -33,8 +33,9 @@ jobs:
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"
-          Rscript -e "aitidata:::update_abs()"
+          Rscript -e "aitidata::update_abs()"
           Rscript -e "devtools::document()"
+          Rscript -e "usethis::use_version(which = 'patch')"
       - name: Render README
         run: |
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"

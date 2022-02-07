@@ -35,7 +35,6 @@ jobs:
           Rscript -e "library(aitidata)"
           Rscript -e "aitidata::update_abs()"
           Rscript -e "devtools::document()"
-          Rscript -e "usethis::use_version(which = 'patch')"
       - name: Render README
         run: |
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
@@ -45,4 +44,6 @@ jobs:
           git config --global user.email 'gamb0043@flinders.edu.au'
           git add .
           git commit -m 'Scheduled data updates' || echo "No changes to commit"
+          Rscript -e "usethis::use_version(which = 'patch')"
           git push || echo "No changes to commit"
+

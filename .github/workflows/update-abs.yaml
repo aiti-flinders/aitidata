@@ -6,8 +6,7 @@ name: update-abs
 on:
    schedule:
       - cron: '35 0 * * 1-5'
-   push:
-      branches: data-prep
+
    pull_request:
 
 

@@ -9,9 +9,13 @@
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
-aitidata is a collection of data sets commonly used by researchers at
+`aitidata` is a collection of data sets commonly used by researchers at
 the Australian Industrial Transformation Institute. Data is updated at
 about 11:30am each day.
+
+The current version of `aitidata` is 0.1.0.
+
+Data was last updated 2022-02-07 16:28:53
 
 ## Installation
 

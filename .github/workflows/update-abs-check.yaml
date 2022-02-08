@@ -1,6 +1,6 @@
 # Check every day at 11:10am Adelaide/Australia for updated ABS data
 
-name: update-abs
+name: update-abs-check
 
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:

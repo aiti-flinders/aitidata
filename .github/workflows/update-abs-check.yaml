@@ -4,11 +4,10 @@ name: update-abs
 
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
-   schedule:
-      - cron: '35 0 * * 1-5'
-
    push:
-      
+      branches:
+      - data_prep
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,7 +29,7 @@ jobs:
           Rscript -e "devtools::install_github('dickoa/rhdx', dependencies = TRUE, type = 'binary')"
           Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
           Rscript -e "install.packages(c('readabs','readr', 'janitor', 'forcats', 'sf', 'zoo', 'vroom', 'here', 'rmarkdown'), type = 'binary')"
-          Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
+          Rscript -e "devtools::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"

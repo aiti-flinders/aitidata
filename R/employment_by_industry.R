@@ -4,7 +4,7 @@ update_employment_by_industry <- function() {
   
   abs_file <- readabs::read_abs_local(filenames = "6291023a.xlsx", path = "data-raw")
   
-  if (max(abs_file$date) <= max(aitidata::employment_by_industry$date) & !check) {
+  if (max(abs_file$date) <= max(aitidata::employment_by_industry$date)) {
     message("Skipping `employment_by_industry.rda`: appears to be up-to-date")
     file.remove(abs_test)
   } else {

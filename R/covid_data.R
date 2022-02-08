@@ -1,10 +1,10 @@
 ## code to prepare `covid_data` dataset goes here
 update_covid_data <- function() {
   
-  maps_data <- strayr::read_absmap("sa22016")
+  maps_data <- strayr::read_absmap("sa22016") 
   
   covid_data <- dplyr::bind_rows(aitidata::jobkeeper_sa2, aitidata::jobseeker_sa2) %>%
-    dplyr::left_join(by = "sa2_code_2016", small_area_labour_market %>% 
+    dplyr::left_join(by = "sa2_code_2016", aitidata::small_area_labour_market %>% 
                        dplyr::filter( indicator == "Smoothed labour force (persons)", date == max(.$date)) %>%
                        dplyr::select(labour_force = value, sa2_code_2016)) %>%
     tidyr::pivot_wider(id_cols = c(sa2_code_2016, date, labour_force), names_from = indicator, values_from = value) %>%
@@ -26,7 +26,7 @@ update_covid_data <- function() {
                   covid_impact,
                   state_name_2016) %>%
     dplyr::left_join(by = c("sa3_code_2016", "date", "state_name_2016"),
-                     payroll_substate %>% dplyr::filter(indicator == "payroll_index")  %>% dplyr::select(-indicator, payroll_index = value)) %>%
+                     aitidata::payroll_substate %>% dplyr::filter(indicator == "payroll_index")  %>% dplyr::select(-indicator, payroll_index = value)) %>%
     dplyr::arrange(date) %>%
     dplyr::group_by(state_name_2016, sa2_code_2016) %>%
     dplyr::mutate(jobkeeper_growth = jobkeeper_applications - lag(jobkeeper_applications)) %>%
@@ -42,8 +42,7 @@ update_covid_data <- function() {
                   jobseeker_proportion,
                   payroll_index,
                   covid_impact) %>%
-    tidyr::pivot_longer(cols = 5:length(.), names_to = "indicator", values_to = "value")
-  
+    tidyr::pivot_longer(cols = 5:length(.), names_to = "indicator", values_to = "value") 
   
   usethis::use_data(covid_data, overwrite = TRUE, compress = "xz")
   return(TRUE)

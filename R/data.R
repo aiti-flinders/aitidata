@@ -325,6 +325,15 @@
 #' Google mobility
 "mobility_google"
 
+#' Hours worked
+"hours_worked"
+
+#' Internet vacancy regions
+"internet_vacancy_regions"
+
+#' Retail trade
+"retail_trade"
+
 
 
 

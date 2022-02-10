@@ -60,9 +60,9 @@ safe_max <- function(df) {
 
 `aitidata` is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 
 
-The current version of `aitidata` is `r packageVersion("aitidata")`. 
+The current version of `aitidata` is `r packageVersion("aitidata")`
 
-Data was last updated `r Sys.time()` 
+Data was last updated `r as.Date(Sys.time(), tz = "Australia/Adelaide")` 
 
 ## Installation
 

@@ -13,9 +13,9 @@
 the Australian Industrial Transformation Institute. Data is updated at
 about 11:30am each day.
 
-The current version of `aitidata` is 0.1.1.
+The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-02-08 04:49:39
+Data was last updated 2022-02-09
 
 ## Installation
 
@@ -30,8 +30,8 @@ devtools::install_github("aiti-flinders/aitidata")
 ## Included data
 
 | Data Name                          | Description                                                                           | Most Recent Data |
-| :--------------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-04       |
+|:-----------------------------------|:--------------------------------------------------------------------------------------|:-----------------|
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-06       |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-12-18       |
 | payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2021-12-18       |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03       |
@@ -49,7 +49,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-08-01       |
 | jobkeeper\_sa2                     | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper\_state                   | Jobkeeper applications by state                                                       | 2021-03-01       |
-| cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2020-06-01       |
+| cabee\_sa2                         | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-02-01       |
 | aitidata\_catalogues               | aitidata Catalogues                                                                   | NA               |
 | anzsic                             | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               |
 | aus\_manufacturing                 | Australian Manufacturing                                                              | NA               |

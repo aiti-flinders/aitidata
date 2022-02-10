@@ -18,7 +18,7 @@ download_data_cube <- function(catalogue_string, cube, path = "data-raw") {
   
   # check if path is valid
   if (!dir.exists(path)) {
-    stop("path does not exist. Please create a folder.")
+    dir.create(path)
   }
   
   available_cubes <- readabs::get_available_files(catalogue_string)

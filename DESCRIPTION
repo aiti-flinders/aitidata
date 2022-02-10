@@ -33,9 +33,15 @@ Imports:
     purrr,
     rlang,
     readabs (>= 0.4.10.901),
-    strayr (>= 0.1.5.1)
+    strayr (>= 0.1.5.1),
+    readr,
+    readxl,
+    rhdx (>= 0.1.0.9000),
+    usethis,
+    withr
 Suggests: 
     testthat (>= 3.0.0)
 Remotes: 
     mattcowgill/readabs,
-    runapp-aus/strayr
+    runapp-aus/strayr,
+    gitlab::dickoa/rhdx

@@ -1,7 +1,6 @@
 #' Update Employment by industry data
 #'
 #' @param force_update logical
-#' @export 
 #' @return logical
 update_employment_by_industry <- function(force_update = FALSE) {
   

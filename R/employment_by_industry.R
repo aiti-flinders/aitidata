@@ -3,7 +3,6 @@
 #' @param force_update logical
 #' @export 
 #' @return logical
-utils::globalVariables("where")
 update_employment_by_industry <- function(force_update = FALSE) {
   
   abs_test <- aitidata::download_data_cube("labour-force-australia-detailed", "6291023a.xlsx", path = here::here("data-raw") )

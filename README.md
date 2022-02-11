@@ -30,17 +30,18 @@ devtools::install_github("aiti-flinders/aitidata")
 ## Included data
 
 | Data Name                          | Description                                                                           | Most Recent Data |
-|:-----------------------------------|:--------------------------------------------------------------------------------------|:-----------------|
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-06       |
-| payroll\_index                     | ABS Weekly Payroll Index                                                              | 2021-12-18       |
-| payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2021-12-18       |
+| :--------------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-08       |
+| payroll\_index                     | ABS Weekly Payroll Index                                                              | 2022-01-15       |
+| payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03       |
 | covid\_data                        | COVID-19 Geographic data                                                              | 2021-12-01       |
+| hours\_worked                      | Hours worked                                                                          | 2021-12-01       |
 | internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-12-01       |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-12-01       |
 | jobseeker\_state                   | jobseeker state                                                                       | 2021-12-01       |
 | labour\_force                      | ABS Labour Force Survey                                                               | 2021-12-01       |
-| retail\_trade                      |                                                                                       | 2021-12-01       |
+| retail\_trade                      | Retail trade                                                                          | 2021-12-01       |
 | employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-11-01       |
 | underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-11-01       |
 | labour\_account                    | ABS Labour Account                                                                    | 2021-09-01       |
@@ -55,5 +56,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | aus\_manufacturing                 | Australian Manufacturing                                                              | NA               |
 | economic\_complexity               | Australian Subnational Economic Complexity                                            | NA               |
 | internet\_vacancies\_index         | Internet Vacancies Index                                                              | NA               |
+| internet\_vacancy\_regions         | Internet vacancy regions                                                              | NA               |
 | seek\_data                         | Seek Job Ads                                                                          | NA               |
 | south\_australia\_net\_debt        | South Australia Historic Net Debt                                                     | NA               |

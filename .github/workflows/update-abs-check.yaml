@@ -25,7 +25,7 @@ jobs:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
           Rscript -e "install.packages(c('remotes'), tpe = 'binary')"
-          Rscript -e "devtools::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
+          Rscript -e "remotes::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"

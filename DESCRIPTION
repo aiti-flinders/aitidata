@@ -35,7 +35,7 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0)
 Remotes: 
-    gitlab::dickoa/rhdx,
+    github::dickoa/rhdx,
     mattcowgill/readabs,
     runapp-aus/strayr
 Encoding: UTF-8

@@ -6,25 +6,32 @@
 #' @importFrom utils download.file
 update_internet_vacancies_regional <- function(force_update = FALSE) {
   
+  if (!force_update) {
   
-  download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790179&.xlsx",
-                destfile = "data-raw/ivi_test.xlsx",
+  
+  utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790179&.xlsx",
+                destfile = here::here("data-raw/ivi_test.xlsx"),
                 mode = "wb")
   
-  current_date <- readxl::read_excel("data-raw/ivi_test.xlsx",
+  current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
                              sheet = "Trend") %>%
     dplyr::select(dplyr::last_col()) 
   
   current_date <- as.Date(as.numeric(colnames(current_date)), origin = "1899-12-30")
+  
+  } else {
+    
+    current_date <- TRUE
+  }
    
   
   if (current_date > max(aitidata::internet_vacancies_regional$date) | force_update) {
     
     download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx",
-                  destfile = "data-raw/ivi_regional.xlsx",
+                  destfile = here::here("data-raw/ivi_regional.xlsx"),
                   mode = "wb")
     
-    internet_vacancies_regional <- readxl::read_excel("data-raw/ivi_regional.xlsx",
+    internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),
                                                       sheet = "Averaged") %>%
       tidyr::pivot_longer(cols = -c(.data$Level,
                                     .data$State,
@@ -57,11 +64,11 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     
     usethis::use_data(internet_vacancies_regional, overwrite = TRUE, compress = 'xz')
-    file.remove("data-raw/ivi_regional.xlsx")
+    file.remove(here::here("data-raw/ivi_regional.xlsx"))
     
   } else {
     message("Skipping `internet_vacancies_regional.rda`: appears to be up-to-date")
-    file.remove("data-raw/ivi_test.xlsx")
+    file.remove(here::here("data-raw/ivi_regional.xlsx"))
     
     
     }

@@ -7,22 +7,27 @@
 #'
 update_small_area_labour_market <- function(force_update = FALSE) {
   
+  if (!force_update) {
+  
   download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193962&.csv",
-                destfile = "data-raw/salm_test.csv",
+                destfile = here::here("data-raw/salm_test.csv"),
                 mode = "wb")
-  current_date <- readr::read_csv("data-raw/salm_test.csv",
+  current_date <- readr::read_csv(here::here("data-raw/salm_test.csv"),
                            skip = 1) %>%
     dplyr::select(dplyr::last_col()) 
   
   current_date <- as.Date(paste0(colnames(current_date), "-01"), format = "%b-%y-%d")
+  } else {
+    current_date <- TRUE
+  }
   
   if (current_date > max(aitidata::small_area_labour_market$date) | force_update) {
     
     download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193958&.csv",
-                  destfile = "data-raw/salm_sa2.csv",
+                  destfile = here::here("data-raw/salm_sa2.csv"),
                   mode = "wb")
     
-    raw <- readr::read_csv("data-raw/salm_sa2.csv", 
+    raw <- readr::read_csv(here::here("data-raw/salm_sa2.csv"), 
                            skip = 1, 
                            na = "-")
     
@@ -42,16 +47,16 @@ update_small_area_labour_market <- function(force_update = FALSE) {
       dplyr::mutate(value = as.numeric(gsub(",", "", .data$value)),
                     date = as.Date(paste0(.data$date, "-01"), format = "%b-%y-%d")) %>%
       dplyr::right_join(all_sa2) %>%
-      tidyr::complete(.data$indicator, tidyr::nesting(.data$sa2_name, .data$sa2_code), .data$date) %>%
+      tidyr::complete(.data$indicator, tidyr::nesting(sa2_name, sa2_code), .data$date) %>%
       dplyr::filter(!is.na(.data$date), 
                     !is.na(.data$indicator))
     
     usethis::use_data(small_area_labour_market, overwrite = TRUE, compress = "xz")
-    file.remove("data-raw/salm_sa2.csv")
+    file.remove(here::here("data-raw/salm_sa2.csv"))
     
   } else {
     message("Skipping `small_area_labour_market.rda`: appears to be up-to-date")
-    file.remove("data-raw/salm_test.csv")
+    file.remove(here::here("data-raw/salm_test.csv"))
     
   }
 }

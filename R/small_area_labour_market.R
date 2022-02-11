@@ -3,8 +3,6 @@
 #' @param force_update logical 
 #'
 #' @return logical
-#' @export
-#'
 update_small_area_labour_market <- function(force_update = FALSE) {
   
   if (!force_update) {

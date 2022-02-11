@@ -1,16 +1,13 @@
 # Check every day at 11:10am Adelaide/Australia for updated ABS data
 
-name: update-abs
+name: update-abs-check
 
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
-   schedule:
-      - cron: '35 0 * * 1-5'
-
    push:
-    branches:
-      - master
-      
+      branches:
+      - data_prep
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +25,7 @@ jobs:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
           Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval'), tpe = 'binary')"
-          Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
+          Rscript -e "remotes::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"

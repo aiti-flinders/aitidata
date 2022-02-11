@@ -1,4 +1,10 @@
-update_jobseeker_sa2 <- function() {
+#' Update JobSeeker SA2 Data if available
+#'
+#' @param force_update logical
+#'
+#' @return logical
+
+update_jobseeker_sa2 <- function(force_update = FALSE) {
   
   
   jobseeker_latest <- aitidata::current_release(
@@ -20,11 +26,9 @@ update_jobseeker_sa2 <- function() {
   
   files <- dplyr::distinct(files, date, .keep_all = TRUE)
   
-  if (max(files$date) <= max(aitidata::jobseeker_sa2$date)) {
-    message("Skipping: `jobseeker_state.rda`, `jobseeker_sa2.rda`: appears to be up-to-date") 
-  } else {
-    
+  if (max(files$date) > max(aitidata::jobseeker_sa2$date) | force_update) {
     message("Updating `jobseeker_state.rda`, `jobseeker_sa2.rda`")
+    
     file_paths <- purrr::map(files$url, ~aitidata::download_file(.x))
     
     jobseeker_all <- data.frame(
@@ -36,11 +40,12 @@ update_jobseeker_sa2 <- function() {
     
     for (i in seq_along(file_paths)) {
       dss_month <- readxl::read_excel(file_paths[[i]],
-                              sheet = "Table 4 - By SA2",
-                              skip = 7,
-                              n_max = 2292,
-                              col_names = c("sa2", "sa2_name", "jobseeker_payment", "youth_allowance_other"),
-                              col_types = c("numeric", "text", "numeric", "numeric")) %>%
+                                      sheet = "Table 4 - By SA2",
+                                      skip = 7,
+                                      na = "<5",
+                                      n_max = 2292,
+                                      col_names = c("sa2", "sa2_name", "jobseeker_payment", "youth_allowance_other"),
+                                      col_types = c("numeric", "text", "numeric", "numeric")) %>%
         dplyr::mutate(date = files$date[i]) %>%
         tidyr::replace_na(list(jobseeker_payment = 5, youth_allowance_other = 5))
       
@@ -49,37 +54,47 @@ update_jobseeker_sa2 <- function() {
     
     jobseeker_sa2 <- jobseeker_all %>%
       dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = c("sa2_name")) %>%
-      dplyr::select(sa2_code, jobseeker_payment, youth_allowance_other, date) %>%
-      dplyr::arrange(date) %>%
-      dplyr::group_by(sa2_code) %>%
-      dplyr::mutate(jobseeker_growth = jobseeker_payment - dplyr::lag(jobseeker_payment),
-             youth_allowance_growth = youth_allowance_other - dplyr::lag(youth_allowance_other)) %>%
+      dplyr::select(.data$sa2_code, 
+                    .data$jobseeker_payment, 
+                    .data$youth_allowance_other, 
+                    .data$date) %>%
+      dplyr::arrange(.data$date) %>%
+      dplyr::group_by(.data$sa2_code) %>%
+      dplyr::mutate(jobseeker_growth = .data$jobseeker_payment - dplyr::lag(.data$jobseeker_payment),
+                    youth_allowance_growth = .data$youth_allowance_other - dplyr::lag(.data$youth_allowance_other)) %>%
       dplyr::ungroup() %>%
-      tidyr::pivot_longer(cols = c(-sa2_code_2016, -date), names_to = "indicator", values_to = "value") %>%
-      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(indicator, "_", " ")))
+      tidyr::pivot_longer(cols = -c(.data$sa2_code, .data$date), names_to = "indicator", values_to = "value") %>%
+      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")))
     
     jobseeker_state <- jobseeker_all %>%
-      dplyr::left_join(read_absmap("sa22016"), by = c("sa2_name" = "sa2_name_2016")) %>%
-      dplyr::select(state_name_2016, jobseeker_payment, youth_allowance_other, date) %>%
-      dplyr::arrange(date) %>%
-      dplyr::group_by(state_name_2016, date) %>%
-      dplyr::summarise(dplyr::across(c(jobseeker_payment, youth_allowance_other), ~sum(.,na.rm = T))) %>%
+      dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = "sa2_name") %>%
+      dplyr::select(.data$state_name, 
+                    .data$jobseeker_payment,
+                    .data$youth_allowance_other,
+                    .data$date) %>%
+      dplyr::arrange(.data$date) %>%
+      dplyr::group_by(.data$state_name, 
+                      .data$date) %>%
+      dplyr::summarise(dplyr::across(c(.data$jobseeker_payment, .data$youth_allowance_other), ~sum(.,na.rm = T)), .groups = "drop") %>%
       dplyr::ungroup() %>%
-      tidyr::pivot_longer(cols = c(-state_name_2016, -date), names_to = "indicator", values_to = "value") %>%
-      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(indicator, "_", " ")),
+      tidyr::pivot_longer(cols = -c(.data$state_name, .data$date), names_to = "indicator", values_to = "value") %>%
+      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")),
                     series_type = "Original",
                     gender = "Persons",
                     age = "Total (age)",
                     unit = "000", 
-                    year = lubridate::year(date),
-                    month = lubridate::month(date, abbr = FALSE, label = TRUE)) %>%
-      dplyr::rename(state = state_name_2016)
+                    year = lubridate::year(.data$date),
+                    month = lubridate::month(.data$date, abbr = FALSE, label = TRUE)) %>%
+      dplyr::rename(state = .data$state_name)
     
     usethis::use_data(jobseeker_state, compress = "xz", overwrite = TRUE)
     usethis::use_data(jobseeker_sa2, compress = "xz", overwrite = TRUE)
     
-    purrr::map_lgl(file_paths, file.remove)
+    any(purrr::map_lgl(file_paths, file.remove))
+  } else {
+    message("Skipping: `jobseeker_state.rda`, `jobseeker_sa2.rda`: appears to be up-to-date") 
     return(TRUE)
+    
   }
 }
 

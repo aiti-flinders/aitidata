@@ -1,5 +1,9 @@
-## code to prepare `retail_trade` dataset goes here
-update_retail_trade <- function() {
+#' Update Retail Trade dataset
+#'
+#' @param force_update logical
+#' @return logical
+#'
+update_retail_trade <- function(force_update = FALSE) {
   
   # Table 12 releases 1 week later than the other tables. 
   
@@ -9,27 +13,37 @@ update_retail_trade <- function() {
     
     #If the download worked, we can proceed as usual
     
-    if (max(abs_test$date) <= max(aitidata::retail_trade$date)) {
-      
-      message("Skipping `retail_trade.rda`: appears to be up-to-date")
-      
-    } else {
+    if (max(abs_test$date) > max(aitidata::retail_trade$date) | force_update) {
       
       message("Updating `retail-trade-australia`")
       
       retail_trade <- readabs::read_abs("8501.0", tables = 12) %>%
-        readabs::separate_series(data = .data, column_names = c("indicator", "state", "industry_group")) %>%
-        dplyr::mutate(year = lubridate::year(date),
-                      month = lubridate::month(date, abbr = FALSE, label = TRUE),
+        readabs::separate_series(column_names = c("indicator", "state", "industry_group"), remove_nas = TRUE) %>%
+        dplyr::mutate(year = lubridate::year(.data$date),
+                      month = lubridate::month(.data$date, abbr = FALSE, label = TRUE),
                       state = dplyr::case_when(
-                        state == "Total (State)" ~ "Australia",
-                        TRUE ~ state
+                        .data$state == "Total (State)" ~ "Australia",
+                        TRUE ~ .data$state
                       )) %>%
-        dplyr::select(date, year, month, state, indicator, industry_group, series_type, value, unit)
+        dplyr::select(.data$date,
+                      .data$year,
+                      .data$month, 
+                      .data$state, 
+                      .data$indicator, 
+                      .data$industry_group, 
+                      .data$series_type, 
+                      .data$value, 
+                      .data$unit)
       
       usethis::use_data(retail_trade, overwrite = TRUE, compress = "xz")
-      remove.file(abs_test)
       return(TRUE)
+      
+      
+    } else {
+      
+      message("Skipping `retail_trade.rda`: appears to be up-to-date")
+      return(TRUE)
+      
     } 
   }
 } 

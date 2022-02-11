@@ -3,10 +3,7 @@
 #' @param url string
 #'
 #' @examples \dontrun{current_release(cat_string = "labour-force-australia")}
-#' @importFrom dplyr "%>%" filter pull
-#' @importFrom xml2 read_html
-#' @importFrom rvest html_nodes html_text
-#' @importFrom rlang .data
+
 abs_current_release <- function(cat_string = NULL, url = NULL) {
   
   if (is.null(cat_string) & is.null(url)) {
@@ -43,16 +40,16 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
 #' @param url string
 #'
 #' @return Date
-#' @importFrom rlang .data
 gov_current_release <- function(url = url) {
   
   release_table <- xml2::read_html(url) %>%
-    rvest::html_table() %>%
-    .[[1]] 
+    rvest::html_table() 
+  
+  release_table <- release_table[[1]] 
   
   current_release <- release_table %>%
-    dplyr::filter(Field == "Date Updated") %>%
-    dplyr::pull(Value) 
+    dplyr::filter(.data$Field == "Date Updated") %>%
+    dplyr::pull(.data$Value) 
   
   as.Date(current_release, format = "%Y-%m-%d")
   
@@ -68,9 +65,6 @@ gov_current_release <- function(url = url) {
 #' @return date
 #' 
 #' @export
-
-#' @importFrom dplyr "%>%"
-#' @importFrom rlang .data
 abs_next_release <- function(cat_string = NULL, url = NULL) {
   
   if(!is.null(cat_string) & is.null(url)) {

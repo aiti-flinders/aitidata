@@ -5,15 +5,9 @@
 \alias{mobility_facebook}
 \title{Facebook Mobility}
 \format{
-<<<<<<< HEAD
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 178248 rows and 6 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 178248 rows and 6 columns.
-=======
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 178056 rows and 6 columns.
-
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 178056 rows and 6 columns.
->>>>>>> 6a9c13bb44a4faa1b5b113f5279731f739b542f4
 }
 \usage{
 mobility_facebook

@@ -2,46 +2,44 @@ Package: aitidata
 Title: Commonly Used Data for AITI Research
 Version: 0.1.1
 Authors@R: 
-    person(given = "Hamish",
-           family = "Gamble",
-           role = c("aut", "cre"),
-           email = "hamish.gamble@flinders.edu.au")
-Description: A collection of datasets commonly used in research at
-  the Australian Industrial Transformation Institute at Flinders University. 
-  Data has been tidyed and simplified for ease of use, and for easy integration
-  into the reportabs package.
+    person("Hamish", "Gamble", , "hamish.gamble@flinders.edu.au", role = c("aut", "cre"))
+Description: A collection of datasets commonly used in research at the
+    Australian Industrial Transformation Institute at Flinders University.
+    Data has been tidyed and simplified for ease of use, and for easy
+    integration into the reportabs package.
 License: CC0
+Depends: 
+    R (>= 3.5.0)
+Imports: 
+    dplyr,
+    fs,
+    glue,
+    here,
+    httr,
+    lubridate,
+    magrittr,
+    purrr,
+    readabs (>= 0.4.10.901),
+    readr,
+    readxl,
+    rhdx (>= 0.1.0.9000),
+    rlang,
+    rvest,
+    strayr (>= 0.1.5.1),
+    stringr,
+    tibble,
+    tidyr,
+    usethis,
+    withr,
+    xml2
+Suggests: 
+    testthat (>= 3.0.0)
+Remotes: 
+    gitlab::dickoa/rhdx,
+    mattcowgill/readabs,
+    runapp-aus/strayr
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Depends: 
-    R (>= 3.5.0)
-Imports: 
-    httr,
-    magrittr,
-    glue,
-    lubridate,
-    rvest,
-    stringr,
-    tibble,
-    xml2,
-    tidyr,
-    dplyr,
-    here,
-    purrr,
-    rlang,
-    readabs (>= 0.4.10.901),
-    strayr (>= 0.1.5.1),
-    readr,
-    readxl,
-    rhdx (>= 0.1.0.9000),
-    usethis,
-    withr
-Suggests: 
-    testthat (>= 3.0.0)
-Remotes: 
-    mattcowgill/readabs,
-    runapp-aus/strayr,
-    gitlab::dickoa/rhdx

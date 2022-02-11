@@ -2,7 +2,7 @@ update_cabee_sa2 <- function(force_update = FALSE) {
   
   # The ABS is currently updating the CABEE release schedule. Add the check back after december 16th
   
-  abs_test <- readabs::download_abs_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits",
+  abs_test <- aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits",
                                               cube = 1,
                                               path = "data-raw")
   

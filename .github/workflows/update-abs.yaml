@@ -27,16 +27,12 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
-          Rscript -e "install.packages(c('remotes', 'devtools'), tpe = 'binary')"
-          Rscript -e "devtools::install_github('runapp-aus/strayr', dependencies = TRUE, type = 'binary')"
-          Rscript -e "devtools::install_github('dickoa/rhdx', dependencies = TRUE, type = 'binary')"
-          Rscript -e "remotes::install_deps(type = 'binary', force = FALSE, dependencies = TRUE)"
-          Rscript -e "install.packages(c('readabs','readr', 'janitor', 'forcats', 'sf', 'zoo', 'vroom', 'here', 'rmarkdown'), type = 'binary')"
+          Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown'), tpe = 'binary')"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"
-          Rscript -e "aitidata::update_abs()"
+          Rscript -e "aitidata:::update_abs()"
           Rscript -e "devtools::document()"
       - name: Render README
         run: |

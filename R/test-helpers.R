@@ -11,7 +11,7 @@ local_create_package <- function(dir = fs::file_temp(), env = parent.frame()) {
   
   # switch to new usethis project
   usethis::proj_set(dir) # C
-  withr::defer(proj_set(old_project, force = TRUE), envir = env) # -C
+  withr::defer(usethis::proj_set(old_project, force = TRUE), envir = env) # -C
   
   dir
 }

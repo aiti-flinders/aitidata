@@ -1,4 +1,4 @@
-local_create_package <- function(dir = file_temp(), env = parent.frame()) {
+local_create_package <- function(dir = fs::file_temp(), env = parent.frame()) {
   old_project <- usethis::proj_get()
   
   # create new folder and package

@@ -70,7 +70,8 @@ update_payroll_index <- function(force_update = FALSE) {
     
     payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages) %>%
       dplyr::mutate(industry = strayr::clean_anzsic(.data$industry, silent = TRUE),
-                    industry = ifelse(is.na(.data$industry), "Total (Industry)", .data$industry))
+                    industry = ifelse(is.na(.data$industry), "Total (Industry)", .data$industry),
+                    age = ifelse(.data$age == "All ages", "Total (age)", .data$age))
     
     
     usethis::use_data(payroll_index, overwrite = TRUE, compress = "xz")

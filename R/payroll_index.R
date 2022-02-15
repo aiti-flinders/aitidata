@@ -70,8 +70,10 @@ update_payroll_index <- function(force_update = FALSE) {
     
     payroll_index <- dplyr::bind_rows(payroll_jobs, payroll_wages) %>%
       dplyr::mutate(industry = strayr::clean_anzsic(.data$industry, silent = TRUE),
-                    industry = ifelse(is.na(.data$industry), "Total (Industry)", .data$industry),
-                    age = ifelse(.data$age == "All ages", "Total (age)", .data$age))
+                    industry = ifelse(is.na(.data$industry), "Total (industry)", .data$industry),
+                    age = ifelse(.data$age == "All ages", "Total (age)", .data$age),
+                    year = lubridate::year(date),
+                    month = lubridate::month(date, abbr = F, label = T))
     
     
     usethis::use_data(payroll_index, overwrite = TRUE, compress = "xz")

@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg?branch=data_prep)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
@@ -15,7 +15,11 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
+<<<<<<< HEAD
 Data was last updated 2022-02-15
+=======
+Data was last updated 2022-02-14
+>>>>>>> master
 
 ## Installation
 

@@ -30,8 +30,8 @@ devtools::install_github("aiti-flinders/aitidata")
 ## Included data
 
 | Data Name                          | Description                                                                           | Most Recent Data |
-|:-----------------------------------|:--------------------------------------------------------------------------------------|:-----------------|
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-13       |
+| :--------------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-12       |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03       |

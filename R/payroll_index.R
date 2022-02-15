@@ -35,7 +35,7 @@ update_payroll_index <- function(force_update = FALSE) {
       dplyr::filter(.data$value != "NA") %>%
       dplyr::mutate(date = as.Date(as.numeric(.data$date), origin = "1899-12-30"),
                     dplyr::across(where(is.character), ~gsub(pattern = ".*\\. ", x =  .x, replacement = "", perl = TRUE)),
-                    indicator = "payroll_jobs",
+                    indicator = "Payroll jobs",
                     state = strayr::clean_state(.data$state, to = "state_name"))
     
     
@@ -61,7 +61,7 @@ update_payroll_index <- function(force_update = FALSE) {
       dplyr::filter(.data$value != "NA") %>%
       dplyr::mutate(date = as.Date(as.numeric(.data$date), origin = "1899-12-30"),
                     dplyr::across(where(is.character), ~gsub(pattern = ".*\\. ", x =  .x, replacement = "", perl = TRUE)),
-                    indicator = "payroll_wages", 
+                    indicator = "Payroll wages", 
                     state = strayr::clean_state(.data$state, to = "state_name"))
     
     

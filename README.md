@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg?branch=data_prep)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 
@@ -31,7 +31,7 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                          | Description                                                                           | Most Recent Data |
 | :--------------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-07       |
+| mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-08       |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03       |

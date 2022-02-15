@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg?branch=data_prep)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
 <!-- badges: end -->
 

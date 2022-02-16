@@ -334,6 +334,12 @@
 #' Retail trade
 "retail_trade"
 
+#' Underemployment by industry
+"underemployment_by_industry"
+
+#' Underemployment by occupation
+"underemployment_by_occupation"
+
 
 
 

@@ -27,7 +27,9 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
   
   if (current_date > max(aitidata::internet_vacancies_regional$date) | force_update) {
     
-    download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx",
+    message("Updating `internet_vacancies_regional` dataset.")
+    
+    utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx",
                   destfile = here::here("data-raw/ivi_regional.xlsx"),
                   mode = "wb")
     
@@ -39,9 +41,10 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                                     .data$ANZSCO_CODE,
                                     .data$ANZSCO_TITLE),
                           names_to = "date",
-                          values_to = "vacancies") %>%
-      dplyr::mutate(dplyr::across(date, ~as.Date(x = as.numeric(.x), origin = "1899-12-30")),
+                          values_to = "value") %>%
+      dplyr::mutate(date = as.Date(x = as.numeric(.data$date), origin = "1899-12-30"),
                     unit = "000",
+                    state = strayr::clean_state(State, to = "state_name"),
                     ANZSCO_TITLE = ifelse(grepl("TOTAL", .data$ANZSCO_TITLE), "TOTAL", .data$ANZSCO_TITLE),
                     region = dplyr::case_when(
                       region == "Blue Mountains, Bathurst & Central West NSW" ~ "Blue Mountains Bathurst & Central West",
@@ -60,7 +63,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                     vacancy_region = .data$region, 
                     anzsco_code = .data$ANZSCO_CODE,
                     anzsco_title = .data$ANZSCO_TITLE,
-                    .data$vacancies)
+                    .data$value)
     
     
     usethis::use_data(internet_vacancies_regional, overwrite = TRUE, compress = 'xz')
@@ -68,7 +71,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
   } else {
     message("Skipping `internet_vacancies_regional.rda`: appears to be up-to-date")
-    file.remove(here::here("data-raw/ivi_regional.xlsx"))
+    file.remove(here::here("data-raw/ivi_test.xlsx"))
     
     
     }

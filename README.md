@@ -34,10 +34,10 @@ devtools::install_github("aiti-flinders/aitidata")
 | mobility\_facebook                 | Facebook Mobility                                                                     | 2022-02-13       |
 | payroll\_index                     | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate                  | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
+| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2022-01-01       |
 | mobility\_google                   | Google mobility                                                                       | 2021-12-03       |
 | covid\_data                        | COVID-19 Geographic data                                                              | 2021-12-01       |
 | hours\_worked                      | Hours worked                                                                          | 2021-12-01       |
-| internet\_vacancies\_regional      | Internet Vacancies Regional                                                           | 2021-12-01       |
 | jobseeker\_sa2                     | JobSeeker data by SA2                                                                 | 2021-12-01       |
 | jobseeker\_state                   | jobseeker state                                                                       | 2021-12-01       |
 | labour\_force                      | ABS Labour Force Survey                                                               | 2021-12-01       |

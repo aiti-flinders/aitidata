@@ -44,6 +44,8 @@ devtools::install_github("aiti-flinders/aitidata")
 | retail\_trade                      | Retail trade                                                                          | 2021-12-01       |
 | employment\_by\_industry           | ABS Employment by Industry                                                            | 2021-11-01       |
 | employment\_by\_industry\_detailed | ABS Detailed employment by industry                                                   | 2021-11-01       |
+| underemployment\_by\_industry      |                                                                                       | 2021-11-01       |
+| underemployment\_by\_occupation    |                                                                                       | 2021-11-01       |
 | underutilisation                   | ABS Measures of Underutilisation                                                      | 2021-11-01       |
 | labour\_account                    | ABS Labour Account                                                                    | 2021-09-01       |
 | national\_accounts                 | ABS National Accounts                                                                 | 2021-09-01       |

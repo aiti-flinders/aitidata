@@ -33,6 +33,7 @@ Imports:
     withr,
     xml2
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Remotes: 
     github::dickoa/rhdx,

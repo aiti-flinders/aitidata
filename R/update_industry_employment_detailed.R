@@ -5,12 +5,12 @@
 #' @return logical: TRUE if data updated successfully 
 #' @export
 #'
-update_employment_by_industry_detailed <- function(force_update = FALSE) {
+update_industry_employment_detailed <- function(force_update = FALSE) {
   
   abs_test <- readabs::read_abs("6291.0.55.001", tables = "23a", retain_files = FALSE)
   
-  if (max(abs_test$date) > max(aitidata::employment_by_industry$date) | force_update) {
-    message("Updating `employment_by_industry_detailed.rda`")
+  if (max(abs_test$date) > max(aitidata::industry_employment_detailed$date) | force_update) {
+    message("Updating `industry_employment_detailed.rda`")
     
     abs_file <- aitidata::download_data_cube("labour-force-australia-detailed", 
                                              cube = "EQ06", 
@@ -36,7 +36,7 @@ update_employment_by_industry_detailed <- function(force_update = FALSE) {
                     .data$anzsic_subdivision,
                     .data$anzsic_group)
     
-    employment_by_industry_detailed <- dplyr::left_join(df, anzsic) %>%
+    industry_employment_detailed <- dplyr::left_join(df, anzsic) %>%
       dplyr::distinct() %>%
       dplyr::group_by(.data$date, .data$indicator, .data$gender, .data$state, .data$anzsic_subdivision, .data$anzsic_division) %>%
       dplyr::summarise(value = sum(.data$value), .groups = "drop") %>%
@@ -45,12 +45,12 @@ update_employment_by_industry_detailed <- function(force_update = FALSE) {
                     indicator = stringr::str_replace_all(.data$indicator, "\\('000.+", ""),
                     indicator = trimws(.data$indicator))
     
-    usethis::use_data(employment_by_industry_detailed, compress = "xz", overwrite = TRUE)
-    file.remove(abs_file)
+    usethis::use_data(industry_employment_detailed, compress = "xz", overwrite = TRUE)
+    return(TRUE)
   } else {
-    message("Skipping `employment_by_industry_detailed.rda`: appears to be up-to-date")
-    file.remove(abs_test)
-  }
+    message("Skipping `industry_employment_detailed`: appears to be up-to-date")
+    return(TRUE)
+    }
 }
 
 

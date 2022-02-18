@@ -332,10 +332,13 @@
 "retail_trade"
 
 #' Underemployment by industry
-#"industry_underemployment"
+"industry_underemployment"
 
 #' Underemployment by occupation
-#"occupation_underemployment"
+"occupation_underemployment"
+
+#' Match ABS Catalogue names with URLS
+"abs_urls"
 
 
 

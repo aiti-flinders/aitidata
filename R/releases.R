@@ -77,7 +77,7 @@ abs_next_release <- function(cat_string = NULL, url = NULL) {
     release_url <- url
   } else if (!is.null(cat_string) & !is.null(url)) {
     warning("Both URL and catalogue_string were specified. Using URL")
-    release_url <- aitidata::abs_url %>%
+    release_url <- aitidata::abs_urls %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(.data$url) %>%
       unique()

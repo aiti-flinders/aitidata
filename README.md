@@ -31,22 +31,22 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-13       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-16       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
+| hours\_worked                  | Hours worked                                                                          | 2022-01-01       |
 | internet\_vacancies\_index     | ABS Employment by Industry                                                            | 2022-01-01       |
 | internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-01-01       |
+| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-01-01       |
+| jobseeker\_state               | jobseeker state                                                                       | 2022-01-01       |
+| labour\_force                  | ABS Labour Force Survey                                                               | 2022-01-01       |
 | mobility\_google               | Google mobility                                                                       | 2021-12-03       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2021-12-01       |
-| hours\_worked                  | Hours worked                                                                          | 2021-12-01       |
-| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2021-12-01       |
-| jobseeker\_state               | jobseeker state                                                                       | 2021-12-01       |
-| labour\_force                  | ABS Labour Force Survey                                                               | 2021-12-01       |
 | retail\_trade                  | Retail trade                                                                          | 2021-12-01       |
 | industry\_employment           |                                                                                       | 2021-11-01       |
 | industry\_employment\_detailed |                                                                                       | 2021-11-01       |
-| industry\_underemployment      |                                                                                       | 2021-11-01       |
-| occupation\_underemployment    |                                                                                       | 2021-11-01       |
+| industry\_underemployment      | Underemployment by industry                                                           | 2021-11-01       |
+| occupation\_underemployment    | Underemployment by occupation                                                         | 2021-11-01       |
 | underutilisation               | ABS Measures of Underutilisation                                                      | 2021-11-01       |
 | labour\_account                | ABS Labour Account                                                                    | 2021-09-01       |
 | national\_accounts             | ABS National Accounts                                                                 | 2021-09-01       |
@@ -54,7 +54,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper\_state               | Jobkeeper applications by state                                                       | 2021-03-01       |
 | cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-02-01       |
-| abs\_urls                      |                                                                                       | NA               |
+| abs\_urls                      | Match ABS Catalogue names with URLS                                                   | NA               |
 | anzsic                         | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               |
 | aus\_manufacturing             | Australian Manufacturing                                                              | NA               |
 | economic\_complexity           | Australian Subnational Economic Complexity                                            | NA               |

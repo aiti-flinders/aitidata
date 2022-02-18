@@ -1,5 +1,5 @@
 ## code to prepare `abs_urls` dataset goes here
-abs_url <- data.frame(
+abs_urls <- data.frame(
   catalogue_string = c("labour-force-australia",
                        "australian-national-accounts-national-income-expenditure-and-product",
                        "weekly-payroll-jobs-and-wages-australia",
@@ -16,4 +16,4 @@ abs_url <- data.frame(
           "https://www.abs.gov.au/statistics/industry/industry-overview/australian-industry/latest-release")
 )
 
-usethis::use_data(abs_urls, coverwrite = TRUE)
+usethis::use_data(abs_urls, overwrite = TRUE)

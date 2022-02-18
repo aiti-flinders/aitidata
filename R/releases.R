@@ -14,7 +14,7 @@ abs_current_release <- function(cat_string = NULL, url = NULL) {
   
   
   if (!is.null(cat_string) & is.null(url)) {
-    release_url <- aitidata::aitidata_catalogues %>%
+    release_url <- aitidata::abs_urls %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(url) %>%
       unique()
@@ -67,8 +67,8 @@ gov_current_release <- function(url = url) {
 #' @export
 abs_next_release <- function(cat_string = NULL, url = NULL) {
   
-  if(!is.null(cat_string) & is.null(url)) {
-    release_url <- aitidata::abs_url %>%
+  if (!is.null(cat_string) & is.null(url)) {
+    release_url <- aitidata::abs_urls %>%
       dplyr::filter(.data$catalogue_string == cat_string) %>%
       dplyr::pull(.data$url) %>%
       unique()

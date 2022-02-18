@@ -46,11 +46,11 @@ update_industry_employment_detailed <- function(force_update = FALSE) {
                     indicator = trimws(.data$indicator))
     
     usethis::use_data(industry_employment_detailed, compress = "xz", overwrite = TRUE)
-    file.remove(abs_file)
+    return(TRUE)
   } else {
     message("Skipping `industry_employment_detailed`: appears to be up-to-date")
-    file.remove(abs_test)
-  }
+    return(TRUE)
+    }
 }
 
 

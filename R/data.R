@@ -96,10 +96,10 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/PrimaryMainFeatures/6291.0.55.001?OpenDocument}
-"employment_by_industry"
+#"industry_employment"
 
 #' ABS Detailed employment by industry
-"employment_by_industry_detailed"
+#"industry_employment_detailed"
 
 
 #' Internet Vacancies Index
@@ -313,9 +313,6 @@
 #' Facebook Mobility
 "mobility_facebook"
 
-#' aitidata Catalogues
-"aitidata_catalogues"
-
 #'jobseeker state
 "jobseeker_state"
 
@@ -335,10 +332,10 @@
 "retail_trade"
 
 #' Underemployment by industry
-"underemployment_by_industry"
+#"industry_underemployment"
 
 #' Underemployment by occupation
-"underemployment_by_occupation"
+#"occupation_underemployment"
 
 
 

@@ -3,6 +3,7 @@
 #' @param force_update logical
 #'
 #' @return logical: TRUE if data updated successfully 
+#' @export
 
 update_labour_force <- function(force_update = FALSE) {
   

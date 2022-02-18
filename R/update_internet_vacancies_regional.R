@@ -44,7 +44,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                           values_to = "value") %>%
       dplyr::mutate(date = as.Date(x = as.numeric(.data$date), origin = "1899-12-30"),
                     unit = "000",
-                    state = strayr::clean_state(State, to = "state_name"),
+                    state = strayr::clean_state(.data$State, to = "state_name"),
                     ANZSCO_TITLE = ifelse(grepl("TOTAL", .data$ANZSCO_TITLE), "TOTAL", .data$ANZSCO_TITLE),
                     region = dplyr::case_when(
                       region == "Blue Mountains, Bathurst & Central West NSW" ~ "Blue Mountains Bathurst & Central West",

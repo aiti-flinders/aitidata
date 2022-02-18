@@ -39,7 +39,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
                           values_to = "value") %>%
       dplyr::mutate(date = as.Date(x = as.numeric(.data$date), origin = "1899-12-30"),
                     unit = "000",
-                    state = strayr::clean_state(State, to = "state_name"),
+                    state = strayr::clean_state(.data$State, to = "state_name"),
                     Title = ifelse(grepl("TOTAL", .data$Title), "TOTAL", .data$Title)) %>%
       dplyr::group_by(.data$state, 
                       .data$date, 

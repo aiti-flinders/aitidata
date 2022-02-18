@@ -2,15 +2,22 @@
 #'
 #' @param force_update logical
 #' @return logical
-update_employment_by_industry <- function(force_update = FALSE) {
+update_industry_employment <- function(force_update = FALSE) {
+  
+  if (!force_update) {
   
   abs_file <- readabs::read_abs(cat_no = "6291.0.55.001", tables = "23a", retain_files = FALSE)
+  current_date <- max(abs_file$date)
   
-  if (max(abs_file$date) > max(aitidata::employment_by_industry$date) | force_update) {
+  } else {
+    current_date <- TRUE
+  }
+  
+  if (current_date > max(aitidata::industry_employment$date) | force_update) {
     
-    message("updating `employment_by_industry`")
+    message("updating `industry_employment`")
     
-    employment_by_industry <- readabs::read_abs(cat_no = "6291.0.55.001", tables = "5", retain_files = FALSE) %>%
+    industry_employment <- readabs::read_abs(cat_no = "6291.0.55.001", tables = "5", retain_files = FALSE) %>%
       tidyr::separate(.data$series, into = c("state", "industry", "indicator"), sep = ";", extra = "drop") %>%
       dplyr::mutate(dplyr::across(c("state", "industry", "indicator"), ~ gsub(pattern = "> ", x = .x, replacement = "")),
                     dplyr::across(where(is.character), ~trimws(.x)),
@@ -26,10 +33,10 @@ update_employment_by_industry <- function(force_update = FALSE) {
       dplyr::ungroup() %>%
       dplyr::select(.data$date, .data$year, .data$month, .data$indicator, .data$industry, .data$gender, .data$age, .data$state, .data$series_type, .data$value, .data$unit) 
     
-    usethis::use_data(employment_by_industry, overwrite = TRUE, compress = "xz")
+    usethis::use_data(industry_employment, overwrite = TRUE, compress = "xz")
     return(TRUE)
   } else {
-    message("Skipping `employment_by_industry.rda`: appears to be up-to-date")
+    message("Skipping `industry_employment.rda`: appears to be up-to-date")
     return(TRUE)
   
   }

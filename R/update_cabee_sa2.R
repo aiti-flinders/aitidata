@@ -1,3 +1,10 @@
+#' Update Count of Australian Businesses Data by SA2
+#'
+#' @param force_update logical. FALSE (the default) checks if new data is available before updating. 
+#'
+#' @return logical. TRUE if the update was successful
+#' @export 
+
 update_cabee_sa2 <- function(force_update = FALSE) {
   
   # The ABS is currently updating the CABEE release schedule. Add the check back after december 16th

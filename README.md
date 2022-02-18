@@ -7,6 +7,8 @@
 
 [![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg?branch=data_prep)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/aiti-flinders/aitidata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/aiti-flinders/aitidata?branch=master)
 <!-- badges: end -->
 
 `aitidata` is a collection of data sets commonly used by researchers at
@@ -16,7 +18,6 @@ about 11:30am each day.
 The current version of `aitidata` is 0.1.1
 
 Data was last updated 2022-02-18
-
 
 ## Installation
 
@@ -35,6 +36,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-16       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
+| covid\_data                    | COVID-19 Geographic data                                                              | 2022-01-01       |
 | hours\_worked                  | Hours worked                                                                          | 2022-01-01       |
 | internet\_vacancies\_index     | ABS Employment by Industry                                                            | 2022-01-01       |
 | internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-01-01       |
@@ -42,7 +44,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_state               | jobseeker state                                                                       | 2022-01-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-01-01       |
 | mobility\_google               | Google mobility                                                                       | 2021-12-03       |
-| covid\_data                    | COVID-19 Geographic data                                                              | 2021-12-01       |
 | retail\_trade                  | Retail trade                                                                          | 2021-12-01       |
 | industry\_employment           |                                                                                       | 2021-11-01       |
 | industry\_employment\_detailed |                                                                                       | 2021-11-01       |

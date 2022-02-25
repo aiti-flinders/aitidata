@@ -7,16 +7,21 @@
 #'
 update_industry_underemployment <- function(force_update = FALSE) {
     
-  abs_file <- readabs::read_abs(cat_no = "6291.0.55.001",
-                                tables = "23a",
-                                retain_files = FALSE)
+  readabs::download_abs_data_cube("labour-force-australia-detailed",
+                                               cube = "6291023a",
+                                               path = here::here("data-raw"))
+  
+  abs_file <- readabs::read_abs_local(path = here::here("data-raw"),
+                                      filenames = "6291023a.xlsx") 
     
     if (max(abs_file$date) > max(aitidata::industry_underemployment$date) | force_update) {
       message("Updating `industry_underemployment`, `occupation_underemployment`")
       
-      table_19 <- readabs::read_abs("6291.0.55.001", 
-                                    tables = "19",
-                                    retain_files = F) %>%
+      table_19 <- readabs::download_abs_data_cube("labour-force-australia-detailed",
+                                                  cube = "6291019.xlsx",
+                                                  path = here::here("data-raw"))
+      table_19 <- readabs::read_abs_local(path = here::here("data-raw"),
+                                          filenames = "6291019.xlsx") %>%
         readabs::separate_series(column_names = c("industry", "indicator", "gender"),
                                  remove_nas = TRUE) %>%
         dplyr::mutate(year = lubridate::year(.data$date),

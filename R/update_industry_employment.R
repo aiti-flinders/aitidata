@@ -6,8 +6,14 @@ update_industry_employment <- function(force_update = FALSE) {
   
   if (!force_update) {
   
-  abs_file <- readabs::read_abs(cat_no = "6291.0.55.001", tables = "23a", retain_files = FALSE)
-  current_date <- max(abs_file$date)
+  readabs::download_abs_data_cube("labour-force-australia-detailed",
+                                               cube = "6291023a.xlsx",
+                                               path = here::here("data-raw"))
+  
+  current_date <- readabs::read_abs_local(path = here::here("data-raw"),
+                                          filenames = "6291023a.xlsx") %>%
+    dplyr::pull(date) %>%
+    max()
   
   } else {
     current_date <- TRUE
@@ -17,7 +23,12 @@ update_industry_employment <- function(force_update = FALSE) {
     
     message("updating `industry_employment`")
     
-    industry_employment <- readabs::read_abs(cat_no = "6291.0.55.001", tables = "5", retain_files = FALSE) %>%
+    readabs::download_abs_data_cube("labour-force-australia-detailed",
+                                                           cube = "6291005.xlsx",
+                                                           path = here::here("data-raw"))
+    
+    industry_employment <- readabs::read_abs_local(path = here::here("data-raw"),
+                                                   filenames = "6291005.xlsx") %>%
       tidyr::separate(.data$series, into = c("state", "industry", "indicator"), sep = ";", extra = "drop") %>%
       dplyr::mutate(dplyr::across(c("state", "industry", "indicator"), ~ gsub(pattern = "> ", x = .x, replacement = "")),
                     dplyr::across(where(is.character), ~trimws(.x)),
@@ -34,7 +45,7 @@ update_industry_employment <- function(force_update = FALSE) {
       dplyr::select(.data$date, .data$year, .data$month, .data$indicator, .data$industry, .data$gender, .data$age, .data$state, .data$series_type, .data$value, .data$unit) 
     
     usethis::use_data(industry_employment, overwrite = TRUE, compress = "xz")
-    return(TRUE)
+    file.remove(abs_file)
   } else {
     message("Skipping `industry_employment.rda`: appears to be up-to-date")
     return(TRUE)

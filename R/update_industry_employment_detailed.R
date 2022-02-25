@@ -7,9 +7,16 @@
 #'
 update_industry_employment_detailed <- function(force_update = FALSE) {
   
-  abs_test <- readabs::read_abs("6291.0.55.001", tables = "23a", retain_files = FALSE)
+  abs_file <-  readabs::download_abs_data_cube("labour-force-australia-detailed",
+                                               cube = "6291023a",
+                                               path = here::here("data-raw"))
   
-  if (max(abs_test$date) > max(aitidata::industry_employment_detailed$date) | force_update) {
+  current_date <- readabs::read_abs_local(path = here::here("data-raw"),
+                                          filenames = "6291023a.xlsx") %>%
+    dplyr::pull(date) %>%
+    max()
+  
+  if (current_date > max(aitidata::industry_employment_detailed$date) | force_update) {
     message("Updating `industry_employment_detailed.rda`")
     
     abs_file <- aitidata::download_data_cube("labour-force-australia-detailed", 

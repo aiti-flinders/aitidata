@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-01
+Data was last updated 2022-03-02
 
 ## Installation
 
@@ -33,7 +33,7 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-25       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-27       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-01-01       |
@@ -53,9 +53,9 @@ devtools::install_github("aiti-flinders/aitidata")
 | labour\_account                | ABS Labour Account                                                                    | 2021-09-01       |
 | national\_accounts             | ABS National Accounts                                                                 | 2021-09-01       |
 | small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2021-09-01       |
+| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-03-01       |
 | jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper\_state               | Jobkeeper applications by state                                                       | 2021-03-01       |
-| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-02-01       |
 | abs\_urls                      | Match ABS Catalogue names with URLS                                                   | NA               |
 | anzsic                         | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               |
 | aus\_manufacturing             | Australian Manufacturing                                                              | NA               |

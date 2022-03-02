@@ -55,7 +55,6 @@ update_national_accounts <- function(force_update = FALSE) {
   } else {
     
     message("Skipping `national_accounts.rda`: appears to be up-to-date")
-    file.remove(abs_test)
-   
+    return(TRUE)
   }
 }

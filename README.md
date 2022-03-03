@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-02
+Data was last updated 2022-03-03
 
 ## Installation
 
@@ -33,7 +33,7 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-27       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-28       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-01-01       |

@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-04
+Data was last updated 2022-03-07
 
 ## Installation
 
@@ -33,7 +33,7 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-02-28       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-03-01       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-01-15       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-01-15       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-01-01       |
@@ -43,8 +43,8 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-01-01       |
 | jobseeker\_state               | jobseeker state                                                                       | 2022-01-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-01-01       |
+| retail\_trade                  | Retail trade                                                                          | 2022-01-01       |
 | mobility\_google               | Google mobility                                                                       | 2021-12-03       |
-| retail\_trade                  | Retail trade                                                                          | 2021-12-01       |
 | industry\_employment           |                                                                                       | 2021-11-01       |
 | industry\_employment\_detailed |                                                                                       | 2021-11-01       |
 | industry\_underemployment      | Underemployment by industry                                                           | 2021-11-01       |

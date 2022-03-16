@@ -45,8 +45,8 @@ update_industry_employment <- function(force_update = FALSE) {
       dplyr::select(.data$date, .data$year, .data$month, .data$indicator, .data$industry, .data$gender, .data$age, .data$state, .data$series_type, .data$value, .data$unit) 
     
     usethis::use_data(industry_employment, overwrite = TRUE, compress = "xz")
-    file.remove(abs_file)
-  } else {
+    return(TRUE)
+    } else {
     message("Skipping `industry_employment.rda`: appears to be up-to-date")
     return(TRUE)
   

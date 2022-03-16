@@ -3,30 +3,8 @@
 \docType{data}
 \name{internet_vacancies_index}
 \alias{internet_vacancies_index}
-\title{ABS Employment by Industry}
+\title{Internet Vacancies Index}
 \format{
-A dataframe with 11 variables:
-\describe{
-\item{date}{Date}
-\item{year}{Year}
-\item{month}{Month}
-\item{indicator}{Indicator}
-\itemize{
-\item{Employed total}
-\item{Underemployed total}
-\item{Underemployment ratio (proportion of employed)}
-\item{Employed full-time}
-\item{Employed part-time}
-}
-\item{industry}{Industry of employment}
-\item{gender}{Gender}
-\item{age}{Age}
-\item{state}{State}
-\item{series_type}{Level of adjustment of original data: original (no adjustment), seasonally adjusted, or trend}
-\item{value}{Value of employment indicator}
-\item{unit}{Unit of measurement for indiciator}
-}
-
 A dataframe with 7 variables
 \describe{
 \item{state}{State}
@@ -39,21 +17,14 @@ A dataframe with 7 variables
 }
 }
 \source{
-\url{https://www.abs.gov.au/ausstats/abs@.nsf/PrimaryMainFeatures/6291.0.55.001?OpenDocument}
-ABS Detailed employment by industry
-Internet Vacancies Index
-
-A dataset containing monthly nation and sub-national internet vacancies by
-occupation since January 2006. Data is updated monthly, about one week
-after the Labour Force Survey is released.
-
 \url{https://lmip.gov.au/default.aspx?LMIP/GainInsights/VacancyReport}
 }
 \usage{
 internet_vacancies_index
 }
 \description{
-A dataset containing quarterly national and sub-national employment indicators
-by industry of employment since February 1991.
+A dataset containing monthly nation and sub-national internet vacancies by
+occupation since January 2006. Data is updated monthly, about one week
+after the Labour Force Survey is released.
 }
 \keyword{datasets}

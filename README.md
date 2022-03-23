@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-22
+Data was last updated 2022-03-23
 
 ## Installation
 
@@ -33,14 +33,14 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-03-15       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-03-19       |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-02-12       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-02-12       |
+| covid\_data                    | COVID-19 Geographic data                                                              | 2022-02-01       |
 | hours\_worked                  | Hours worked                                                                          | 2022-02-01       |
 | jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-02-01       |
 | jobseeker\_state               | jobseeker state                                                                       | 2022-02-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-02-01       |
-| covid\_data                    | COVID-19 Geographic data                                                              | 2022-01-01       |
 | internet\_vacancies\_index     | Internet Vacancies Index                                                              | 2022-01-01       |
 | internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-01-01       |
 | retail\_trade                  | Retail trade                                                                          | 2022-01-01       |

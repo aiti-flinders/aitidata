@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-31
+Data was last updated 2022-04-08
 
 ## Installation
 
@@ -33,9 +33,9 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-03-29       |
-| payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-02-12       |
-| payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-02-12       |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-04-05       |
+| payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-03-12       |
+| payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-03-12       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-02-01       |
 | hours\_worked                  | Hours worked                                                                          | 2022-02-01       |
 | industry\_employment           | ABS Employment by Industry                                                            | 2022-02-01       |
@@ -47,13 +47,13 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_state               | jobseeker state                                                                       | 2022-02-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-02-01       |
 | occupation\_underemployment    | Underemployment by occupation                                                         | 2022-02-01       |
+| retail\_trade                  | Retail trade                                                                          | 2022-02-01       |
 | underutilisation               | ABS Measures of Underutilisation                                                      | 2022-02-01       |
-| retail\_trade                  | Retail trade                                                                          | 2022-01-01       |
 | mobility\_google               | Google mobility                                                                       | 2021-12-03       |
 | labour\_account                | ABS Labour Account                                                                    | 2021-12-01       |
-| national\_accounts             | ABS National Accounts                                                                 | 2021-09-01       |
+| national\_accounts             | ABS National Accounts                                                                 | 2021-12-01       |
 | small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2021-09-01       |
-| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-03-01       |
+| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-04-01       |
 | jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper\_state               | Jobkeeper applications by state                                                       | 2021-03-01       |
 | abs\_urls                      | Match ABS Catalogue names with URLS                                                   | NA               |

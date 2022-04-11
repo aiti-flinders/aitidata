@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-03-31
+Data was last updated 2022-04-11
 
 ## Installation
 
@@ -51,7 +51,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | retail\_trade                  | Retail trade                                                                          | 2022-01-01       |
 | mobility\_google               | Google mobility                                                                       | 2021-12-03       |
 | labour\_account                | ABS Labour Account                                                                    | 2021-12-01       |
-| national\_accounts             | ABS National Accounts                                                                 | 2021-09-01       |
+| national\_accounts             | ABS National Accounts                                                                 | 2021-12-01       |
 | small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2021-09-01       |
 | cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-03-01       |
 | jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       |

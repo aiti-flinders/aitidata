@@ -8,7 +8,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
   
   if (!force_update) {
     
-    utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790179&.xlsx",
+    utils::download.file("https://labourmarketinsights.gov.au/media/afsfdmij/ivi_data_skill-level-january-2006-onwards.xlsx",
                          destfile = here::here("data-raw/ivi_test.xlsx"),
                          mode = "wb")
     
@@ -24,7 +24,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
   if (current_date > max(aitidata::internet_vacancies_index$date) | force_update) {
     
     message("Updating `internet_vacancies_index` dataset.")
-    utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790177&.xlsx",
+    utils::download.file("https://labourmarketinsights.gov.au/media/mh2ltysb/ivi_data-january-2006-onwards.xlsx",
                          destfile = here::here("data-raw/ivi_basic.xlsx"),
                          mode = "wb")
     

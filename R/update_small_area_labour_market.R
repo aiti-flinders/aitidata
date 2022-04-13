@@ -6,8 +6,15 @@
 update_small_area_labour_market <- function(force_update = FALSE) {
   
   if (!force_update) {
+    
+    filename <- xml2::read_html("https://www.nationalskillscommission.gov.au/topics/small-area-labour-markets") %>%
+      rvest::html_elements("a.downloadLink") %>%
+      rvest::html_attr("href") %>%
+      .[5]
+    
+    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
   
-  download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193962&.csv",
+  download.file(url,
                 destfile = here::here("data-raw/salm_test.csv"),
                 mode = "wb")
   current_date <- readr::read_csv(here::here("data-raw/salm_test.csv"),
@@ -15,13 +22,21 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     dplyr::select(dplyr::last_col()) 
   
   current_date <- as.Date(paste0(colnames(current_date), "-01"), format = "%b-%y-%d")
+  
   } else {
     current_date <- TRUE
   }
   
   if (current_date > max(aitidata::small_area_labour_market$date) | force_update) {
     
-    download.file("https://lmip.gov.au/PortalFile.axd?FieldID=3193958&.csv",
+    filename <- xml2::read_html("https://www.nationalskillscommission.gov.au/topics/small-area-labour-markets") %>%
+      rvest::html_elements("a.downloadLink") %>%
+      rvest::html_attr("href") %>%
+      .[3]
+    
+    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
+    
+    download.file(url,
                   destfile = here::here("data-raw/salm_sa2.csv"),
                   mode = "wb")
     

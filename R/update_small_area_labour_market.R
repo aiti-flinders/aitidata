@@ -25,7 +25,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
   
   } else {
     current_date <- TRUE
-  }
+  } 
   
   if (current_date > max(aitidata::small_area_labour_market$date) | force_update) {
     
@@ -46,6 +46,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     
     all_sa2 <- data.frame(strayr::read_absmap("sa22016", remove_year_suffix = TRUE)) %>%
       dplyr::select(.data$sa2_name, .data$sa2_code, .data$state_name)
+    
     
     small_area_labour_market <- raw %>%
       dplyr::mutate(dplyr::across(where(is.numeric), as.character)) %>%

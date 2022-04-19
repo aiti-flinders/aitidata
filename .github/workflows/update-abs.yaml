@@ -37,10 +37,6 @@ jobs:
       - name: Render README
         run: |
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
-      - name: Increment Version
-        run: |
-          Rscript -e "usethis::use_version(which = 'patch')"
-
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'

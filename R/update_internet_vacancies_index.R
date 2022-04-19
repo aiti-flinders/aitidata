@@ -61,7 +61,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     file.remove(here::here("data-raw/ivi_basic.xlsx"))
   } else {
     message("Skipping update of `internet_vacancies_index`: data is up-to-date")
-    file.remove(here::here("data-raw/ivi_test.xslx"))
+    file.remove(here::here("data-raw/ivi_test.xlsx"))
   }
 }
 

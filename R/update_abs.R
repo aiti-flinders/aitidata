@@ -22,5 +22,6 @@ update_abs <- function(force_update = FALSE) {
   update_cabee_sa2(force_update)
   update_payroll_index(force_update)
   update_payroll_substate(force_update)
+  update_household_spending(force_update)
   update_covid_data() #this has to be after jobseeker, payroll, small area
 }

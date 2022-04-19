@@ -51,7 +51,7 @@ update_household_spending <- function(force_update = FALSE) {
     
     usethis::use_data(household_spending, overwrite = TRUE, compress = "xz")
     
-    file.remove(files)
+    file.remove(unlist(files))
      
   } else {
     message("Skipping `household_spending,rda`: appears to be up-to-date")

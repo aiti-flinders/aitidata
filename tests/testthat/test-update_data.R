@@ -17,5 +17,6 @@ test_that("update_ functions work", {
   expect_true(update_payroll_index(TRUE))
   expect_true(update_payroll_substate(TRUE))
   expect_true(update_industry_employment_detailed(TRUE))
+  expect_true(update_household_spending(TRUE))
   expect_true(update_covid_data())
 })

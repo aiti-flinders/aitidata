@@ -338,6 +338,9 @@
 #' Underemployment by occupation
 "occupation_underemployment"
 
+#' Experimental household spending
+"household_spending"
+
 #' Match ABS Catalogue names with URLS
 "abs_urls"
 

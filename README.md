@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-04-19
+Data was last updated 2022-04-20
 
 ## Installation
 
@@ -33,34 +33,34 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                      | Description                                                                           | Most Recent Data | Last Updated |
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- | :----------- |
-| mobility\_facebook             | Facebook Mobility                                                                     | 2022-04-17       | 2022-04-19   |
-| payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-03-12       | 2022-04-19   |
-| payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-03-12       | 2022-04-19   |
-| hours\_worked                  | Hours worked                                                                          | 2022-03-01       | 2022-04-19   |
-| labour\_force                  | ABS Labour Force Survey                                                               | 2022-03-01       | 2022-04-19   |
-| covid\_data                    | COVID-19 Geographic data                                                              | 2022-02-01       | 2022-04-19   |
-| household\_spending            | Experimental household spending                                                       | 2022-02-01       | 2022-04-19   |
-| industry\_employment           | ABS Employment by Industry                                                            | 2022-02-01       | 2022-04-19   |
-| industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-02-01       | 2022-04-19   |
-| industry\_underemployment      | Underemployment by industry                                                           | 2022-02-01       | 2022-04-19   |
-| internet\_vacancies\_index     | Internet Vacancies Index                                                              | 2022-02-01       | 2022-04-19   |
-| internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-02-01       | 2022-04-19   |
-| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-02-01       | 2022-04-19   |
-| jobseeker\_state               | jobseeker state                                                                       | 2022-02-01       | 2022-04-19   |
-| occupation\_underemployment    | Underemployment by occupation                                                         | 2022-02-01       | 2022-04-19   |
-| retail\_trade                  | Retail trade                                                                          | 2022-02-01       | 2022-04-19   |
-| underutilisation               | ABS Measures of Underutilisation                                                      | 2022-02-01       | 2022-04-19   |
-| mobility\_google               | Google mobility                                                                       | 2021-12-03       | 2022-04-19   |
-| labour\_account                | ABS Labour Account                                                                    | 2021-12-01       | 2022-04-19   |
-| national\_accounts             | ABS National Accounts                                                                 | 2021-12-01       | 2022-04-19   |
-| small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2021-12-01       | 2022-04-19   |
-| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-04-01       | 2022-04-19   |
-| jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       | 2022-04-19   |
-| jobkeeper\_state               | Jobkeeper applications by state                                                       | 2021-03-01       | 2022-04-19   |
-| abs\_urls                      | Match ABS Catalogue names with URLS                                                   | NA               | 2022-04-19   |
-| anzsic                         | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               | 2022-04-19   |
-| aus\_manufacturing             | Australian Manufacturing                                                              | NA               | 2022-04-19   |
-| economic\_complexity           | Australian Subnational Economic Complexity                                            | NA               | 2022-04-19   |
-| internet\_vacancy\_regions     | Internet vacancy regions                                                              | NA               | 2022-04-19   |
-| seek\_data                     | Seek Job Ads                                                                          | NA               | 2022-04-19   |
-| south\_australia\_net\_debt    | South Australia Historic Net Debt                                                     | NA               | 2022-04-19   |
+| mobility\_facebook             | Facebook Mobility                                                                     | 2022-04-17       | 2022-04-20   |
+| payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-03-12       | 2022-04-20   |
+| payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-03-12       | 2022-04-20   |
+| hours\_worked                  | Hours worked                                                                          | 2022-03-01       | 2022-04-20   |
+| labour\_force                  | ABS Labour Force Survey                                                               | 2022-03-01       | 2022-04-20   |
+| covid\_data                    | COVID-19 Geographic data                                                              | 2022-02-01       | 2022-04-20   |
+| household\_spending            | Experimental household spending                                                       | 2022-02-01       | 2022-04-20   |
+| industry\_employment           | ABS Employment by Industry                                                            | 2022-02-01       | 2022-04-20   |
+| industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-02-01       | 2022-04-20   |
+| industry\_underemployment      | Underemployment by industry                                                           | 2022-02-01       | 2022-04-20   |
+| internet\_vacancies\_index     | Internet Vacancies Index                                                              | 2022-02-01       | 2022-04-20   |
+| internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-02-01       | 2022-04-20   |
+| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-02-01       | 2022-04-20   |
+| jobseeker\_state               | jobseeker state                                                                       | 2022-02-01       | 2022-04-20   |
+| occupation\_underemployment    | Underemployment by occupation                                                         | 2022-02-01       | 2022-04-20   |
+| retail\_trade                  | Retail trade                                                                          | 2022-02-01       | 2022-04-20   |
+| underutilisation               | ABS Measures of Underutilisation                                                      | 2022-02-01       | 2022-04-20   |
+| mobility\_google               | Google mobility                                                                       | 2021-12-03       | 2022-04-20   |
+| labour\_account                | ABS Labour Account                                                                    | 2021-12-01       | 2022-04-20   |
+| national\_accounts             | ABS National Accounts                                                                 | 2021-12-01       | 2022-04-20   |
+| small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2021-12-01       | 2022-04-20   |
+| cabee\_sa2                     | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-04-01       | 2022-04-20   |
+| jobkeeper\_sa2                 | JobKeeper data by SA2                                                                 | 2021-03-01       | 2022-04-20   |
+| jobkeeper\_state               | Jobkeeper applications by state                                                       | 2021-03-01       | 2022-04-20   |
+| abs\_urls                      | Match ABS Catalogue names with URLS                                                   | NA               | 2022-04-20   |
+| anzsic                         | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               | 2022-04-20   |
+| aus\_manufacturing             | Australian Manufacturing                                                              | NA               | 2022-04-20   |
+| economic\_complexity           | Australian Subnational Economic Complexity                                            | NA               | 2022-04-20   |
+| internet\_vacancy\_regions     | Internet vacancy regions                                                              | NA               | 2022-04-20   |
+| seek\_data                     | Seek Job Ads                                                                          | NA               | 2022-04-20   |
+| south\_australia\_net\_debt    | South Australia Historic Net Debt                                                     | NA               | 2022-04-20   |

@@ -16,7 +16,7 @@ update_aus_manufacturing <- function(force_update = FALSE) {
   
   if (max(years) > max(aitidata::aus_manufacturing$year) | force_update) {
     
-    aus_manufacturing <- readxl::read_xls(abs_file, 
+    aus_manufacturing <- readxl::read_excel(abs_file, 
                                           sheet = "Table_1", 
                                           skip = 7, 
                                           col_names = c("industry", "employment_1", "wages_1", "income_1", "iva_1",

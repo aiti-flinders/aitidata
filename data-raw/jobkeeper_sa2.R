@@ -97,7 +97,7 @@ get_file_types <- function(file, sheet, skip, n_max) {
 
 read_jobkeeper <- function(file, sheet, ...) {
   ft <- get_file_types(file, sheet = sheet, skip = 1, n_max = 0)
-  jobkeeper_postal <- readxl::read_xlsx(path = file, 
+  jobkeeper_postal <- readxl::read_excel(path = file, 
                                         sheet = sheet,
                                         skip = 2,
                                         col_types = ft$ct,

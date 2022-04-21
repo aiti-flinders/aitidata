@@ -9,7 +9,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
   if (!force_update) {
   
   
-  utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790179&.xlsx",
+  utils::download.file("https://labourmarketinsights.gov.au/media/afsfdmij/ivi_data_skill-level-january-2006-onwards.xlsx",
                 destfile = here::here("data-raw/ivi_test.xlsx"),
                 mode = "wb")
   
@@ -29,7 +29,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
-    utils::download.file("https://lmip.gov.au/PortalFile.axd?FieldID=2790180&.xlsx",
+    utils::download.file("https://labourmarketinsights.gov.au/media/tpdfqiiy/ivi_data_regional-may-2010-onwards.xlsx",
                   destfile = here::here("data-raw/ivi_regional.xlsx"),
                   mode = "wb")
     

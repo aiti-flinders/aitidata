@@ -96,10 +96,11 @@
 #' }
 #'
 #' @source \url{https://www.abs.gov.au/ausstats/abs@.nsf/PrimaryMainFeatures/6291.0.55.001?OpenDocument}
-#"industry_employment"
+
+"industry_employment"
 
 #' ABS Detailed employment by industry
-#"industry_employment_detailed"
+"industry_employment_detailed"
 
 
 #' Internet Vacancies Index
@@ -336,6 +337,9 @@
 
 #' Underemployment by occupation
 "occupation_underemployment"
+
+#' Experimental household spending
+"household_spending"
 
 #' Match ABS Catalogue names with URLS
 "abs_urls"

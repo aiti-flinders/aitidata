@@ -5,7 +5,7 @@ update_labour_account <- function(force_update = FALSE) {
                                            cube = "6150055003DO001.xls",
                                            path = "data-raw")
   
-  current_date <- readxl::read_xls(abs_test, sheet = 2, skip = 9) %>%
+  current_date <- readxl::read_excel(abs_test, sheet = 2, skip = 9) %>%
     dplyr::select(1) %>%
     dplyr::pull() %>%
     max() %>%

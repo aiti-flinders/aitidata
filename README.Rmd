@@ -21,16 +21,19 @@ write_metadata <- function() {
  included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] %>%
    dplyr::mutate(Item = paste0("aitidata::", Item))
  
- dates <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
- 
- dplyr::bind_cols(included_data, dates) %>%
-   dplyr::mutate(Item = str_remove_all(Item, "aitidata::")) %>% 
+ date_max <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
+
+ dplyr::bind_cols(included_data, date_max) %>%
+   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::"),
+                 last_updated = as.Date(file.info(here::here("data", paste0(Item, ".rda")))$mtime)) %>% 
    dplyr::rename("Data Name" = Item,
           "Description" = Title,
-          "Most Recent Data" = date) %>%  
+          "Most Recent Data" = date,
+          "Last Updated" = last_updated) %>%  
    dplyr::arrange(desc(`Most Recent Data`))
  
 }
+
 
 safe_max <- function(df) {
   

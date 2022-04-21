@@ -43,6 +43,5 @@ jobs:
           git config --global user.email 'gamb0043@flinders.edu.au'
           git add .
           git commit -m 'Scheduled data updates' || echo "No changes to commit"
-          Rscript -e "usethis::use_version(which = 'patch')"
           git push || echo "No changes to commit"
 

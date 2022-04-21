@@ -1,7 +1,14 @@
+#' Update National Accounts ABS Data
+#' 
+#' @param force_update logical. FALSE (the default) checks if new data is available before updating.
+#'
+#' @return logical. TRUE if the update completed successfully or no new data found
+#' @export 
+#'
 update_national_accounts <- function(force_update = FALSE) {
   abs_test <- readabs::read_abs(cat_no = "5206.0", tables = 42, retain_files = FALSE)
   
-  if (max(abs_test$date) <= max(aitidata::national_accounts$date) | force_update) {
+  if (max(abs_test$date) > max(aitidata::national_accounts$date) | force_update) {
     
     message("Updating `national_accounts.rda`")
     raw <- readabs::read_abs(cat_no = "5206.0", tables = c(1, 6), retain_files = FALSE)

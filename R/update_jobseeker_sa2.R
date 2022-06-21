@@ -37,28 +37,28 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
       dplyr::select(.data$sa2_code, 
                     .data$jobseeker_payment, 
                     .data$youth_allowance_other, 
-                    .data$date) 
+                    .data$date) %>%
+      tidyr::pivot_longer(names_to = "indicator",
+                          values_to = "value",
+                          cols = c(.data$jobseeker_payment, .data$youth_allowance_other)) %>%
+      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")))
+    
     
     jobseeker_sa2 <- dss_new %>% 
       dplyr::bind_rows(aitidata::jobseeker_sa2) %>%
-      dplyr::arrange(.data$date) %>%
-      dplyr::group_by(.data$sa2_code) %>%
-      dplyr::mutate(jobseeker_growth = .data$jobseeker_payment - dplyr::lag(.data$jobseeker_payment),
-                    youth_allowance_growth = .data$youth_allowance_other - dplyr::lag(.data$youth_allowance_other)) %>%
-      dplyr::ungroup() %>%
-      tidyr::pivot_longer(cols = -c(.data$sa2_code, .data$date), names_to = "indicator", values_to = "value") %>%
-      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")))
-    
+      dplyr::distinct()
+
     jobseeker_state <- dss_new %>%
       dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = c("sa2_code")) %>%
       dplyr::select(.data$state_name, 
-                    .data$jobseeker_payment,
-                    .data$youth_allowance_other,
+                    .data$indicator,
+                    .data$value,
                     .data$date) %>%
       dplyr::arrange(.data$date) %>%
       dplyr::group_by(.data$state_name, 
+                      .data$indicator,
                       .data$date) %>%
-      dplyr::summarise(dplyr::across(c(.data$jobseeker_payment, .data$youth_allowance_other), ~sum(.,na.rm = T)), .groups = "drop") %>%
+      dplyr::summarise(value = sum(value), .groups = "drop") %>%
       dplyr::ungroup() %>%
       dplyr::bind_rows(aitidata::jobseeker_state) %>%
       tidyr::pivot_longer(cols = -c(.data$state_name, .data$date), names_to = "indicator", values_to = "value") %>%

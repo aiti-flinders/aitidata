@@ -5,7 +5,7 @@
 \alias{household_spending}
 \title{Experimental household spending}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3600 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3654 rows and 4 columns.
 }
 \usage{
 household_spending

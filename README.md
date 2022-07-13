@@ -64,3 +64,4 @@ devtools::install_github("aiti-flinders/aitidata")
 | internet_vacancy_regions     | Internet vacancy regions                                                              | NA               |
 | seek_data                    | Seek Job Ads                                                                          | NA               |
 | south_australia_net_debt     | South Australia Historic Net Debt                                                     | NA               |
+

@@ -5,6 +5,23 @@
 
 update_household_spending <- function(force_update = FALSE) {
   
+  hh_spending <- function(path, state) {
+    
+    readxl::read_excel(path, 
+                       sheet = "Data 2",
+                       skip = 4,
+                       col_types = c("date",
+                                     rep("numeric", 10))) %>%
+      tidyr::pivot_longer(cols = 2:length(.),
+                          names_to = "coicop_division",
+                          values_to = "index") %>%
+      dplyr::mutate(date = as.Date(...1, origin = "1899-12-30"), 
+                    state = state) %>%
+      dplyr::filter(!is.na(index)) %>% 
+      dplyr::select(-...1)
+    
+  }
+  
   if (!force_update) {
     
     fname <- aitidata::download_data_cube(catalogue_string = "monthly-household-spending-indicator",
@@ -28,6 +45,7 @@ update_household_spending <- function(force_update = FALSE) {
       
     }
     
+
     current_date <- hh_spending(fname, "Australia") %>%
       dplyr::pull(date) %>%
       max()
@@ -51,7 +69,7 @@ update_household_spending <- function(force_update = FALSE) {
     
     usethis::use_data(household_spending, overwrite = TRUE, compress = "xz")
     
-    file.remove(unlist(files))
+    any(file.remove(unlist(files)))
      
   } else {
     message("Skipping `household_spending,rda`: appears to be up-to-date")

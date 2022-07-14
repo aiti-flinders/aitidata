@@ -38,6 +38,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | mobility\_facebook             | Facebook Mobility                                                                     | 2022-05-22       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-05-01       |
 | hours\_worked                  | Hours worked                                                                          | 2022-05-01       |
+| household\_spending            | Experimental household spending                                                       | 2022-05-01       |
 | industry\_employment           | ABS Employment by Industry                                                            | 2022-05-01       |
 | industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-05-01       |
 | industry\_underemployment      | Underemployment by industry                                                           | 2022-05-01       |
@@ -47,7 +48,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | occupation\_underemployment    | Underemployment by occupation                                                         | 2022-05-01       |
 | retail\_trade                  | Retail trade                                                                          | 2022-05-01       |
 | underutilisation               | ABS Measures of Underutilisation                                                      | 2022-05-01       |
-| household\_spending            | Experimental household spending                                                       | 2022-04-01       |
 | labour\_account                | ABS Labour Account                                                                    | 2022-03-01       |
 | national\_accounts             | ABS National Accounts                                                                 | 2022-03-01       |
 | small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2022-03-01       |

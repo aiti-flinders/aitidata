@@ -5,7 +5,11 @@
 \alias{jobseeker_state}
 \title{jobseeker state}
 \format{
+<<<<<<< HEAD
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 486 rows and 4 columns.
+=======
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 504 rows and 4 columns.
+>>>>>>> 15790a1a6590cdc19c92133dfa5b44f43cf9250d
 }
 \usage{
 jobseeker_state

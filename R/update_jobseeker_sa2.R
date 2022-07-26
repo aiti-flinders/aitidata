@@ -50,27 +50,18 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
 
     jobseeker_state <- dss_new %>%
       dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = c("sa2_code")) %>%
-      dplyr::select(.data$state_name, 
+      dplyr::select(state = .data$state_name, 
                     .data$indicator,
                     .data$value,
                     .data$date) %>%
       dplyr::arrange(.data$date) %>%
-      dplyr::group_by(.data$state_name, 
+      dplyr::group_by(.data$state, 
                       .data$indicator,
                       .data$date) %>%
       dplyr::summarise(value = sum(value), .groups = "drop") %>%
       dplyr::ungroup() %>%
-      dplyr::bind_rows(aitidata::jobseeker_state) %>%
-      tidyr::pivot_longer(cols = -c(.data$state_name, .data$date), names_to = "indicator", values_to = "value") %>%
-      dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")),
-                    series_type = "Original",
-                    gender = "Persons",
-                    age = "Total (age)",
-                    unit = "000", 
-                    year = lubridate::year(.data$date),
-                    month = lubridate::month(.data$date, abbr = FALSE, label = TRUE)) %>%
-      dplyr::rename(state = .data$state_name)
-    
+      dplyr::bind_rows(aitidata::jobseeker_state) 
+
     usethis::use_data(jobseeker_state, compress = "xz", overwrite = TRUE)
     usethis::use_data(jobseeker_sa2, compress = "xz", overwrite = TRUE)
     

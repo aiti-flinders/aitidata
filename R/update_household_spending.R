@@ -11,7 +11,7 @@ update_household_spending <- function(force_update = FALSE) {
                        sheet = "Data 2",
                        skip = 4,
                        col_types = c("date",
-                                     rep("numeric", 10))) %>%
+                                     rep("numeric", 14))) %>%
       tidyr::pivot_longer(cols = 2:length(.),
                           names_to = "coicop_division",
                           values_to = "index") %>%

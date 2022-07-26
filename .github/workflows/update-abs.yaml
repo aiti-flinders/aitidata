@@ -23,11 +23,18 @@ jobs:
       - uses: actions/checkout@v2 
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@v1
+      - name: Homebrew setup
+        run: |
+         brew install pkg-config
+         brew install gdal proj geos
       - name: Install packages
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
-          Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval'), tpe = 'binary')"
+          Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval'), type = 'mac.binary')"
+          Rscript -e "install.packages('rgeos', repos='http://R-Forge.R-project.org', type='source')"
+          Rscript -e "install.packages('rgdal', repos='http://R-Forge.R-project.org', type='source')"
+          Rscript -e "devtools::install_github('r-spatial/sf', configure.args = '--with-proj-lib=/usr/local/lib/')"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
       - name: Get data
         run: |

@@ -24,12 +24,10 @@ write_metadata <- function() {
  date_max <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
 
  dplyr::bind_cols(included_data, date_max) %>%
-   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::"),
-                 last_updated = as.Date(file.info(here::here("data", paste0(Item, ".rda")))$mtime)) %>% 
+   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::")) %>%
    dplyr::rename("Data Name" = Item,
           "Description" = Title,
-          "Most Recent Data" = date,
-          "Last Updated" = last_updated) %>%  
+          "Most Recent Data" = date) %>%  
    dplyr::arrange(desc(`Most Recent Data`))
  
 }

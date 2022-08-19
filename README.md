@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-08-18
+Data was last updated 2022-08-19
 
 ## Installation
 
@@ -35,12 +35,12 @@ devtools::install_github("aiti-flinders/aitidata")
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-07-16       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-07-16       |
+| hours\_worked                  | Hours worked                                                                          | 2022-07-01       |
+| labour\_force                  | ABS Labour Force Survey                                                               | 2022-07-01       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-06-01       |
-| hours\_worked                  | Hours worked                                                                          | 2022-06-01       |
 | household\_spending            | Experimental household spending                                                       | 2022-06-01       |
 | jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-06-01       |
 | jobseeker\_state               | jobseeker state                                                                       | 2022-06-01       |
-| labour\_force                  | ABS Labour Force Survey                                                               | 2022-06-01       |
 | retail\_trade                  | Retail trade                                                                          | 2022-06-01       |
 | mobility\_facebook             | Facebook Mobility                                                                     | 2022-05-22       |
 | industry\_employment           | ABS Employment by Industry                                                            | 2022-05-01       |

@@ -19,7 +19,7 @@ update_abs <- function(force_update = FALSE) {
   update_jobseeker_sa2(force_update)
   update_labour_force(force_update)
   update_retail_trade(force_update)
-  update_cabee_sa2(force_update)
+  #update_cabee_sa2(force_update)
   update_payroll_index(force_update)
   update_payroll_substate(force_update)
   update_household_spending(force_update)

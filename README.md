@@ -40,8 +40,8 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-07-01       |
 | jobseeker\_state               | jobseeker state                                                                       | 2022-07-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-07-01       |
+| retail\_trade                  | Retail trade                                                                          | 2022-07-01       |
 | household\_spending            | Experimental household spending                                                       | 2022-06-01       |
-| retail\_trade                  | Retail trade                                                                          | 2022-06-01       |
 | mobility\_facebook             | Facebook Mobility                                                                     | 2022-05-22       |
 | industry\_employment           | ABS Employment by Industry                                                            | 2022-05-01       |
 | industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-05-01       |

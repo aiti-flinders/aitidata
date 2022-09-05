@@ -7,9 +7,20 @@ update_household_spending <- function(force_update = FALSE) {
   
   hh_spending <- function(path, state) {
     
+    cur_month_header <- readxl::read_excel(path,
+                                           sheet = "Data 2",
+                                           range = "A4") %>%
+      colnames()
+    
+    cur_month <- paste0(stringr::str_extract(cur_month_header, "([^,]+$)"), " 01")
+    
+    rows <- lubridate::interval("2019-01-01", myd(x)) %/% months(1) + 1
+    
+    
     readxl::read_excel(path, 
                        sheet = "Data 2",
                        skip = 4,
+                       n_max = rows,
                        col_types = c("date",
                                      rep("numeric", 14))) %>%
       tidyr::pivot_longer(cols = 2:length(.),
@@ -28,22 +39,22 @@ update_household_spending <- function(force_update = FALSE) {
                                  cube = "Table 1. Experimental estimates of Household Spending, Australia",
                                  path = here::here("data-raw"))
     
-    hh_spending <- function(path, state) {
-      
-      readxl::read_excel(path, 
-                         sheet = "Data 2",
-                         skip = 4,
-                         col_types = c("date",
-                                       rep("numeric", 14))) %>%
-        tidyr::pivot_longer(cols = 2:length(.),
-                            names_to = "coicop_division",
-                            values_to = "index") %>%
-        dplyr::mutate(date = as.Date(...1, origin = "1899-12-30"), 
-                      state = state) %>%
-        dplyr::filter(!is.na(index)) %>% 
-        dplyr::select(-...1)
-      
-    }
+    # hh_spending <- function(path, state) {
+    #   
+    #   readxl::read_excel(path, 
+    #                      sheet = "Data 2",
+    #                      skip = 4,
+    #                      col_types = c("date",
+    #                                    rep("numeric", 14))) %>%
+    #     tidyr::pivot_longer(cols = 2:length(.),
+    #                         names_to = "coicop_division",
+    #                         values_to = "index") %>%
+    #     dplyr::mutate(date = as.Date(...1, origin = "1899-12-30"), 
+    #                   state = state) %>%
+    #     dplyr::filter(!is.na(index)) %>% 
+    #     dplyr::select(-...1)
+    #   
+    # }
     
 
     current_date <- hh_spending(fname, "Australia") %>%

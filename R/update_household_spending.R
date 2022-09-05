@@ -14,7 +14,7 @@ update_household_spending <- function(force_update = FALSE) {
     
     cur_month <- paste0(stringr::str_extract(cur_month_header, "([^,]+$)"), " 01")
     
-    rows <- lubridate::interval("2019-01-01", myd(x)) %/% months(1) + 1
+    rows <- lubridate::interval("2019-01-01", lubridate::myd(x)) %/% months(1) + 1
     
     
     readxl::read_excel(path, 

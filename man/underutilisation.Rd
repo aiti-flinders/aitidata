@@ -5,7 +5,7 @@
 \alias{underutilisation}
 \title{ABS Measures of Underutilisation}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 14976 rows and 10 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 15444 rows and 10 columns.
 }
 \usage{
 underutilisation

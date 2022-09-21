@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-09-16
+Data was last updated 2022-09-21
 
 ## Installation
 
@@ -36,11 +36,11 @@ devtools::install_github("aiti-flinders/aitidata")
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-08-13       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-08-13       |
 | hours\_worked                  | Hours worked                                                                          | 2022-08-01       |
+| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-08-01       |
+| jobseeker\_state               | jobseeker state                                                                       | 2022-08-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-08-01       |
 | covid\_data                    | COVID-19 Geographic data                                                              | 2022-07-01       |
 | household\_spending            | Experimental household spending                                                       | 2022-07-01       |
-| jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-07-01       |
-| jobseeker\_state               | jobseeker state                                                                       | 2022-07-01       |
 | retail\_trade                  | Retail trade                                                                          | 2022-07-01       |
 | labour\_account                | ABS Labour Account                                                                    | 2022-06-01       |
 | national\_accounts             | ABS National Accounts                                                                 | 2022-06-01       |

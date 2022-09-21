@@ -36,7 +36,7 @@ update_household_spending <- function(force_update = FALSE) {
   if (!force_update) {
     
     fname <- aitidata::download_data_cube(catalogue_string = "monthly-household-spending-indicator",
-                                 cube = "Table 1. Experimental estimates of Household Spending, Australia",
+                                 cube = "1_National",
                                  path = here::here("data-raw"))
     
     # hh_spending <- function(path, state) {
@@ -70,9 +70,9 @@ update_household_spending <- function(force_update = FALSE) {
     
     message("updating `household_spending`")
     
-    states <- strayr::clean_state(c("Aus", "NSW", "Vic", "Qld", "SA", "WA", "Tas", "NT", "ACT"), to = "state_name") 
+    states <- toupper(c("National", "NSW", "Vic", "Qld", "SA", "WA", "Tas", "NT", "ACT")) 
     
-    cubes <- paste0("Table ", seq(1,9), ". Experimental estimates of Household Spending, ", states)
+    cubes <- paste0( seq(1,9), "_", states)
     
     files <- purrr::map(.x = cubes, .f = ~aitidata::download_data_cube("monthly-household-spending-indicator", cube = .x, path = "data-raw"))
     

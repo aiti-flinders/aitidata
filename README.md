@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-09-21
+Data was last updated 2022-09-22
 
 ## Installation
 
@@ -35,21 +35,21 @@ devtools::install_github("aiti-flinders/aitidata")
 | :----------------------------- | :------------------------------------------------------------------------------------ | :--------------- |
 | payroll\_index                 | ABS Weekly Payroll Index                                                              | 2022-08-13       |
 | payroll\_substate              | ABS Weekly Payroll Index for SA3                                                      | 2022-08-13       |
+| covid\_data                    | COVID-19 Geographic data                                                              | 2022-08-01       |
 | hours\_worked                  | Hours worked                                                                          | 2022-08-01       |
+| industry\_employment           | ABS Employment by Industry                                                            | 2022-08-01       |
+| industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-08-01       |
+| industry\_underemployment      | Underemployment by industry                                                           | 2022-08-01       |
 | jobseeker\_sa2                 | JobSeeker data by SA2                                                                 | 2022-08-01       |
 | jobseeker\_state               | jobseeker state                                                                       | 2022-08-01       |
 | labour\_force                  | ABS Labour Force Survey                                                               | 2022-08-01       |
-| covid\_data                    | COVID-19 Geographic data                                                              | 2022-07-01       |
+| occupation\_underemployment    | Underemployment by occupation                                                         | 2022-08-01       |
+| underutilisation               | ABS Measures of Underutilisation                                                      | 2022-08-01       |
 | household\_spending            | Experimental household spending                                                       | 2022-07-01       |
 | retail\_trade                  | Retail trade                                                                          | 2022-07-01       |
 | labour\_account                | ABS Labour Account                                                                    | 2022-06-01       |
 | national\_accounts             | ABS National Accounts                                                                 | 2022-06-01       |
 | mobility\_facebook             | Facebook Mobility                                                                     | 2022-05-22       |
-| industry\_employment           | ABS Employment by Industry                                                            | 2022-05-01       |
-| industry\_employment\_detailed | ABS Detailed employment by industry                                                   | 2022-05-01       |
-| industry\_underemployment      | Underemployment by industry                                                           | 2022-05-01       |
-| occupation\_underemployment    | Underemployment by occupation                                                         | 2022-05-01       |
-| underutilisation               | ABS Measures of Underutilisation                                                      | 2022-05-01       |
 | small\_area\_labour\_market    | DESE Small (SA2) Area Labour Market                                                   | 2022-03-01       |
 | internet\_vacancies\_index     | Internet Vacancies Index                                                              | 2022-02-01       |
 | internet\_vacancies\_regional  | Internet Vacancies Regional                                                           | 2022-02-01       |

@@ -5,7 +5,7 @@
 \alias{retail_trade}
 \title{Retail trade}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 85019 rows and 9 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 85196 rows and 9 columns.
 }
 \usage{
 retail_trade

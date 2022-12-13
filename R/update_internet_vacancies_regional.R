@@ -42,6 +42,9 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     writeBin(dl$content,
              con = here::here("data-raw/ivi_regional.xlsx"))
+    
+    # Close the file so that read_excel can open it
+    close(file(here::here("data-raw/ivi_regional.xlsx")))
                   
     
     internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),

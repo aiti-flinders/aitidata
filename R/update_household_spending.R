@@ -34,7 +34,7 @@ update_household_spending <- function(force_update = FALSE) {
                     "year", 
                     "month",
                     "indicator", 
-                    "coicop",
+                    "coicop_division",
                     "state",
                     "series_type",
                     "value",

@@ -17,7 +17,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
       )
     
     writeBin(dl$content,
-             con = "data-raw/ivi_test.xlsx")
+             con = here::here("data-raw/ivi_test.xlsx"))
                    
     
     current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
@@ -39,7 +39,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     )
     
     writeBin(dl$content,
-             con = "data-raw/ivi_basic.xlsx")
+             con = here::here("data-raw/ivi_basic.xlsx"))
     
     
     internet_vacancies_index <- readxl::read_excel(here::here("data-raw/ivi_basic.xlsx"),

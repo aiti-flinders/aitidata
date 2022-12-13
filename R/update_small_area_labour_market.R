@@ -21,7 +21,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
   
     
   writeBin(dl$content,
-           con = "data-raw/salm_test.csv")
+           con = here::here("data-raw/salm_test.csv"))
   
   current_date <- readr::read_csv(here::here("data-raw/salm_test.csv"),
                            skip = 1) %>%
@@ -44,7 +44,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
               header = httr::add_headers(header))
     
     writeBin(dl$content,
-             con = "data-raw/salm_sa2.csv")
+             con = here::here("data-raw/salm_sa2.csv"))
     
     raw <- readr::read_csv(here::here("data-raw/salm_sa2.csv"), 
                            skip = 1, 

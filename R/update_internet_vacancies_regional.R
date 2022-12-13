@@ -6,12 +6,18 @@
 #' @importFrom utils download.file
 update_internet_vacancies_regional <- function(force_update = FALSE) {
   
+  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  
   if (!force_update) {
   
+    dl <- httr::GET(
+      url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_SkillLevel%20-%20January%202006%20onwards.xlsx",
+      header = httr::add_headers(header)
+      )
   
-  utils::download.file("https://labourmarketinsights.gov.au/media/afsfdmij/ivi_data_skill-level-january-2006-onwards.xlsx",
-                destfile = here::here("data-raw/ivi_test.xlsx"),
-                mode = "wb")
+  writeBin(dl$content, 
+           con = "data-raw/ivi_test.xlsx")
+                
   
   current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
                              sheet = "Trend") %>%
@@ -29,9 +35,14 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
-    utils::download.file("https://labourmarketinsights.gov.au/media/tpdfqiiy/ivi_data_regional-may-2010-onwards.xlsx",
-                  destfile = here::here("data-raw/ivi_regional.xlsx"),
-                  mode = "wb")
+    dl <- httr::GET(
+      url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx",
+      header = httr::add_headers(header)
+      )
+    
+    writeBin(dl$content,
+             con = "data-raw/ivi_regional.xlsx")
+                  
     
     internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),
                                                       sheet = "Averaged") %>%

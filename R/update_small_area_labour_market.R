@@ -5,18 +5,24 @@
 #' @return logical
 update_small_area_labour_market <- function(force_update = FALSE) {
   
+  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  
+  
   if (!force_update) {
+    
     
     filename <- xml2::read_html("https://www.nationalskillscommission.gov.au/topics/small-area-labour-markets") %>%
       rvest::html_elements("a.downloadLink") %>%
       rvest::html_attr("href") %>%
       .[5]
     
-    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
+    dl <- GET(url = paste0("https://www.nationalskillscommission.gov.au/", filename),
+              header = httr::add_headers(header))
   
-  download.file(url,
-                destfile = here::here("data-raw/salm_test.csv"),
-                mode = "wb")
+    
+  writeBin(dl$content,
+           con = "data-raw/salm_test.csv")
+  
   current_date <- readr::read_csv(here::here("data-raw/salm_test.csv"),
                            skip = 1) %>%
     dplyr::select(dplyr::last_col()) 
@@ -34,11 +40,11 @@ update_small_area_labour_market <- function(force_update = FALSE) {
       rvest::html_attr("href") %>%
       .[3]
     
-    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
+    dl <- GET(url = paste0("https://www.nationalskillscommission.gov.au/", filename),
+              header = httr::add_headers(header))
     
-    download.file(url,
-                  destfile = here::here("data-raw/salm_sa2.csv"),
-                  mode = "wb")
+    writeBin(dl$content,
+             con = "data-raw/salm_sa2.csv")
     
     raw <- readr::read_csv(here::here("data-raw/salm_sa2.csv"), 
                            skip = 1, 

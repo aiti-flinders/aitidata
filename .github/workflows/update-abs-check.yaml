@@ -2,8 +2,6 @@
 
 name: update-abs-check
 
-on:
-  pull_request:
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -26,7 +24,7 @@ jobs:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
           Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval', 'sf'))"
-          Rscript -e "remotes::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
+          Rscript -e "remotes::install_github('aiti-flinders/aitidata')"
       - name: Get data
         run: |
           Rscript -e "library(aitidata)"

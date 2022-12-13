@@ -42,9 +42,6 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
       )
 
           
-    
-
-    
     internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),
                                                       sheet = 2) %>%
       tidyr::pivot_longer(cols = -c(.data$Level,

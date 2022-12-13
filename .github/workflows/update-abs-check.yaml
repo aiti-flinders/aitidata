@@ -25,10 +25,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: | 
-          Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval'), tpe = 'mac.binary')"
-          Rscript -e "install.packages('rgeos', repos='http://R-Forge.R-project.org', type='source')"
-          Rscript -e "install.packages('rgdal', repos='http://R-Forge.R-project.org', type='source')"
-          Rscript -e "devtools::install_github('r-spatial/sf', configure.args = '--with-proj-lib=/usr/local/lib/')"
+          Rscript -e "install.packages(c('remotes', 'devtools', 'rmarkdown', 'lazyeval', 'sf'))"
           Rscript -e "remotes::install_github('aiti-flinders/aitidata', ref = 'data_prep')"
       - name: Get data
         run: |

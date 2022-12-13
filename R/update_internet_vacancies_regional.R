@@ -35,20 +35,26 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
-    dl <- httr::GET(
-      url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx",
-      header = httr::add_headers(header)
-      )
+    # dl <- httr::GET(
+    #   url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx",
+    #   header = httr::add_headers(header)
+    #   )
+    # 
+    # writeBin(dl$content,
+    #          con = here::here("data-raw/ivi_regional.xlsx"))
+    # 
+    # # Close the file so that read_excel can open it
+    # 
+    # close(file(here::here("data-raw/ivi_regional.xlsx")))
+    #               
     
-    writeBin(dl$content,
-             con = here::here("data-raw/ivi_regional.xlsx"))
-    
-    # Close the file so that read_excel can open it
-    close(file(here::here("data-raw/ivi_regional.xlsx")))
-                  
+    download.file(url = 'https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',
+                  destfile = here::here("data-raw/ivi_regional.xlsx"),
+                  mode = "wb",
+                  header = header)
     
     internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),
-                                                      sheet = "Averaged") %>%
+                                                      sheet = 2) %>%
       tidyr::pivot_longer(cols = -c(.data$Level,
                                     .data$State,
                                     .data$region,

@@ -23,9 +23,11 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
     message("Updating `jobseeker_state.rda`, `jobseeker_sa2.rda`")
     
     file_path <- aitidata::download_file(files %>% dplyr::filter(date == max(.$date)) %>% dplyr::pull(url))
+    
+    sa2_sheet <- which(grepl("By SA2", readxl::excel_sheets(file_path)))
 
     dss_new <- readxl::read_excel(file_path,
-                                  sheet = "Table 4 - By SA2",
+                                  sheet = sa2_sheet,
                                   skip = 7,
                                   na = "<5",
                                   n_max = 2292,
@@ -34,10 +36,10 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
       dplyr::mutate(date = files %>% dplyr::filter(date == max(.$date)) %>% dplyr::pull(date)) %>%
       tidyr::replace_na(list(jobseeker_payment = 5, youth_allowance_other = 5))  %>%
       dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = c("sa2_name")) %>%
-      dplyr::select(.data$sa2_code, 
-                    .data$jobseeker_payment, 
-                    .data$youth_allowance_other, 
-                    .data$date) %>%
+      dplyr::select("sa2_code", 
+                    "jobseeker_payment", 
+                    "youth_allowance_other", 
+                    "date") %>%
       tidyr::pivot_longer(names_to = "indicator",
                           values_to = "value",
                           cols = c(.data$jobseeker_payment, .data$youth_allowance_other)) %>%

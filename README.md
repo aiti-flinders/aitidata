@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-12-15
+Data was last updated 2022-12-16
 
 ## Installation
 
@@ -34,13 +34,13 @@ devtools::install_github("aiti-flinders/aitidata")
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2022-11-12       |
+| hours_worked                 | Hours worked                                                                          | 2022-11-01       |
+| labour_force                 | ABS Labour Force Survey                                                               | 2022-11-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2022-10-15       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2022-10-01       |
-| hours_worked                 | Hours worked                                                                          | 2022-10-01       |
 | household_spending           | Experimental household spending                                                       | 2022-10-01       |
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2022-10-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2022-10-01       |
-| labour_force                 | ABS Labour Force Survey                                                               | 2022-10-01       |
 | retail_trade                 | Retail trade                                                                          | 2022-10-01       |
 | labour_account               | ABS Labour Account                                                                    | 2022-09-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2022-09-01       |

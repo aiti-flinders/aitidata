@@ -24,19 +24,10 @@ jobs:
         run: |
           Rscript -e "dl <- httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',
           header = httr::add_headers(header),
-          httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))
-          
-          dl"
+          httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))"
         
 
         run: |
-          Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
-      - name: Commit
-        run: |
-          git config --global user.name 'Hamish Gamble'
-          git config --global user.email 'gamb0043@flinders.edu.au'
-          git add .
-          git commit -m 'Scheduled data updates' || echo "No changes to commit"
-          Rscript -e "usethis::use_version(which = 'patch')"
-          git push || echo "No changes to commit"
+          Rscript -e "dl"
+
 

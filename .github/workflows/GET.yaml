@@ -23,6 +23,7 @@ jobs:
           install.packages('httr')
           install.packages('here')
           install.packages('readxl')
+        shell: Rscript {0}
       - name: GET
         run: |
           header = c('Connection' = 'keep-alive', 'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')

@@ -18,17 +18,18 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install packages
-        run: | 
-          Rscript -e "install.packages('httr')"
+        run: |
+          install.packages('httr')
+      - name: Set header
+        run: |
+          header = c('user-agent' = 'Labour market data access [hamish.gamble@flinders.edu.au])
+
       - name: Get data
         run: |
-          Rscript -e "header = c('user-agent' = 'Labour market data access [hamish.gamble@flinders.edu.au]')"
-          Rscript -e "dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',
-          header = httr::add_headers(header),
-          httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))"
+          dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx', header = httr::add_headers(header), httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))"
         
       - name: Print 
         run: |
-          Rscript -e "dl"
+          dl
 
 

@@ -12,15 +12,13 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
   if (!force_update) {
     
     dl <- GET(
-      url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA_SkillLevel%20-%20January%202006%20onwards.xlsx",
-      header = httr::add_headers(header)
+      url = "https://labourmarketinsights.gov.au/media/lftjcpze/ivi_data_skilllevel-january-2006-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_test.xlsx")
       )
     
-    writeBin(dl$content,
-             con = here::here("data-raw/ivi_test.xlsx"))
-                   
     
-    current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
+    current_date <- readxl::read_excel("ivi_test.xlsx",
                                        sheet = "Trend") %>%
       dplyr::select(dplyr::last_col()) 
     
@@ -34,15 +32,14 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     message("Updating `internet_vacancies_index` dataset.")
     
     dl <- GET(
-      url = "https://www.nationalskillscommission.gov.au/sites/default/files/2022-10/IVI_DATA%20-%20January%202006%20onwards.xlsx",
-      header = httr::add_headers(header)
+      url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_basic.xlsx")
     )
     
-    writeBin(dl$content,
-             con = here::here("data-raw/ivi_basic.xlsx"))
+
     
-    
-    internet_vacancies_index <- readxl::read_excel(here::here("data-raw/ivi_basic.xlsx"),
+    internet_vacancies_index <- readxl::read_excel("ivi_basic.xlsx",
                                                    sheet = "Trend") %>%
       tidyr::pivot_longer(cols = -c(.data$Level,
                                     .data$State, 
@@ -71,10 +68,10 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     
     
     usethis::use_data(internet_vacancies_index, overwrite = TRUE, compress = "xz")
-    file.remove(here::here("data-raw/ivi_basic.xlsx"))
+    file.remove("ivi_basic.xlsx")
   } else {
     message("Skipping update of `internet_vacancies_index`: data is up-to-date")
-    file.remove(here::here("data-raw/ivi_test.xlsx"))
+    file.remove("ivi_test.xlsx")
   }
 }
 

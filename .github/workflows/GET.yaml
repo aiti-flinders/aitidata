@@ -19,7 +19,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install packages
         run: | 
-          Rscript -e "install.packages('httr')
+          Rscript -e "install.packages('httr')"
       - name: Get data
         run: |
           Rscript -e "dl <- httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',

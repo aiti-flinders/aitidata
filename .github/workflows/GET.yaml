@@ -22,7 +22,8 @@ jobs:
           Rscript -e "install.packages('httr')"
       - name: Get data
         run: |
-          Rscript -e "dl <- httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',
+          Rscript -e "header = c('user-agent' = 'Labour market data access [hamish.gamble@flinders.edu.au]')"
+          Rscript -e "dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx',
           header = httr::add_headers(header),
           httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))"
         

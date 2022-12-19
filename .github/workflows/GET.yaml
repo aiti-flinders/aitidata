@@ -27,7 +27,7 @@ jobs:
       - name: GET
         run: |
           header = c('Connection' = 'keep-alive', 'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
-          dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx', header = httr::add_headers(header), httr::write_disk('ivi_regional.xlsx'))
+          dl = httr::GET(url = https://labourmarketinsights.gov.au/media/nyfhedpg/ivi_data_regional-may-2010-onwards.xlsx', header = httr::add_headers(header), httr::write_disk('ivi_regional.xlsx'))
           dl
         shell: Rscript {0}  
       - name: File Exists

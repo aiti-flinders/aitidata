@@ -20,9 +20,10 @@ jobs:
       - name: GET
         run: |
           install.packages('httr')
-          header = c('user-agent' = 'Labour market data access [hamish.gamble@flinders.edu.au])
+          header = c('user-agent' = 'Labour market data access [hamish.gamble@flinders.edu.au]')
           dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx', header = httr::add_headers(header), httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))
           dl
+          file.exists(here::here('data-raw/ivi_regional.xlsx'))
         shell: Rscript {0}
 
 

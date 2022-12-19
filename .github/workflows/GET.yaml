@@ -30,7 +30,6 @@ jobs:
           dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx', header = httr::add_headers(header), httr::write_disk('ivi_regional.xlsx'))
           dl
         shell: Rscript {0}  
-        shell: Rscript {0}  
       - name: File Exists
         run: |
           file.exists('ivi_regional.xlsx')

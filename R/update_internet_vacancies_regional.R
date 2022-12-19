@@ -6,14 +6,19 @@
 #' @importFrom utils download.file
 update_internet_vacancies_regional <- function(force_update = FALSE) {
   
+  header <- c('Connection' = 'keep-alive', 
+              'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
+  
   if (!force_update) {
   
+    dl <- httr::GET(
+      url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_test.xlsx")
+      )
   
-  utils::download.file("https://labourmarketinsights.gov.au/media/afsfdmij/ivi_data_skill-level-january-2006-onwards.xlsx",
-                destfile = here::here("data-raw/ivi_test.xlsx"),
-                mode = "wb")
-  
-  current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
+
+  current_date <- readxl::read_excel("ivi_test.xlsx",
                              sheet = "Trend") %>%
     dplyr::select(dplyr::last_col()) 
   
@@ -29,12 +34,17 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
-    utils::download.file("https://labourmarketinsights.gov.au/media/tpdfqiiy/ivi_data_regional-may-2010-onwards.xlsx",
-                  destfile = here::here("data-raw/ivi_regional.xlsx"),
-                  mode = "wb")
+    dl <- httr::GET(
+      url = "https://labourmarketinsights.gov.au/media/nyfhedpg/ivi_data_regional-may-2010-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_regional.xlsx", overwrite = TRUE)
+      )
     
-    internet_vacancies_regional <- readxl::read_excel(here::here("data-raw/ivi_regional.xlsx"),
-                                                      sheet = "Averaged") %>%
+    
+
+          
+    internet_vacancies_regional <- readxl::read_excel("ivi_regional.xlsx",
+                                                      sheet = 2) %>%
       tidyr::pivot_longer(cols = -c(.data$Level,
                                     .data$State,
                                     .data$region,
@@ -51,7 +61,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                       region == "Central Queensland" ~ "Central QLD",
                       region == "Far North Queensland" ~ "Far North QLD",
                       region == 'Hobart & Southeast Tasmania' ~ "Hobart & Southeast TAS",
-                      region == "Launceston and Northeast Tasmania" ~ "Launceston and Northeast TAS", 
+                      region == "Launceston and Northeast Tasmania" ~ "Launceston and Northeast TAS",
                       region == "North West Tasmania" ~ "North West TAS",
                       region == "Outback Queensland" ~ "Outback QLD",
                       region == "Regional Northern Territory" ~ "Regional NT",
@@ -60,18 +70,18 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
       dplyr::select(.data$date,
                     occupation_level = .data$Level,
                     state = .data$State,
-                    vacancy_region = .data$region, 
+                    vacancy_region = .data$region,
                     anzsco_code = .data$ANZSCO_CODE,
                     anzsco_title = .data$ANZSCO_TITLE,
                     .data$value)
-    
-    
+
+
     usethis::use_data(internet_vacancies_regional, overwrite = TRUE, compress = 'xz')
-    file.remove(here::here("data-raw/ivi_regional.xlsx"))
+    file.remove("ivi_regional.xlsx")
     
   } else {
     message("Skipping `internet_vacancies_regional.rda`: appears to be up-to-date")
-    file.remove(here::here("data-raw/ivi_test.xlsx"))
+    file.remove("data-raw/ivi_test.xlsx")
     
     
     }

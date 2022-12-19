@@ -1,5 +1,5 @@
 test_that("update_ functions work", {
-  pkg <- local_create_package()
+  #pkg <- local_create_package()
   expect_true(update_internet_vacancies_regional(TRUE))
   expect_true(update_internet_vacancies_index(TRUE))
   expect_true(update_small_area_labour_market(TRUE))

@@ -6,13 +6,19 @@
 #' @export
 update_internet_vacancies_index <- function(force_update = FALSE) {
   
+  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  
+  
   if (!force_update) {
     
-    utils::download.file("https://labourmarketinsights.gov.au/media/afsfdmij/ivi_data_skill-level-january-2006-onwards.xlsx",
-                         destfile = here::here("data-raw/ivi_test.xlsx"),
-                         mode = "wb")
+    dl <- GET(
+      url = "https://labourmarketinsights.gov.au/media/lftjcpze/ivi_data_skilllevel-january-2006-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_test.xlsx")
+      )
     
-    current_date <- readxl::read_excel(here::here("data-raw/ivi_test.xlsx"),
+    
+    current_date <- readxl::read_excel("ivi_test.xlsx",
                                        sheet = "Trend") %>%
       dplyr::select(dplyr::last_col()) 
     
@@ -24,12 +30,16 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
   if (current_date > max(aitidata::internet_vacancies_index$date) | force_update) {
     
     message("Updating `internet_vacancies_index` dataset.")
-    utils::download.file("https://labourmarketinsights.gov.au/media/mh2ltysb/ivi_data-january-2006-onwards.xlsx",
-                         destfile = here::here("data-raw/ivi_basic.xlsx"),
-                         mode = "wb")
     
+    dl <- GET(
+      url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
+      header = httr::add_headers(header),
+      httr::write_disk("ivi_basic.xlsx")
+    )
     
-    internet_vacancies_index <- readxl::read_excel(here::here("data-raw/ivi_basic.xlsx"),
+
+    
+    internet_vacancies_index <- readxl::read_excel("ivi_basic.xlsx",
                                                    sheet = "Trend") %>%
       tidyr::pivot_longer(cols = -c(.data$Level,
                                     .data$State, 
@@ -58,10 +68,10 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     
     
     usethis::use_data(internet_vacancies_index, overwrite = TRUE, compress = "xz")
-    file.remove(here::here("data-raw/ivi_basic.xlsx"))
+    file.remove("ivi_basic.xlsx")
   } else {
     message("Skipping update of `internet_vacancies_index`: data is up-to-date")
-    file.remove(here::here("data-raw/ivi_test.xlsx"))
+    file.remove("ivi_test.xlsx")
   }
 }
 

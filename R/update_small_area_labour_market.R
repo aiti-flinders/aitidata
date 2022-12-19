@@ -5,19 +5,23 @@
 #' @return logical
 update_small_area_labour_market <- function(force_update = FALSE) {
   
+  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  
+  
   if (!force_update) {
     
-    filename <- xml2::read_html("https://www.nationalskillscommission.gov.au/topics/small-area-labour-markets") %>%
-      rvest::html_elements("a.downloadLink") %>%
+    
+    filename <- xml2::read_html("https://labourmarketinsights.gov.au/regions/small-area-labour-markets/") %>%
+      rvest::html_elements("a.btn.btn-outline-primary.pl-2.pr-5.py-2") %>%
       rvest::html_attr("href") %>%
       .[5]
     
-    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
+    dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
+              header = httr::add_headers(header),
+              httr::write_disk("salm_test.csv"))
   
-  download.file(url,
-                destfile = here::here("data-raw/salm_test.csv"),
-                mode = "wb")
-  current_date <- readr::read_csv(here::here("data-raw/salm_test.csv"),
+    
+  current_date <- readr::read_csv("salm_test.csv",
                            skip = 1) %>%
     dplyr::select(dplyr::last_col()) 
   
@@ -29,18 +33,17 @@ update_small_area_labour_market <- function(force_update = FALSE) {
   
   if (current_date > max(aitidata::small_area_labour_market$date) | force_update) {
     
-    filename <- xml2::read_html("https://www.nationalskillscommission.gov.au/topics/small-area-labour-markets") %>%
-      rvest::html_elements("a.downloadLink") %>%
+    filename <- xml2::read_html("https://labourmarketinsights.gov.au/regions/small-area-labour-markets/") %>%
+      rvest::html_elements("a.btn.btn-outline-primary.pl-2.pr-5.py-2") %>%
       rvest::html_attr("href") %>%
       .[3]
     
-    url <- paste0("https://www.nationalskillscommission.gov.au/", filename)
+    dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
+              header = httr::add_headers(header),
+              httr::write_disk("salm_sa2.csv"))
+ 
     
-    download.file(url,
-                  destfile = here::here("data-raw/salm_sa2.csv"),
-                  mode = "wb")
-    
-    raw <- readr::read_csv(here::here("data-raw/salm_sa2.csv"), 
+    raw <- readr::read_csv("salm_sa2.csv", 
                            skip = 1, 
                            na = "-")
     
@@ -66,11 +69,11 @@ update_small_area_labour_market <- function(force_update = FALSE) {
                     !is.na(.data$indicator))
     
     usethis::use_data(small_area_labour_market, overwrite = TRUE, compress = "xz")
-    file.remove(here::here("data-raw/salm_sa2.csv"))
+    file.remove("salm_sa2.csv")
     
   } else {
     message("Skipping `small_area_labour_market.rda`: appears to be up-to-date")
-    file.remove(here::here("data-raw/salm_test.csv"))
+    file.remove("salm_test.csv")
     
   }
 }

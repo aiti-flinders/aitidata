@@ -21,10 +21,12 @@ jobs:
         run: |
           install.packages('httr')
           install.packages('here')
+          install.packages('readxl')
           header = c('Connection' = 'keep-alive', 'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
           dl = httr::GET(url = 'https://www.jobsandskills.gov.au/sites/default/files/2022-11/IVI_DATA_regional%20-%20May%202010%20onwards.xlsx', header = httr::add_headers(header), httr::write_disk(here::here('data-raw/ivi_regional.xlsx'), overwrite = TRUE))
           dl
           file.exists(here::here('data-raw/ivi_regional.xlsx'))
+          readxl::read_excel(here::here('data-raw/ivi_regional.xlsx'))
         shell: Rscript {0}
 
 

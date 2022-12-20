@@ -29,10 +29,10 @@ update_mobility_facebook <- function() {
   
   fb_mobility <-  read_facebook() %>%
     dplyr::filter(.data$country == "AUS") %>%
-    dplyr::select(state = .data$polygon_name,
-                  date = .data$ds,
-                  single_location = .data$all_day_ratio_single_tile_users) %>%
-    tidyr::pivot_longer(cols = .data$single_location,
+    dplyr::select(state = "polygon_name",
+                  date = "ds",
+                  single_location = "all_day_ratio_single_tile_users") %>%
+    tidyr::pivot_longer(cols = "single_location",
                         names_to = "metric",
                         values_to = "trend") %>%
     dplyr::mutate(date = lubridate::date(.data$date),
@@ -44,7 +44,7 @@ update_mobility_facebook <- function() {
                                   x = .data$lga_name,
                                   replacement = "")) %>%
     dplyr::as_tibble() %>%
-    dplyr::select(.data$lga_name, .data$state_name)
+    dplyr::select("lga_name", "state_name")
   
   mobility_facebook <- dplyr::bind_rows(mobility_facebook_2020,
                                         fb_mobility) %>%

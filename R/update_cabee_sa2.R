@@ -74,15 +74,15 @@ update_cabee_sa2 <- function(force_update = FALSE) {
       }
       
       cabee_sa2 <- cabee_sa2 %>%
-        tidyr::pivot_longer(cols = -c(.data$industry_code, .data$industry_label, .data$sa2_main_2016, .data$sa2_name_2016, .data$date),
+        tidyr::pivot_longer(cols = -c("industry_code", "industry_label", "sa2_main_2016", "sa2_name_2016", "date"),
                             names_to = "indicator",
                             values_to = "value") %>%
-        dplyr::select(.data$date,
-                      division = .data$industry_label,
-                      .data$sa2_main_2016,
-                      .data$sa2_name_2016,
-                      .data$indicator, 
-                      .data$value)
+        dplyr::select("date",
+                      division = "industry_label",
+                      "sa2_main_2016",
+                      "sa2_name_2016",
+                      "indicator", 
+                      "value")
       
       usethis::use_data(cabee_sa2, compress = "xz", overwrite = TRUE)
       file.remove(abs_file)

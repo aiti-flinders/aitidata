@@ -6,12 +6,12 @@ update_covid_data <- function() {
   covid_data <- dplyr::bind_rows(aitidata::jobkeeper_sa2, aitidata::jobseeker_sa2) %>%
     dplyr::left_join(by = "sa2_code", aitidata::small_area_labour_market %>% 
                        dplyr::filter(.data$indicator == "Smoothed labour force (persons)", date == max(.data$date)) %>%
-                       dplyr::select(labour_force = .data$value, .data$sa2_code)) %>%
-    tidyr::pivot_wider(id_cols = c(.data$sa2_code, 
-                                   .data$date, 
-                                   .data$labour_force), 
-                       names_from = .data$indicator, 
-                       values_from = .data$value) %>%
+                       dplyr::select(labour_force = "value", "sa2_code")) %>%
+    tidyr::pivot_wider(id_cols = c("sa2_code", 
+                                   "date", 
+                                   "labour_force"), 
+                       names_from = "indicator", 
+                       values_from = "value") %>%
     dplyr::rename(jobkeeper_applications = 4,
                   jobkeeper_proportion = 6,
                   jobseeker_payment = 7) %>%
@@ -20,36 +20,36 @@ update_covid_data <- function() {
                   jobseeker_decile = dplyr::ntile(.data$jobseeker_proportion, 10),
                   covid_impact = .data$jobkeeper_decile + .data$jobseeker_decile) %>%
     dplyr::left_join(maps_data, by = "sa2_code") %>%
-    dplyr::select(.data$sa2_code,
-                  .data$sa3_code,
-                  .data$date,
-                  .data$jobkeeper_applications,
-                  .data$jobkeeper_proportion,
-                  .data$jobseeker_payment,
-                  .data$jobseeker_proportion,
-                  .data$covid_impact,
-                  .data$state_name) %>%
+    dplyr::select("sa2_code",
+                  "sa3_code",
+                  "date",
+                  "jobkeeper_applications",
+                  "jobkeeper_proportion",
+                  "jobseeker_payment",
+                  "jobseeker_proportion",
+                  "covid_impact",
+                  "state_name") %>%
     dplyr::left_join(by = c("sa3_code", "date", "state_name"),
-                     aitidata::payroll_substate %>% dplyr::filter(.data$indicator == "payroll_index")  %>% dplyr::select(-.data$indicator, payroll_index = .data$value)) %>%
+                     aitidata::payroll_substate %>% dplyr::filter(.data$indicator == "payroll_index")  %>% dplyr::select(-"indicator", payroll_index = "value")) %>%
     dplyr::arrange(.data$date) %>%
     dplyr::group_by(.data$state_name, .data$sa2_code) %>%
     dplyr::mutate(jobkeeper_growth = .data$jobkeeper_applications - dplyr::lag(.data$jobkeeper_applications)) %>%
     dplyr::ungroup() %>%
-    dplyr::select(state = .data$state_name,
-                  .data$sa2_code,
-                  .data$sa3_code,
-                  .data$date,
-                  .data$jobkeeper_applications,
-                  .data$jobkeeper_proportion,
-                  .data$jobkeeper_growth,
-                  .data$jobseeker_payment,
-                  .data$jobseeker_proportion,
-                  .data$payroll_index,
-                  .data$covid_impact) %>%
-    tidyr::pivot_longer(cols = -c(.data$state,
-                                  .data$sa2_code,
-                                  .data$sa3_code,
-                                  .data$date), 
+    dplyr::select(state = "state_name",
+                  "sa2_code",
+                  "sa3_code",
+                  "date",
+                  "jobkeeper_applications",
+                  "jobkeeper_proportion",
+                  "jobkeeper_growth",
+                  "jobseeker_payment",
+                  "jobseeker_proportion",
+                  "payroll_index",
+                  "covid_impact") %>%
+    tidyr::pivot_longer(cols = -c("state",
+                                  "sa2_code",
+                                  "sa3_code",
+                                  "date"), 
                         names_to = "indicator",
                         values_to = "value") 
   

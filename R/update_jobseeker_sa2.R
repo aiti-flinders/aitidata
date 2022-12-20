@@ -42,7 +42,7 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
                     "date") %>%
       tidyr::pivot_longer(names_to = "indicator",
                           values_to = "value",
-                          cols = c(.data$jobseeker_payment, .data$youth_allowance_other)) %>%
+                          cols = c("jobseeker_payment", "youth_allowance_other")) %>%
       dplyr::mutate(indicator = stringr::str_to_sentence(stringr::str_replace_all(.data$indicator, "_", " ")))
     
     
@@ -52,10 +52,10 @@ update_jobseeker_sa2 <- function(force_update = FALSE) {
 
     jobseeker_state <- dss_new %>%
       dplyr::left_join(strayr::read_absmap("sa22016", remove_year_suffix = TRUE), by = c("sa2_code")) %>%
-      dplyr::select(state = .data$state_name, 
-                    .data$indicator,
-                    .data$value,
-                    .data$date) %>%
+      dplyr::select(state = "state_name", 
+                    "indicator",
+                    "value",
+                    "date") %>%
       dplyr::arrange(.data$date) %>%
       dplyr::group_by(.data$state, 
                       .data$indicator,

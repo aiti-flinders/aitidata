@@ -5,7 +5,8 @@
 #' @return logical
 update_small_area_labour_market <- function(force_update = FALSE) {
   
-  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  header <- c('Connection' = 'keep-alive', 
+              'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
   
   
   if (!force_update) {
@@ -14,7 +15,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     filename <- xml2::read_html("https://labourmarketinsights.gov.au/regions/small-area-labour-markets/") %>%
       rvest::html_elements("a.btn.btn-outline-primary.pl-2.pr-5.py-2") %>%
       rvest::html_attr("href") %>%
-      .[5]
+      .[4]
     
     dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
               header = httr::add_headers(header),

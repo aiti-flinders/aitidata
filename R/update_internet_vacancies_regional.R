@@ -14,7 +14,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     dl <- httr::GET(
       url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
       header = httr::add_headers(header),
-      httr::write_disk("ivi_test.xlsx")
+      httr::write_disk("ivi_test.xlsx", overwrite = TRUE)
       )
   
 

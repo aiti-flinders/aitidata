@@ -15,7 +15,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     dl <- GET(
       url = "https://labourmarketinsights.gov.au/media/lftjcpze/ivi_data_skilllevel-january-2006-onwards.xlsx",
       header = httr::add_headers(header),
-      httr::write_disk("ivi_test.xlsx")
+      httr::write_disk("ivi_test.xlsx", overwrite = TRUE)
       )
     
     
@@ -35,7 +35,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     dl <- GET(
       url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
       header = httr::add_headers(header),
-      httr::write_disk("ivi_basic.xlsx")
+      httr::write_disk("ivi_basic.xlsx", overwrite = TRUE)
     )
     
 

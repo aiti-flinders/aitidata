@@ -19,7 +19,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     
     dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
               header = httr::add_headers(header),
-              httr::write_disk("salm_test.csv"))
+              httr::write_disk("salm_test.csv", overwrite = TRUE))
   
     
   current_date <- readr::read_csv("salm_test.csv",
@@ -41,7 +41,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     
     dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
               header = httr::add_headers(header),
-              httr::write_disk("salm_sa2.csv"))
+              httr::write_disk("salm_sa2.csv", overwrite = TRUE))
  
     
     raw <- readr::read_csv("salm_sa2.csv", 

@@ -5,9 +5,9 @@
 #' @return NULL
 #' 
 update_abs <- function(force_update = FALSE) {
-  #update_internet_vacancies_regional(force_update)
-  #update_internet_vacancies_index(force_update)
-  #update_small_area_labour_market(force_update)
+  update_internet_vacancies_regional(force_update)
+  update_internet_vacancies_index(force_update)
+  update_small_area_labour_market(force_update)
   update_industry_employment(force_update)
   update_industry_underemployment(force_update)
   update_industry_employment_detailed(force_update)

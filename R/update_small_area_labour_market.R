@@ -48,17 +48,19 @@ update_small_area_labour_market <- function(force_update = FALSE) {
                            na = "-")
     
     all_sa2 <- data.frame(strayr::read_absmap("sa22016", remove_year_suffix = TRUE)) %>%
-      dplyr::select(.data$sa2_name, .data$sa2_code, .data$state_name)
+      dplyr::select("sa2_name",
+                    "sa2_code",
+                    "state_name")
     
     
     small_area_labour_market <- raw %>%
       dplyr::mutate(dplyr::across(where(is.numeric), as.character)) %>%
-      dplyr::rename(indicator = .data$`Data Item`,
-                   sa2_name = .data$`Statistical Area Level 2 (SA2) (2016 ASGS)`,
-                   sa2_code = .data$`SA2 Code (2016 ASGS)`) %>%
-      tidyr::pivot_longer(cols = -c(.data$indicator,
-                                    .data$sa2_name,
-                                    .data$sa2_code),
+      dplyr::rename(indicator = "Data Item",
+                   sa2_name = "Statistical Area Level 2 (SA2) (2016 ASGS)",
+                   sa2_code = "SA2 Code (2016 ASGS)") %>%
+      tidyr::pivot_longer(cols = -c("indicator",
+                                    "sa2_name",
+                                    "sa2_code"),
                           names_to = "date",
                           values_to = "value") %>%
       dplyr::mutate(value = as.numeric(gsub(",", "", .data$value)),

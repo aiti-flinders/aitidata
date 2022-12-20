@@ -22,7 +22,7 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
                                        sheet = "Trend") %>%
       dplyr::select(dplyr::last_col()) 
     
-    current_date <- as.Date(as.numeric(colnames(current_date)), origin = "1899-12-30")
+    current_date <- as.Date(paste0(colnames(current_date), "01"), format = "%b%y%d")
   } else {
     current_date <- TRUE
   }
@@ -41,10 +41,10 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
     
     internet_vacancies_index <- readxl::read_excel("ivi_basic.xlsx",
                                                    sheet = "Trend") %>%
-      tidyr::pivot_longer(cols = -c(.data$Level,
-                                    .data$State, 
-                                    .data$ANZSCO_CODE,
-                                    .data$Title),
+      tidyr::pivot_longer(cols = -c("Level",
+                                    "State", 
+                                    "ANZSCO_CODE",
+                                    "Title"),
                           names_to = "date", 
                           values_to = "value") %>%
       dplyr::mutate(date = as.Date(x = as.numeric(.data$date), origin = "1899-12-30"),
@@ -58,12 +58,12 @@ update_internet_vacancies_index <- function(force_update = FALSE) {
                       .data$Level) %>%
       dplyr::summarise(value = mean(.data$value), .groups = "drop") %>%
       dplyr::ungroup() %>% 
-      dplyr::select(.data$date,
-                    .data$state,
-                    occupation_level = .data$Level,
-                    anzsco_code = .data$ANZSCO_CODE,
-                    anzsco_title = .data$Title,
-                    .data$value) 
+      dplyr::select("date",
+                    "state",
+                    occupation_level = "Level",
+                    anzsco_code = "ANZSCO_CODE",
+                    anzsco_title = "Title",
+                    "value") 
     
     
     

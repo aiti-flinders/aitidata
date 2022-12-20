@@ -22,7 +22,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                              sheet = "Trend") %>%
     dplyr::select(dplyr::last_col()) 
   
-  current_date <- as.Date(as.numeric(colnames(current_date)), origin = "1899-12-30")
+  current_date <- as.Date(paste0(colnames(current_date),"01"), format = "%b%y%d") 
   
   } else {
     
@@ -45,11 +45,11 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
           
     internet_vacancies_regional <- readxl::read_excel("ivi_regional.xlsx",
                                                       sheet = 2) %>%
-      tidyr::pivot_longer(cols = -c(.data$Level,
-                                    .data$State,
-                                    .data$region,
-                                    .data$ANZSCO_CODE,
-                                    .data$ANZSCO_TITLE),
+      tidyr::pivot_longer(cols = -c("Level",
+                                    "State",
+                                    "region",
+                                    "ANZSCO_CODE",
+                                    "ANZSCO_TITLE"),
                           names_to = "date",
                           values_to = "value") %>%
       dplyr::mutate(date = as.Date(x = paste0(.data$date, "01"), format = "%b%y%d"),
@@ -67,13 +67,13 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                       region == "Regional Northern Territory" ~ "Regional NT",
                       TRUE ~ .data$region
                     )) %>%
-      dplyr::select(.data$date,
-                    occupation_level = .data$Level,
-                    state = .data$State,
-                    vacancy_region = .data$region,
-                    anzsco_code = .data$ANZSCO_CODE,
-                    anzsco_title = .data$ANZSCO_TITLE,
-                    .data$value)
+      dplyr::select("date",
+                    occupation_level = "Level",
+                    state = "State",
+                    vacancy_region = "region",
+                    anzsco_code = "ANZSCO_CODE",
+                    anzsco_title = "ANZSCO_TITLE",
+                    "value")
 
 
     usethis::use_data(internet_vacancies_regional, overwrite = TRUE, compress = 'xz')
@@ -81,7 +81,7 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
   } else {
     message("Skipping `internet_vacancies_regional.rda`: appears to be up-to-date")
-    file.remove("data-raw/ivi_test.xlsx")
+    file.remove("ivi_test.xlsx")
     
     
     }

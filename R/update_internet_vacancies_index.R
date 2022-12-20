@@ -6,7 +6,8 @@
 #' @export
 update_internet_vacancies_index <- function(force_update = FALSE) {
   
-  header <- c("user-agent" = "Labour market data access [hamish.gamble@flinders.edu.au]")
+  header <- c('Connection' = 'keep-alive', 
+              'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
   
   
   if (!force_update) {

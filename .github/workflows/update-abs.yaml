@@ -6,10 +6,10 @@ name: update-abs
 on:
    schedule:
       - cron: '35 0 * * 1-5'
-
-   push:
-    branches:
-      - master
+# 
+#    push:
+#     branches:
+#       - master
       
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel

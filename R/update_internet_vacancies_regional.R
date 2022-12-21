@@ -10,9 +10,16 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
               'user-agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
   
   if (!force_update) {
+    
+    filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/internet-vacancy-index") %>%
+      rvest::html_elements("a.downloadLink.button.primary") %>% 
+      rvest::html_attr("href") %>%
+      .[2]
+    
+    
   
     dl <- httr::GET(
-      url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
+      url = paste0("https://www.jobsandskills.gov.au/", filename),
       header = httr::add_headers(header),
       httr::write_disk("ivi_test.xlsx", overwrite = TRUE)
       )
@@ -34,8 +41,13 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
+    filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/internet-vacancy-index") %>%
+      rvest::html_elements("a.downloadLink.button.primary") %>% 
+      rvest::html_attr("href") %>%
+      .[3]
+    
     dl <- httr::GET(
-      url = "https://labourmarketinsights.gov.au/media/nyfhedpg/ivi_data_regional-may-2010-onwards.xlsx",
+      url = paste0("https://www.jobsandskills.gov.au/", filename),
       header = httr::add_headers(header),
       httr::write_disk("ivi_regional.xlsx", overwrite = TRUE)
       )

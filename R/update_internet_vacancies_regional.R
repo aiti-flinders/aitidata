@@ -11,50 +11,38 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
   
   if (!force_update) {
     
-    filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/internet-vacancy-index") %>%
-      rvest::html_elements("a.downloadLink.button.primary") %>% 
-      rvest::html_attr("href") %>%
-      .[2]
-    
-    
-  
     dl <- httr::GET(
-      url = paste0("https://www.jobsandskills.gov.au/", filename),
+      url = "https://labourmarketinsights.gov.au/media/0pud50bo/ivi_data-january-2006-onwards.xlsx",
       header = httr::add_headers(header),
       httr::write_disk("ivi_test.xlsx", overwrite = TRUE)
-      )
-  
-
-  current_date <- readxl::read_excel("ivi_test.xlsx",
-                             sheet = "Trend") %>%
-    dplyr::select(dplyr::last_col()) 
-  
-  current_date <- as.Date(paste0(colnames(current_date),"01"), format = "%b%y%d") 
-  
+    )
+    
+    
+    current_date <- readxl::read_excel("ivi_test.xlsx",
+                                       sheet = "Trend") %>%
+      dplyr::select(dplyr::last_col()) 
+    
+    current_date <- as.Date(paste0(colnames(current_date),"01"), format = "%b%y%d") 
+    
   } else {
     
     current_date <- TRUE
   }
-   
+  
   
   if (current_date > max(aitidata::internet_vacancies_regional$date) | force_update) {
     
     message("Updating `internet_vacancies_regional` dataset.")
     
-    filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/internet-vacancy-index") %>%
-      rvest::html_elements("a.downloadLink.button.primary") %>% 
-      rvest::html_attr("href") %>%
-      .[3]
-    
     dl <- httr::GET(
-      url = paste0("https://www.jobsandskills.gov.au/", filename),
+      url = "https://labourmarketinsights.gov.au/media/nyfhedpg/ivi_data_regional-may-2010-onwards.xlsx",
       header = httr::add_headers(header),
       httr::write_disk("ivi_regional.xlsx", overwrite = TRUE)
-      )
+    )
     
     
-
-          
+    
+    
     internet_vacancies_regional <- readxl::read_excel("ivi_regional.xlsx",
                                                       sheet = 2) %>%
       tidyr::pivot_longer(cols = -c("Level",
@@ -86,8 +74,8 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
                     anzsco_code = "ANZSCO_CODE",
                     anzsco_title = "ANZSCO_TITLE",
                     "value")
-
-
+    
+    
     usethis::use_data(internet_vacancies_regional, overwrite = TRUE, compress = 'xz')
     file.remove("ivi_regional.xlsx")
     
@@ -96,5 +84,5 @@ update_internet_vacancies_regional <- function(force_update = FALSE) {
     file.remove("ivi_test.xlsx")
     
     
-    }
+  }
 }

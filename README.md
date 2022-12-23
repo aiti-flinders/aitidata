@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2022-12-22
+Data was last updated 2022-12-23
 
 ## Installation
 
@@ -36,9 +36,14 @@ devtools::install_github("aiti-flinders/aitidata")
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2022-11-12       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2022-11-01       |
 | hours_worked                 | Hours worked                                                                          | 2022-11-01       |
+| industry_employment          | ABS Employment by Industry                                                            | 2022-11-01       |
+| industry_employment_detailed | ABS Detailed employment by industry                                                   | 2022-11-01       |
+| industry_underemployment     | Underemployment by industry                                                           | 2022-11-01       |
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2022-11-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2022-11-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2022-11-01       |
+| occupation_underemployment   | Underemployment by occupation                                                         | 2022-11-01       |
+| underutilisation             | ABS Measures of Underutilisation                                                      | 2022-11-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2022-10-15       |
 | household_spending           | Experimental household spending                                                       | 2022-10-01       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
@@ -46,11 +51,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | retail_trade                 | Retail trade                                                                          | 2022-10-01       |
 | labour_account               | ABS Labour Account                                                                    | 2022-09-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2022-09-01       |
-| industry_employment          | ABS Employment by Industry                                                            | 2022-08-01       |
-| industry_employment_detailed | ABS Detailed employment by industry                                                   | 2022-08-01       |
-| industry_underemployment     | Underemployment by industry                                                           | 2022-08-01       |
-| occupation_underemployment   | Underemployment by occupation                                                         | 2022-08-01       |
-| underutilisation             | ABS Measures of Underutilisation                                                      | 2022-08-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2022-06-01       |
 | mobility_facebook            | Facebook Mobility                                                                     | 2022-05-22       |
 | mobility_google              | Google mobility                                                                       | 2021-12-03       |

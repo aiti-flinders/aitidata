@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-01-11
+Data was last updated 2023-01-12
 
 ## Installation
 
@@ -44,11 +44,11 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker_state              | jobseeker state                                                                       | 2022-11-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2022-11-01       |
 | occupation_underemployment   | Underemployment by occupation                                                         | 2022-11-01       |
+| retail_trade                 | Retail trade                                                                          | 2022-11-01       |
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2022-11-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2022-10-15       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
 | internet_vacancies_regional  | Internet Vacancies Regional                                                           | 2022-10-01       |
-| retail_trade                 | Retail trade                                                                          | 2022-10-01       |
 | labour_account               | ABS Labour Account                                                                    | 2022-09-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2022-09-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2022-06-01       |

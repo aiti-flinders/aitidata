@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-01-17
+Data was last updated 2023-01-18
 
 ## Installation
 

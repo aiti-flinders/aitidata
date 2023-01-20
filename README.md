@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-01-19
+Data was last updated 2023-01-20
 
 ## Installation
 
@@ -33,16 +33,16 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
+| hours_worked                 | Hours worked                                                                          | 2022-12-01       |
+| labour_force                 | ABS Labour Force Survey                                                               | 2022-12-01       |
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2022-11-12       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2022-11-01       |
-| hours_worked                 | Hours worked                                                                          | 2022-11-01       |
 | household_spending           | Experimental household spending                                                       | 2022-11-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2022-11-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2022-11-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2022-11-01       |
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2022-11-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2022-11-01       |
-| labour_force                 | ABS Labour Force Survey                                                               | 2022-11-01       |
 | occupation_underemployment   | Underemployment by occupation                                                         | 2022-11-01       |
 | retail_trade                 | Retail trade                                                                          | 2022-11-01       |
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2022-11-01       |

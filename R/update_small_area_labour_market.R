@@ -57,8 +57,8 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     small_area_labour_market <- raw %>%
       dplyr::mutate(dplyr::across(where(is.numeric), as.character)) %>%
       dplyr::rename(indicator = "Data Item",
-                   sa2_name = "Statistical Area Level 2 (SA2) (2016 ASGS)",
-                   sa2_code = "SA2 Code (2016 ASGS)") %>%
+                   sa2_name = "Statistical Area Level 2 (SA2)",
+                   sa2_code = "SA2 Code") %>%
       tidyr::pivot_longer(cols = -c("indicator",
                                     "sa2_name",
                                     "sa2_code"),

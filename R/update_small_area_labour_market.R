@@ -15,7 +15,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     filename <- xml2::read_html("https://labourmarketinsights.gov.au/regions/small-area-labour-markets/") %>%
       rvest::html_elements("a.btn.btn-outline-primary.pl-2.pr-5.py-2") %>%
       rvest::html_attr("href") %>%
-      .[4]
+      .[5]
     
     dl <- GET(url = paste0("https://labourmarketinsights.gov.au/", filename),
               header = httr::add_headers(header),

@@ -22,8 +22,8 @@ update_retail_trade <- function(force_update = FALSE) {
         dplyr::mutate(year = lubridate::year(.data$date),
                       month = lubridate::month(.data$date, abbr = FALSE, label = TRUE),
                       state = dplyr::case_when(
-                        .data$state == "Total (State)" ~ "Australia",
-                        TRUE ~ .data$state
+                        state == "Total (State)" ~ "Australia",
+                        TRUE ~ state
                       )) %>%
         dplyr::select(.data$date,
                       .data$year,
@@ -44,7 +44,9 @@ update_retail_trade <- function(force_update = FALSE) {
       message("Skipping `retail_trade.rda`: appears to be up-to-date")
       return(TRUE)
       
-    } 
+    }
+    } else {
+      return(TRUE)
   }
 } 
 

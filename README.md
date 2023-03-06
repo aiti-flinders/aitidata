@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-03-03
+Data was last updated 2023-03-06
 
 ## Installation
 
@@ -42,6 +42,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker_state              | jobseeker state                                                                       | 2023-01-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2023-01-01       |
 | household_spending           | Experimental household spending                                                       | 2022-12-01       |
+| labour_account               | ABS Labour Account                                                                    | 2022-12-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2022-12-01       |
 | retail_trade                 | Retail trade                                                                          | 2022-12-01       |
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2022-11-12       |
@@ -52,7 +53,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2022-11-01       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
 | internet_vacancies_regional  | Internet Vacancies Regional                                                           | 2022-10-01       |
-| labour_account               | ABS Labour Account                                                                    | 2022-09-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2022-09-01       |
 | mobility_facebook            | Facebook Mobility                                                                     | 2022-05-22       |
 | mobility_google              | Google mobility                                                                       | 2021-12-03       |

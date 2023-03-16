@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-03-15
+Data was last updated 2023-03-16
 
 ## Installation
 
@@ -31,11 +31,10 @@ devtools::install_github("aiti-flinders/aitidata")
 
 ## Included data
 
-    #> Warning in max.default(structure(numeric(0), class = "Date"), na.rm = FALSE):
-    #> no non-missing arguments to max; returning -Inf
-
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
+| payroll_index                | ABS Weekly Payroll Index                                                              | 2023-02-11       |
+| payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-02-11       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2023-01-01       |
 | hours_worked                 | Hours worked                                                                          | 2023-01-01       |
 | household_spending           | Experimental household spending                                                       | 2023-01-01       |
@@ -45,7 +44,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | retail_trade                 | Retail trade                                                                          | 2023-01-01       |
 | labour_account               | ABS Labour Account                                                                    | 2022-12-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2022-12-01       |
-| payroll_index                | ABS Weekly Payroll Index                                                              | 2022-11-12       |
 | industry_employment          | ABS Employment by Industry                                                            | 2022-11-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2022-11-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2022-11-01       |
@@ -59,7 +57,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2021-06-01       |
 | jobkeeper_sa2                | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper_state              | Jobkeeper applications by state                                                       | 2021-03-01       |
-| payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | -Inf             |
 | abs_urls                     | Match ABS Catalogue names with URLS                                                   | NA               |
 | anzsic                       | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               |
 | aus_manufacturing            | Australian Manufacturing                                                              | NA               |

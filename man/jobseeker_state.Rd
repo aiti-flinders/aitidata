@@ -5,7 +5,7 @@
 \alias{jobseeker_state}
 \title{jobseeker state}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 754 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 774 rows and 4 columns.
 }
 \usage{
 jobseeker_state

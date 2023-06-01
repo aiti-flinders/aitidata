@@ -6,7 +6,7 @@
 update_aus_manufacturing <- function(force_update = FALSE) {
   
   abs_file <- aitidata::download_data_cube(catalogue_string = "australian-industry",
-                                           cube = "Manufacturing industry", 
+                                           cube = "81550DO003_202122", 
                                            path = "data-raw")
   #fpath <- gsub("[^\\/]*$", "", fpath)
   years <- readxl::read_excel(abs_file, sheet = "Table_1", skip = 4, n_max = 1) %>%
@@ -30,7 +30,9 @@ update_aus_manufacturing <- function(force_update = FALSE) {
         industry_code = stringr::str_extract(.data$industry, "\\d{2,4}"),
         industry_code = ifelse(is.na(.data$industry_code), "C", .data$industry_code),
         industry = trimws(stringr::str_replace(.data$industry, "\\d{2,4}", "")),
-        indicator = stringr::str_remove_all(.data$indicator, "_[1-3]"))
+        indicator = stringr::str_remove_all(.data$indicator, "_[1-3]")) %>%
+      dplyr::filter(!is.na(value),
+                    !is.na(industry))
     
     usethis::use_data(aus_manufacturing, overwrite = TRUE, compress = "xz")
     file.remove(abs_file)

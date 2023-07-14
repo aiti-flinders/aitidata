@@ -17,7 +17,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-07-13
+Data was last updated 2023-07-14
 
 ## Installation
 
@@ -33,8 +33,8 @@ devtools::install_github("aiti-flinders/aitidata")
 
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
-| payroll_index                | ABS Weekly Payroll Index                                                              | 2023-05-13       |
-| payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-05-13       |
+| payroll_index                | ABS Weekly Payroll Index                                                              | 2023-06-10       |
+| payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-06-10       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2023-05-01       |
 | hours_worked                 | Hours worked                                                                          | 2023-05-01       |
 | household_spending           | Experimental household spending                                                       | 2023-05-01       |

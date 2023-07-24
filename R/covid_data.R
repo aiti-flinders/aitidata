@@ -7,6 +7,7 @@ update_covid_data <- function() {
     dplyr::left_join(by = "sa2_code", aitidata::small_area_labour_market %>% 
                        dplyr::filter(.data$indicator == "Smoothed labour force (persons)", date == max(.data$date)) %>%
                        dplyr::select(labour_force = "value", "sa2_code")) %>%
+    dplyr::filter(!is.na(sa2_code)) %>% 
     tidyr::pivot_wider(id_cols = c("sa2_code", 
                                    "date", 
                                    "labour_force"), 

@@ -25,7 +25,8 @@ update_household_spending <- function(force_update = FALSE) {
     raw <- readabs::read_abs(cat_no = "5682.0", tables = 1:9, retain_files = FALSE) 
     
     household_spending <- raw %>%
-      readabs::separate_series(column_names = c("indicator", "coicop_division", "state", "price")) %>%
+      readabs::separate_series(column_names = c("indicator", "coicop_division", "state", "price"),
+                               remove_nas = TRUE) %>%
       dplyr::filter(indicator == "Calendar adjusted household spending - Index") %>%
       dplyr::mutate(value = ifelse(.data$unit == "000", 1000 * .data$value, .data$value),
                     year = lubridate::year(.data$date),

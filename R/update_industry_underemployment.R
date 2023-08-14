@@ -41,17 +41,17 @@ update_industry_underemployment <- function(force_update = FALSE) {
                                        "Sales Workers",
                                        "Machinery Operators and Drivers",
                                        "Labourers")) %>%
-        dplyr::select(.data$date,
-                      .data$year,
-                      .data$month,
-                      .data$indicator,
-                      .data$industry,
-                      .data$gender,
-                      .data$age,
-                      .data$state,
-                      .data$series_type,
-                      .data$value,
-                      .data$unit)
+        dplyr::select("date",
+                      "year",
+                      "month",
+                      "indicator",
+                      "industry",
+                      "gender",
+                      "age",
+                      "state",
+                      "series_type",
+                      "value",
+                      "unit")
       
       occupation_underemployment <- table_19 %>%
         dplyr::filter(industry %in% c("Managers",
@@ -62,17 +62,17 @@ update_industry_underemployment <- function(force_update = FALSE) {
                                       "Sales Workers",
                                       "Machinery Operators and Drivers",
                                       "Labourers")) %>%
-        dplyr::select(.data$date,
-                      .data$year,
-                      .data$month,
-                      occupation = .data$indicator,
-                      .data$industry,
-                      .data$gender,
-                      .data$age,
-                      .data$state,
-                      .data$series_type,
-                      .data$value,
-                      .data$unit)
+        dplyr::select("date",
+                      "year",
+                      "month",
+                      occupation = "indicator",
+                      industry,
+                      "gender",
+                      "age",
+                      "state",
+                      "series_type",
+                      "value",
+                      "unit")
       
       
       usethis::use_data(industry_underemployment, overwrite = TRUE, compress = "xz")

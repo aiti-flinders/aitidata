@@ -23,12 +23,12 @@ update_national_accounts <- function(force_update = FALSE) {
                     !is.na(.data$value)) %>%
       dplyr::mutate(subdivision = ifelse(.data$subdivision == "", paste(.data$industry, "(Total)"), .data$subdivision)) %>%
       tidyr::separate(.data$subdivision, into = c("subdivision", "indicator"), sep = ":", fill = "right") %>%
-      dplyr::select(.data$date, 
-                    .data$industry, 
-                    .data$subdivision, 
-                    .data$value, 
-                    .data$series_type, 
-                    .data$unit) %>%
+      dplyr::select("date", 
+                    "industry", 
+                    "subdivision", 
+                    "value", 
+                    "series_type", 
+                    "unit") %>%
       dplyr::mutate(indicator = dplyr::case_when(
         .data$unit == "$ Millions" ~ "Gross Value Added",
         .data$unit == "Percent" ~ "Percent Changes",

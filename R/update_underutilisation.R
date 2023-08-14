@@ -19,16 +19,16 @@ update_underutilisation <- function(force_update = FALSE) {
                     value = ifelse(.data$unit == "000", (1000 * .data$value), .data$value),
                     year = lubridate::year(.data$date),
                     month = lubridate::month(.data$date, label = T, abbr = F)) %>%
-      dplyr::select(.data$date, 
-                    .data$year, 
-                    .data$month, 
-                    .data$indicator, 
-                    .data$gender, 
-                    .data$age, 
-                    .data$state, 
-                    .data$series_type, 
-                    .data$value, 
-                    .data$unit)
+      dplyr::select("date", 
+                    "year", 
+                    "month", 
+                    "indicator", 
+                    "gender", 
+                    "age", 
+                    "state", 
+                    "series_type", 
+                    "value", 
+                    "unit")
     
     underutilisation_23b <- raw %>%
       dplyr::filter(.data$table_no == "6291023b") %>%
@@ -40,16 +40,16 @@ update_underutilisation <- function(force_update = FALSE) {
                     state = "Australia",
                     year = lubridate::year(.data$date),
                     month = lubridate::month(.data$date, label = TRUE, abbr = FALSE)) %>%
-      dplyr::select(.data$date,
-                    .data$year, 
-                    .data$month, 
-                    .data$indicator, 
-                    .data$gender, 
-                    .data$age, 
-                    .data$state, 
-                    .data$series_type, 
-                    .data$value, 
-                    .data$unit)
+      dplyr::select('date',
+                    'year', 
+                    'month', 
+                    'indicator', 
+                    'gender', 
+                    'age', 
+                    'state', 
+                    'series_type', 
+                    'value', 
+                    "unit")
     
     
     underutilisation <- dplyr::bind_rows(underutilisation_23a, underutilisation_23b) %>%

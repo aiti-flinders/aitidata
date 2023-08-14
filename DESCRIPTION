@@ -9,7 +9,7 @@ Description: A collection of datasets commonly used in research at the
     integration into the reportabs package.
 License: CC0
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports: 
     dplyr,
     fs,
@@ -17,12 +17,11 @@ Imports:
     here,
     httr,
     lubridate,
-    magrittr,
     purrr,
     readabs (>= 0.4.10.901),
     readr,
     readxl,
-    rhdx (>= 0.1.0.9000),
+    reportabs (>= 0.0.1.9000),
     rlang,
     rvest,
     strayr (>= 0.1.5.1),
@@ -33,12 +32,11 @@ Imports:
     withr,
     xml2
 Suggests: 
-    covr,
     testthat (>= 3.0.0)
-Remotes: 
-    github::dickoa/rhdx,
+Remotes:  
     mattcowgill/readabs,
-    runapp-aus/strayr
+    runapp-aus/strayr,
+    aiti-flinders/reportabs
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz

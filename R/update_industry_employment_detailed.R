@@ -39,9 +39,9 @@ update_industry_employment_detailed <- function(force_update = FALSE) {
     
     
     anzsic <- strayr::anzsic2006 %>%
-      dplyr::select(.data$anzsic_division,
-                    .data$anzsic_subdivision,
-                    .data$anzsic_group)
+      dplyr::select("anzsic_division",
+                    "anzsic_subdivision",
+                    "anzsic_group")
     
     industry_employment_detailed <- dplyr::left_join(df, anzsic) %>%
       dplyr::distinct() %>%

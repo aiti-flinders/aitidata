@@ -12,7 +12,7 @@ update_abs <- function(force_update = FALSE) {
   update_industry_underemployment(force_update)
   update_industry_employment_detailed(force_update)
   update_aus_manufacturing(force_update)
-  update_mobility_facebook()
+  #update_mobility_facebook()
   update_national_accounts(force_update)
   update_underutilisation(force_update)
   update_labour_account(force_update)

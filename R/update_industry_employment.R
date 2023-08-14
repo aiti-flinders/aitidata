@@ -42,7 +42,7 @@ update_industry_employment <- function(force_update = FALSE) {
       dplyr::group_by(.data$date, .data$indicator, .data$gender, .data$age, .data$state) %>% 
       dplyr::mutate(value_share = 200 * .data$value / sum(.data$value)) %>%
       dplyr::ungroup() %>%
-      dplyr::select(.data$date, .data$year, .data$month, .data$indicator, .data$industry, .data$gender, .data$age, .data$state, .data$series_type, .data$value, .data$unit) 
+      dplyr::select("date", "year", "month", "indicator", "industry", "gender", "age", "state", "series_type", "value", "unit") 
     
     usethis::use_data(industry_employment, overwrite = TRUE, compress = "xz")
     return(TRUE)

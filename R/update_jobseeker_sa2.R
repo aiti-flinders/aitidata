@@ -4,6 +4,7 @@
 #'
 #' @return logical
 
+
 update_jobseeker_sa2 <- function(force_update = FALSE) {
   
   files <- data.frame(

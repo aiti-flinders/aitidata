@@ -25,15 +25,15 @@ update_retail_trade <- function(force_update = FALSE) {
                         state == "Total (State)" ~ "Australia",
                         TRUE ~ state
                       )) %>%
-        dplyr::select(.data$date,
-                      .data$year,
-                      .data$month, 
-                      .data$state, 
-                      .data$indicator, 
-                      .data$industry_group, 
-                      .data$series_type, 
-                      .data$value, 
-                      .data$unit)
+        dplyr::select("date",
+                      "year",
+                      "month", 
+                      "state", 
+                      "indicator", 
+                      "industry_group", 
+                      "series_type", 
+                      "value", 
+                      "unit")
       
       usethis::use_data(retail_trade, overwrite = TRUE, compress = "xz")
       return(TRUE)

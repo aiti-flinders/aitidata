@@ -6,7 +6,6 @@ output: github_document
 
 ```{r, include = FALSE}
 
-library(magrittr)
 library(dplyr)
 library(stringr)
 
@@ -18,16 +17,16 @@ knitr::opts_chunk$set(
 )
 
 write_metadata <- function() {
- included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] %>%
+ included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] |> 
    dplyr::mutate(Item = paste0("aitidata::", Item))
  
  date_max <- purrr::map_dfr(.x = included_data$Item, .f = ~safe_max(.x))
 
- dplyr::bind_cols(included_data, date_max) %>%
-   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::")) %>%
+ dplyr::bind_cols(included_data, date_max) |> 
+   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::")) |> 
    dplyr::rename("Data Name" = Item,
           "Description" = Title,
-          "Most Recent Data" = date) %>%  
+          "Most Recent Data" = date) |>   
    dplyr::arrange(desc(`Most Recent Data`))
  
 }
@@ -57,7 +56,7 @@ safe_max <- function(df) {
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml/badge.svg?branch=data_prep)](https://github.com/aiti-flinders/aitidata/actions/workflows/R-CMD-check.yaml)
 [![update-abs](https://github.com/aiti-flinders/aitidata/workflows/update-abs/badge.svg)](https://github.com/aiti-flinders/aitidata/actions)
-[![Codecov test coverage](https://codecov.io/gh/aiti-flinders/aitidata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/aiti-flinders/aitidata?branch=master)
+
 <!-- badges: end -->
 
 `aitidata` is a collection of data sets commonly used by researchers at the Australian Industrial Transformation Institute. Data is updated at about 11:30am each day. 

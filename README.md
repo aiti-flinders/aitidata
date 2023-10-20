@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-10-19
+Data was last updated 2023-10-20
 
 ## Installation
 
@@ -33,12 +33,12 @@ devtools::install_github("aiti-flinders/aitidata")
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2023-09-16       |
-| hours_worked                 | Hours worked                                                                          | 2023-08-01       |
+| hours_worked                 | Hours worked                                                                          | 2023-09-01       |
+| labour_force                 | ABS Labour Force Survey                                                               | 2023-09-01       |
 | household_spending           | Experimental household spending                                                       | 2023-08-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2023-08-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2023-08-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2023-08-01       |
-| labour_force                 | ABS Labour Force Survey                                                               | 2023-08-01       |
 | occupation_underemployment   | Underemployment by occupation                                                         | 2023-08-01       |
 | retail_trade                 | Retail trade                                                                          | 2023-08-01       |
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2023-08-01       |

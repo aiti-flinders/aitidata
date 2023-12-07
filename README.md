@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2023-12-06
+Data was last updated 2023-12-07
 
 ## Installation
 
@@ -37,6 +37,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | household_spending           | Experimental household spending                                                       | 2023-10-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2023-10-01       |
 | retail_trade                 | Retail trade                                                                          | 2023-10-01       |
+| national_accounts            | ABS National Accounts                                                                 | 2023-09-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2023-08-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2023-08-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2023-08-01       |
@@ -47,7 +48,6 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2023-06-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2023-06-01       |
 | labour_account               | ABS Labour Account                                                                    | 2023-06-01       |
-| national_accounts            | ABS National Accounts                                                                 | 2023-06-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2023-03-01       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
 | internet_vacancies_regional  | Internet Vacancies Regional                                                           | 2022-10-01       |

@@ -25,16 +25,17 @@ update_cabee_sa2 <- function(force_update = FALSE) {
   
   if (current_date > max(aitidata::cabee_sa2$date) | force_update) {
     
-    abs_file <- try(aitidata::download_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
-                                                 cube = "Data cube 8: Businesses by industry division by Statistical Area Level 2 by employment size ranges",
+    abs_file <- try(readabs::download_abs_data_cube(catalogue_string = "counts-australian-businesses-including-entries-and-exits", 
+                                                 cube = "8165DC08",
                                                  path = "data-raw"), silent = TRUE)
     
     if (!grepl("Error", abs_file)) {
       
       cabee_sheets <- readxl::excel_sheets(abs_file)
-      cabee_sheets <- stringr::str_extract(cabee_sheets, "\\d+.+")
+      cabee_sheets <- stringr::str_extract(cabee_sheets, "\\d")
       cabee_sheets <- cabee_sheets[!is.na(cabee_sheets)]
       cabee_sheets <- cabee_sheets[stringr::str_detect(cabee_sheets, "b", negate = TRUE)]
+      cabee_sheets <- paste("Table", cabee_sheets)
       
       cabee_sa2 <- tibble::tribble(
         ~"date",
@@ -68,7 +69,7 @@ update_cabee_sa2 <- function(force_update = FALSE) {
                                          )) %>%
           dplyr::filter(!is.na(.data$sa2_main_2016)) %>%
           dplyr::mutate(sa2_main_2016 = as.character(.data$sa2_main_2016),
-                        date = as.Date(paste(stringr::str_extract(i, "\\d+"), "06", "01"), format = "%Y %M %d"))
+                        date = as.Date(paste(2024 -  as.numeric(stringr::str_extract(i, "\\d+")), "06", "01"), format = "%Y %M %d"))
         
         cabee_sa2 <- dplyr::bind_rows(cabee_year, cabee_sa2)
       }

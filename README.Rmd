@@ -34,7 +34,6 @@ write_metadata <- function() {
  
 }
 
-
 safe_max <- function(df) {
   
   df <- lazyeval::lazy_eval(df)

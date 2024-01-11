@@ -27,21 +27,19 @@ update_labour_force <- function(force_update = FALSE) {
     
     raw <- readabs::read_abs(cat_no = "6202.0", tables = c("12", "12a", "19", "19a", "22", "23", "23a"), retain_files = FALSE)
     
-    labour_force_status <- raw %>%
-      dplyr::filter(.data$table_no == "6202012" | .data$table_no == "6202012a") %>%
-      readabs::separate_series(column_names = c("indicator", "gender", "state"), remove_nas = TRUE) %>%
+    labour_force_status <- raw |> 
+      dplyr::filter(.data$table_no == "6202012" | .data$table_no == "6202012a") |> 
+      readabs::separate_series(column_names = c("indicator", "gender", "state"), remove_nas = TRUE) |> 
       dplyr::mutate(
         value = ifelse(.data$unit == "000", (1000 * .data$value), (.data$value)),
         year = lubridate::year(.data$date),
         month = lubridate::month(.data$date, label = TRUE, abbr = FALSE),
-        age = "Total (age)"
-      ) %>%
+      ) |> 
       dplyr::select("date", 
                     "year", 
                     "month", 
                     "indicator", 
                     "gender", 
-                    "age", 
                     "state", 
                     "series_type", 
                     "value", 
@@ -49,24 +47,21 @@ update_labour_force <- function(force_update = FALSE) {
     
     
     
-    hours_worked <- raw %>%
-      dplyr::filter(.data$table_no == "6202019" | .data$table_no == "6202019a") %>%
-      tidyr::separate(.data$series, into = c("indicator", "gender", "state"), sep = ";") %>%
+    hours_worked <- raw  |> 
+      dplyr::filter(.data$table_no == "6202019" | .data$table_no == "6202019a") |> 
+      tidyr::separate(.data$series, into = c("indicator", "gender", "state"), sep = ";") |> 
       dplyr::mutate(dplyr::across(c("indicator", "gender"), ~ trimws(gsub(">", "", .))),
                     state = ifelse(.data$gender %in%  states, .data$gender, "Australia"),
                     gender = ifelse(.data$gender %in% states, "Persons", .data$gender),
                     unit = "000",
                     value = ifelse(.data$unit == "000", 1000 * .data$value, .data$value),
                     year = lubridate::year(.data$date),
-                    month = lubridate::month(.data$date, label = TRUE, abbr = FALSE),
-                    age = "Total (age)"
-      ) %>%
+                    month = lubridate::month(.data$date, label = TRUE, abbr = FALSE))  |> 
       dplyr::select("date", 
                     "year", 
                     "month", 
                     "indicator", 
                     "gender", 
-                    "age", 
                     "state", 
                     "series_type", 
                     "value", 
@@ -75,15 +70,15 @@ update_labour_force <- function(force_update = FALSE) {
     usethis::use_data(hours_worked, overwrite = TRUE, compress = "xz")
     
     
-    underutilisation_aus <- raw %>%
-      dplyr::filter(.data$table_no == 6202022) %>%
-      tidyr::separate(col = .data$series, into = c("indicator", "gender", "age"), sep = ";", extra = "drop") %>%
+    underutilisation_aus <- raw |> 
+      dplyr::filter(.data$table_no == 6202022) |> 
+      tidyr::separate(col = .data$series, into = c("indicator", "gender", "age"), sep = ";", extra = "drop") |> 
       dplyr::mutate(dplyr::across(c("indicator", "gender", "age"), ~ trimws(gsub(">", "", .))),
                     age = ifelse(.data$age == "", "Total (age)", .data$age),
                     value = ifelse(.data$unit == "000", (1000 * .data$value), .data$value),
                     year = lubridate::year(.data$date),
                     month = lubridate::month(.data$date, label = T, abbr = F),
-                    state = "Australia") %>%
+                    state = "Australia") |> 
       dplyr::select("date", 
                     "year", 
                     "month", 
@@ -96,21 +91,20 @@ update_labour_force <- function(force_update = FALSE) {
                     "unit")
     
     
-    underutilisation_state <- raw %>%
-      dplyr::filter(.data$table_no == "6202023" | .data$table_no == "6202023a") %>%
-      tidyr::separate(col = .data$series, into = c("indicator", "gender", "state"), sep = ";", extra = "drop") %>%
+    underutilisation_state <- raw |> 
+      dplyr::filter(.data$table_no == "6202023" | .data$table_no == "6202023a",
+                    grepl("Underemploy|Underutilisation", series)) |> 
+      tidyr::separate(col = .data$series, into = c("indicator", "gender", "state"), sep = ";", extra = "drop") |> 
       dplyr::mutate(dplyr::across(c("indicator", "gender", "state"), ~ trimws(gsub(">", "", .))),
                     state = ifelse(.data$state == "", "Australia", .data$state),
                     value = ifelse(.data$unit == "000", (1000 * .data$value), .data$value),
                     year = lubridate::year(.data$date),
-                    month = lubridate::month(.data$date, label = T, abbr = F),
-                    age = "Total (age)") %>%
+                    month = lubridate::month(.data$date, label = T, abbr = F)) |> 
       dplyr::select('date', 
                     'year', 
                     'month', 
                     'indicator', 
                     'gender', 
-                    'age', 
                     'state', 
                     'series_type', 
                     'value', 

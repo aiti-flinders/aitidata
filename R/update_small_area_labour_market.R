@@ -13,7 +13,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
     
     
     filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/small-area-labour-markets") %>%
-      rvest::html_elements("a.downloadLink.button.primary") %>%
+      rvest::html_elements("a.downloadLink.button.brandDark.medium.downloadCloudAfter") %>%
       rvest::html_attr("href") %>%
       .[5]
     
@@ -35,7 +35,7 @@ update_small_area_labour_market <- function(force_update = FALSE) {
   if (current_date > max(aitidata::small_area_labour_market$date) | force_update) {
     
     filename <- xml2::read_html("https://www.jobsandskills.gov.au/work/small-area-labour-markets") %>%
-      rvest::html_elements("a.downloadLink.button.primary") %>%
+      rvest::html_elements("a.downloadLink.button.brandDark.medium.downloadCloudAfter") %>%
       rvest::html_attr("href") %>%
       .[3]
     

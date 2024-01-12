@@ -36,8 +36,7 @@ jobs:
 
       - name: Get data
         run: |
-          Rscript R/update_abs.R
-          Rscript -e update_abs()
+          Rscript data-raw/update_data.R
       - name: Document data
         run: | 
           Rscript -e "devtools::document()"

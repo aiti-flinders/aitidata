@@ -35,8 +35,8 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
 
       - name: Get data
-        run: Rscript R/update_abs.R
         run: |
+          Rscript R/update_abs.R
           Rscript -e update_abs()
       - name: Document data
         run: | 

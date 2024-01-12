@@ -5,7 +5,7 @@
 \alias{industry_employment_detailed}
 \title{ABS Detailed employment by industry}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 765464 rows and 7 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 770216 rows and 7 columns.
 }
 \usage{
 industry_employment_detailed

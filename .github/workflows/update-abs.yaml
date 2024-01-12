@@ -35,9 +35,11 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
 
       - name: Get data
+        run: Rscript R/update_abs.R
         run: |
-          Rscript -e "library(aitidata)"
-          Rscript -e "aitidata:::update_abs()"
+          Rscript -e update_abs()
+      - name: Document data
+        run: | 
           Rscript -e "devtools::document()"
       - name: Render README
         run: |

@@ -31,6 +31,8 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libharfbuzz-dev libfribidi-dev 
           sudo apt-get install libudunits2-dev
+          sudo apt-get install libgdal-dev gdal-bin libproj15 libproj19 libproj-dev
+
       - uses: r-lib/actions/setup-renv@v2
 
       - name: Get data

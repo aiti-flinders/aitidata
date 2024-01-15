@@ -39,6 +39,7 @@ jobs:
           Rscript data-raw/update_data.R
       - name: Document data
         run: | 
+          Rscript -e "install.packages('devtools')"
           Rscript -e "devtools::document()"
       - name: Render README
         run: |

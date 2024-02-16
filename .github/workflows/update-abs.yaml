@@ -34,9 +34,6 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
-      - name: Get data
-        run: |
-          Rscript data-raw/update_data.R
       - name: Document data
         run: | 
           Rscript -e "install.packages('devtools')"

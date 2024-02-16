@@ -40,6 +40,7 @@ jobs:
           Rscript -e "devtools::document()"
       - name: Render README
         run: |
+          Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
       - name: Get data
         run: |

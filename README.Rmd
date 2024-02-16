@@ -8,6 +8,7 @@ output: github_document
 
 library(dplyr)
 library(stringr)
+library(aitidata)
 
 knitr::opts_chunk$set(
   collapse = TRUE,

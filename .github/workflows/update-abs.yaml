@@ -44,6 +44,9 @@ jobs:
       - name: Render README
         run: |
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
+      - name: Get data
+        run: |
+          Rscript data-raw/update_data.R
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'

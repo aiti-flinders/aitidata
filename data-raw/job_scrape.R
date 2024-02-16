@@ -1,15 +1,35 @@
 ## code to prepare `job_scrape` dataset goes here
+# 11/01/2024 - David Nicoll - Updated due to changes to Seek website
+#             NOTE: This update now on hold due to finding that seek only enables up to 25 pages of job content
+#                   this is regardless of scraping or trying to access page 26 of the job list manually via the website
+#                   On the day of testing there was ~200 pages of jobs needed to be scraped, so only ~12% of pages could be scraped.
+
 library(rvest)
 library(tidyverse)
 library(glue)
+library(xml2)
 
-num_jobs <- read_html("https://www.seek.com.au/jobs?daterange=1&page=1&sortmode=ListedDate") %>%
-  html_nodes(xpath = '//*[@id="SearchSummary"]/span/h1/strong') %>%
-  html_text() %>%
-  str_replace_all(",", "") %>%
-  as.numeric()
+#num_jobs <- read_html("https://www.seek.com.au/jobs?daterange=1&page=1&sortmode=ListedDate") %>%
+#  html_nodes(xpath = '//*[@id="SearchSummary"]/span/h1/strong') %>%
+#  html_text() %>%
+#  str_replace_all(",", "") %>%
+#  as.numeric()
 
-num_pages <- ceiling(num_jobs / 22)
+# Download seek website for job postings today and then get values of interest
+seekData <- rvest::read_html("https://www.seek.com.au/jobs?daterange=1&page=1&sortmode=ListedDate") %>%
+  rvest::html_elements(xpath = '//*[@id="searchResultSummary"]')  # New string as at 09/01/2024 assume seek website changed
+seekData <- as.character(xml_attrs(seekData[[1]])[["data-sol-meta"]]) # Convert to character for following code
+seekData <- gsub("([{}\"])", "", seekData) # Get rid of unwanted characters
+seekData <- as.data.frame.character(seekData) %>%
+  separate_longer_delim(seekData, delim=",") %>%
+  filter(grepl('totalJobCount|pageSize', seekData)) %>% #Only keep the values we want e.g., totalJobCount,pageSize
+  separate_wider_delim(seekData, delim=":", names=c("Attribute", "Value")) %>%
+  mutate(Value = as.numeric(Value)) %>%
+  pivot_wider(names_from = "Attribute", values_from = Value)
+
+# num_pages <- ceiling(num_jobs / 22) 
+num_pages <- ceiling(seekData$totalJobCount/seekData$pageSize)
+
 
 urls <- tibble(url = glue("https://www.seek.com.au/jobs?daterange=1&page={1:num_pages}&sortmode=ListedDate"))
 

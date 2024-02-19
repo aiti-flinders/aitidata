@@ -34,6 +34,10 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
+      - name: Get data
+        run: |
+          Rscript data-raw/update_data.R
+
       - name: Document data
         run: | 
           Rscript -e "install.packages('devtools')"
@@ -42,9 +46,6 @@ jobs:
         run: |
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
           Rscript -e "rmarkdown::render(here::here('README.Rmd'))"
-      - name: Get data
-        run: |
-          Rscript data-raw/update_data.R
       - name: Commit
         run: |
           git config --global user.name 'Hamish Gamble'

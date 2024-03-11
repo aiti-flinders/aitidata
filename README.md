@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-03-08
+Data was last updated 2024-03-11
 
 ## Installation
 
@@ -37,13 +37,13 @@ devtools::install_github("aiti-flinders/aitidata")
 | labour_force                 | ABS Labour Force Survey                                                               | 2024-01-01       |
 | retail_trade                 | Retail trade                                                                          | 2024-01-01       |
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2023-12-09       |
+| labour_account               | ABS Labour Account                                                                    | 2023-12-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2023-12-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2023-11-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2023-11-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2023-11-01       |
 | occupation_underemployment   | Underemployment by occupation                                                         | 2023-11-01       |
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2023-11-01       |
-| labour_account               | ABS Labour Account                                                                    | 2023-09-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-06-10       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2023-06-01       |
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2023-06-01       |

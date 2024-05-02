@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-05-01
+Data was last updated 2024-05-02
 
 ## Installation
 
@@ -49,7 +49,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2023-06-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2023-06-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2023-06-01       |
-| cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2023-04-01       |
+| cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2023-05-01       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
 | internet_vacancies_regional  | Internet Vacancies Regional                                                           | 2022-10-01       |
 | mobility_facebook            | Facebook Mobility                                                                     | 2022-05-22       |

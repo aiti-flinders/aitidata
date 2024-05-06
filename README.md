@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-05-03
+Data was last updated 2024-05-06
 
 ## Installation
 
@@ -34,8 +34,8 @@ devtools::install_github("aiti-flinders/aitidata")
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2024-03-16       |
 | hours_worked                 | Hours worked                                                                          | 2024-03-01       |
+| household_spending           | Experimental household spending                                                       | 2024-03-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2024-03-01       |
-| household_spending           | Experimental household spending                                                       | 2024-02-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2024-02-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2024-02-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2024-02-01       |

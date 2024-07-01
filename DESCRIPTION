@@ -12,16 +12,14 @@ Depends:
     R (>= 4.1.0)
 Imports: 
     dplyr,
-    fs,
     glue,
     here,
     httr,
     lubridate,
     purrr,
-    readabs (>= 0.4.10.901),
+    readabs,
     readr,
     readxl,
-    reportabs (>= 0.0.1.9000),
     rlang,
     rvest,
     strayr (>= 0.1.5.1),
@@ -29,17 +27,14 @@ Imports:
     tibble,
     tidyr,
     usethis,
-    withr,
     xml2
 Suggests: 
     testthat (>= 3.0.0)
 Remotes: 
-    mattcowgill/readabs,
-    runapp-aus/strayr,
-    aiti-flinders/reportabs
+    runapp-aus/strayr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Config/testthat/edition: 3

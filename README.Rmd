@@ -20,8 +20,12 @@ write_metadata <- function() {
  included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] |> 
    dplyr::mutate(Item = paste0("aitidata::", Item))
  
+ safe_max <- purrr::safely(max)
+ 
  date_max <- purrr::map(.x = included_data$Item, .f = ~safe_max(.x)) |> 
-   purrr::list_c() 
+   purrr::transpose() |> 
+   purrr::pluck("result") |> 
+   purrr::simplify()
  
  date_max <- data.frame(date_max)
 
@@ -34,23 +38,7 @@ write_metadata <- function() {
  
 }
 
-safe_max <- function(df) {
-  
-  df <- lazyeval::lazy_eval(df)
-  
-  if ("date" %in% colnames(df)) {
-    
-    r <- max(df$date)
-    
-  }
-  
-  else {
-    r <- NA
-  }
-  
-  names(r) <- "date"
-  r
-}
+
 ```
 
 # aitidata

@@ -15,7 +15,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   update-data:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     env:
         GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
@@ -27,7 +27,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Get data
         run: |
-          Rscript -e "install.packages('devtools')"
+          Rscript -e "install.packages('devtools', 'rmarkdown')"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
           Rscript -e "aitidata::update_abs()"
 

@@ -33,7 +33,7 @@ jobs:
         run: |
           Rscript -e "install.packages(c('devtools', 'rmarkdown'))"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
-          Rscript -e "aitidata::update_abs()"
+          Rscript -e "aitidata:::update_abs()"
 
       - name: Document data
         run: | 

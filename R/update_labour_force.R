@@ -62,17 +62,17 @@ update_labour_force <- function(force_update = FALSE) {
       tidyr::pivot_wider(names_from = "indicator", values_from = "value")  |> 
       dplyr::mutate("Underutilised total" = .data$`Unemployed total` + .data$`Underemployed total`)
     
-    labour_force <- labour_force %>%
+    labour_force <- labour_force |> 
       tidyr::pivot_longer(cols = "Employed total":"Underutilised total",
                           names_to = "indicator", 
                           values_to = "value", 
                           values_drop_na = TRUE) |> 
-      dplyr::mutate(ifelse(is.na(age), "Total (age)", age))
+      dplyr::mutate(age = ifelse(is.na(age), "Total (age)", age))
     
     usethis::use_data(labour_force, overwrite = TRUE, compress = "xz")
     return(TRUE)
   } else {
-    message("Skipping `labour_force.rda`: appears to be up-to-date")
+    message("Skipping `labour_force.rda`: data appears to be up to date")
     
   }
 }

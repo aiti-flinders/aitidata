@@ -27,12 +27,12 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Get data
         run: |
+          Rscript -e "install.packages('devtools')"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
           Rscript -e "aitidata::update_abs()"
 
       - name: Document data
         run: | 
-          Rscript -e "install.packages('devtools')"
           Rscript -e "devtools::document()"
       - name: Render README
         run: |

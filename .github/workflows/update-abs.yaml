@@ -31,7 +31,7 @@ jobs:
           brew install gdal proj geos
       - name: Get data
         run: |
-          Rscript -e "install.packages(c('devtools', 'rmarkdown'))"
+          Rscript -e "install.packages(c('devtools', 'rmarkdown', 'lazyeval'))"
           Rscript -e "devtools::install_github('aiti-flinders/aitidata')"
           Rscript -e "aitidata:::update_abs()"
 

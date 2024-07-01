@@ -6,8 +6,9 @@ output: github_document
 
 ```{r, include = FALSE}
 library(dplyr)
+library(purrr)
 library(stringr)
-library(aitidata)
+library(lazyeval)
 
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -18,23 +19,26 @@ knitr::opts_chunk$set(
 
 write_metadata <- function() {
  included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] |> 
-   dplyr::mutate(Item = paste0("aitidata::", Item))
+   mutate(Item = paste0("aitidata::", Item))
  
- safe_max <- purrr::safely(max)
+ safe_max <- safely(.f = ~lazy_eval(.x) |> pull(date) |> max(),
+                    otherwise = NA)
  
- date_max <- purrr::map(.x = included_data$Item, .f = ~safe_max(.x)) |> 
-   purrr::transpose() |> 
-   purrr::pluck("result") |> 
-   purrr::simplify()
+ date_max <- map(.x = included_data$Item, .f = ~safe_max(.x)) |> 
+   transpose() |> 
+   pluck("result") |> 
+   simplify() |> 
+   list_c() |> 
+   as.Date()
  
  date_max <- data.frame(date_max)
 
- dplyr::bind_cols(included_data, date_max) |> 
-   dplyr::mutate(Item = stringr::str_remove_all(Item, "aitidata::")) |> 
-   dplyr::rename("Data Name" = Item,
+ bind_cols(included_data, date_max) |> 
+   mutate(Item = str_remove_all(Item, "aitidata::")) |> 
+   rename("Data Name" = Item,
           "Description" = Title,
           "Most Recent Data" = date_max) |>   
-   dplyr::arrange(desc(`Most Recent Data`))
+   arrange(desc(`Most Recent Data`))
  
 }
 

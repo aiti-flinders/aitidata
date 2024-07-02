@@ -38,7 +38,7 @@ update_labour_force <- function(force_update = FALSE) {
       tidyr::separate(.data$series, into = c("indicator", "sex", "state"), sep = ";") |> 
       dplyr::mutate(dplyr::across(c("indicator", "sex"), ~ trimws(gsub(">", "", .))),
                     state = ifelse(.data$sex %in%  states, .data$sex, "Australia"),
-                    gender = ifelse(.data$sex %in% states, "Persons", .data$sex))
+                    sex = ifelse(.data$sex %in% states, "Persons", .data$sex))
     
     usethis::use_data(hours_worked, overwrite = TRUE, compress = "xz")
     

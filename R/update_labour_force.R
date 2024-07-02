@@ -59,15 +59,22 @@ update_labour_force <- function(force_update = FALSE) {
     labour_force <- dplyr::bind_rows(list(labour_force_status, underutilisation_aus, underutilisation_state)) |> 
       dplyr::distinct() |> 
       dplyr::filter(!is.na(value))  |>  
-      tidyr::pivot_wider(names_from = "indicator", values_from = "value")  |> 
-      dplyr::mutate("Underutilised total" = .data$`Unemployed total` + .data$`Underemployed total`)
+      dplyr::mutate(age = ifelse(is.na(age), "Total (age)", age))
+    
+    
+    underutilised_total <- labour_force |> 
+      dplyr::filter(indicator %in% c("Underemployed total", "Unemployed total")) |> 
+      tidyr::pivot_wider(id_cols = c(date, sex, state, series_type, unit, age), names_from = "indicator", values_from = "value")  |> 
+      dplyr::mutate("Underutilised total" = .data$`Unemployed total` + .data$`Underemployed total`) |> 
+      tidyr::pivot_longer(cols = c("Underutilised total", "Unemployed total", "Underemployed total"),
+                          names_to = "indicator",
+                          values_to = "value",
+                          values_drop_na = TRUE)
     
     labour_force <- labour_force |> 
-      tidyr::pivot_longer(cols = "Employed total":"Underutilised total",
-                          names_to = "indicator", 
-                          values_to = "value", 
-                          values_drop_na = TRUE) |> 
-      dplyr::mutate(age = ifelse(is.na(age), "Total (age)", age))
+      dplyr::bind_rows(list(labour_force, underutilised_total)) |> 
+      dplyr::distinct() |> 
+      dplyr::mutate(state = ifelse(is.na(state), "Australia", state))
     
     usethis::use_data(labour_force, overwrite = TRUE, compress = "xz")
     return(TRUE)

@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-07-03
+Data was last updated 2024-07-04
 
 ## Installation
 
@@ -39,9 +39,9 @@ devtools::install_github("aiti-flinders/aitidata")
 | industry_underemployment     | Underemployment by industry                                                           | 2024-05-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2024-05-01       |
 | occupation_underemployment   | Underemployment by occupation                                                         | 2024-05-01       |
+| retail_trade                 | Retail trade                                                                          | 2024-05-01       |
 | underutilisation             | ABS Measures of Underutilisation                                                      | 2024-05-01       |
 | household_spending           | Experimental household spending                                                       | 2024-04-01       |
-| retail_trade                 | Retail trade                                                                          | 2024-04-01       |
 | labour_account               | ABS Labour Account                                                                    | 2024-03-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2024-03-01       |
 | cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2023-07-01       |

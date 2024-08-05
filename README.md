@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-08-02
+Data was last updated 2024-08-05
 
 ## Installation
 
@@ -30,13 +30,15 @@ devtools::install_github("aiti-flinders/aitidata")
 
 ## Included data
 
+    #> Warning in max.default(structure(numeric(0), class = "Date"), na.rm = FALSE):
+    #> no non-missing arguments to max; returning -Inf
+
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2024-06-15       |
 | hours_worked                 | Hours worked                                                                          | 2024-06-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2024-06-01       |
 | retail_trade                 | Retail trade                                                                          | 2024-06-01       |
-| household_spending           | Experimental household spending                                                       | 2024-05-01       |
 | industry_employment          | ABS Employment by Industry                                                            | 2024-05-01       |
 | industry_employment_detailed | ABS Detailed employment by industry                                                   | 2024-05-01       |
 | industry_underemployment     | Underemployment by industry                                                           | 2024-05-01       |
@@ -56,6 +58,7 @@ devtools::install_github("aiti-flinders/aitidata")
 | mobility_google              | Google mobility                                                                       | 2021-12-03       |
 | jobkeeper_sa2                | JobKeeper data by SA2                                                                 | 2021-03-01       |
 | jobkeeper_state              | Jobkeeper applications by state                                                       | 2021-03-01       |
+| household_spending           | Experimental household spending                                                       | -Inf             |
 | abs_urls                     | Match ABS Catalogue names with URLS                                                   | NA               |
 | anzsic                       | Australian and New Zealand Standard Industrial Classification (ANZSIC)                | NA               |
 | aus_manufacturing            | Australian Manufacturing                                                              | NA               |

@@ -16,7 +16,7 @@ about 11:30am each day.
 
 The current version of `aitidata` is 0.1.1
 
-Data was last updated 2024-09-26
+Data was last updated 2024-09-27
 
 ## Installation
 
@@ -36,16 +36,16 @@ devtools::install_github("aiti-flinders/aitidata")
 | Data Name                    | Description                                                                           | Most Recent Data |
 |:-----------------------------|:--------------------------------------------------------------------------------------|:-----------------|
 | hours_worked                 | Hours worked                                                                          | 2024-08-01       |
+| industry_employment          | ABS Employment by Industry                                                            | 2024-08-01       |
+| industry_employment_detailed | ABS Detailed employment by industry                                                   | 2024-08-01       |
+| industry_underemployment     | Underemployment by industry                                                           | 2024-08-01       |
 | labour_force                 | ABS Labour Force Survey                                                               | 2024-08-01       |
+| occupation_underemployment   | Underemployment by occupation                                                         | 2024-08-01       |
+| underutilisation             | ABS Measures of Underutilisation                                                      | 2024-08-01       |
 | retail_trade                 | Retail trade                                                                          | 2024-07-01       |
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2024-06-15       |
 | labour_account               | ABS Labour Account                                                                    | 2024-06-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2024-06-01       |
-| industry_employment          | ABS Employment by Industry                                                            | 2024-05-01       |
-| industry_employment_detailed | ABS Detailed employment by industry                                                   | 2024-05-01       |
-| industry_underemployment     | Underemployment by industry                                                           | 2024-05-01       |
-| occupation_underemployment   | Underemployment by occupation                                                         | 2024-05-01       |
-| underutilisation             | ABS Measures of Underutilisation                                                      | 2024-05-01       |
 | cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2023-07-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-06-10       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2023-06-01       |

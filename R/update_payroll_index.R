@@ -14,7 +14,7 @@ update_payroll_index <- function(force_update = FALSE) {
       tolower(x)
     }
     
-    payroll_jobs <- readxl::read_excel("data-raw/6160055001_DO004.xlsx", sheet = "Payroll jobs index", col_types = "text", skip = 5) %>%
+    payroll_jobs <- readxl::read_excel("data-raw/6160055001_DO004.xlsx", sheet = "Table 4", col_types = "text", skip = 5) %>%
       dplyr::rename_with(.fn = ~ dplyr::case_when(
         .x == "State or Territory" ~ "state",
         .x == "Industry division" ~ "industry",

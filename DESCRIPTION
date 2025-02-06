@@ -17,7 +17,7 @@ Imports:
     httr,
     lubridate,
     purrr,
-    readabs,
+    readabs (>= 0.4.17),
     readr,
     readxl,
     rlang,
@@ -30,8 +30,9 @@ Imports:
     xml2
 Suggests: 
     testthat (>= 3.0.0)
-Remotes: 
-    runapp-aus/strayr
+Remotes:  
+    runapp-aus/strayr,
+    mattcowgill/readabs
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

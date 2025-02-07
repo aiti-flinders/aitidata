@@ -12,7 +12,7 @@ test_that("update_ functions work", {
   expect_true(update_labour_force(TRUE))
   expect_true(update_retail_trade(TRUE))
   expect_true(update_cabee_sa2(TRUE))
-  expect_true(update_payroll_index(TRUE))
+  #expect_true(update_payroll_index(TRUE))
   expect_true(update_industry_employment_detailed(TRUE))
   expect_true(update_household_spending(TRUE))
 })

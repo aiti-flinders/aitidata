@@ -17,13 +17,7 @@ update_payroll_index <- function(force_update = FALSE) {
     payroll_jobs <- readxl::read_excel("data-raw/6160055001_DO004.xlsx", sheet = "Table 4", col_types = "text", skip = 5) %>%
       dplyr::rename_with(.fn = ~ dplyr::case_when(
         .x == "State or Territory" ~ "state",
-        .x == "Industry division" ~ "industry",
-        .x == "Sub-division" ~ "industry_subdivision",
-        .x == "Employment size" ~ "emp_size",
-        .x == "Sex" ~ "gender",
-        .x == "Age group" ~ "age",
-        .x == "Statistical Area 4" ~ "sa4",
-        .x == "Statistical Area 3" ~ "sa3",
+        .x == "Characteristic" ~ "characteristic",
         TRUE ~ to_snake(.x)
       )) %>%
       tidyr::pivot_longer(
@@ -34,9 +28,29 @@ update_payroll_index <- function(force_update = FALSE) {
       dplyr::mutate(value = suppressWarnings(as.numeric(.data$value))) %>%
       dplyr::filter(.data$value != "NA") %>%
       dplyr::mutate(date = as.Date(as.numeric(.data$date), origin = "1899-12-30"),
-                    dplyr::across(where(is.character), ~gsub(pattern = ".*\\. ", x =  .x, replacement = "", perl = TRUE)),
+                    dplyr::across(c(state), ~gsub(pattern = ".*\\. ", x =  .x, replacement = "", perl = TRUE)),
                     indicator = "Payroll jobs",
                     state = strayr::clean_state(.data$state, to = "state_name"))
+    
+    payroll_jobs |> mutate(t = case_when(
+      str_detect(characteristic, "All") ~ "all",
+      str_detect(characteristic, "(\\d+\\. [A-S])") ~ "industry",
+      str_detect(characteristic, "[2][1-7]\\. \\d") ~ "age",
+      str_detect(characteristic, "employees") ~ "emp_size",
+      str_detect(characteristic, "[0-9][0-9]\\. [A-Z][^-]") ~ "industry_subdivision")) |> 
+      mutate(industry = case_when(
+        str_detect(t, "industry") ~ characteristic,
+        TRUE ~ "Total (industry)"),
+        gender = "Persons",
+        age = case_when(
+          str_detect(t, "age") ~ characteristic,
+          TRUE ~ "Total (age)"
+        ),
+        business_size = case_when(
+          str_detect(t, "emp_size") ~ characteristic,
+          TRUE ~ "Total (business size)"
+        )) |> 
+      distinct()
     
     
     

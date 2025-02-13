@@ -64,7 +64,7 @@ update_cabee_sa2 <- function(force_update = FALSE) {
       cabee_sa2 <- purrr::map2(.x = cabee_sheets,
                                .y = cabee_years,
                                .f = ~ readxl::read_excel(abs_file,
-                                                         sheet = i,
+                                                         sheet = .x,
                                                          skip = 7,
                                                          col_names = c(
                                                            "industry_code",
@@ -106,4 +106,6 @@ update_cabee_sa2 <- function(force_update = FALSE) {
     }
   }
 }
+
+
 

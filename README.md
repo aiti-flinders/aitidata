@@ -46,12 +46,12 @@ devtools::install_github("aiti-flinders/aitidata")
 | labour_account               | ABS Labour Account                                                                    | 2024-09-01       |
 | national_accounts            | ABS National Accounts                                                                 | 2024-09-01       |
 | payroll_index                | ABS Weekly Payroll Index                                                              | 2024-06-15       |
+| cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2024-06-01       |
 | payroll_substate             | ABS Weekly Payroll Index for SA3                                                      | 2023-06-10       |
 | covid_data                   | COVID-19 Geographic data                                                              | 2023-06-01       |
 | jobseeker_sa2                | JobSeeker data by SA2                                                                 | 2023-06-01       |
 | jobseeker_state              | jobseeker state                                                                       | 2023-06-01       |
 | small_area_labour_market     | DESE Small (SA2) Area Labour Market                                                   | 2023-06-01       |
-| cabee_sa2                    | Counts of Australian Businesses, including Entries and Exists, June 2015 to June 2019 | 2023-02-01       |
 | internet_vacancies_index     | Internet Vacancies Index                                                              | 2022-10-01       |
 | internet_vacancies_regional  | Internet Vacancies Regional                                                           | 2022-10-01       |
 | mobility_facebook            | Facebook Mobility                                                                     | 2022-05-22       |

@@ -59,8 +59,9 @@ update_labour_force <- function(force_update = FALSE) {
     labour_force <- dplyr::bind_rows(list(labour_force_status, underutilisation_aus, underutilisation_state)) |> 
       dplyr::filter(!is.na(value))  |>  
       dplyr::mutate(age = ifelse(is.na(age), "Total (age)", age),
-                    state = ifelse(is.na(state), "Australia", state)) |> 
-      dplyr::distinct(date, indicator, sex, state, series_type, unit, age, value, .keep_all = TRUE) 
+                    state = ifelse(is.na(state), "Australia", state),
+                    value = ifelse(value == "000", value*1000, value)) |> 
+      dplyr::distinct(date, indicator, sex, state, series_type, unit, age, value) 
     
     usethis::use_data(labour_force, overwrite = TRUE, compress = "xz")
     return(TRUE)

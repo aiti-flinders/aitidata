@@ -4,7 +4,7 @@
 \alias{update_abs}
 \title{Run data generating scripts}
 \usage{
-update_abs(force_update = FALSE)
+update_abs()
 }
 \arguments{
 \item{force_update}{logical}

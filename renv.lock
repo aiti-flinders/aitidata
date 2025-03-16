@@ -1576,14 +1576,14 @@
     },
     "tzdb": {
       "Package": "tzdb",
-      "Version": "0.5.0",
+      "Version": "0.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "cpp11"
       ],
-      "Hash": "09e3961e87b7bafa4a9340bbb34aeda8"
+      "Hash": "f561504ec2897f4d46f0c7657e488ae1"
     },
     "urlchecker": {
       "Package": "urlchecker",
@@ -1730,7 +1730,7 @@
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.3.8",
+      "Version": "1.3.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1739,7 +1739,7 @@
         "methods",
         "rlang"
       ],
-      "Hash": "f5130b2f3d461964bac93cc618013231"
+      "Hash": "a3a1b41cfc948bd88dc5b1e4ae8d491e"
     },
     "xopen": {
       "Package": "xopen",

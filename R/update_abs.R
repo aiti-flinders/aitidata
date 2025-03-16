@@ -1,15 +1,11 @@
 #' Run data generating scripts
 #'
-#' @param force_update logical 
-#'
 #' @return NULL
+#' @export
 #' 
 update_abs <- function() {
-  source("data-raw/labour_force.R")
-  source("data-raw/labour_force_industry.R")
-  source("data-raw/manufacturing.R")
-  source("data-raw/labour_account.R")
-  source("data-raw/business_counts.R")
-  source("data-raw/payroll_data.R")
-  source("data-raw/national_accounts.R")
+  source_files <- list.files("data-raw")
+  source_files <- paste0("data-raw/", source_files[grep(".R", source_files)])
+  Map(source, source_files)
+  devtools::document()
 }

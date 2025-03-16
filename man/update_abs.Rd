@@ -6,9 +6,6 @@
 \usage{
 update_abs()
 }
-\arguments{
-\item{force_update}{logical}
-}
 \description{
 Run data generating scripts
 }

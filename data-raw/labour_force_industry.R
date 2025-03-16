@@ -40,7 +40,7 @@ industry_underemployment <- table_19 |>
          "month",
          "indicator",
          "industry",
-         "gender",
+         "sex",
          "age",
          "state",
          "series_type",
@@ -61,7 +61,7 @@ occupation_underemployment <- table_19 |>
          "month",
          occupation = "indicator",
          industry,
-         "gender",
+         "sex",
          "age",
          "state",
          "series_type",
@@ -101,7 +101,7 @@ download_abs_data_cube("labour-force-australia-detailed",
                        cube = "EQ06",
                        path = "data-raw")
 
-eq6 <- read_excel(path = abs_file,
+eq6 <- read_excel(path = "data-raw/EQ06.xlsx",
                   sheet = "Data 1",
                   skip = 3) |> 
   pivot_longer(cols = 5:8, 
@@ -113,9 +113,9 @@ eq6 <- read_excel(path = abs_file,
          anzsic_group = "Industry group of main job: ANZSIC (2006) Rev.2.0") |> 
   mutate(date = as.Date(date),
          anzsic_group = str_sub(anzsic_group, 5)) |>  
-  replace_na(list(value = 0))
+  replace_na(list(value = 0)) 
 
-industry_employment_detailed <- left_join(eq6, anzsic2006 |> select(anzsic_division, anzsic_subdivision, anzsic_group)) |> 
+industry_employment_detailed <- left_join(eq6, anzsic2006 |> distinct(anzsic_division, anzsic_subdivision, anzsic_group)) |> 
   distinct() |> 
   group_by(date, indicator, sex, state, anzsic_subdivision, anzsic_division) |> 
   summarise(value = sum(value), 

@@ -2,9 +2,12 @@
 library(readabs)
 library(tibble)
 library(purrr)
+library(dplyr)
 library(readxl)
 library(stringr)
+library(tidyr)
 library(tibble)
+library(usethis)
 
 abs_file <- download_abs_data_cube("counts-australian-businesses-including-entries-and-exits",
                                    cube = "8165DC08",

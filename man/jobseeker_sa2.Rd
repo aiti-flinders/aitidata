@@ -5,9 +5,10 @@
 \alias{jobseeker_sa2}
 \title{JobSeeker data by SA2}
 \format{
-A dataframe with 4 variables
+A data frame with 4 variables
 \describe{
-\item{sa2_main_2016}{Statistical Area 2 Code}
+\item{sa2_code}{Statistical Area 2 Code. A mix of 2016 and 2021 boundaries}
+\item{sa2_name}{Statistical Area 2 Name. A mix of 2016 and 2021 boundaries}
 \item{date}{Date}
 \item{indicator}{Jobseeker payment, Youth allowance other, Jobseeker growth, Youth allowance growth}
 \item{value}{Value}
@@ -21,6 +22,6 @@ jobseeker_sa2
 }
 \description{
 Department of Social Services estimates of monthly jobseeker and
-youth allowance payments since March 2020.
+youth allowance payments since March 2020
 }
 \keyword{datasets}

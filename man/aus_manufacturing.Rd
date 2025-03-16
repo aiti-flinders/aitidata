@@ -5,7 +5,7 @@
 \alias{aus_manufacturing}
 \title{Australian Manufacturing}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2492 rows and 5 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2488 rows and 5 columns.
 }
 \usage{
 aus_manufacturing

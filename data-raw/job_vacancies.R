@@ -5,6 +5,7 @@ library(tidyr)
 library(dplyr)
 library(strayr)
 library(usethis)
+library(stringr)
 
 # Internet Vacancy Index --------------------------------------------------
 
@@ -16,15 +17,16 @@ path_to_file <- read_html(url) |>
   html_attr("href")
 
 path_to_file <- paste0("https://www.jobsandskills.gov.au", path_to_file)
+fname <- str_extract(path_to_file, "[^\\/]+$")
 
-if (!file.exists("data-raw/job_vacancies/job_vacancies.xlsx")) {
+if (!file.exists(paste0("data-raw/job_vacancies/", fname))) {
   
   download.file(path_to_file, 
-                destfile = "data-raw/job_vacancies/job_vacancies.xlsx",
+                destfile = paste0("data-raw/job_vacancies/", fname),
                 mode = "wb")
 }
 
-internet_vacancy_index <- read_xlsx("data-raw/job_vacancies/job_vacancies.xlsx",
+internet_vacancy_index <- read_xlsx(paste0("data-raw/job_vacancies/", fname),
                                     sheet = "Trend") |> 
   pivot_longer(cols = -c("Level",
                          "ANZSCO_CODE",
@@ -57,16 +59,18 @@ path_to_file <- read_html(url) |>
   html_attr("href")
 
 path_to_file <- paste0("https://www.jobsandskills.gov.au", path_to_file)
+fname <- str_extract(path_to_file, "[^\\/]+$")
 
-if (!file.exists("data-raw/job_vacancies/job_vacancies_regional.xlsx")) {
+
+if (!file.exists(paste0("data-raw/job_vacancies/", fname))) {
   
   download.file(path_to_file, 
-                destfile = "data-raw/job_vacancies/job_vacancies_regional.xlsx",
+                destfile = paste0("data-raw/job_vacancies/", fname),
                 mode = "wb")
 }
 
 
-internet_vacancy_regional <- read_excel("data-raw/job_vacancies/job_vacancies_regional.xlsx",
+internet_vacancy_regional <- read_excel(paste0("data-raw/job_vacancies/", fname),
                                         sheet = 2) |> 
   pivot_longer(cols = -c("Level",
                          "State",
@@ -74,7 +78,7 @@ internet_vacancy_regional <- read_excel("data-raw/job_vacancies/job_vacancies_re
                          "ANZSCO_CODE",
                          "ANZSCO_TITLE"),
                names_to = "date",
-               values_to = "value") %>%
+               values_to = "value") |> 
   mutate(date = as.Date(as.numeric(date), origin = "1899-12-30"),
          unit = "000",
          state = clean_state(State, to = "state_name"),

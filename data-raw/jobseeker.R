@@ -49,6 +49,7 @@ read_jobseeker <- function(url, date) {
 
 jobseeker_sa2 <- map2(.x = files$url,
                       .y = files$date,
-                      .f = function(x,y) read_jobseeker(x, y)) 
+                      .f = function(x,y) read_jobseeker(x, y)) |> 
+  list_rbind()
 
-use_data(jobseeker, overwrite = TRUE, compress = "xz")
+use_data(jobseeker_sa2, overwrite = TRUE, compress = "xz")

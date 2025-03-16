@@ -8,34 +8,13 @@ Description: A collection of datasets commonly used in research at the
     Data has been tidyed and simplified for ease of use, and for easy
     integration into the reportabs package.
 License: CC0
-Depends: 
-    R (>= 4.1.0)
-Imports: 
-    dplyr,
-    glue,
-    here,
-    httr,
-    lubridate,
-    purrr,
-    readabs (>= 0.4.17),
-    readr,
-    readxl,
-    rlang,
-    rvest,
-    strayr (>= 0.1.5.1),
-    stringr,
-    tibble,
-    tidyr,
-    usethis,
-    xml2
-Suggests: 
-    testthat (>= 3.0.0)
-Remotes:  
-    runapp-aus/strayr,
-    mattcowgill/readabs
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+Imports: 
+    devtools

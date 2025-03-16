@@ -2,10 +2,12 @@ name: update-data
 
 # Controls when the action will run. Run this job every weekday at 12:40am UTC, which should be 11:10am Adelaide time
 on:
-  push:
-    branches: [main, master, cleanup]
    schedule:
       - cron: '35 0 * * 1-5'
+
+   push:
+    branches:
+      - cleanup
 
 jobs:
   update-data:

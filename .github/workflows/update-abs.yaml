@@ -25,7 +25,7 @@ jobs:
           
       - name: Update data
         run: |
-          Rscript -e "source('data-raw/update_abs')"
+          Rscript -e "source('data-raw/update_abs.R')"
       - name: Commit new data
         run: |
           git config --global user.name 'Hamish Gamble'

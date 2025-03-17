@@ -5,12 +5,10 @@
 \alias{labour_force}
 \title{ABS Labour Force Survey}
 \format{
-A dataframe with 10 variables:
+A data frame with 10 variables:
 \describe{
 \item{date}{date of survey}
-\item{year}{year of survey}
-\item{month}{month of survey}
-\item{gender}{gender of individual surveyed: persons, male, or female}
+\item{sex}{sex of individual surveyed: persons, male, or female}
 \item{age}{age of individual surveyed}
 \item{state}{state or territory (including Australia)}
 \item{series_type}{level of adjustment of original data: original (no adjustment), seasonally adjusted, or trend}

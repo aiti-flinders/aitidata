@@ -6,9 +6,9 @@ on:
       - cron: '35 0 * * 1-5'
 
    push:
-    branches:
+     branches:
       - [main, master]
-    paths:
+     paths:
       - "data-raw/**"
 
 jobs:

@@ -5,13 +5,14 @@
 \alias{labour_account}
 \title{ABS Labour Account}
 \format{
-A dataframe with 10 variables
+A data frame with 10 variables
 \describe{
 \item{date}{Date}
 \item{month}{Month}
 \item{year}{Year}
 \item{prefix}{Prefix on the indicator - safe to ignore}
 \item{indicator}{Labour account indicator}
+\item{state}{State}
 \item{industry}{Industry}
 \item{series_type}{Series type}
 \item{value}{Value}

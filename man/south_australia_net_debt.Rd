@@ -5,7 +5,7 @@
 \alias{south_australia_net_debt}
 \title{South Australia Historic Net Debt}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 34 rows and 5 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 37 rows and 5 columns.
 }
 \usage{
 south_australia_net_debt

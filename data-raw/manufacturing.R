@@ -15,6 +15,8 @@ abs_file <- download_abs_data_cube(catalogue_string = "australian-industry",
                                    path = "data-raw")
 
 years <- colnames(read_excel(abs_file, sheet = "Table_1", range = c("B6:D6")))
+years <- as.numeric(str_sub(years, end = 4L)) + 1
+years <- as.Date(paste0(years, "-06-01"))
 
 aus_manufacturing <- read_excel(abs_file, 
                                 sheet = "Table_1", 
@@ -24,7 +26,7 @@ aus_manufacturing <- read_excel(abs_file,
                                               "employment_2", "wages_2", "income_2", "iva_2",
                                               "employment_3", "wages_3", "income_3", "iva_3")) |> 
   pivot_longer(cols = where(is.double), names_to = "indicator", values_to = "value") |> 
-  mutate(year = case_when(
+  mutate(date = case_when(
     str_detect(indicator, "_1") ~ years[1],
     str_detect(indicator, "_2") ~ years[2],
     str_detect(indicator, "_3") ~ years[3]),

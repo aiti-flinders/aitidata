@@ -6,22 +6,21 @@ library(usethis)
 
 raw <- read_abs(cat_no = "5682.0", tables = 1:9, retain_files = FALSE) 
 
-household_spending <- raw %>%
+household_spending <- raw |> 
   separate_series(column_names = c("indicator", "coicop_division", "state", "price"),
-                           remove_nas = TRUE)  |> 
-  filter(indicator == "Calendar adjusted household spending - Index")  |> 
+                  remove_nas = TRUE)  |> 
   mutate(value = ifelse(unit == "000", 1000 * value, value),
-                year = year(date),
-                month = month(date, label = TRUE, abbr = FALSE)) |> 
-  dplyr::select("date", 
-                "year", 
-                "month",
-                "indicator", 
-                "coicop_division",
-                "state",
-                "series_type",
-                "value",
-                "unit")
+         year = year(date),
+         month = month(date, label = TRUE, abbr = FALSE)) |> 
+  select("date", 
+         "year", 
+         "month",
+         "indicator", 
+         "coicop_division",
+         "state",
+         "series_type",
+         "value",
+         "unit")
 
 use_data(household_spending, overwrite = TRUE, compress = "xz")
 

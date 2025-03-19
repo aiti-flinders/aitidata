@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 
 write_metadata <- function() {
- included_data <-  data.frame(data(package = "aitidata")$results)[-c(1, 2)] |> 
+ included_data <-  data.frame(ls("package:aitidata")) |> 
    mutate(Item = paste0("aitidata::", Item))
  
  safe_max <- safely(.f = ~lazy_eval(.x) |> pull(date) |> max(),

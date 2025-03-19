@@ -3,6 +3,7 @@ library(rvest)
 library(usethis)
 library(readr)
 library(dplyr)
+library(purrr)
 
 url <- "https://www.jobsandskills.gov.au/data/small-area-labour-markets#downloads"
 
@@ -13,9 +14,11 @@ path_to_file <- read_html(url) |>
 path_to_file <- paste0("https://www.jobsandskills.gov.au", path_to_file)
 
 if (!file.exists("data-raw/small_area_labour_market.csv")) {
-  download.file(path_to_file,
+  tryCatch(
+  download.file(path_to_file, 
                 destfile = "data-raw/small_area_labour_market.csv",
-                mode = "wb")
+                mode = "wb"),
+  error = "Can't download file.")
 }
 
 small_area_labour_market <- read_csv("data-raw/small_area_labour_market.csv",

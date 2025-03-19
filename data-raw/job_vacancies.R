@@ -63,10 +63,12 @@ fname <- str_extract(path_to_file, "[^\\/]+$")
 
 
 if (!file.exists(paste0("data-raw/job_vacancies/", fname))) {
-  
+  tryCatch(
   download.file(path_to_file, 
                 destfile = paste0("data-raw/job_vacancies/", fname),
-                mode = "wb")
+                mode = "wb"),
+  error = "Can't download file."
+  )
 }
 
 

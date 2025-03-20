@@ -18,7 +18,11 @@ if (!file.exists("data-raw/small_area_labour_market.csv")) {
   download.file(path_to_file, 
                 destfile = "data-raw/small_area_labour_market.csv",
                 mode = "wb"),
-  error = "Can't download file.")
+  error = function(e) {
+    message("Unable to download file.")
+    print(e)
+  }
+  )
 }
 
 small_area_labour_market <- read_csv("data-raw/small_area_labour_market.csv",

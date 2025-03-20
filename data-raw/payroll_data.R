@@ -1,9 +1,8 @@
 ## code to prepare `payroll_data` dataset goes here
 library(readabs)
 library(usethis)
-library(purrr)
 
-payroll_index <- read_payrolls("industry_jobs", path = "data_raw")
+payroll_index <- read_payrolls("industry_jobs", path = "data-raw")
 payroll_index_industry <- read_payrolls("subindustry_jobs", path = "data-raw")
 payroll_index_business <- read_payrolls("empsize_jobs", path = "data-raw")
 
